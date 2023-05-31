@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AA2A2758DF00915FCD /* ColorExtension.swift */; };
+		78F210AD2A27595400915FCD /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
+		78F210B02A275A0800915FCD /* Pilseung Gothic Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78F210AF2A275A0800915FCD /* Pilseung Gothic Regular.otf */; };
 		78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */; };
 		78F734B92A27284C002AAE1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B82A27284C002AAE1A /* ContentView.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
 		78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734CB2A2728F8002AAE1A /* modelExample.swift */; };
 		78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734CD2A272905002AAE1A /* modifierExample.swift */; };
-		78F734D02A272916002AAE1A /* extensionExmaple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734CF2A272916002AAE1A /* extensionExmaple.swift */; };
 		78F734D22A272924002AAE1A /* componentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734D12A272924002AAE1A /* componentExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78F210AA2A2758DF00915FCD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		78F210AC2A27595400915FCD /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		78F210AF2A275A0800915FCD /* Pilseung Gothic Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pilseung Gothic Regular.otf"; sourceTree = "<group>"; };
 		78F734B32A27284C002AAE1A /* SeSACTHON_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACTHON_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_AppApp.swift; sourceTree = "<group>"; };
 		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,7 +30,6 @@
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		78F734CB2A2728F8002AAE1A /* modelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelExample.swift; sourceTree = "<group>"; };
 		78F734CD2A272905002AAE1A /* modifierExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modifierExample.swift; sourceTree = "<group>"; };
-		78F734CF2A272916002AAE1A /* extensionExmaple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionExmaple.swift; sourceTree = "<group>"; };
 		78F734D12A272924002AAE1A /* componentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = componentExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78F210AE2A2759BE00915FCD /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				78F210AF2A275A0800915FCD /* Pilseung Gothic Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		78F734AA2A27284B002AAE1A = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +110,8 @@
 		78F734C62A272890002AAE1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				78F734CF2A272916002AAE1A /* extensionExmaple.swift */,
+				78F210AA2A2758DF00915FCD /* ColorExtension.swift */,
+				78F210AC2A27595400915FCD /* FontExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -122,6 +135,7 @@
 		78F734C92A2728B4002AAE1A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				78F210AE2A2759BE00915FCD /* Font */,
 				78F734BA2A27284C002AAE1A /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -194,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */,
+				78F210B02A275A0800915FCD /* Pilseung Gothic Regular.otf in Resources */,
 				78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,9 +222,10 @@
 			files = (
 				78F734D22A272924002AAE1A /* componentExample.swift in Sources */,
 				78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */,
+				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
-				78F734D02A272916002AAE1A /* extensionExmaple.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
+				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
