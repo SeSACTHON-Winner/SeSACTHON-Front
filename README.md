@@ -18,7 +18,7 @@
 
 ### **개인 작업하기**
 
-- 기능 개발을 위해 작성한 이슈 번호를 사용하여 branch를 생성합니다. (ex. doeun_feat/#1 (git branch 사용법 참고))
+- 기능 개발을 위해 작성한 이슈 번호를 사용하여 branch를 생성합니다. (ex. eugene_feat/#1 (git branch 사용법 참고))
 - 작업 전에 develop branch를 반드시 pull하고 시작합니다. (git pull origin develop)
 - commit은 컨벤션을 지켜 메세지를 적습니다.
 - push은 해당 작업 branch에 합니다.
