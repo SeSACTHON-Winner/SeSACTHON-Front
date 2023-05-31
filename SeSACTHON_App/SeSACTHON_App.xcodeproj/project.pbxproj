@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20A25C54FAF4D804F1A644F9 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */; };
 		78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AA2A2758DF00915FCD /* ColorExtension.swift */; };
 		78F210AD2A27595400915FCD /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
 		78F210B02A275A0800915FCD /* Pilseung Gothic Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78F210AF2A275A0800915FCD /* Pilseung Gothic Regular.otf */; };
@@ -20,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
+		716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		78F210AA2A2758DF00915FCD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		78F210AC2A27595400915FCD /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		78F210AF2A275A0800915FCD /* Pilseung Gothic Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pilseung Gothic Regular.otf"; sourceTree = "<group>"; };
@@ -38,12 +42,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A25C54FAF4D804F1A644F9 /* Pods_SeSACTHON_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28D5E719EF989021F202F1EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		78F210AE2A2759BE00915FCD /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +70,8 @@
 			children = (
 				78F734B52A27284C002AAE1A /* SeSACTHON_App */,
 				78F734B42A27284C002AAE1A /* Products */,
+				F48F2423302A135894EFE1FE /* Pods */,
+				28D5E719EF989021F202F1EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +164,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F48F2423302A135894EFE1FE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */,
+				064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78F734C12A27284C002AAE1A /* Build configuration list for PBXNativeTarget "SeSACTHON_App" */;
 			buildPhases = (
+				2498D57D0330887E17E62E91 /* [CP] Check Pods Manifest.lock */,
 				78F734AF2A27284B002AAE1A /* Sources */,
 				78F734B02A27284B002AAE1A /* Frameworks */,
 				78F734B12A27284B002AAE1A /* Resources */,
+				FE930C4C02C196C46DE05492 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,6 +241,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2498D57D0330887E17E62E91 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeSACTHON_App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE930C4C02C196C46DE05492 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		78F734AF2A27284B002AAE1A /* Sources */ = {
@@ -349,6 +418,7 @@
 		};
 		78F734C22A27284C002AAE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -377,6 +447,7 @@
 		};
 		78F734C32A27284C002AAE1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
