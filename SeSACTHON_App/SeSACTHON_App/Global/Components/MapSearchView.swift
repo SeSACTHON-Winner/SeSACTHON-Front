@@ -53,11 +53,24 @@ struct MapSearchView: View {
     }
     
     private func handleSearchResultTapped(_ completion: MKLocalSearchCompletion) {
-        // Perform the desired action when a search result is tapped
-        print("Selected search result: \(completion.title)")
-        // Clear the search text and dismiss the keyboard
-        searchText = ""
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        let searchRequest = MKLocalSearch.Request(completion: completion)
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { response, error in
+            guard let mapItem = response?.mapItems.first else {
+                // Handle error
+                return
+            }
+            
+            let coordinate = mapItem.placemark.coordinate
+            print("Selected search result: \(completion.title)")
+            print("Coordinate: \(coordinate)")
+            
+            // Perform additional actions with the coordinate if needed
+            
+            // Clear the search text and dismiss the keyboard
+            searchText = ""
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
     }
 }
 
