@@ -70,6 +70,7 @@ struct MainMapView: View {
         }
         .frame(maxWidth: .infinity)
         .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea(.keyboard)
 
     }
 }

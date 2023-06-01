@@ -5,66 +5,11 @@
 //  Created by ChoiYujin on 2023/06/01.
 //
 
-//import SwiftUI
-//
-//struct MapSearchView: View {
-//
-//    @Binding var searchText: String
-//
-//    var body: some View {
-//            VStack(spacing: 12) {
-//
-//                Label("주소들어가는자리", systemImage: "smallcircle.filled.circle")
-//                    .padding(.leading)
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .frame(height: 36)
-//                    .background()
-//                    .cornerRadius(10)
-//
-//                HStack {
-//                    Image(systemName: "magnifyingglass")
-//                    TextField("검색하는 곳", text: $searchText)
-//                }
-//                .padding(.leading)
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//                .frame(height: 36)
-//                .background()
-//                .cornerRadius(10)
-//            }
-//        .padding()
-//        .frame(maxWidth: .infinity)
-//        .background(.black)
-//    }
-//}
-//
-//struct MapSearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MapSearchView(searchText: .constant("검색 텍스트"))
-//    }
-//}
-
 import SwiftUI
 import MapKit
 
-class LocalSearchCompleterWrapper: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
-    @Published var searchResults: [MKLocalSearchCompletion] = []
-    private let completer = MKLocalSearchCompleter()
-    
-    override init() {
-        super.init()
-        completer.delegate = self
-    }
-    
-    func search(query: String) {
-        completer.queryFragment = query
-    }
-    
-    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
-        searchResults = completer.results
-    }
-}
-
 struct MapSearchView: View {
+    
     @Binding var searchText: String
     @StateObject private var completerWrapper = LocalSearchCompleterWrapper()
     
@@ -90,15 +35,16 @@ struct MapSearchView: View {
             .background(Color.white)
             .cornerRadius(10)
             
-            if !completerWrapper.searchResults.isEmpty {
+            if !completerWrapper.searchResults.isEmpty && searchText != "" {
                 List(completerWrapper.searchResults, id: \.self) { result in
                     Text(result.title)
                         .onTapGesture {
                             handleSearchResultTapped(result)
+                            completerWrapper.searchResults.removeAll()
                         }
                 }
-                .frame(height: 200)
-                .cornerRadius(10)
+                .listStyle(.plain)
+                .frame(height: 160)
             }
         }
         .padding()
@@ -117,6 +63,24 @@ struct MapSearchView: View {
 
 struct MapSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        MapSearchView(searchText: .constant("검색 텍스트"))
+        MapSearchView(searchText: .constant("포항"))
+    }
+}
+
+class LocalSearchCompleterWrapper: NSObject, ObservableObject, MKLocalSearchCompleterDelegate {
+    @Published var searchResults: [MKLocalSearchCompletion] = []
+    private let completer = MKLocalSearchCompleter()
+    
+    override init() {
+        super.init()
+        completer.delegate = self
+    }
+    
+    func search(query: String) {
+        completer.queryFragment = query
+    }
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
     }
 }
