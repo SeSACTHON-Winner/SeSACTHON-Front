@@ -8,5 +8,10 @@
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIImageName</key>
+		<string>LoadingImg</string>
+	</dict>
 </dict>
 </plist>
