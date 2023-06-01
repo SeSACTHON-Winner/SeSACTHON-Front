@@ -10,6 +10,8 @@
 		20A25C54FAF4D804F1A644F9 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */; };
 		780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A1E2A28599D00B715BD /* MainMapView.swift */; };
 		780F9A212A2859A500B715BD /* MainRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A202A2859A500B715BD /* MainRunView.swift */; };
+		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
+		78123B332A288CC60060BA4F /* CurrentLocationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B322A288CC60060BA4F /* CurrentLocationMO.swift */; };
 		782172392A286B3100D981DC /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782172382A286B3000D981DC /* CustomMapView.swift */; };
 		7821723E2A28746100D981DC /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723D2A28746100D981DC /* MapSearchView.swift */; };
 		782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */; };
@@ -31,6 +33,8 @@
 		71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		780F9A1E2A28599D00B715BD /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		780F9A202A2859A500B715BD /* MainRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunView.swift; sourceTree = "<group>"; };
+		78123B302A288C9C0060BA4F /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		78123B322A288CC60060BA4F /* CurrentLocationMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationMO.swift; sourceTree = "<group>"; };
 		782172382A286B3000D981DC /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7821723D2A28746100D981DC /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				78F734C72A272894002AAE1A /* Modifier */,
 				78F734C62A272890002AAE1A /* Extension */,
 				78F734C52A27287A002AAE1A /* Components */,
+				78123B302A288C9C0060BA4F /* LocationDataManager.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				78F734CB2A2728F8002AAE1A /* modelExample.swift */,
+				78123B322A288CC60060BA4F /* CurrentLocationMO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 				7821723E2A28746100D981DC /* MapSearchView.swift in Sources */,
 				782172392A286B3100D981DC /* CustomMapView.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
+				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
+				78123B332A288CC60060BA4F /* CurrentLocationMO.swift in Sources */,
 				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,
@@ -450,6 +458,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -481,6 +492,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
