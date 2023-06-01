@@ -9,13 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("commit test!")
+        
+        NavigationStack {
+            HStack(spacing: 30) {
+                NavigationLink {
+                    MainMapView()
+                } label: {
+                    Text("Map으로 이동")
+                }
+                NavigationLink {
+                    MainRunView()
+                } label: {
+                    Text("Run으로 이동")
+                }
+
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
