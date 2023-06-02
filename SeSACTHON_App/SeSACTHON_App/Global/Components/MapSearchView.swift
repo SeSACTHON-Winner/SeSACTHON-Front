@@ -17,6 +17,8 @@ struct MapSearchView: View {
     @Binding var region: MKCoordinateRegion
     @Binding var userTrackingMode: MapUserTrackingMode
     
+    
+    
     var body: some View {
         VStack(spacing: 12) {
             Label(address, systemImage: "smallcircle.filled.circle")

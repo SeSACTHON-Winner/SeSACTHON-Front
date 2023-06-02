@@ -14,6 +14,8 @@ struct NavigationMapView: UIViewRepresentable {
     let sourceLocation: CLLocationCoordinate2D
     let destinationLocation: CLLocationCoordinate2D
     @Binding var region: MKCoordinateRegion
+    @Binding var formattedTime: String
+    @Binding var formattedDistance: String
     
     func makeUIView(context: UIViewRepresentableContext<NavigationMapView>) -> MKMapView {
         let map = MKMapView()
@@ -52,6 +54,31 @@ struct NavigationMapView: UIViewRepresentable {
                 map.addOverlay(polyline!, level: .aboveRoads)
                 map.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
             }
+            
+            guard let route = direct?.routes.first else {
+                // Handle error
+                return
+            }
+            let timeInterval = route.expectedTravelTime
+            let distance = route.distance
+
+            // Convert time to desired format
+            let formatter = DateComponentsFormatter()
+            formatter.unitsStyle = .short
+            formatter.allowedUnits = [.hour, .minute]
+            let formattedTime = formatter.string(from: timeInterval)
+
+            // Convert distance to desired format
+            let distanceFormatter = MKDistanceFormatter()
+            distanceFormatter.unitStyle = .abbreviated
+            let formattedDistance = distanceFormatter.string(fromDistance: distance)
+
+            print("Estimated Time: \(formattedTime ?? "")")
+            print("Distance: \(formattedDistance)")
+            
+            
+            self.formattedTime = formattedTime ?? ""
+            self.formattedDistance = formattedDistance ?? ""
         }
         
         return map

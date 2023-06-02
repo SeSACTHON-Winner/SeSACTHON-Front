@@ -16,6 +16,8 @@ struct MainMapView: View {
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State var address = ""
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
+    @State var formattedTime = ""
+    @State var formattedDistance = ""
     var locationManager = LocationDataManager()
 
     var body: some View {
@@ -24,8 +26,8 @@ struct MainMapView: View {
             VStack(spacing: 0) {
                 Color.black.frame(height: 60)
                 if showRoute {
-                    MapRouteInfoView()
-                    NavigationMapView(sourceLocation: locationManager.currentLocation, destinationLocation: CLLocationCoordinate2D(latitude: region.center.latitude, longitude: region.center.longitude), region: self.$region)
+                    MapRouteInfoView(address: self.$address, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
+                    NavigationMapView(sourceLocation: locationManager.currentLocation, destinationLocation: CLLocationCoordinate2D(latitude: region.center.latitude, longitude: region.center.longitude), region: self.$region, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
                 } else {
                     MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region, userTrackingMode: self.$userTrackingMode)
                     CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
