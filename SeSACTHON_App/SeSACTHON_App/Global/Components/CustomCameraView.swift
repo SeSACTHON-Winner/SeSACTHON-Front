@@ -147,8 +147,7 @@ struct SelectStatusView: View {
                 .background(.ultraThinMaterial)
                 
                 NavigationLink {
-                    //Next
-                    //ReportSubmitView()
+                    ReportSubmitView()
                 } label: {
                     Text("제보하기")
                 }
