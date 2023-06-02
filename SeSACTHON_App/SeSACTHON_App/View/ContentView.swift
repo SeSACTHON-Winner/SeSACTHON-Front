@@ -19,75 +19,76 @@ struct ContentView: View {
     
     var body: some View {
         
-        NavigationStack {
-            ZStack {
-                HStack(spacing: 0) {
-                    ZStack {
-                        leftTabColor
-                            .ignoresSafeArea()
-                        VStack {
-                            Image("DoubleChebronDownWhite")
-                                .opacity(isAnythingClicked ? 0 : 1)
-                            Text("Map")
-                                .font(.system(size: 75, weight: .heavy))
-                                .foregroundColor(leftTextColor)
-                                .italic()
-                            Spacer().frame(height: 24)
-                                .opacity(isAnythingClicked ? 0 : 1)
+            NavigationStack {
+                ZStack {
+                    HStack(spacing: 0) {
+                        ZStack {
+                            leftTabColor
+                                .ignoresSafeArea()
+                            VStack {
+                                Image("DoubleChebronDownWhite")
+                                    .opacity(isAnythingClicked ? 0 : 1)
+                                Text("Map")
+                                    .font(.custom("SF Pro Text", size: 75))
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(leftTextColor)
+                                    .italic()
+                                Spacer().frame(height: 24)
+                                    .opacity(isAnythingClicked ? 0 : 1)
+                            }
+                        }
+                        .onTapGesture {
+                            isAnythingClicked = true
+                            leftTabColor = .black
+                            rightTabColor = .white
+                            leftTextColor = .mint
+                            rightTextColor = .black
+                            isLeftClicked = true
+                            UserDefaults().setValue(true, forKey: "isMap")
+                            UserDefaults().setValue(false, forKey: "isRun")
+                            
+                        }
+                        ZStack{
+                            rightTabColor
+                                .ignoresSafeArea()
+                            VStack {
+                                Image("DoubleChebronDownGray")
+                                    .opacity(isAnythingClicked ? 0 : 1)
+                                Text("Run")
+                                    .font(.custom("SF Pro Text", size: 75))
+                                    .foregroundColor(rightTextColor)
+                                    .italic()
+                                Spacer().frame(height: 24)
+                                    .opacity(isAnythingClicked ? 0 : 1)
+                            }
+                        }
+                        .onTapGesture {
+                            isAnythingClicked = true
+                            leftTabColor = .white
+                            rightTabColor = .black
+                            leftTextColor = .black
+                            rightTextColor = .mint
+                            isLeftClicked = false
+                            UserDefaults().setValue(false, forKey: "isMap")
+                            UserDefaults().setValue(true, forKey: "isRun")
                         }
                     }
-                    .onTapGesture {
-                        isAnythingClicked = true
-                        leftTabColor = .black
-                        rightTabColor = .white
-                        leftTextColor = .mint
-                        rightTextColor = .black
-                        isLeftClicked = true
-                        UserDefaults().setValue(true, forKey: "isMap")
-                        UserDefaults().setValue(false, forKey: "isRun")
-                        
-                    }
-                    ZStack{
-                        rightTabColor
-                            .ignoresSafeArea()
-                        VStack {
-                            Image("DoubleChebronDownGray")
-                                .opacity(isAnythingClicked ? 0 : 1)
-                            Text("Run")
-                                .font(.system(size: 75, weight: .heavy))
-                                .foregroundColor(rightTextColor)
-                                .italic()
-                            Spacer().frame(height: 24)
-                                .opacity(isAnythingClicked ? 0 : 1)
+                    VStack {
+                        Spacer()
+                        NavigationLink {
+                            if isLeftClicked {
+                                MainMapView()
+                            } else {
+                                MainRunView()
+                            }
+                        } label: {
+                            Image(isLeftClicked ? "MainGoRight" : "MainGoLeft")
+                                .opacity(isAnythingClicked ? 1 : 0)
                         }
                     }
-                    .onTapGesture {
-                        isAnythingClicked = true
-                        leftTabColor = .white
-                        rightTabColor = .black
-                        leftTextColor = .black
-                        rightTextColor = .mint
-                        isLeftClicked = false
-                        UserDefaults().setValue(false, forKey: "isMap")
-                        UserDefaults().setValue(true, forKey: "isRun")
-                    }
+                    
                 }
-                VStack {
-                    Spacer()
-                    NavigationLink {
-                        if isLeftClicked {
-                            MainMapView()
-                        } else {
-                            MainRunView()
-                        }
-                    } label: {
-                        Image(isLeftClicked ? "MainGoRight" : "MainGoLeft")
-                            .opacity(isAnythingClicked ? 1 : 0)
-                    }
-                }
-                
             }
-        }
         .onAppear {
             if UserDefaults().bool(forKey: "isMap") {
                 isAnythingClicked = true
@@ -103,6 +104,9 @@ struct ContentView: View {
                 leftTextColor = .black
                 rightTextColor = .mint
                 isLeftClicked = false
+            }
+            for family in UIFont.familyNames {
+                print("Font Family: \(family)")
             }
         }
     }

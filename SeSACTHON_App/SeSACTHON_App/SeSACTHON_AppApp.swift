@@ -12,7 +12,7 @@ struct SeSACTHON_AppApp: App {
     
     init() {
         // Font 파일 추가 Sample
-//        Font.registerFonts(fontName: "Pilseung Gothic Regular")
+        Font.registerFonts(fontName: "SF-Pro-Text-BlackItalic")
     }
     
     var body: some Scene {

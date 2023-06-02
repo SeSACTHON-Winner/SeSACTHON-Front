@@ -12,7 +12,8 @@ struct MapRouteInfoView: View {
     var body: some View {
         VStack(spacing: 12) {
             
-            Label("포항시 대이동", systemImage: "smallcircle.filled.circle")
+            Label("포항시 대이동", systemImage: "paperplane.fill")
+                .labelStyle(BlueSystemImageLabelStyle())
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .frame(height: 36)
@@ -23,7 +24,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("7m")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("경사도구간")
@@ -31,7 +32,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("3")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("장애물")
@@ -39,7 +40,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("15m")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("예정시간")
