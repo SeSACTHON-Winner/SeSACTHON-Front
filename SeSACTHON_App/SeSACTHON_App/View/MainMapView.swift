@@ -9,13 +9,16 @@ import SwiftUI
 import MapKit
 
 struct MainMapView: View {
-
+    
     @State var searchText = ""
     @State var showRoute = false
     @State var isPlaceSelected = false
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State var address = ""
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
+    @State var formattedTime = ""
+    @State var formattedDistance = ""
+    var locationManager = LocationDataManager()
 
     var body: some View {
 
@@ -23,12 +26,13 @@ struct MainMapView: View {
             VStack(spacing: 0) {
                 Color.black.frame(height: 60)
                 if showRoute {
-                    MapRouteInfoView()
+                    MapRouteInfoView(address: self.$address, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
+                    NavigationMapView(sourceLocation: locationManager.currentLocation, destinationLocation: CLLocationCoordinate2D(latitude: region.center.latitude, longitude: region.center.longitude), region: self.$region, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
                 } else {
-                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region)
+                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region, userTrackingMode: self.$userTrackingMode)
+                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                        .ignoresSafeArea()
                 }
-                CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                    .ignoresSafeArea()
             }
 
             VStack {
@@ -43,6 +47,7 @@ struct MainMapView: View {
                                 searchText = ""
                                 showRoute = true
                                 isPlaceSelected = false
+                                print("Current : \(locationManager.currentLocation), DestinationCoordinate : \(region.center.latitude) , \(region.center.longitude)")
                             }
                         }
                     Image("CurrentLocationBtn")

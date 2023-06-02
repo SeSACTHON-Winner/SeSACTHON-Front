@@ -12,12 +12,14 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
     @Published var locationManager = CLLocationManager()
     @Published var authorizationStatus: CLAuthorizationStatus?
     
+    @Published var currentLocation: CLLocationCoordinate2D = CLLocationCoordinate2D()
+    
     override init() {
         super.init()
 
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.allowsBackgroundLocationUpdates = true
@@ -55,6 +57,7 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         // Do something with the new location here
+        self.currentLocation = manager.location?.coordinate ?? CLLocationCoordinate2D()
  
     }
     
