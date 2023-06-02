@@ -10,8 +10,8 @@ import SwiftUI
 import UIKit
 import CoreLocation
 
-class CurrentLocationMO: ObservableObject {
-    static let shared = CurrentLocationMO()
+class SearchLocationMO: ObservableObject {
+    static let shared = SearchLocationMO()
     @Published var lat: CLLocationDegrees = 0
     @Published var long: CLLocationDegrees = 0
     private init() { }

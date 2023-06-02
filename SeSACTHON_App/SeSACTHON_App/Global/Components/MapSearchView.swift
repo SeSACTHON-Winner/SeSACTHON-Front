@@ -13,10 +13,12 @@ struct MapSearchView: View {
     @Binding var searchText: String
     @Binding var isPlaceSelected: Bool
     @StateObject private var completerWrapper = LocalSearchCompleterWrapper()
+    @Binding var address: String
+    @Binding var region: MKCoordinateRegion
     
     var body: some View {
         VStack(spacing: 12) {
-            Label("주소들어가는자리", systemImage: "smallcircle.filled.circle")
+            Label(address, systemImage: "smallcircle.filled.circle")
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .frame(height: 36)
@@ -70,15 +72,12 @@ struct MapSearchView: View {
             searchText = ""
             completerWrapper.searchResults.removeAll()
             isPlaceSelected = true
+            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude:  coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            getAddressFromCoordinates()
+            
             // Clear the search text and dismiss the keyboard
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
-    }
-}
-
-struct MapSearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapSearchView(searchText: .constant("포항"), isPlaceSelected: .constant(false))
     }
 }
 
@@ -97,5 +96,22 @@ class LocalSearchCompleterWrapper: NSObject, ObservableObject, MKLocalSearchComp
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
+    }
+}
+
+extension MapSearchView {
+    func getAddressFromCoordinates() {
+        let geocoder = CLGeocoder()
+        let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+        
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let error = error {
+                print("Reverse geocoding error: \(error.localizedDescription)")
+            } else if let placemark = placemarks?.first {
+                // Extract the desired address information from the placemark
+                let address = "\(placemark.subThoroughfare ?? "") \(placemark.thoroughfare ?? ""), \(placemark.locality ?? "")"
+                self.address = address
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@
 		780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A1E2A28599D00B715BD /* MainMapView.swift */; };
 		780F9A212A2859A500B715BD /* MainRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A202A2859A500B715BD /* MainRunView.swift */; };
 		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
-		78123B332A288CC60060BA4F /* CurrentLocationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B322A288CC60060BA4F /* CurrentLocationMO.swift */; };
+		78123B332A288CC60060BA4F /* SearchLocationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B322A288CC60060BA4F /* SearchLocationMO.swift */; };
 		782172392A286B3100D981DC /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782172382A286B3000D981DC /* CustomMapView.swift */; };
 		7821723E2A28746100D981DC /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723D2A28746100D981DC /* MapSearchView.swift */; };
 		782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */; };
@@ -34,7 +34,7 @@
 		780F9A1E2A28599D00B715BD /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		780F9A202A2859A500B715BD /* MainRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunView.swift; sourceTree = "<group>"; };
 		78123B302A288C9C0060BA4F /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
-		78123B322A288CC60060BA4F /* CurrentLocationMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationMO.swift; sourceTree = "<group>"; };
+		78123B322A288CC60060BA4F /* SearchLocationMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationMO.swift; sourceTree = "<group>"; };
 		782172382A286B3000D981DC /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7821723D2A28746100D981DC /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				78F734CB2A2728F8002AAE1A /* modelExample.swift */,
-				78123B322A288CC60060BA4F /* CurrentLocationMO.swift */,
+				78123B322A288CC60060BA4F /* SearchLocationMO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
-				78123B332A288CC60060BA4F /* CurrentLocationMO.swift in Sources */,
+				78123B332A288CC60060BA4F /* SearchLocationMO.swift in Sources */,
 				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,

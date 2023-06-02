@@ -55,9 +55,7 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         // Do something with the new location here
-        CurrentLocationMO.shared.lat = location.coordinate.latitude
-        CurrentLocationMO.shared.long = location.coordinate.longitude
-        print("New location: \(CurrentLocationMO.shared.lat), \( CurrentLocationMO.shared.long)")
+ 
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
