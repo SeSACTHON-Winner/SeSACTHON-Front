@@ -37,6 +37,7 @@ struct MapSearchView: View {
             .frame(height: 36)
             .background(Color.white)
             .cornerRadius(10)
+            .padding(.bottom, 18)
             
             if !completerWrapper.searchResults.isEmpty && searchText != "" {
                 List(completerWrapper.searchResults, id: \.self) { result in
@@ -53,6 +54,7 @@ struct MapSearchView: View {
         .padding()
         .frame(maxWidth: .infinity)
         .background(Color.black)
+        .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
     }
     
     private func handleSearchResultTapped(_ completion: MKLocalSearchCompletion) {
