@@ -12,6 +12,7 @@
 		60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE572A29EA1200312357 /* CameraModel.swift */; };
 		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
 		60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */; };
+		60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */; };
 		780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A1E2A28599D00B715BD /* MainMapView.swift */; };
 		780F9A212A2859A500B715BD /* MainRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A202A2859A500B715BD /* MainRunView.swift */; };
 		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
@@ -39,6 +40,7 @@
 		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubmitView.swift; sourceTree = "<group>"; };
+		60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEndView.swift; sourceTree = "<group>"; };
 		716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		780F9A1E2A28599D00B715BD /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
@@ -153,7 +155,6 @@
 				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
 				78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */,
 				78D01CA02A2A08DF00240004 /* NavigationMapView.swift */,
-
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -202,6 +203,7 @@
 				780F9A1E2A28599D00B715BD /* MainMapView.swift */,
 				780F9A202A2859A500B715BD /* MainRunView.swift */,
 				60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */,
+				60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,7 +334,6 @@
 			files = (
 				78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */,
 				78F734D22A272924002AAE1A /* componentExample.swift in Sources */,
-				78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */,
 				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
@@ -343,6 +344,7 @@
 				782172392A286B3100D981DC /* CustomMapView.swift in Sources */,
 				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
+				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
@@ -351,8 +353,6 @@
 				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
-				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
