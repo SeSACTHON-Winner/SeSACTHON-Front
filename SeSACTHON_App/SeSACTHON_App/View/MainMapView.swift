@@ -38,10 +38,11 @@ struct MainMapView: View {
             VStack {
                 Spacer()
 
-                HStack(alignment: .top) {
+                HStack(alignment: .top, spacing: 0) {
+                    Spacer().frame(width: 52)
                     Image("GoBtn")
                         .padding(.bottom, 94)
-                        .padding(.leading, UIScreen.main.bounds.size.width / 2 - 120)
+                        .padding(.horizontal, 26)
                         .onTapGesture {
                             withAnimation(.easeOut(duration: 0.4)) {
                                 searchText = ""
