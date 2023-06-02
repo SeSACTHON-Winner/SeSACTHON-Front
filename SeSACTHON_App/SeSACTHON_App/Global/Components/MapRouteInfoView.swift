@@ -12,7 +12,8 @@ struct MapRouteInfoView: View {
     var body: some View {
         VStack(spacing: 12) {
             
-            Label("포항시 대이동", systemImage: "smallcircle.filled.circle")
+            Label("포항시 대이동", systemImage: "paperplane.fill")
+                .labelStyle(BlueSystemImageLabelStyle())
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .frame(height: 36)
