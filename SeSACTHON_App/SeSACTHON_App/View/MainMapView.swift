@@ -16,7 +16,7 @@ struct MainMapView: View {
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State var address = ""
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
-    @StateObject var locationManager = LocationDataManager()
+    var locationManager = LocationDataManager()
 
     var body: some View {
 
@@ -27,7 +27,7 @@ struct MainMapView: View {
                     MapRouteInfoView()
                     NavigationMapView(sourceLocation: locationManager.currentLocation, destinationLocation: CLLocationCoordinate2D(latitude: region.center.latitude, longitude: region.center.longitude), region: self.$region)
                 } else {
-                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region)
+                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region, userTrackingMode: self.$userTrackingMode)
                     CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
                         .ignoresSafeArea()
                 }
@@ -42,7 +42,6 @@ struct MainMapView: View {
                         .padding(.leading, UIScreen.main.bounds.size.width / 2 - 120)
                         .onTapGesture {
                             withAnimation(.easeOut(duration: 0.4)) {
-                                userTrackingMode = .none
                                 searchText = ""
                                 showRoute = true
                                 isPlaceSelected = false

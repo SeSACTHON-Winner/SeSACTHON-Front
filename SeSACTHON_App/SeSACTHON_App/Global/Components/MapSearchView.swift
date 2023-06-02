@@ -15,6 +15,7 @@ struct MapSearchView: View {
     @StateObject private var completerWrapper = LocalSearchCompleterWrapper()
     @Binding var address: String
     @Binding var region: MKCoordinateRegion
+    @Binding var userTrackingMode: MapUserTrackingMode
     
     var body: some View {
         VStack(spacing: 12) {
@@ -29,7 +30,11 @@ struct MapSearchView: View {
                 Image(systemName: "magnifyingglass")
                 TextField("검색하는 곳", text: $searchText)
                     .onChange(of: searchText) { newValue in
+                        userTrackingMode = .none
                         completerWrapper.search(query: newValue)
+                    }
+                    .onAppear {
+                        
                     }
             }
             .padding(.leading)
