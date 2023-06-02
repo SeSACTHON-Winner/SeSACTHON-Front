@@ -21,6 +21,7 @@ struct MainMapView: View {
 
         ZStack {
             VStack(spacing: 0) {
+                Color.black.frame(height: 60)
                 if showRoute {
                     MapRouteInfoView()
                 } else {
@@ -76,6 +77,7 @@ struct MainMapView: View {
         .frame(maxWidth: .infinity)
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea(.keyboard)
+        .ignoresSafeArea()
 
     }
 }

@@ -48,12 +48,14 @@ struct MapRouteInfoView: View {
                 Spacer()
             }
             .foregroundColor(.white)
+            .padding(.bottom, 24)
             
             
         }
         .padding()
         .frame(maxWidth: .infinity)
         .background(.black)
+        .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
     }
 }
 
