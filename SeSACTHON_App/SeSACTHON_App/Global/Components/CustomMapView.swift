@@ -11,19 +11,18 @@ import MapKit
 struct CustomMapView: View {
     @StateObject var locationDataManager = LocationDataManager()
     @Binding var userTrackingMode: MapUserTrackingMode
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CurrentLocationMO.shared.lat, longitude: CurrentLocationMO.shared.lat), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @Binding var region: MKCoordinateRegion
     
     var body: some View {
         Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode))
             .gesture(DragGesture().onChanged { _ in
                 userTrackingMode = .none
-
             })
     }
 }
-
-struct CustomMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomMapView(userTrackingMode: .constant(.follow))
-    }
-}
+//
+//struct CustomMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CustomMapView(userTrackingMode: .constant(.follow), )
+//    }
+//}

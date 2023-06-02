@@ -14,6 +14,8 @@ struct MainMapView: View {
     @State var showRoute = false
     @State var isPlaceSelected = false
     @State private var userTrackingMode: MapUserTrackingMode = .follow
+    @State var address = ""
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 
     var body: some View {
 
@@ -22,9 +24,9 @@ struct MainMapView: View {
                 if showRoute {
                     MapRouteInfoView()
                 } else {
-                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected)
+                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region)
                 }
-                CustomMapView(userTrackingMode: self.$userTrackingMode)
+                CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
                     .ignoresSafeArea()
             }
 
