@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		20A25C54FAF4D804F1A644F9 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */; };
+		60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE552A29E98300312357 /* CustomCameraView.swift */; };
+		60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE572A29EA1200312357 /* CameraModel.swift */; };
+		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
+		60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */; };
 		780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A1E2A28599D00B715BD /* MainMapView.swift */; };
 		780F9A212A2859A500B715BD /* MainRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A202A2859A500B715BD /* MainRunView.swift */; };
 		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
@@ -29,6 +33,10 @@
 
 /* Begin PBXFileReference section */
 		064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
+		60E6CE552A29E98300312357 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
+		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubmitView.swift; sourceTree = "<group>"; };
 		716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		780F9A1E2A28599D00B715BD /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
@@ -138,6 +146,7 @@
 				782172382A286B3000D981DC /* CustomMapView.swift */,
 				7821723D2A28746100D981DC /* MapSearchView.swift */,
 				7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */,
+				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -164,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				78F734CB2A2728F8002AAE1A /* modelExample.swift */,
+				60E6CE572A29EA1200312357 /* CameraModel.swift */,
+				60E6CE592A29EA6B00312357 /* CameraViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +194,7 @@
 				78F734B82A27284C002AAE1A /* ContentView.swift */,
 				780F9A1E2A28599D00B715BD /* MainMapView.swift */,
 				780F9A202A2859A500B715BD /* MainRunView.swift */,
+				60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,17 +325,21 @@
 			files = (
 				78F734D22A272924002AAE1A /* componentExample.swift in Sources */,
 				78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */,
+				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
 				7821723E2A28746100D981DC /* MapSearchView.swift in Sources */,
+				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
 				782172392A286B3100D981DC /* CustomMapView.swift in Sources */,
+				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
 				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
+				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
 				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,17 +470,21 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = UG6UT639QH;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -487,17 +507,21 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = UG6UT639QH;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
