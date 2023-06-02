@@ -23,7 +23,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("7m")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("경사도구간")
@@ -31,7 +31,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("3")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("장애물")
@@ -39,7 +39,7 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("15m")
-                        .font(.system(size: 48, weight: .bold))
+                        .font(.custom("SF Pro Text", size: 48))
                         .foregroundColor(.white)
                         .italic()
                     Text("예정시간")
