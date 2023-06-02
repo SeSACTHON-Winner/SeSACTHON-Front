@@ -23,13 +23,15 @@ struct NavigationMapView: UIViewRepresentable {
         sourcePin.title = "출발"
         map.addAnnotation(sourcePin)
         
+        
+        
         let destinationPin = MKPointAnnotation()
         destinationPin.coordinate = self.destinationLocation
         destinationPin.title = "도착"
         map.addAnnotation(destinationPin)
         
         // Set the region to show both source and destination
-        let region = MKCoordinateRegion(center: destinationLocation, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+        let region = MKCoordinateRegion(center: destinationLocation, span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
         map.region = region
         map.delegate = context.coordinator
         

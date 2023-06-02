@@ -74,7 +74,7 @@ struct MapSearchView: View {
             searchText = ""
             completerWrapper.searchResults.removeAll()
             isPlaceSelected = true
-            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude:  coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude:  coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
             getAddressFromCoordinates()
             
             // Clear the search text and dismiss the keyboard

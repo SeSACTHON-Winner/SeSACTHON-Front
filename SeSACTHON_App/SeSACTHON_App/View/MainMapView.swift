@@ -15,7 +15,7 @@ struct MainMapView: View {
     @State var isPlaceSelected = false
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State var address = ""
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
     @StateObject var locationManager = LocationDataManager()
 
     var body: some View {
@@ -42,6 +42,7 @@ struct MainMapView: View {
                         .padding(.leading, UIScreen.main.bounds.size.width / 2 - 120)
                         .onTapGesture {
                             withAnimation(.easeOut(duration: 0.4)) {
+                                userTrackingMode = .none
                                 searchText = ""
                                 showRoute = true
                                 isPlaceSelected = false
