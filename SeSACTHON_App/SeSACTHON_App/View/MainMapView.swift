@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainMapView: View {
 
     @State var searchText = ""
     @State var showRoute = false
     @State var isPlaceSelected = false
-    
+    @State private var userTrackingMode: MapUserTrackingMode = .follow
 
     var body: some View {
 
@@ -23,7 +24,7 @@ struct MainMapView: View {
                 } else {
                     MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected)
                 }
-                CustomMapView()
+                CustomMapView(userTrackingMode: self.$userTrackingMode)
                     .ignoresSafeArea()
             }
 
@@ -45,9 +46,7 @@ struct MainMapView: View {
                         .padding(.bottom, 94)
                         .onTapGesture {
                             withAnimation(.easeOut(duration: 0.4)) {
-                                searchText = ""
-                                showRoute = true
-                                isPlaceSelected = false
+                                userTrackingMode = .follow
                             }
                         }
                 }
