@@ -11,6 +11,7 @@ import MapKit
 struct MapSearchView: View {
     
     @Binding var searchText: String
+    @Binding var isPlaceSelected: Bool
     @StateObject private var completerWrapper = LocalSearchCompleterWrapper()
     
     var body: some View {
@@ -37,11 +38,11 @@ struct MapSearchView: View {
             
             if !completerWrapper.searchResults.isEmpty && searchText != "" {
                 List(completerWrapper.searchResults, id: \.self) { result in
-                    Text(result.title)
-                        .onTapGesture {
-                            handleSearchResultTapped(result)
-                            completerWrapper.searchResults.removeAll()
-                        }
+                    Button {
+                        handleSearchResultTapped(result)
+                    } label: {
+                        Text(result.title)
+                    }
                 }
                 .listStyle(.plain)
                 .frame(height: 160)
@@ -66,9 +67,10 @@ struct MapSearchView: View {
             print("Coordinate: \(coordinate)")
             
             // Perform additional actions with the coordinate if needed
-            
-            // Clear the search text and dismiss the keyboard
             searchText = ""
+            completerWrapper.searchResults.removeAll()
+            isPlaceSelected = true
+            // Clear the search text and dismiss the keyboard
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
@@ -76,7 +78,7 @@ struct MapSearchView: View {
 
 struct MapSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        MapSearchView(searchText: .constant("포항"))
+        MapSearchView(searchText: .constant("포항"), isPlaceSelected: .constant(false))
     }
 }
 
