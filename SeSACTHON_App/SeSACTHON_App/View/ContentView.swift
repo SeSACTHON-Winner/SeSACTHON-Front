@@ -25,10 +25,16 @@ struct ContentView: View {
                     ZStack {
                         leftTabColor
                             .ignoresSafeArea()
-                        Text("Map")
-                            .font(.system(size: 75, weight: .heavy))
-                            .foregroundColor(leftTextColor)
-                            .italic()
+                        VStack {
+                            Image("DoubleChebronDownWhite")
+                                .opacity(isAnythingClicked ? 0 : 1)
+                            Text("Map")
+                                .font(.system(size: 75, weight: .heavy))
+                                .foregroundColor(leftTextColor)
+                                .italic()
+                            Spacer().frame(height: 24)
+                                .opacity(isAnythingClicked ? 0 : 1)
+                        }
                     }
                     .onTapGesture {
                         isAnythingClicked = true
@@ -44,10 +50,16 @@ struct ContentView: View {
                     ZStack{
                         rightTabColor
                             .ignoresSafeArea()
-                        Text("Run")
-                            .font(.system(size: 75, weight: .heavy))
-                            .foregroundColor(rightTextColor)
-                            .italic()
+                        VStack {
+                            Image("DoubleChebronDownGray")
+                                .opacity(isAnythingClicked ? 0 : 1)
+                            Text("Run")
+                                .font(.system(size: 75, weight: .heavy))
+                                .foregroundColor(rightTextColor)
+                                .italic()
+                            Spacer().frame(height: 24)
+                                .opacity(isAnythingClicked ? 0 : 1)
+                        }
                     }
                     .onTapGesture {
                         isAnythingClicked = true
