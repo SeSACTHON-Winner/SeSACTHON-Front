@@ -9,10 +9,15 @@ import SwiftUI
 
 struct MapRouteInfoView: View {
     
+    
+    @Binding var address: String
+    @Binding var formattedTime: String
+    @Binding var formattedDistance: String
+    
     var body: some View {
         VStack(spacing: 12) {
             
-            Label("포항시 대이동", systemImage: "paperplane.fill")
+            Label(address, systemImage: "paperplane.fill")
                 .labelStyle(BlueSystemImageLabelStyle())
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -23,8 +28,8 @@ struct MapRouteInfoView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Text("7m")
-                        .font(.custom("SF Pro Text", size: 48))
+                    Text(formattedTime)
+                        .font(.custom("SF Pro Text", size: 24))
                         .foregroundColor(.white)
                         .italic()
                     Text("경사도구간")
@@ -32,15 +37,15 @@ struct MapRouteInfoView: View {
                 Spacer()
                 VStack {
                     Text("3")
-                        .font(.custom("SF Pro Text", size: 48))
+                        .font(.custom("SF Pro Text", size: 24))
                         .foregroundColor(.white)
                         .italic()
                     Text("장애물")
                 }
                 Spacer()
                 VStack {
-                    Text("15m")
-                        .font(.custom("SF Pro Text", size: 48))
+                    Text(formattedDistance)
+                        .font(.custom("SF Pro Text", size: 24))
                         .foregroundColor(.white)
                         .italic()
                     Text("예정시간")
@@ -48,17 +53,19 @@ struct MapRouteInfoView: View {
                 Spacer()
             }
             .foregroundColor(.white)
+            .padding(.bottom, 24)
             
             
         }
         .padding()
         .frame(maxWidth: .infinity)
         .background(.black)
+        .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
     }
 }
 
-struct MapRouteInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapRouteInfoView()
-    }
-}
+//struct MapRouteInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MapRouteInfoView()
+//    }
+//}
