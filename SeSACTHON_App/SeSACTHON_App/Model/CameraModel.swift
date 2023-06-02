@@ -17,6 +17,10 @@ class Camera: NSObject, ObservableObject {
     var photoData = Data(count: 0)
     @Published var recentImage: UIImage?
     
+    var isSilentModeOn = false
+    @Published var isCameraBusy = false
+    
+    
     // 카메라 셋업 과정을 담당하는 함수,
     func setUpCamera() {
         if let device = AVCaptureDevice.default(.builtInWideAngleCamera,
@@ -83,12 +87,20 @@ class Camera: NSObject, ObservableObject {
 
 extension Camera: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, willBeginCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        self.isCameraBusy = true
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        if isSilentModeOn {
+            print("[Camera]: Silent sound activated")
+            AudioServicesDisposeSystemSoundID(1108)
+        }
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        if isSilentModeOn {
+            AudioServicesDisposeSystemSoundID(1108)
+        }
     }
     
     
@@ -98,6 +110,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
         self.recentImage = UIImage(data: imageData)
         self.savePhoto(imageData)
         
+        self.isCameraBusy = false
         print("[CameraModel]: Capture routine's done")
     }
 }

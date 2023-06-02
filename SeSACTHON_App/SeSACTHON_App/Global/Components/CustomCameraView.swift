@@ -9,87 +9,55 @@ import SwiftUI
 
 struct CustomCameraView: View {
     @ObservedObject var viewModel = CameraViewModel()
-
+    
     var body: some View {
         ZStack {
-            viewModel.cameraPreview.ignoresSafeArea()
-                .onAppear {
-                    viewModel.configure()
+            if let previewImage = viewModel.recentImage {
+                ZStack {
+                    Image(uiImage: previewImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    SelectStatusView()
                 }
-            
-            VStack {
-                HStack {
-                    // 셔터사운드 온오프
-                    Button(action: {viewModel.switchFlash()}) {
-                        Image(systemName: viewModel.isFlashOn ?
-                              "speaker.fill" : "speaker")
+            } else {
+                viewModel.cameraPreview.ignoresSafeArea()
+                    .onAppear {
+                        viewModel.configure()
+                    }
+                
+                VStack {
+                    HStack {
+                        // 셔터사운드 온오프
+                        Button(action: {viewModel.switchFlash()}) {
+                            Image(systemName: viewModel.isFlashOn ?
+                                  "speaker.fill" : "speaker")
                             .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
-                    }
-                    .padding(.horizontal, 30)
-                    
-                    // 플래시 온오프
-                    Button(action: {viewModel.switchSilent()}) {
-                        Image(systemName: viewModel.isSilentModeOn ?
-                              "bolt.fill" : "bolt")
-                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
-                    }
-                    .padding(.horizontal, 30)
-                }
-                .font(.system(size:25))
-                .padding()
-                
-                Spacer()
-                
-                HStack{
-                    // 찍은 사진 미리보기
-                    Button(action: {}) {
-                        // ✅ view 추가
-                        if let previewImage = viewModel.recentImage {
-                            Image(uiImage: previewImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 75, height: 75)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .aspectRatio(1, contentMode: .fit)
-                        } else {
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(lineWidth: 3)
-                                .foregroundColor(.white)
-                                .frame(width: 75, height: 75)
                         }
-                    }
-                    .padding()
-                    
-                    Spacer()
-                    
-                    // 사진찍기 버튼
-                    NavigationLink {
-                        SelectStatusView()
-                    } label: {
-                        Circle()
-                            .stroke(lineWidth: 5)
-                            .frame(width: 75, height: 75)
-                            .padding()
-                    }.onTapGesture {
-                        viewModel.capturePhoto()
-                    }
-                    
-                    Spacer()
-                    
-                    // 전후면 카메라 교체
-                    Button(action: {viewModel.changeCamera()}) {
-                        Image(systemName: "arrow.triangle.2.circlepath.camera")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
+                        .padding(.horizontal, 30)
                         
+                        // 플래시 온오프
+                        Button(action: {viewModel.switchSilent()}) {
+                            Image(systemName: viewModel.isSilentModeOn ?
+                                  "bolt.fill" : "bolt")
+                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
+                        }
+                        .padding(.horizontal, 30)
                     }
-                    .frame(width: 75, height: 75)
+                    .font(.system(size:25))
                     .padding()
+                    
+                    Spacer()
+                    
+                    Button {
+                        viewModel.capturePhoto()
+                    } label: {
+                        Image("Camera")
+                        //  .padding()
+                    }
                 }
+                .foregroundColor(.white)
             }
-            .foregroundColor(.white)
-        }
+        }.navigationBarBackButtonHidden()
     }
 }
 
@@ -101,47 +69,40 @@ struct CameraView_Previews: PreviewProvider {
 
 
 enum Status: String, CaseIterable {
-    case gradient
-    case water
-    case road
-    case natural
+    case gradient = "경사도, 턱 높음"
+    case water = "좁은 길"
+    case road = "자연재해"
+    case natural = "공사중"
 }
 
 struct SelectStatusView: View {
     @State var selection: Status?
-    var gridItem = [ GridItem(.flexible(), spacing: 16) ]
+    var gridItem = [ GridItem(.flexible(), spacing: 10) ]
     var body: some View {
         VStack {
             Spacer()
             LazyVGrid(columns: gridItem) {
                 ForEach(Status.allCases, id:  \.rawValue) { item in
-                   
-                    Text("🍎" + item.rawValue)
+                    Text(selection == item ? "🍎" + item.rawValue :  "🥚" + item.rawValue)
                         .frame(height: 60)
-                       
+                        .onTapGesture {
+                            selection = item
+                        }
                 }
+                
                 .frame(maxWidth: .infinity, alignment: .center)
                 .background(.ultraThinMaterial)
                 .cornerRadius(16)
+                
             }
             .shadow(color: .black.opacity(0.15) ,radius: 4, x: 2, y: 2)
             .padding(.bottom, 100)
             
-            
             HStack {
-//                Button {
-//                    //pop? binding으로
-//                    //아님 네비게이션 링크로 다시 찍게 할까
-//                } label: {
-//                    Text("다시 찍기")
-//                        .background(.ultraThinMaterial)
-//                }
-
                 Button {
                     //pop? binding
                 } label: {
                     Text("러닝하기")
-                       
                 }
                 .frame(width: 100, height: 80)
                 .background(.ultraThinMaterial)
@@ -156,6 +117,6 @@ struct SelectStatusView: View {
             }
             .padding(.bottom, 80)
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 60)
     }
 }

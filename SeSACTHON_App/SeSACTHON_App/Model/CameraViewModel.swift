@@ -14,13 +14,15 @@ import Combine
 class CameraViewModel: ObservableObject {
     private let model: Camera
     private let session: AVCaptureSession
+    private var isCameraBusy = false
     let cameraPreview: AnyView
     
     private var subscriptions = Set<AnyCancellable>()
     
     @Published var recentImage: UIImage?
     @Published var isFlashOn = false
-    @Published var isSilentModeOn = true
+    @Published var isSilentModeOn = false
+    
     
     func configure() {
         model.requestAndCheckPermissions()
@@ -32,15 +34,17 @@ class CameraViewModel: ObservableObject {
     
     func switchSilent() {
         isSilentModeOn.toggle()
+        model.isSilentModeOn = isSilentModeOn
     }
     
     func capturePhoto() {
-        model.capturePhoto()
-        print("[CameraViewModel]: Photo captured!")
-    }
-    
-    func changeCamera() {
-        print("[CameraViewModel]: Camera changed!")
+        if isCameraBusy == false {
+            model.capturePhoto()
+            
+            print("[CameraViewModel]: Photo captured!")
+        } else {
+            print("[CameraViewModel]: Camera's busy.")
+        }
     }
     
     init() {
@@ -52,6 +56,11 @@ class CameraViewModel: ObservableObject {
         model.$recentImage.sink { [weak self] (photo) in
             guard let pic = photo else { return }
             self?.recentImage = pic
+        }
+        .store(in: &self.subscriptions)
+        
+        model.$isCameraBusy.sink { [weak self] (result) in
+            self?.isCameraBusy = result
         }
         .store(in: &self.subscriptions)
     }

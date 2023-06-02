@@ -10,7 +10,7 @@ import SwiftUI
 struct ReportSubmitView: View {
     var body: some View {
         VStack(spacing: 40) {
-            Spacer()
+            Spacer().frame(height: 134)
             VStack {
                 Spacer()
                 Text("3") //TODO: Data 연결
@@ -20,37 +20,41 @@ struct ReportSubmitView: View {
                 Text("무성씨는 최고의 알리미")
                 Spacer()
                 NavigationLink {
-                    //TODO: 맵(홈)으로 돌아가기 pop으로 수정
-                    //TODO: Camera deinit
+                    //TODO: 커스텀 카메라 뷰로 이동 pop으로 수정
                     MainRunView()
                 } label: {
-                    Text("계속하기")
+                    Text("다른 사진찍기")
                 }
                 .frame(width: 144, height: 32)
                 .foregroundColor(.black)
                 .background(.white)
                 .cornerRadius(16)
                 
-                Text("모든 알리미 보기")
+                Text("앨범 보기")
                     .font(.system(size: 10, weight: .black))
                 Spacer()
             }
-            .frame(minWidth: 260)
+            .frame(minWidth: 274)
             .background(.black)
             .foregroundColor(.white)
-            .cornerRadius(40)
-                        
-            Button {
-                //TODO: 맵(홈)으로 돌아가기
+            .cornerRadius(14)
+            Spacer()
+            NavigationLink {
+                //TODO: Camera deinit
+                //TODO: MainRun으로 돌아가기 pop 방식으로 수정
+                MainRunView()
             } label: {
-                Text("X")
-                    .frame(width: 96, height: 96)
+                Text("Go Run")
+                    .font(.system(size: 30, weight: .black))
+                    .foregroundColor(.teal)
+                    .italic()
+                    .frame(width: 120, height: 120)
                     .foregroundColor(.white)
                     .background(.black)
-                    .cornerRadius(48)
+                    .cornerRadius(60)
             }
-            .padding(.bottom, 100)
-        }
+            .padding(.bottom, 94)
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
