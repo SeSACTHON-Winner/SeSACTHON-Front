@@ -26,8 +26,6 @@
 		78F734B92A27284C002AAE1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B82A27284C002AAE1A /* ContentView.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
-		78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734CB2A2728F8002AAE1A /* modelExample.swift */; };
-		78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734CD2A272905002AAE1A /* modifierExample.swift */; };
 		78F734D22A272924002AAE1A /* componentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734D12A272924002AAE1A /* componentExample.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,8 +53,6 @@
 		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		78F734CB2A2728F8002AAE1A /* modelExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modelExample.swift; sourceTree = "<group>"; };
-		78F734CD2A272905002AAE1A /* modifierExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modifierExample.swift; sourceTree = "<group>"; };
 		78F734D12A272924002AAE1A /* componentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = componentExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,7 +161,6 @@
 		78F734C72A272894002AAE1A /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
-				78F734CD2A272905002AAE1A /* modifierExample.swift */,
 				7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */,
 			);
 			path = Modifier;
@@ -174,7 +169,6 @@
 		78F734C82A2728A9002AAE1A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				78F734CB2A2728F8002AAE1A /* modelExample.swift */,
 				78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */,
 			);
 			path = Model;
@@ -325,7 +319,6 @@
 			files = (
 				78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */,
 				78F734D22A272924002AAE1A /* componentExample.swift in Sources */,
-				78F734CC2A2728F8002AAE1A /* modelExample.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
@@ -340,7 +333,6 @@
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
 				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
-				78F734CE2A272905002AAE1A /* modifierExample.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
