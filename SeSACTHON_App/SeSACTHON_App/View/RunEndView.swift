@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RunEndView: View {
+    @Binding var swpSelection: Int
     @State var courseName: String = "효자공원 철길 코스"
     var body: some View {
         ScrollView {
@@ -157,6 +158,6 @@ struct RunRecentView: View {
 
 struct RunEndView_Previews: PreviewProvider {
     static var previews: some View {
-        RunEndView()
+        RunEndView(swpSelection: .constant(2))
     }
 }

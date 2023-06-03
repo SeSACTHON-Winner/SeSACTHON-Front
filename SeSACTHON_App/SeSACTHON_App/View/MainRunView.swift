@@ -9,7 +9,70 @@ import SwiftUI
 import MapKit
 
 struct MainRunView: View {
+    @State private var swpSelection = 0
     
+    @State private var userTrackingMode: MapUserTrackingMode = .follow
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    
+    var body: some View {
+        ZStack {
+            switch swpSelection {
+            case 0, 1:
+                VStack(spacing: 0) {
+                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                        .ignoresSafeArea()
+                }
+            default:
+                EmptyView()
+            }
+            
+            switch swpSelection {
+            case 0:
+                MainRunHomeView(swpSelection: $swpSelection)
+            case 1:
+                MainRunStart(swpSelection: $swpSelection)
+            case 2:
+                RunEndView(swpSelection: $swpSelection)
+            default:
+                EmptyView()
+            }
+        }.navigationBarBackButtonHidden()
+    }
+}
+
+struct MainRunStart: View {
+    @Binding var swpSelection: Int
+    
+    var body: some View {
+        VStack {
+            VStack {
+                Spacer().frame(height: 80)
+                Text("3").foregroundColor(.white)
+                    .font(.system(size: 96, weight: .black)).italic()
+            }
+            .foregroundColor(.white)
+            .frame(height: 208)
+            .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+            Spacer()
+            Button {
+                swpSelection = 2
+            } label: {
+                Text("Are")
+                    .font(.system(size: 32, weight: .black))
+                    .italic()
+                    .foregroundColor(.white)
+                    .frame(width: 120, height: 120)
+                    .background(.black)
+                    .cornerRadius(60)
+            }.padding(.bottom, 60)
+        }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+struct MainRunHomeView: View {
     @State var searchText = ""
     @State var showRoute = false
     @State var isPlaceSelected = false
@@ -19,17 +82,36 @@ struct MainRunView: View {
     let layout = [
         GridItem(.flexible())
     ]
+    @Binding var swpSelection: Int
+    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-           
                 CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
                     .ignoresSafeArea()
             }
             
-            
             VStack {
-                Spacer().frame(height: 128)
+                VStack {
+                    Spacer().frame(height: 36)
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .resizable()
+                            .foregroundColor(.blue)
+                            .frame(width: 20, height: 20)
+                        Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
+                            .font(.system(size: 17, weight: .regular))
+                        
+                    }
+                }
+                .foregroundColor(.white)
+                .frame(height: 96)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                
+                Spacer().frame(height: 130)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows:layout, spacing: 20) {
                         ForEach(0...2, id: \.self) { _ in
@@ -66,8 +148,8 @@ struct MainRunView: View {
                 }
                 Spacer()
                 HStack(alignment: .top, spacing: 28) {
-                    Button {
-                        //
+                    NavigationLink {
+                        CustomCameraView()
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -76,9 +158,8 @@ struct MainRunView: View {
                             .shadow(radius: 2)
                     }
                     
-                    NavigationLink {
-                        //커스텀 카메라 뷰로 임시 연결
-                        CustomCameraView()
+                    Button {
+                        swpSelection = 1
                     } label: {
                         Text("Go")
                             .font(.system(size: 32, weight: .black))
@@ -100,6 +181,7 @@ struct MainRunView: View {
                     }
                 }.padding(.bottom, 60)
             }
+            .edgesIgnoringSafeArea(.all)
         }
         .navigationBarBackButtonHidden(true)
     }
