@@ -35,11 +35,10 @@ struct MainRunView: View {
                         ForEach(0...2, id: \.self) { _ in
                             HStack {
                                 HStack(spacing: 20) {
-                                    Image(systemName: "pause.fill")
+                                    Image(systemName: "map.fill")
                                         .resizable()
                                         .padding(16)
-                                        .foregroundColor(.blue)
-                                    
+                                        .foregroundColor(.black)
                                         .frame(width: 82, height: 82)
                                         .background(.white)
                                         .cornerRadius(8)
@@ -101,13 +100,8 @@ struct MainRunView: View {
                     }
                 }.padding(.bottom, 60)
             }
-            
         }
-
-        
-        
-        
-            .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
