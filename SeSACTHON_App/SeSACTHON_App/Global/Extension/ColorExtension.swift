@@ -21,6 +21,8 @@ extension Color {
     static let yellowLight = Color(hex: "FFE477")
     */
     
+    static let sesacMint = Color.init(hex: "03FFF0")
+    
     init(hex: String) {
         let scanner = Scanner(string: hex)
         _ = scanner.scanString("#")
