@@ -23,6 +23,12 @@
 		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
 		7812A9882A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */; };
 		7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */; };
+		781D10BB2A2CC7BA00107D79 /* RunningEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781D10BA2A2CC7BA00107D79 /* RunningEndView.swift */; };
+		7846157E2A2CAA8100C83C89 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7846157D2A2CAA8100C83C89 /* StartView.swift */; };
+		7846157F2A2CACB500C83C89 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AA2A2758DF00915FCD /* ColorExtension.swift */; };
+		784615812A2CB26200C83C89 /* RunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784615802A2CB26200C83C89 /* RunningView.swift */; };
+		784615832A2CB8E200C83C89 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784615822A2CB8E200C83C89 /* ReportView.swift */; };
+		784615852A2CB8F700C83C89 /* RunningTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784615842A2CB8F700C83C89 /* RunningTimeView.swift */; };
 		7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */; };
 		788501412A2C3B0400932C42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788501402A2C3B0400932C42 /* ContentView.swift */; };
 		788501432A2C3B0500932C42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788501422A2C3B0500932C42 /* Assets.xcassets */; };
@@ -67,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
+		560322FBF3E02D75BD6CEFEF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		60E6CE552A29E98300312357 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
@@ -84,7 +91,12 @@
 		78123B302A288C9C0060BA4F /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BlackItalic.otf"; sourceTree = "<group>"; };
 		7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueSystemImageLabelStyle.swift; sourceTree = "<group>"; };
+		781D10BA2A2CC7BA00107D79 /* RunningEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningEndView.swift; sourceTree = "<group>"; };
 		7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		7846157D2A2CAA8100C83C89 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		784615802A2CB26200C83C89 /* RunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningView.swift; sourceTree = "<group>"; };
+		784615822A2CB8E200C83C89 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		784615842A2CB8F700C83C89 /* RunningTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimeView.swift; sourceTree = "<group>"; };
 		7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSACTHON_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_WatchApp.swift; sourceTree = "<group>"; };
 		788501402A2C3B0400932C42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +112,7 @@
 		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DEF6F31E134D3B0397C9EF20 /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,13 +142,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3EEF771B45A7D15201C5742E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				560322FBF3E02D75BD6CEFEF /* Pods-SeSACTHON_App.debug.xcconfig */,
+				DEF6F31E134D3B0397C9EF20 /* Pods-SeSACTHON_App.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
 				7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */,
+				7846157D2A2CAA8100C83C89 /* StartView.swift */,
 				788501402A2C3B0400932C42 /* ContentView.swift */,
+				784615822A2CB8E200C83C89 /* ReportView.swift */,
+				784615802A2CB26200C83C89 /* RunningView.swift */,
+				784615842A2CB8F700C83C89 /* RunningTimeView.swift */,
+				F48F2423302A135894EFE1FE /* Pods */,
 				788501422A2C3B0500932C42 /* Assets.xcassets */,
 				788501442A2C3B0500932C42 /* Preview Content */,
+				781D10BA2A2CC7BA00107D79 /* RunningEndView.swift */,
 			);
 			path = "SeSACTHON_Watch Watch App";
 			sourceTree = "<group>";
@@ -143,6 +171,7 @@
 		788501442A2C3B0500932C42 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				78F734B42A27284C002AAE1A /* Products */,
 				788501452A2C3B0500932C42 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -161,9 +190,8 @@
 			children = (
 				78F734B52A27284C002AAE1A /* SeSACTHON_App */,
 				7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */,
-				78F734B42A27284C002AAE1A /* Products */,
-				F48F2423302A135894EFE1FE /* Pods */,
 				28D5E719EF989021F202F1EA /* Frameworks */,
+				3EEF771B45A7D15201C5742E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,6 +202,7 @@
 				7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */,
 			);
 			name = Products;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		78F734B52A27284C002AAE1A /* SeSACTHON_App */ = {
@@ -429,9 +458,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				784615812A2CB26200C83C89 /* RunningView.swift in Sources */,
 				7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */,
 				788501412A2C3B0400932C42 /* ContentView.swift in Sources */,
+				784615852A2CB8F700C83C89 /* RunningTimeView.swift in Sources */,
 				7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */,
+				784615832A2CB8E200C83C89 /* ReportView.swift in Sources */,
+				7846157E2A2CAA8100C83C89 /* StartView.swift in Sources */,
+				781D10BB2A2CC7BA00107D79 /* RunningEndView.swift in Sources */,
+				7846157F2A2CACB500C83C89 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
