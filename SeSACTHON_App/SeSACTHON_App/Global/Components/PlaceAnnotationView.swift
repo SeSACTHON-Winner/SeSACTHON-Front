@@ -19,11 +19,13 @@ struct PlaceAnnotationView: View {
                         Text("😂")
                     }
                 }
+                .shadow(radius: 3)
             Image(systemName: "arrowtriangle.down.fill")
                 .font(.caption)
                 .scaleEffect(2)
                 .foregroundColor(.white)
-                .offset(x: 0, y: -5)
+//                .offset(x: 0, y: -5)
+                .shadow(radius: 2, x: 0, y: 4)
         }
     }
 }
