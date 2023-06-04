@@ -9,11 +9,11 @@ import SwiftUI
 import MapKit
 
 struct MainMapView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     @State var userTrackingMode: MapUserTrackingMode = .follow
     
-    var empireStateBuilding =
-    PlaceMO(name: "지곡회관", coordinate: CLLocationCoordinate2D(latitude: 36.01577810316272, longitude: 129.32320658359848 ))
+    @State var placeMOArr: [PlaceMO] = [PlaceMO(name: "지곡회관", coordinate: CLLocationCoordinate2D(latitude: 36.01577810316272, longitude: 129.32320658359848)), PlaceMO(name: "dd", coordinate: CLLocationCoordinate2D(latitude: 36.016, longitude: 129.324))
+    ]
     
     var body: some View {
         VStack {
@@ -34,7 +34,7 @@ struct MainMapView: View {
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             ZStack {
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: [empireStateBuilding]
+                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: placeMOArr
                 ) { place in
                     MapAnnotation(coordinate: place.coordinate) {
                         PlaceAnnotationView()
@@ -64,6 +64,15 @@ struct MainMapView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
     }
+}
+
+extension MainMapView {
+    
+    func fetchAnnotationItems() {
+        // API가 완성되면 여기에 호출 코드 작성
+    }
+    
+    
 }
 
 struct MainMapView_Previews: PreviewProvider {

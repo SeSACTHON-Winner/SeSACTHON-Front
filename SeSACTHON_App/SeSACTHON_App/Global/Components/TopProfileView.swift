@@ -5,6 +5,8 @@
 //  Created by ChoiYujin on 2023/06/04.
 //
 
+// MARK: - 디자인 계속 변경될 예정
+
 import SwiftUI
 
 struct TopProfileView: View {
