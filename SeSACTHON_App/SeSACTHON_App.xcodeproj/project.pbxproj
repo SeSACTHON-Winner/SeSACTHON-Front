@@ -13,14 +13,16 @@
 		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
 		60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */; };
 		60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */; };
+		7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F3382A2C65A40071AB01 /* PlaceMO.swift */; };
+		7805F33B2A2C65EC0071AB01 /* PlaceAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */; };
+		7805F33D2A2C66BF0071AB01 /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */; };
+		7805F33F2A2C67730071AB01 /* TopProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F33E2A2C67730071AB01 /* TopProfileView.swift */; };
+		7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F3402A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift */; };
 		780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A1E2A28599D00B715BD /* MainMapView.swift */; };
 		780F9A212A2859A500B715BD /* MainRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780F9A202A2859A500B715BD /* MainRunView.swift */; };
 		78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78123B302A288C9C0060BA4F /* LocationDataManager.swift */; };
 		7812A9882A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */; };
 		7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */; };
-		782172392A286B3100D981DC /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782172382A286B3000D981DC /* CustomMapView.swift */; };
-		7821723E2A28746100D981DC /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723D2A28746100D981DC /* MapSearchView.swift */; };
-		782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */; };
 		7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */; };
 		788501412A2C3B0400932C42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788501402A2C3B0400932C42 /* ContentView.swift */; };
 		788501432A2C3B0500932C42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788501422A2C3B0500932C42 /* Assets.xcassets */; };
@@ -30,7 +32,6 @@
 		7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
 		78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9A2A29F87600240004 /* ViewExtension.swift */; };
 		78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */; };
-		78D01CA12A2A08DF00240004 /* NavigationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01CA02A2A08DF00240004 /* NavigationMapView.swift */; };
 		78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */; };
 		78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AA2A2758DF00915FCD /* ColorExtension.swift */; };
 		78F210AD2A27595400915FCD /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
@@ -38,7 +39,6 @@
 		78F734B92A27284C002AAE1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B82A27284C002AAE1A /* ContentView.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
-		78F734D22A272924002AAE1A /* componentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734D12A272924002AAE1A /* componentExample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,15 +74,17 @@
 		60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEndView.swift; sourceTree = "<group>"; };
 		716AF2D2EBE890A057F2B11B /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
+		7805F3382A2C65A40071AB01 /* PlaceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMO.swift; sourceTree = "<group>"; };
+		7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotationView.swift; sourceTree = "<group>"; };
+		7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
+		7805F33E2A2C67730071AB01 /* TopProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopProfileView.swift; sourceTree = "<group>"; };
+		7805F3402A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintSystemImageLabelStyle.swift; sourceTree = "<group>"; };
 		780F9A1E2A28599D00B715BD /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
 		780F9A202A2859A500B715BD /* MainRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunView.swift; sourceTree = "<group>"; };
 		78123B302A288C9C0060BA4F /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BlackItalic.otf"; sourceTree = "<group>"; };
 		7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueSystemImageLabelStyle.swift; sourceTree = "<group>"; };
-		782172382A286B3000D981DC /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
 		7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-App-Info.plist"; sourceTree = SOURCE_ROOT; };
-		7821723D2A28746100D981DC /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
-		7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouteInfoView.swift; sourceTree = "<group>"; };
 		7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSACTHON_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_WatchApp.swift; sourceTree = "<group>"; };
 		788501402A2C3B0400932C42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,7 +92,6 @@
 		788501452A2C3B0500932C42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		78D01C9A2A29F87600240004 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
-		78D01CA02A2A08DF00240004 /* NavigationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMapView.swift; sourceTree = "<group>"; };
 		78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationMO.swift; sourceTree = "<group>"; };
 		78F210AA2A2758DF00915FCD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		78F210AC2A27595400915FCD /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		78F734D12A272924002AAE1A /* componentExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = componentExample.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,13 +212,11 @@
 		78F734C52A27287A002AAE1A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				78F734D12A272924002AAE1A /* componentExample.swift */,
-				782172382A286B3000D981DC /* CustomMapView.swift */,
-				7821723D2A28746100D981DC /* MapSearchView.swift */,
-				7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */,
 				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
 				78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */,
-				78D01CA02A2A08DF00240004 /* NavigationMapView.swift */,
+				7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */,
+				7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */,
+				7805F33E2A2C67730071AB01 /* TopProfileView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -237,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				7812A9892A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift */,
+				7805F3402A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -247,6 +246,7 @@
 				60E6CE572A29EA1200312357 /* CameraModel.swift */,
 				60E6CE592A29EA6B00312357 /* CameraViewModel.swift */,
 				78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */,
+				7805F3382A2C65A40071AB01 /* PlaceMO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -440,24 +440,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */,
-				78F734D22A272924002AAE1A /* componentExample.swift in Sources */,
+				7805F33D2A2C66BF0071AB01 /* CustomMapView.swift in Sources */,
+				7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */,
 				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
-				78D01CA12A2A08DF00240004 /* NavigationMapView.swift in Sources */,
-				7821723E2A28746100D981DC /* MapSearchView.swift in Sources */,
 				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
-				782172392A286B3100D981DC /* CustomMapView.swift in Sources */,
+				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
+				7805F33F2A2C67730071AB01 /* TopProfileView.swift in Sources */,
+				7805F33B2A2C65EC0071AB01 /* PlaceAnnotationView.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
-				782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
 			);

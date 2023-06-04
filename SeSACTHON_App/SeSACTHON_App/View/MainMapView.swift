@@ -9,83 +9,70 @@ import SwiftUI
 import MapKit
 
 struct MainMapView: View {
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    @State var userTrackingMode: MapUserTrackingMode = .follow
     
-    @State var searchText = ""
-    @State var showRoute = false
-    @State var isPlaceSelected = false
-    @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State var address = ""
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
-    @State var formattedTime = ""
-    @State var formattedDistance = ""
-    var locationManager = LocationDataManager()
-
+    @State var placeMOArr: [PlaceMO] = [PlaceMO(name: "지곡회관", coordinate: CLLocationCoordinate2D(latitude: 36.01577810316272, longitude: 129.32320658359848)), PlaceMO(name: "dd", coordinate: CLLocationCoordinate2D(latitude: 36.016, longitude: 129.324))
+    ]
+    
     var body: some View {
-
-        ZStack {
-            VStack(spacing: 0) {
-                Color.black.frame(height: 60)
-                if showRoute {
-                    MapRouteInfoView(address: self.$address, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
-                    NavigationMapView(sourceLocation: locationManager.currentLocation, destinationLocation: CLLocationCoordinate2D(latitude: region.center.latitude, longitude: region.center.longitude), region: self.$region, formattedTime: self.$formattedTime, formattedDistance: self.$formattedDistance)
-                } else {
-                    MapSearchView(searchText: self.$searchText, isPlaceSelected: self.$isPlaceSelected, address: self.$address, region: self.$region, userTrackingMode: self.$userTrackingMode)
-                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                        .ignoresSafeArea()
-                }
+        VStack {
+            
+            VStack(spacing: 12) {
+                Spacer().frame(height: 40)
+                TopProfileView()
+                Label("address", systemImage: "smallcircle.filled.circle")
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 36)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .labelStyle(MintSystemImageLabelStyle())
             }
-
-            VStack {
-                Spacer()
-
-                HStack(alignment: .top, spacing: 0) {
-                    Spacer().frame(width: 52)
-                    Image("GoBtn")
-                        .padding(.bottom, 94)
-                        .padding(.horizontal, 26)
-                        .onTapGesture {
-                            withAnimation(.easeOut(duration: 0.4)) {
-                                searchText = ""
-                                showRoute = true
-                                isPlaceSelected = false
-                                print("Current : \(locationManager.currentLocation), DestinationCoordinate : \(region.center.latitude) , \(region.center.longitude)")
-                            }
-                        }
-                    Image("CurrentLocationBtn")
-                        .padding(.bottom, 94)
-                        .onTapGesture {
-                            withAnimation(.easeOut(duration: 0.4)) {
-                                userTrackingMode = .follow
-                            }
-                        }
-                }
-            }
+            .padding()
             .frame(maxWidth: .infinity)
-            .opacity(isPlaceSelected ? 1 : 0)
-            if showRoute {
-                VStack {
-                    Spacer()
-                    HStack(alignment: .top) {
-                        Image("EndMintBtn")
-                            .padding(.bottom, 94)
-                            .onTapGesture {
-                                withAnimation(.easeOut(duration: 0.4)) {
-                                    searchText = ""
-                                    showRoute = false
-                                }
-                            }
+            .background(Color.black)
+            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            ZStack {
+                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: placeMOArr
+                ) { place in
+                    MapAnnotation(coordinate: place.coordinate) {
+                        PlaceAnnotationView()
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .opacity(showRoute ? 1 : 0)
+                .gesture(DragGesture().onChanged { _ in
+                    userTrackingMode = .none
+                })
+                .tint(.mint)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button {
+                            if userTrackingMode == .none {
+                                userTrackingMode = .follow
+                            }
+                        } label: {
+                            Image("CurrentLocationBtn").frame(width: 50, height: 50)
+                        }
+                    }
+                    .padding(40)
+                }
             }
         }
-        .frame(maxWidth: .infinity)
-        .navigationBarBackButtonHidden(true)
-        .ignoresSafeArea(.keyboard)
         .ignoresSafeArea()
-
+        .navigationBarBackButtonHidden(true)
     }
+}
+
+extension MainMapView {
+    
+    func fetchAnnotationItems() {
+        // API가 완성되면 여기에 호출 코드 작성
+    }
+    
+    
 }
 
 struct MainMapView_Previews: PreviewProvider {
@@ -93,4 +80,5 @@ struct MainMapView_Previews: PreviewProvider {
         MainMapView()
     }
 }
+
 
