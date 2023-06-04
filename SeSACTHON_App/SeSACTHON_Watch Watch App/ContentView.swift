@@ -9,42 +9,51 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var scrollAmount = 0.0
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("5 : 12 : 48")
-                    .font(.custom("SF Pro Text", size: 24))
-                    .foregroundColor(.white)
-                    .italic()
+        VStack {
+            Text("5 : 12 : 48")
+                .font(.custom("SF Pro Text", size: 24))
+                .foregroundColor(.white)
+                .italic()
+                .padding(.vertical)
+            List {
+                
                 Button {
                     print("경사도 턱 높음")
                 } label: {
                     Text("경사도 턱 높음")
+                        
                 }
+                .frame(height: 120)
+  
                 Button {
                     print("좁은길")
                 } label: {
                     Text("좁은길")
+                        
                 }
+                .frame(height: 120)
+      
                 Button {
                     print("자연재해")
                 } label: {
                     Text("자연재해")
+                        .frame(height: 120)
+        
                 }
                 Button {
                     print("공사중")
                 } label: {
                     Text("공사중")
+                        .frame(height: 120)
                 }
-                
+
             }
-            
-            .padding()
+            .listStyle(CarouselListStyle())
+            .font(.custom("SF Pro Text", size: 24))
+            .foregroundColor(.white)
         }
-        .focusable(true)
-        .digitalCrownRotation($scrollAmount)
     }
 }
 
