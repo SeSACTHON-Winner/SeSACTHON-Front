@@ -8,30 +8,35 @@
 import SwiftUI
 
 struct TopProfileView: View {
+    
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Button {
-                    //
-                } label: {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(.white)
-                }
-                Image("Camera")
+        
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
                     .resizable()
-                    .frame(width: 34, height: 34)
-                    .padding(.leading)
-                Spacer()
+                    .scaledToFit()
+                    .frame(width: 16)
+                    .foregroundColor(.white)
+                    .padding(.trailing, 26)
             }
-            
-            .padding()
+            Spacer()
             Text("Map")
-                .font(.custom("SF Pro Text", size: 24))
+                .font(.custom("SF Pro Text", size: 40))
                 .foregroundColor(.white)
                 .italic()
-                .padding(.leading, 58)
-                .padding(.bottom)
+            Spacer()
+            Image("Camera")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .padding(.leading)
         }
+        .frame(maxWidth: .infinity)
+        .padding(.bottom)
         .background(.black)
     }
 }

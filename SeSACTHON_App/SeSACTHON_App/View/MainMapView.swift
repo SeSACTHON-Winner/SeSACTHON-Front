@@ -19,13 +19,15 @@ struct MainMapView: View {
         VStack {
             
             VStack(spacing: 12) {
-                Spacer().frame(height: 60)
+                Spacer().frame(height: 40)
+                TopProfileView()
                 Label("address", systemImage: "smallcircle.filled.circle")
                     .padding(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 36)
                     .background(Color.white)
                     .cornerRadius(10)
+                    .labelStyle(MintSystemImageLabelStyle())
             }
             .padding()
             .frame(maxWidth: .infinity)
@@ -60,6 +62,7 @@ struct MainMapView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
     }
 }
 
