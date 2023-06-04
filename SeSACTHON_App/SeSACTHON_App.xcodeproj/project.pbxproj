@@ -21,6 +21,13 @@
 		782172392A286B3100D981DC /* CustomMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782172382A286B3000D981DC /* CustomMapView.swift */; };
 		7821723E2A28746100D981DC /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723D2A28746100D981DC /* MapSearchView.swift */; };
 		782172402A2875DE00D981DC /* MapRouteInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */; };
+		7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */; };
+		788501412A2C3B0400932C42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788501402A2C3B0400932C42 /* ContentView.swift */; };
+		788501432A2C3B0500932C42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788501422A2C3B0500932C42 /* Assets.xcassets */; };
+		788501462A2C3B0500932C42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788501452A2C3B0500932C42 /* Preview Assets.xcassets */; };
+		788501492A2C3B0500932C42 /* SeSACTHON_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7885014E2A2C3B4A00932C42 /* SF-Pro-Text-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */; };
+		7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
 		78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9A2A29F87600240004 /* ViewExtension.swift */; };
 		78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */; };
 		78D01CA12A2A08DF00240004 /* NavigationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01CA02A2A08DF00240004 /* NavigationMapView.swift */; };
@@ -33,6 +40,30 @@
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
 		78F734D22A272924002AAE1A /* componentExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734D12A272924002AAE1A /* componentExample.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		788501472A2C3B0500932C42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78F734AB2A27284B002AAE1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7885013B2A2C3B0400932C42;
+			remoteInfo = "SeSACTHON_Watch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7885014D2A2C3B0500932C42 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				788501492A2C3B0500932C42 /* SeSACTHON_Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
@@ -52,6 +83,11 @@
 		7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		7821723D2A28746100D981DC /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
 		7821723F2A2875DE00D981DC /* MapRouteInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRouteInfoView.swift; sourceTree = "<group>"; };
+		7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSACTHON_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_WatchApp.swift; sourceTree = "<group>"; };
+		788501402A2C3B0400932C42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		788501422A2C3B0500932C42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		788501452A2C3B0500932C42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		78D01C9A2A29F87600240004 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		78D01CA02A2A08DF00240004 /* NavigationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMapView.swift; sourceTree = "<group>"; };
@@ -67,6 +103,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		788501392A2C3B0400932C42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78F734B02A27284B002AAE1A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -86,6 +129,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */,
+				788501402A2C3B0400932C42 /* ContentView.swift */,
+				788501422A2C3B0500932C42 /* Assets.xcassets */,
+				788501442A2C3B0500932C42 /* Preview Content */,
+			);
+			path = "SeSACTHON_Watch Watch App";
+			sourceTree = "<group>";
+		};
+		788501442A2C3B0500932C42 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				788501452A2C3B0500932C42 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		78F210AE2A2759BE00915FCD /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				78F734B52A27284C002AAE1A /* SeSACTHON_App */,
+				7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */,
 				78F734B42A27284C002AAE1A /* Products */,
 				F48F2423302A135894EFE1FE /* Pods */,
 				28D5E719EF989021F202F1EA /* Frameworks */,
@@ -108,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				78F734B32A27284C002AAE1A /* SeSACTHON_App.app */,
+				7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +284,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7885013B2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7885014A2A2C3B0500932C42 /* Build configuration list for PBXNativeTarget "SeSACTHON_Watch Watch App" */;
+			buildPhases = (
+				788501382A2C3B0400932C42 /* Sources */,
+				788501392A2C3B0400932C42 /* Frameworks */,
+				7885013A2A2C3B0400932C42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SeSACTHON_Watch Watch App";
+			productName = "SeSACTHON_Watch Watch App";
+			productReference = 7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		78F734B22A27284B002AAE1A /* SeSACTHON_App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78F734C12A27284C002AAE1A /* Build configuration list for PBXNativeTarget "SeSACTHON_App" */;
@@ -229,10 +310,12 @@
 				78F734B02A27284B002AAE1A /* Frameworks */,
 				78F734B12A27284B002AAE1A /* Resources */,
 				FE930C4C02C196C46DE05492 /* [CP] Embed Pods Frameworks */,
+				7885014D2A2C3B0500932C42 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				788501482A2C3B0500932C42 /* PBXTargetDependency */,
 			);
 			name = SeSACTHON_App;
 			productName = SeSACTHON_App;
@@ -249,6 +332,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					7885013B2A2C3B0400932C42 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					78F734B22A27284B002AAE1A = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -268,11 +354,22 @@
 			projectRoot = "";
 			targets = (
 				78F734B22A27284B002AAE1A /* SeSACTHON_App */,
+				7885013B2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7885013A2A2C3B0400932C42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7885014E2A2C3B4A00932C42 /* SF-Pro-Text-BlackItalic.otf in Resources */,
+				788501462A2C3B0500932C42 /* Preview Assets.xcassets in Resources */,
+				788501432A2C3B0500932C42 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78F734B12A27284B002AAE1A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +425,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		788501382A2C3B0400932C42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */,
+				788501412A2C3B0400932C42 /* ContentView.swift in Sources */,
+				7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78F734AF2A27284B002AAE1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,7 +465,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		788501482A2C3B0500932C42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7885013B2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */;
+			targetProxy = 788501472A2C3B0500932C42 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7885014B2A2C3B0500932C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = UG6UT639QH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		7885014C2A2C3B0500932C42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_Watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = UG6UT639QH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
 		78F734BF2A27284C002AAE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -477,12 +652,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71E80079FDB3F23CB130F6BF /* Pods-SeSACTHON_App.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = VJUK3HBJ2M;
+				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -514,12 +690,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 064B31A41AA7C4522C7BA64B /* Pods-SeSACTHON_App.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = VJUK3HBJ2M;
+				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -550,6 +727,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7885014A2A2C3B0500932C42 /* Build configuration list for PBXNativeTarget "SeSACTHON_Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7885014B2A2C3B0500932C42 /* Debug */,
+				7885014C2A2C3B0500932C42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		78F734AE2A27284B002AAE1A /* Build configuration list for PBXProject "SeSACTHON_App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
