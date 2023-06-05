@@ -10,7 +10,7 @@ import SwiftUI
 struct ReportView: View {
     
     @State var isNext = false
-    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack(spacing: 0) {
@@ -66,6 +66,16 @@ struct ReportView: View {
             .foregroundColor(.white)
         }
         .frame(maxWidth: .infinity)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    watchBackButton()
+                }
+            }
+        }
         
         
     }

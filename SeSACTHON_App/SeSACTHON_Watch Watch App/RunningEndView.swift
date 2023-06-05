@@ -32,6 +32,16 @@ struct RunningEndView: View {
             // MARK: - info
             runningInfoView()
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    watchBackButton()
+                }
+            }
+        }
     }
 }
 

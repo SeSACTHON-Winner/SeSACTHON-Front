@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RunningView: View {
     
+    @Environment(\.dismiss) private var dismiss
     @State var isNext = false
     @State var isEnd = false
     
@@ -44,7 +45,19 @@ struct RunningView: View {
         }
         .navigationDestination(isPresented: $isEnd) {
             RunningEndView()
+                
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    watchBackButton()
+                }
+            }
+        }
+        
     }
 }
 
