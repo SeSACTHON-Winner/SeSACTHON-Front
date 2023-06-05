@@ -10,14 +10,14 @@ import MapKit
 
 struct MainRunView: View {
     @State private var swpSelection = 0
-    
+    var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    
+   
     var body: some View {
         ZStack {
             switch swpSelection {
-            case 0, 1:
+            case 0, 1, 2:
                 VStack(spacing: 0) {
                     CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
                         .ignoresSafeArea()
@@ -32,13 +32,18 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunning(swpSelection: $swpSelection)
+                MainRunningView(swpSelection: $swpSelection)
             case 3:
                 RunEndView(swpSelection: $swpSelection)
             default:
                 EmptyView()
             }
-        }.navigationBarBackButtonHidden()
+        }
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            //healthDataManager.getHealthAuthorizationRequestStatus()
+            healthDataManager.requestHealthAuthorization()
+        }
     }
 }
 
@@ -47,7 +52,7 @@ struct MainRunStart: View {
     @State private var startCount = "3."
     @State private var startText = "Are"
     @State private var isAnimating = false
-
+    
     var body: some View {
         VStack {
             VStack {
@@ -89,7 +94,7 @@ struct MainRunStart: View {
                         .foregroundColor(Color("MainColor"))
                         .scaleEffect(isAnimating ? 1.35 : 1.0)
                         .opacity(isAnimating ? 0.5 : 0)
-
+                    
                     Circle()
                         .foregroundColor(Color("MainColor"))
                         .scaleEffect(isAnimating ? 1.2 : 1.0)
@@ -105,183 +110,151 @@ struct MainRunStart: View {
                         .foregroundColor(.white)
                 )
                 .onAppear {
-                    
                     withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatCount(8)) {
-                            self.isAnimating.toggle()
-                            
-                        }
+                        self.isAnimating.toggle()
+                        
+                    }
                 }
             }
             .padding(.bottom, 60)
-                
         }
         .edgesIgnoringSafeArea(.all)
     }
 }
-//
-//Text("\(startText)")
-//    .font(.system(size: 28, weight: .black))
-//    .italic()
-//    .foregroundColor(.white)
-//    .frame(width: 120, height: 120)
-//    .background(.black)
-//    .cornerRadius(60)
-//    .scaleEffect(isAnimating ? 1.2 : 1.0)
 
-struct MainRunning: View {
+
+struct MainRunHomeView: View {
+    @State var searchText = ""
+    @State var showRoute = false
+    @State var isPlaceSelected = false
+    @State private var userTrackingMode: MapUserTrackingMode = .follow
+    @State var address = ""
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    let layout = [
+        GridItem(.flexible())
+    ]
     @Binding var swpSelection: Int
-   // @State private var startCount = "3."
     
     var body: some View {
-        VStack {
-            VStack {
-                Spacer().frame(height: 60)
-                HStack {
-                    Text("00 : 00 : 00").foregroundColor(.white)
-                        .font(.system(size: 48, weight: .black)).italic()
-                    Spacer()
-                }.padding(.leading, 28)
+        ZStack {
+            VStack(spacing: 0) {
+                CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                    .ignoresSafeArea()
             }
-            .foregroundColor(.white)
-            .frame(height: 120)
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-            .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
             
-            Spacer()
-            Button {
-                //swpSelection = 2
-            } label: {
-                Text("Stop")
-                    .font(.system(size: 28, weight: .black))
-                    .italic()
-                    .foregroundColor(.white)
-                    .frame(width: 120, height: 120)
-                    .background(.black)
-                    .cornerRadius(60)
-            }.padding(.bottom, 60)
-            
-        }.edgesIgnoringSafeArea(.all)
+            VStack {
+                VStack {
+                    Spacer().frame(height: 36)
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .resizable()
+                            .foregroundColor(.blue)
+                            .frame(width: 20, height: 20)
+                        Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
+                            .font(.system(size: 17, weight: .regular))
+                    }
+                }
+                .foregroundColor(.white)
+                .frame(height: 96)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                
+                Spacer().frame(height: 130)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHGrid(rows:layout, spacing: 20) {
+                        ForEach(0...2, id: \.self) { _ in
+                            HStack {
+                                HStack(spacing: 20) {
+                                    Image(systemName: "map.fill")
+                                        .resizable()
+                                        .padding(16)
+                                        .foregroundColor(.black)
+                                        .frame(width: 82, height: 82)
+                                        .background(.white)
+                                        .cornerRadius(8)
+                                    
+                                    //TODO: 데이터 연결
+                                    VStack(alignment: .leading) {
+                                        Text("오전동")
+                                            .font(.system(size: 10, weight: .regular))
+                                        Spacer().frame(height: 16)
+                                        Text("최근 기록")
+                                            .font(.system(size: 20, weight: .semibold))
+                                        Text("3.3km 40min")
+                                            .font(.system(size: 14, weight: .regular))
+                                        
+                                    }.foregroundColor(.white)
+                                    Spacer()
+                                }.padding(20)
+                            }.frame(width: 312, height: 124)
+                                .background(Color("Darkgray"))
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.horizontal, 40)
+                }
+                Spacer()
+                NavigationLink {
+                    CustomCameraView()
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 28, weight: .black))
+                        .italic()
+                        .foregroundColor(.black)
+                        .frame(width: 52, height: 52)
+                        .background(Color("MainColor"))
+                        .cornerRadius(26)
+                        .shadow(color: .black.opacity(0.25), radius: 2)
+
+                }.padding(.bottom, 14)
+                
+                HStack(alignment: .top, spacing: 28) {
+                    NavigationLink {
+                        //SettingView()
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 28, weight: .black))
+                            .italic()
+                            .foregroundColor(.black)
+                            .frame(width: 52, height: 52)
+                            .background(Color("MainColor"))
+                            .cornerRadius(26)
+                            .shadow(color: .black.opacity(0.25), radius: 2)
+                    }
+                    
+                    Button {
+                        swpSelection = 1
+                    } label: {
+                        Text("Go")
+                            .font(.system(size: 32, weight: .black))
+                            .italic()
+                            .foregroundColor(.white)
+                            .frame(width: 120, height: 120)
+                            .background(.black)
+                            .cornerRadius(60)
+                    }
+                    
+                    Button {
+                        //
+                    } label: {
+                        Image(systemName: "location.circle.fill")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 52, height: 52)
+                            .shadow(radius: 2)
+                    }
+                }.padding(.bottom, 60)
+            }
+            .edgesIgnoringSafeArea(.all)
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
-    struct MainRunHomeView: View {
-        @State var searchText = ""
-        @State var showRoute = false
-        @State var isPlaceSelected = false
-        @State private var userTrackingMode: MapUserTrackingMode = .follow
-        @State var address = ""
-        @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-        let layout = [
-            GridItem(.flexible())
-        ]
-        @Binding var swpSelection: Int
-        
-        var body: some View {
-            ZStack {
-                VStack(spacing: 0) {
-                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                        .ignoresSafeArea()
-                }
-                
-                VStack {
-                    VStack {
-                        Spacer().frame(height: 36)
-                        HStack {
-                            Image(systemName: "location.fill")
-                                .resizable()
-                                .foregroundColor(.blue)
-                                .frame(width: 20, height: 20)
-                            Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
-                                .font(.system(size: 17, weight: .regular))
-                            
-                        }
-                    }
-                    .foregroundColor(.white)
-                    .frame(height: 96)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.black)
-                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                    .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
-                    
-                    Spacer().frame(height: 130)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHGrid(rows:layout, spacing: 20) {
-                            ForEach(0...2, id: \.self) { _ in
-                                HStack {
-                                    HStack(spacing: 20) {
-                                        Image(systemName: "map.fill")
-                                            .resizable()
-                                            .padding(16)
-                                            .foregroundColor(.black)
-                                            .frame(width: 82, height: 82)
-                                            .background(.white)
-                                            .cornerRadius(8)
-                                        
-                                        //TODO: 데이터 연결
-                                        VStack(alignment: .leading) {
-                                            Text("오전동")
-                                                .font(.system(size: 10, weight: .regular))
-                                            Spacer().frame(height: 16)
-                                            Text("최근 기록")
-                                                .font(.system(size: 20, weight: .semibold))
-                                            
-                                            Text("3.3km/30분")
-                                                .font(.system(size: 14, weight: .regular))
-                                            
-                                        }.foregroundColor(.white)
-                                        Spacer()
-                                    }.padding(20)
-                                }.frame(width: 312, height: 124)
-                                    .background(.black)
-                                    .cornerRadius(8)
-                            }
-                        }
-                        .padding(.horizontal, 40)
-                    }
-                    Spacer()
-                    HStack(alignment: .top, spacing: 28) {
-                        NavigationLink {
-                            CustomCameraView()
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .resizable()
-                                .foregroundColor(.black)
-                                .frame(width: 52, height: 52)
-                                .shadow(radius: 2)
-                        }
-                        
-                        Button {
-                            swpSelection = 1
-                        } label: {
-                            Text("Go")
-                                .font(.system(size: 32, weight: .black))
-                                .italic()
-                                .foregroundColor(.white)
-                                .frame(width: 120, height: 120)
-                                .background(.black)
-                                .cornerRadius(60)
-                        }
-                        
-                        Button {
-                            //
-                        } label: {
-                            Image(systemName: "location.circle.fill")
-                                .resizable()
-                                .foregroundColor(.black)
-                                .frame(width: 52, height: 52)
-                                .shadow(radius: 2)
-                        }
-                    }.padding(.bottom, 60)
-                }
-                .edgesIgnoringSafeArea(.all)
-            }
-            .navigationBarBackButtonHidden(true)
-        }
+
+struct MainRunView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainRunView()
     }
-    
-    struct MainRunView_Previews: PreviewProvider {
-        static var previews: some View {
-            MainRunView()
-        }
-    }
+}

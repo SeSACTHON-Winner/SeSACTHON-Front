@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57D4395AADC0DAD9E533214B /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3288E70D091A9EF882BDB678 /* Pods_SeSACTHON_App.framework */; };
+		60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B60F2A2D7F3300032504 /* MainRunningView.swift */; };
+		60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6112A2D7FF100032504 /* HealthDataManager.swift */; };
+		60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6132A2D817A00032504 /* HealthKitSupport.swift */; };
+		60B9B6162A2D81D700032504 /* HealthKitSupport+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */; };
 		60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE552A29E98300312357 /* CustomCameraView.swift */; };
 		60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE572A29EA1200312357 /* CameraModel.swift */; };
 		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
@@ -47,6 +50,7 @@
 		78F734B92A27284C002AAE1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B82A27284C002AAE1A /* ContentView.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
+		B732D104897AD04850F98849 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,13 +78,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		21F93AB93DD621F61F59FAAD /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
-		3288E70D091A9EF882BDB678 /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60B9B60E2A2D7DFB00032504 /* SeSACTHON_App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACTHON_App.entitlements; sourceTree = "<group>"; };
+		60B9B60F2A2D7F3300032504 /* MainRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunningView.swift; sourceTree = "<group>"; };
+		60B9B6112A2D7FF100032504 /* HealthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataManager.swift; sourceTree = "<group>"; };
+		60B9B6132A2D817A00032504 /* HealthKitSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSupport.swift; sourceTree = "<group>"; };
+		60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKitSupport+Strings.swift"; sourceTree = "<group>"; };
 		60E6CE552A29E98300312357 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubmitView.swift; sourceTree = "<group>"; };
 		60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEndView.swift; sourceTree = "<group>"; };
+		73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
 		7805F3382A2C65A40071AB01 /* PlaceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMO.swift; sourceTree = "<group>"; };
 		7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotationView.swift; sourceTree = "<group>"; };
 		7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
@@ -113,7 +122,7 @@
 		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		93EA203E1030DF0666FC7AAB /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
+		D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57D4395AADC0DAD9E533214B /* Pods_SeSACTHON_App.framework in Frameworks */,
+				B732D104897AD04850F98849 /* Pods_SeSACTHON_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,18 +147,19 @@
 		3EEF771B45A7D15201C5742E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				21F93AB93DD621F61F59FAAD /* Pods-SeSACTHON_App.debug.xcconfig */,
-				93EA203E1030DF0666FC7AAB /* Pods-SeSACTHON_App.release.xcconfig */,
+				D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */,
+				73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		6E63F9904F49F858B83A8E3E /* Frameworks */ = {
+		60B9B6172A2D81ED00032504 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3288E70D091A9EF882BDB678 /* Pods_SeSACTHON_App.framework */,
+				60B9B6132A2D817A00032504 /* HealthKitSupport.swift */,
+				60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */,
 			);
-			name = Frameworks;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */ = {
@@ -192,7 +202,7 @@
 				78F734B52A27284C002AAE1A /* SeSACTHON_App */,
 				7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */,
 				3EEF771B45A7D15201C5742E /* Pods */,
-				6E63F9904F49F858B83A8E3E /* Frameworks */,
+				B1C252A92649DB7E3F200112 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +219,7 @@
 		78F734B52A27284C002AAE1A /* SeSACTHON_App */ = {
 			isa = PBXGroup;
 			children = (
+				60B9B60E2A2D7DFB00032504 /* SeSACTHON_App.entitlements */,
 				7821723C2A28732100D981DC /* SeSACTHON-App-Info.plist */,
 				78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */,
 				78F734CA2A2728C1002AAE1A /* View */,
@@ -235,6 +246,8 @@
 				78F734C62A272890002AAE1A /* Extension */,
 				78F734C52A27287A002AAE1A /* Components */,
 				78123B302A288C9C0060BA4F /* LocationDataManager.swift */,
+				60B9B6112A2D7FF100032504 /* HealthDataManager.swift */,
+				60B9B6172A2D81ED00032504 /* Utilities */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -298,9 +311,18 @@
 				780F9A202A2859A500B715BD /* MainRunView.swift */,
 				60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */,
 				60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */,
+				60B9B60F2A2D7F3300032504 /* MainRunningView.swift */,
 				789866B52A2DC02A00CA4722 /* HomeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B1C252A92649DB7E3F200112 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F48F2423302A135894EFE1FE /* Pods */ = {
@@ -334,12 +356,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78F734C12A27284C002AAE1A /* Build configuration list for PBXNativeTarget "SeSACTHON_App" */;
 			buildPhases = (
-				1183FF8355DB6516A30EE3A2 /* [CP] Check Pods Manifest.lock */,
+				0CE832052E32733871883E52 /* [CP] Check Pods Manifest.lock */,
 				78F734AF2A27284B002AAE1A /* Sources */,
 				78F734B02A27284B002AAE1A /* Frameworks */,
 				78F734B12A27284B002AAE1A /* Resources */,
 				7885014D2A2C3B0500932C42 /* Embed Watch Content */,
-				5175C2921A4728293315091A /* [CP] Embed Pods Frameworks */,
+				32ECFF20EA28195EF904D4EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -412,7 +434,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1183FF8355DB6516A30EE3A2 /* [CP] Check Pods Manifest.lock */ = {
+		0CE832052E32733871883E52 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -434,7 +456,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5175C2921A4728293315091A /* [CP] Embed Pods Frameworks */ = {
+		32ECFF20EA28195EF904D4EE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -483,17 +505,21 @@
 				789866B62A2DC02A00CA4722 /* HomeView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
+				60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */,
 				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
 				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
 				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
+				60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */,
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
 				7805F33F2A2C67730071AB01 /* TopProfileView.swift in Sources */,
+				60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */,
 				7805F33B2A2C65EC0071AB01 /* PlaceAnnotationView.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
+				60B9B6162A2D81D700032504 /* HealthKitSupport+Strings.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
@@ -687,11 +713,12 @@
 		};
 		78F734C22A27284C002AAE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21F93AB93DD621F61F59FAAD /* Pods-SeSACTHON_App.debug.xcconfig */;
+			baseConfigurationReference = D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSACTHON_App/SeSACTHON_App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
@@ -699,11 +726,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "앱 사용을 위해 승인해주세요";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱 사용을 위해 승인해주세요";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -725,11 +755,12 @@
 		};
 		78F734C32A27284C002AAE1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93EA203E1030DF0666FC7AAB /* Pods-SeSACTHON_App.release.xcconfig */;
+			baseConfigurationReference = 73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SeSACTHON_App/SeSACTHON_App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
@@ -737,11 +768,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "앱 사용을 위해 승인해주세요";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱 사용을 위해 승인해주세요";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
