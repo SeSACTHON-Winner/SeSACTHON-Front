@@ -12,6 +12,7 @@ struct RunningView: View {
     @Environment(\.dismiss) private var dismiss
     @State var isNext = false
     @State var isEnd = false
+    @State var isRunning = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: -10) {
@@ -20,7 +21,7 @@ struct RunningView: View {
                 .padding(.top, 30)
                 .padding(.leading, 10)
             RunningTimeView()
-            HStack(alignment: .bottom, spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
                 Button {
                     isNext = true
                 } label: {
@@ -28,12 +29,24 @@ struct RunningView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 Button {
-                    isEnd = true
+                    isRunning.toggle()
+                    if !isRunning {
+                        isEnd = true
+                    }
+                    
+                    
                 } label: {
-                    watchRunningBtn(color: .white, btnText: "STOP")
+                    watchRunningBtn(color: .white, systemName: isRunning ? "pause.fill" : "play.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.leading, 10)
+                Button {
+                    // MARK: - restart logic
+                    
+                } label: {
+                    watchRunningBtn(color: .white, systemName: "repeat")
+                }
+                .buttonStyle(PlainButtonStyle())
             }
             .padding(.vertical, 20)
             .padding(.leading, 10)
@@ -62,15 +75,16 @@ struct RunningView: View {
 }
 
 extension RunningView {
-    func watchRunningBtn(color: Color, btnText: String) -> some View {
+    func watchRunningBtn(color: Color, systemName: String) -> some View {
         return Circle()
             .foregroundColor(Color.init(hex: "D9D9D9").opacity(0.2))
             .overlay {
-                Circle().stroke(lineWidth: 3).foregroundColor(color)
-                Text(btnText)
-                    .font(.custom("SF Pro Text", size: 12))
-                    .foregroundColor(color)
-                    .italic()
+                Circle().stroke(lineWidth: 2).foregroundColor(color)
+                Image(systemName: systemName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 11)
+                    .foregroundColor(.white)
             }
             .frame(width: 42, height: 42)
     }

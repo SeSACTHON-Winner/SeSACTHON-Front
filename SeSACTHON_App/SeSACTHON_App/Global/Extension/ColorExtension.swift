@@ -23,6 +23,7 @@ extension Color {
     
     static let sesacMint = Color.init(hex: "03FFF0")
     static let sesacYellow = Color.init(hex: "FFD703")
+    static let sesacLightGreen = Color.init(hex: "BAE347")
     
     init(hex: String) {
         let scanner = Scanner(string: hex)

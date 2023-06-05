@@ -23,7 +23,7 @@ struct RunningResultView: View {
                 .padding(.bottom)
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.sesacMint, .sesacMint, .sesacMint, .sesacYellow],
+                        colors: [.sesacMint, .sesacLightGreen],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

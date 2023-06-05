@@ -160,9 +160,9 @@
 				784615842A2CB8F700C83C89 /* RunningTimeView.swift */,
 				781D10BA2A2CC7BA00107D79 /* RunningEndView.swift */,
 				786B244A2A2DA0820048013C /* RunningResultView.swift */,
+				786B244C2A2DA4CD0048013C /* watchBackButton.swift */,
 				F48F2423302A135894EFE1FE /* Pods */,
 				788501442A2C3B0500932C42 /* Preview Content */,
-				786B244C2A2DA4CD0048013C /* watchBackButton.swift */,
 			);
 			path = "SeSACTHON_Watch Watch App";
 			sourceTree = "<group>";
