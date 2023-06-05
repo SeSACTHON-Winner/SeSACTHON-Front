@@ -21,6 +21,7 @@ struct StartView: View {
         .buttonStyle(PlainButtonStyle())
         .navigationDestination(isPresented: $isNext) {
             RunningView()
+
         }
         .ignoresSafeArea()
         

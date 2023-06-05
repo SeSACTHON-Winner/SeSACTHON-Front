@@ -13,28 +13,33 @@ struct RunningEndView: View {
     @State var isRunningEnd = false
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text("05:12")
-                            .font(.custom("SF Pro Text", size: 30))
-                        Text(": 58")
-                            .font(.custom("SF Pro Text", size: 20))
-                    }
-                    .foregroundColor(.sesacMint)
-                    .italic()
-                    Spacer()
+        
+        VStack(alignment: .leading, spacing: 0) {
+            Spacer()
+            HStack {
+                VStack(alignment: .leading, spacing: -15) {
+                    Text("05 : 12")
+                        .font(.custom("SF Pro Text", size: 52))
+                        .tracking(-2)
+                    Text(": 58")
+                        .font(.custom("SF Pro Text", size: 34))
+                        .tracking(-2)
                 }
-                .padding(.leading, 20)
-                
-                // MARK: - info
-                if isRunningEnd {
-                    runningResultView()
-                } else {
-                    runningInfoView()
-                }
+                .foregroundColor(.sesacMint)
+                .italic()
                 Spacer()
+            }
+            // MARK: - info
+            runningInfoView()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    watchBackButton()
+                }
             }
         }
     }
@@ -52,41 +57,39 @@ extension RunningEndView {
                     .foregroundColor(color)
                     .frame(width: 20)
             }
-            .frame(width: 70, height: 70)
+            .frame(width: 60, height: 60)
             .padding(.leading, 18)
     }
     
     @ViewBuilder
     func runningInfoView() -> some View {
-        Group {
-            Text("2 km")
-            Text("도움 2개")
-        }
-        .font(.custom("SF Pro Text", size: 16))
-        .padding(.leading, 20)
-        
-        HStack {
-            Button {
-                isRunningEnd = true
-            } label: {
-                watchCircleSytemImageBtn(color: .sesacMint, systemName: "checkmark")
+        VStack(alignment: .leading, spacing: 0) {
+            Group {
+                Text("2 km")
+                Text("도움 2개")
             }
-            .buttonStyle(PlainButtonStyle())
-            Button {
-                dismiss()
-            } label: {
-                watchCircleSytemImageBtn(color: .white, systemName: "xmark")
+            .tracking(-0.8)
+            .font(.custom("SF Pro Text", size: 16))
+            .padding(.leading, 20)
+            HStack {
+                Button {
+                    isRunningEnd = true
+                } label: {
+                    watchCircleSytemImageBtn(color: .sesacMint, systemName: "checkmark")
+                }
+                .buttonStyle(PlainButtonStyle())
+                Spacer()
+                Button {
+                    dismiss()
+                } label: {
+                    watchCircleSytemImageBtn(color: .white, systemName: "xmark")
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.trailing, 16)
             }
-            .buttonStyle(PlainButtonStyle())
+            .padding(.top)
+            Spacer()
         }
-        .padding(.top, 20)
-        Spacer()
-    }
-    
-    
-    @ViewBuilder
-    func runningResultView() -> some View {
-        Text("러닝 결과로 바꿀 뷰입니다.")
     }
 }
 
