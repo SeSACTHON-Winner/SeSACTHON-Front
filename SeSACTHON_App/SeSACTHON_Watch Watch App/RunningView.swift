@@ -45,7 +45,6 @@ struct RunningView: View {
         .navigationDestination(isPresented: $isEnd) {
             RunningEndView()
         }
-        
     }
 }
 

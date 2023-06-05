@@ -9,7 +9,35 @@ import SwiftUI
 
 struct RunningResultView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                VStack(alignment: .leading, spacing: -10) {
+                    Text("05 : 12")
+                        .font(.custom("SF Pro Text", size: 38))
+                        .tracking(-1)
+                    Text(": 58")
+                        .font(.custom("SF Pro Text", size: 25))
+                        .tracking(-1)
+                }
+                .padding(.bottom)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [.sesacMint, .sesacMint, .sesacMint, .sesacYellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .foregroundColor(.sesacMint)
+                .italic()
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            // MARK: - RunningResult
+            Text("결과가 들어갈 자리")
+            Spacer()
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 

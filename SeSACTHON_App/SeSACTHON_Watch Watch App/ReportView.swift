@@ -13,9 +13,24 @@ struct ReportView: View {
     
     
     var body: some View {
-        VStack {
-            RunningTimeView()
-            
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: -10) {
+                Text("05 : 12")
+                    .font(.custom("SF Pro Text", size: 54))
+                    .tracking(-1)
+                Text(": 58")
+                    .font(.custom("SF Pro Text", size: 36))
+                    .tracking(-1)
+            }
+            .foregroundStyle(
+                LinearGradient(
+                    colors: [.sesacMint, .sesacMint, .sesacMint, .sesacYellow],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .foregroundColor(.sesacMint)
+            .italic()
             List {
                 Group {
                     Button {
@@ -49,9 +64,7 @@ struct ReportView: View {
             .listStyle(CarouselListStyle())
             .font(.custom("SF Pro Text", size: 24))
             .foregroundColor(.white)
-            Spacer()
         }
-        .ignoresSafeArea()
         .frame(maxWidth: .infinity)
         
         
