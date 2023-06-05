@@ -10,48 +10,97 @@ import SwiftUI
 struct ReportView: View {
     
     @State var isNext = false
-    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack {
-            RunningTimeView()
-            
+        VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: -10) {
+                Text("05 : 12")
+                    .font(.custom("SF Pro Text", size: 54))
+                    .tracking(-2.2)
+                Text(": 58")
+                    .font(.custom("SF Pro Text", size: 36))
+                    .tracking(-2.2)
+            }
+            .frame(maxWidth: .infinity)
+            .background()
+            .backgroundStyle(
+                LinearGradient(
+                    colors: [.sesacMint, .sesacMint, .sesacLightGreen],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .cornerRadius(4.8)
+            .foregroundColor(.black)
+            .italic()
             List {
                 Group {
                     Button {
                         isNext = true
                     } label: {
-                        listButton(btnText: "경사도", systemName: "cart")
+                        HStack {
+                            Text("🎢")
+                                .font(.custom("SF Pro Text", size: 24))
+                            Text("경사도")
+                                .font(.custom("SF Pro Text", size: 14))
+                        }
+                           
                     }
                     Button {
                         isNext = true
                     } label: {
-                        listButton(btnText: "좁은 길", systemName: "cart")
+                        HStack {
+                            Text("🌊")
+                                .font(.custom("SF Pro Text", size: 24))
+                            Text("자연재해")
+                                .font(.custom("SF Pro Text", size: 14))
+                        }
                     }
                     Button {
                         isNext = true
                     } label: {
-                        listButton(btnText: "자연재해", systemName: "cart")
+                        HStack {
+                            Text("⛔")
+                                .font(.custom("SF Pro Text", size: 24))
+                            Text("좁은길")
+                                .font(.custom("SF Pro Text", size: 14))
+                        }
                     }
                     Button {
                         isNext = true
                     } label: {
-                        listButton(btnText: "공사 중", systemName: "cart")
+                        HStack {
+                            Text("🚧")
+                                .font(.custom("SF Pro Text", size: 24))
+                            Text("공사중")
+                                .font(.custom("SF Pro Text", size: 14))
+                        }
                     }
                 }
                 .frame(height: 90)
+                .frame(maxWidth: .infinity)
                 .foregroundColor(.sesacMint)
-                .font(.system(size: 14))
                 .navigationDestination(isPresented: $isNext) {
                     EmptyView()
                 }
+
             }
             .listStyle(CarouselListStyle())
-            .font(.custom("SF Pro Text", size: 24))
-            .foregroundColor(.white)
-            Spacer()
+            
         }
         .frame(maxWidth: .infinity)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button {
+                    dismiss()
+                } label: {
+                    watchBackButton()
+                }
+            }
+        }
+        
         
     }
 }

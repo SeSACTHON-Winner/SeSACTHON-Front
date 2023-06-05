@@ -10,20 +10,22 @@ import SwiftUI
 struct RunningTimeView: View {
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("05:12")
-                    .font(.custom("SF Pro Text", size: 30))
-                Text(": 58")
-                    .font(.custom("SF Pro Text", size: 20))
+            VStack(alignment: .leading, spacing: -10) {
+                Text("05 : 12")
+                    .tracking(-2)
+                    .font(.custom("SF Pro Text", size: 54))
+                Text(":58")
+                    .font(.custom("SF Pro Text", size: 36))
+                    .tracking(-2)
             }
+            .frame(maxWidth: .infinity)
             .foregroundColor(.sesacMint)
             .italic()
-            HStack {
-                
-            }
             Spacer()
         }
-        .padding(.leading, 20)
+        .frame(maxWidth: .infinity)
+        
+        
     }
 }
 
