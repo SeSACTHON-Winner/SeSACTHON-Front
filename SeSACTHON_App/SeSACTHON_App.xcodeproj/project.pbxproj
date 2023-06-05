@@ -37,6 +37,7 @@
 		788501492A2C3B0500932C42 /* SeSACTHON_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7885014E2A2C3B4A00932C42 /* SF-Pro-Text-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7812A9872A29D41F00D20EAF /* SF-Pro-Text-BlackItalic.otf */; };
 		7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
+		789866B62A2DC02A00CA4722 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789866B52A2DC02A00CA4722 /* HomeView.swift */; };
 		78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9A2A29F87600240004 /* ViewExtension.swift */; };
 		78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */; };
 		78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */; };
@@ -101,6 +102,7 @@
 		7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSACTHON_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_WatchApp.swift; sourceTree = "<group>"; };
 		788501452A2C3B0500932C42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		789866B52A2DC02A00CA4722 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		78D01C9A2A29F87600240004 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationMO.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				780F9A202A2859A500B715BD /* MainRunView.swift */,
 				60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */,
 				60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */,
+				789866B52A2DC02A00CA4722 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */,
 				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
+				789866B62A2DC02A00CA4722 /* HomeView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
 				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
