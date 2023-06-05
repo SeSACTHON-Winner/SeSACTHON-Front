@@ -16,7 +16,8 @@ struct MainRunningView: View {
     @State private var time: TimeInterval = 0
     @State private var timer: Timer?
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
-    
+    @State private var isAnimate = false
+
     var body: some View {
         VStack {
             VStack {
@@ -35,20 +36,23 @@ struct MainRunningView: View {
             .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
             
             Spacer()
-            Button {
-                //TODO: 신고 카메라 뷰 켜기
-            } label: {
+            NavigationLink {
+                CustomCameraView()
+            }  label: {
                 Image(systemName: "bell.fill")
                     .font(.system(size: 28, weight: .black))
                     .italic()
                     .foregroundColor(.black)
                     .frame(width: 52, height: 52)
-                    
                     .background(Color("MainColor"))
-
                     .cornerRadius(26)
-            }.shadow(color: .black.opacity(0.25), radius: 4)
+                
+            }
+            .shadow(color: .black.opacity(0.25), radius: 2)
             .padding(.bottom, 8)
+            
+            
+            
             HStack(spacing: 50) {
                 if runState == "run" {
                     Button {
@@ -82,14 +86,70 @@ struct MainRunningView: View {
                         runState = "run"
                         startTimer()
                     } label: {
-                        Text("RESTART")
-                            .font(.system(size: 24, weight: .black))
-                            .italic()
-                            .foregroundColor(Color("MainColor"))
-                            .frame(width: 120, height: 120)
-                            .background(.black)
-                            .cornerRadius(60)
-                    }.padding(.bottom, 60)
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color("MainColor"))
+                                .scaleEffect(isAnimate ? 1.35 : 1.0)
+                                .opacity(isAnimate ? 0.5 : 0)
+                            
+                            Circle()
+                                .foregroundColor(Color("MainColor"))
+                                .scaleEffect(isAnimate ? 1.2 : 1.0)
+                                .opacity(isAnimate ? 0.8 : 0)
+                            Circle()
+                                .foregroundColor(.black)
+                        }
+                        .frame(width: 120, height: 120)
+                        .overlay(
+                            Text("RESTART")
+                                .font(.system(size: 24, weight: .black))
+                                .italic()
+                                .foregroundColor(Color("MainColor"))
+                                .cornerRadius(60)
+                        )
+                        .onAppear {
+                            withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
+                                self.isAnimate.toggle()
+                                
+                            }
+                        }
+                    } .padding(.bottom, 60)
+//                    Button {
+//                        runState = "run"
+//                        startTimer()
+//                    } label: {
+//                        ZStack {
+//                            Circle()
+//                                .foregroundColor(Color("MainColor"))
+//                                .scaleEffect(isAnimating ? 1.35 : 1.0)
+//                                .opacity(isAnimating ? 0.5 : 0)
+//
+//                            Circle()
+//                                .foregroundColor(Color("MainColor"))
+//                                .scaleEffect(isAnimating ? 1.2 : 1.0)
+//                                .opacity(isAnimating ? 0.8 : 0)
+//                            Circle()
+//                                .foregroundColor(.black)
+//                        }
+//                        .frame(width: 120, height: 120)
+//                        .overlay(
+//                            Text("RESTART")
+//                                .font(.system(size: 24, weight: .black))
+//                                .italic()
+//                                .foregroundColor(Color("MainColor"))
+//                                .frame(width: 120, height: 120)
+//                                .background(.black)
+//                                .cornerRadius(60)
+//
+//                        )
+//                        .onAppear {
+//                            withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
+//                                self.isAnimating.toggle()
+//
+//                            }
+//                        }
+//                    }
+//                    .padding(.bottom, 60)
                     
                 }
             }

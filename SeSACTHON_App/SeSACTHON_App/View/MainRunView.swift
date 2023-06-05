@@ -110,7 +110,6 @@ struct MainRunStart: View {
                         .foregroundColor(.white)
                 )
                 .onAppear {
-                    
                     withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatCount(8)) {
                         self.isAnimating.toggle()
                         
@@ -118,7 +117,6 @@ struct MainRunStart: View {
                 }
             }
             .padding(.bottom, 60)
-            
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -154,7 +152,6 @@ struct MainRunHomeView: View {
                             .frame(width: 20, height: 20)
                         Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
                             .font(.system(size: 17, weight: .regular))
-                        
                     }
                 }
                 .foregroundColor(.white)
@@ -185,30 +182,46 @@ struct MainRunHomeView: View {
                                         Spacer().frame(height: 16)
                                         Text("최근 기록")
                                             .font(.system(size: 20, weight: .semibold))
-                                        
-                                        Text("3.3km/30분")
+                                        Text("3.3km 40min")
                                             .font(.system(size: 14, weight: .regular))
                                         
                                     }.foregroundColor(.white)
                                     Spacer()
                                 }.padding(20)
                             }.frame(width: 312, height: 124)
-                                .background(.black)
+                                .background(Color("Darkgray"))
                                 .cornerRadius(8)
                         }
                     }
                     .padding(.horizontal, 40)
                 }
                 Spacer()
+                NavigationLink {
+                    CustomCameraView()
+                } label: {
+                    Image(systemName: "bell.fill")
+                        .font(.system(size: 28, weight: .black))
+                        .italic()
+                        .foregroundColor(.black)
+                        .frame(width: 52, height: 52)
+                        .background(Color("MainColor"))
+                        .cornerRadius(26)
+                        .shadow(color: .black.opacity(0.25), radius: 2)
+
+                }.padding(.bottom, 14)
+                
                 HStack(alignment: .top, spacing: 28) {
                     NavigationLink {
-                        CustomCameraView()
+                        //SettingView()
                     } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 28, weight: .black))
+                            .italic()
                             .foregroundColor(.black)
                             .frame(width: 52, height: 52)
-                            .shadow(radius: 2)
+                            .background(Color("MainColor"))
+                            .cornerRadius(26)
+                            .shadow(color: .black.opacity(0.25), radius: 2)
                     }
                     
                     Button {
