@@ -21,3 +21,16 @@ struct SeSACTHON_AppApp: App {
         }
     }
 }
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // 백그라운드로 이동할 때 타이머를 일시 중지
+        NotificationCenter.default.post(name: Notification.Name("PauseTimer"), object: nil)
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // 포그라운드로 돌아올 때 타이머를 재개
+        NotificationCenter.default.post(name: Notification.Name("ResumeTimer"), object: nil)
+    }
+}
