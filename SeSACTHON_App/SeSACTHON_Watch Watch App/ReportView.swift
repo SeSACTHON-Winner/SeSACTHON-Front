@@ -51,7 +51,9 @@ struct ReportView: View {
             .foregroundColor(.white)
             Spacer()
         }
+        .ignoresSafeArea()
         .frame(maxWidth: .infinity)
+        
         
     }
 }

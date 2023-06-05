@@ -13,34 +13,31 @@ struct RunningView: View {
     @State var isEnd = false
     
     var body: some View {
-            VStack {
-                RunningTimeView()
-                HStack(spacing: 10) {
-                    Button {
-                        isEnd = true
-                    } label: {
-                        watchRunningBtn(color: .white, btnText: "STOP")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-
-                    
-                    watchRunningBtn(color: .sesacMint, btnText: "GO")
-                    Spacer()
+        VStack(alignment: .leading, spacing: -10) {
+            Spacer()
+            Text("1.2KM")
+                .padding(.top, 30)
+                .padding(.leading, 10)
+            RunningTimeView()
+            HStack(alignment: .bottom, spacing: 10) {
+                Button {
+                    isNext = true
+                } label: {
+                    watchReportBtn()
                 }
-                .padding(.leading, 20)
-                .padding(.bottom)
-                HStack {
-                    Button {
-                        isNext = true
-                    } label: {
-                        watchReportBtn()
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    Spacer()
+                .buttonStyle(PlainButtonStyle())
+                Button {
+                    isEnd = true
+                } label: {
+                    watchRunningBtn(color: .white, btnText: "STOP")
                 }
-                .padding(.leading)
-                Spacer()
+                .buttonStyle(PlainButtonStyle())
+                .padding(.leading, 10)
             }
+            .padding(.vertical, 20)
+            .padding(.leading, 10)
+        }
+        .ignoresSafeArea()
         .frame(maxWidth: .infinity)
         .navigationDestination(isPresented: $isNext) {
             ReportView()
@@ -57,28 +54,26 @@ extension RunningView {
         return Circle()
             .foregroundColor(Color.init(hex: "D9D9D9").opacity(0.2))
             .overlay {
-                Circle().stroke(lineWidth: 2).foregroundColor(color)
+                Circle().stroke(lineWidth: 3).foregroundColor(color)
                 Text(btnText)
                     .font(.custom("SF Pro Text", size: 12))
                     .foregroundColor(color)
                     .italic()
             }
-            .frame(width: 40, height: 40)
+            .frame(width: 42, height: 42)
     }
     func watchReportBtn() -> some View {
         Circle()
             .foregroundColor(Color.init(hex: "D9D9D9").opacity(0.2))
             .overlay {
-                Circle().stroke(lineWidth: 2).foregroundColor(.sesacMint)
-                Image(systemName: "bell")
+                Circle().stroke(lineWidth: 3).foregroundColor(.sesacMint)
+                Image("icon _bell outline_")
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(.sesacMint)
-                    .frame(width: 30)
-                
+                    .frame(width: 35)
             }
-            .frame(width: 52, height: 52)
-            .padding(.leading, 18)
+            .frame(width: 56, height: 56)
     }
 }
 
