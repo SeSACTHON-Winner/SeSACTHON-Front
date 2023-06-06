@@ -31,10 +31,14 @@ struct HomeView: View {
                     .foregroundColor(.white)
                     .italic()
                 Spacer()
-                Image("Camera")
-                    .resizable()
-                    .frame(width: 34, height: 34)
-                    .padding(.leading)
+                NavigationLink {
+                    ProfileView()
+                } label: {
+                    Image("Camera")
+                        .resizable()
+                        .frame(width: 34, height: 34)
+                        .padding(.leading)
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.bottom)
@@ -48,55 +52,68 @@ struct HomeView: View {
                 Text("RUN NEWS")
                     .font(.system(size: 20))
                     .fontWeight(.heavy)
-                    .padding(.horizontal)
+                    .padding(.leading, 30)
                 Text("이달의 교통 뉴스를 확인해보고\n우리가 알릴 수 있는 방법을 생각해봐요.")
                     .font(.system(size: 12))
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
-                    .padding(.horizontal)
+                    .padding(.leading, 30)
                 Divider()
-                ScrollView(.horizontal, showsIndicators: true) {
-                    HStack {
-                        Color.gray.frame(width: 318, height: 205)
-                            .cornerRadius(10)
-                        Color.gray.frame(width: 318, height: 205)
-                            .cornerRadius(10)
-                    }
+                
+                TabView {
+                    YouTubeView(videoId: "HyVuk9hksRc")
+                        .frame(width: 1980 / 6, height: 1080 / 6)
+                        .cornerRadius(10)
+                    YouTubeView(videoId: "TU-O2e1ll10")
+                        .frame(width: 1980 / 6, height: 1080 / 6)
+                        .cornerRadius(10)
+                    YouTubeView(videoId: "wIX_f4YDTwk")
+                        .frame(width: 1980 / 6, height: 1080 / 6)
+                        .cornerRadius(10)
                 }
+                .tabViewStyle(PageTabViewStyle())
+                .frame(height: 1080 / 6 + 80)
+                .frame(maxWidth: .infinity)
+                .background(.black)
+                .cornerRadius(10)
+                .padding(.horizontal)
+                
                 Group {
                     HStack {
                         Spacer()
                         Text("이달의 불편한 장소")
                         Spacer()
                     }
-                    .padding(.top, 50)
                     .padding(.bottom, 13)
+                    .padding(.top)
                     HStack(alignment: .top) {
                         Spacer()
-                        Circle().frame(width: 41, height: 41)
-                            .foregroundColor(.black)
+                        VStack {
+                            Circle().frame(width: 41, height: 41)
+                                .foregroundColor(.black)
+                        }
                         Divider().frame(height: 41)
-                        Circle()
-                            .frame(width: 41, height: 41)
-                            .foregroundColor(.secondary)
+                        VStack {
+                            Circle().frame(width: 41, height: 41)
+                                .foregroundColor(.black)
+                        }
                         Divider().frame(height: 41)
-                        Circle()
-                            .frame(width: 41, height: 41)
-                            .foregroundColor(.gray)
+                        VStack {
+                            Circle().frame(width: 41, height: 41)
+                                .foregroundColor(.black)
+                        }
                         Spacer()
                     }
                     Divider()
                 }
-                .padding(.trailing)
             }
             .frame(maxWidth: .infinity)
             .padding(.top, 45)
-            .padding(.leading)
             
-            Spacer()
+            
             Text("도움을 주러 가볼까요?")
                 .foregroundColor(.gray)
-                .padding(.top, 30)
+                .padding(.top)
             Spacer()
             Button {
                 gotoRun = true
@@ -109,7 +126,7 @@ struct HomeView: View {
                     .foregroundColor(.sesacMint)
                     .cornerRadius(10)
             }
-            .padding(.top, 30)
+            .padding(.top   )
             .padding(.horizontal)
             Spacer()
         }
