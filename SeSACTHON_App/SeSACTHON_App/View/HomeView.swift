@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.dismiss) private var dismiss
     @State var gotoRun = false
+    @State var isViewMore = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,7 +25,6 @@ struct HomeView: View {
                         .frame(width: 10, height: 16)
                         .foregroundColor(.white)
                         .padding(.trailing, 10)
-                    
                 }
                 Text("Home")
                     .font(.custom("SF Pro Text", size: 32))
@@ -47,95 +47,113 @@ struct HomeView: View {
             Color.black.frame(height: 40)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(radius: 3, x: 0 ,y: 4)
-            VStack(alignment: .leading, spacing: 10) {
-                
-                Text("RUN NEWS")
-                    .font(.system(size: 20))
-                    .fontWeight(.heavy)
-                    .padding(.leading, 30)
-                Text("이달의 교통 뉴스를 확인해보고\n우리가 알릴 수 있는 방법을 생각해봐요.")
-                    .font(.system(size: 12))
-                    .fontWeight(.regular)
-                    .foregroundColor(.secondary)
-                    .padding(.leading, 30)
-                Divider()
-                
+            ZStack {
                 TabView {
-                    YouTubeView(videoId: "HyVuk9hksRc")
-                        .frame(width: 1980 / 6, height: 1080 / 6)
-                        .cornerRadius(10)
-                    YouTubeView(videoId: "TU-O2e1ll10")
-                        .frame(width: 1980 / 6, height: 1080 / 6)
-                        .cornerRadius(10)
-                    YouTubeView(videoId: "wIX_f4YDTwk")
-                        .frame(width: 1980 / 6, height: 1080 / 6)
-                        .cornerRadius(10)
+                    newsView(title: "이달에 대중교통\n임산부석 확대", content: "이달의 교통 뉴스를 확인해보고\n우리가 알릴수 있는 방법을 생각해봐요.", image: Image("Rectangle 136"))
+                    newsView(title: "이달에 대중교통\n임산부석 확대", content: "이달의 교통 뉴스를 확인해보고\n우리가 알릴수 있는 방법을 생각해봐요.", image: Image("Rectangle 136"))
+                    newsView(title: "이달에 대중교통\n임산부석 확대", content: "이달의 교통 뉴스를 확인해보고\n우리가 알릴수 있는 방법을 생각해봐요.", image: Image("Rectangle 136"))
+                    newsView(title: "이달에 대중교통\n임산부석 확대", content: "이달의 교통 뉴스를 확인해보고\n우리가 알릴수 있는 방법을 생각해봐요.", image: Image("Rectangle 136"))
                 }
                 .tabViewStyle(PageTabViewStyle())
-                .frame(height: 1080 / 6 + 80)
-                .frame(maxWidth: .infinity)
-                .background(.black)
-                .cornerRadius(10)
-                .padding(.horizontal)
-                
-                Group {
-                    HStack {
-                        Spacer()
-                        Text("이달의 불편한 장소")
-                        Spacer()
-                    }
-                    .padding(.bottom, 13)
-                    .padding(.top)
-                    HStack(alignment: .top) {
-                        Spacer()
-                        VStack {
-                            Circle().frame(width: 41, height: 41)
-                                .foregroundColor(.black)
-                        }
-                        Divider().frame(height: 41)
-                        VStack {
-                            Circle().frame(width: 41, height: 41)
-                                .foregroundColor(.black)
-                        }
-                        Divider().frame(height: 41)
-                        VStack {
-                            Circle().frame(width: 41, height: 41)
-                                .foregroundColor(.black)
-                        }
-                        Spacer()
-                    }
-                    Divider()
-                }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.top, 45)
-            
+            .background(.black)
             
             Text("도움을 주러 가볼까요?")
-                .foregroundColor(.gray)
-                .padding(.top)
-            Spacer()
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.white)
+                .padding(.vertical)
+                .padding(.top, 24)
+                .background(.black)
             Button {
                 gotoRun = true
             } label: {
-                Text("START")
+                Text("START RUNNING")
                     .frame(height: 50)
                     .frame(maxWidth: .infinity)
                     .background(.black)
-                    .font(.custom("SF Pro Text", size: 20))
+                    .font(.custom("SF Pro Text", size: 24))
                     .foregroundColor(.sesacMint)
-                    .cornerRadius(10)
             }
-            .padding(.top   )
-            .padding(.horizontal)
-            Spacer()
         }
         .frame(maxWidth: .infinity)
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea([.top, .horizontal])
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $gotoRun) {
             MainRunView()
         }
+    }
+}
+
+extension HomeView {
+    
+    func newsView(title: String, content: String, image: Image) -> some View {
+            return ZStack {
+                Color.clear.overlay {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                }
+                VStack(alignment: .leading, spacing: 0) {
+                    Spacer()
+                    if isViewMore {
+                        VStack(spacing: 0) {
+                            HStack {
+                               Spacer()
+                                Button {
+                                    isViewMore.toggle()
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.vertical)
+                                .padding(.trailing, 18)
+                            }
+                            ScrollView {
+                                Text("기사 내용이들어갈 자리\n기사 내용이들어갈 자리\n기사 내용이들어갈 자리\n")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(.white)
+                                    .fontWeight(.medium)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(10)
+                        }
+                    } else {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("RUN NEWS")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.sesacMint)
+                                Text(title)
+                                    .font(.system(size: 24))
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(.white)
+                                Text(content)
+                                    .foregroundColor(.white)
+                                HStack {
+                                    Spacer()
+                                    Button {
+                                        isViewMore.toggle()
+                                    } label: {
+                                        Text("View More +")
+                                            .foregroundColor(.sesacMint)
+                                    }
+                                }
+                                
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+                .padding(.bottom, 78)
+                .padding(.horizontal, 18)
+                .frame(maxWidth: .infinity)
+            }
     }
 }
 
