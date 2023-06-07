@@ -10,12 +10,12 @@
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>
 		<string>LoadingImg</string>
 	</dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>
