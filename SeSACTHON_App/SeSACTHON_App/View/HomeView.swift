@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.dismiss) private var dismiss
     @State var gotoRun = false
+    @State var isViewMore = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -94,24 +95,63 @@ extension HomeView {
                 }
                 VStack(alignment: .leading, spacing: 0) {
                     Spacer()
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("RUN NEWS")
-                                .font(.system(size: 18))
-                                .fontWeight(.bold)
-                                .foregroundColor(.sesacMint)
-                            Text(title)
-                                .font(.system(size: 24))
-                                .fontWeight(.heavy)
-                                .foregroundColor(.white)
-                            Text(content)
-                                .foregroundColor(.white)
+                    if isViewMore {
+                        VStack(spacing: 0) {
+                            HStack {
+                               Spacer()
+                                Button {
+                                    isViewMore.toggle()
+                                } label: {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.vertical)
+                                .padding(.trailing, 18)
+                            }
+                            ScrollView {
+                                Text("기사 내용이들어갈 자리\n기사 내용이들어갈 자리\n기사 내용이들어갈 자리\n")
+                                    .font(.system(size: 18))
+                                    .foregroundColor(.white)
+                                    .fontWeight(.medium)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.black.opacity(0.4))
+                            .cornerRadius(10)
                         }
-                        Spacer()
+                    } else {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("RUN NEWS")
+                                    .font(.system(size: 18))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.sesacMint)
+                                Text(title)
+                                    .font(.system(size: 24))
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(.white)
+                                Text(content)
+                                    .foregroundColor(.white)
+                                HStack {
+                                    Spacer()
+                                    Button {
+                                        isViewMore.toggle()
+                                    } label: {
+                                        Text("View More +")
+                                            .foregroundColor(.sesacMint)
+                                    }
+                                }
+                                
+                            }
+                            Spacer()
+                        }
                     }
                 }
                 .padding(.bottom, 78)
-                .padding(.leading, 18)
+                .padding(.horizontal, 18)
                 .frame(maxWidth: .infinity)
             }
     }
