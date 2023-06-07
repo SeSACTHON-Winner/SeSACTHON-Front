@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6099D7C82A310623004A49D1 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C62A310623004A49D1 /* Haptics.swift */; };
 		6099D7C92A310623004A49D1 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C72A310623004A49D1 /* HKHelper.swift */; };
+		6099D7CF2A3106AC004A49D1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CA2A3106AC004A49D1 /* Workout.swift */; };
+		6099D7D02A3106AC004A49D1 /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CB2A3106AC004A49D1 /* WorkoutViewModel.swift */; };
+		6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CC2A3106AC004A49D1 /* MyMapError.swift */; };
+		6099D7D22A3106AC004A49D1 /* WorkoutFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */; };
+		6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */; };
 		60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B60F2A2D7F3300032504 /* MainRunningView.swift */; };
 		60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6112A2D7FF100032504 /* HealthDataManager.swift */; };
 		60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6132A2D817A00032504 /* HealthKitSupport.swift */; };
@@ -85,6 +90,11 @@
 		367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6099D7C62A310623004A49D1 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		6099D7C72A310623004A49D1 /* HKHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKHelper.swift; sourceTree = "<group>"; };
+		6099D7CA2A3106AC004A49D1 /* Workout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		6099D7CB2A3106AC004A49D1 /* WorkoutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
+		6099D7CC2A3106AC004A49D1 /* MyMapError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMapError.swift; sourceTree = "<group>"; };
+		6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutFilter.swift; sourceTree = "<group>"; };
+		6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
 		60B9B60E2A2D7DFB00032504 /* SeSACTHON_App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACTHON_App.entitlements; sourceTree = "<group>"; };
 		60B9B60F2A2D7F3300032504 /* MainRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunningView.swift; sourceTree = "<group>"; };
 		60B9B6112A2D7FF100032504 /* HealthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataManager.swift; sourceTree = "<group>"; };
@@ -297,6 +307,11 @@
 		78F734C82A2728A9002AAE1A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6099D7CC2A3106AC004A49D1 /* MyMapError.swift */,
+				6099D7CB2A3106AC004A49D1 /* WorkoutViewModel.swift */,
+				6099D7CA2A3106AC004A49D1 /* Workout.swift */,
+				6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */,
+				6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */,
 				60E6CE572A29EA1200312357 /* CameraModel.swift */,
 				60E6CE592A29EA6B00312357 /* CameraViewModel.swift */,
 				78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */,
@@ -510,8 +525,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				78D01CA32A2A095C00240004 /* CurrentLocationMO.swift in Sources */,
+				6099D7D22A3106AC004A49D1 /* WorkoutFilter.swift in Sources */,
 				7898F0362A2F102A00B677A2 /* YoutubeView.swift in Sources */,
 				6099D7C92A310623004A49D1 /* HKHelper.swift in Sources */,
+				6099D7CF2A3106AC004A49D1 /* Workout.swift in Sources */,
 				7805F33D2A2C66BF0071AB01 /* CustomMapView.swift in Sources */,
 				7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */,
 				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
@@ -521,6 +538,7 @@
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
 				60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */,
 				6099D7C82A310623004A49D1 /* Haptics.swift in Sources */,
+				6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */,
 				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
 				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				7898F03A2A2F128300B677A2 /* ProfileView.swift in Sources */,
@@ -529,7 +547,9 @@
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
+				6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
+				6099D7D02A3106AC004A49D1 /* WorkoutViewModel.swift in Sources */,
 				7805F33F2A2C67730071AB01 /* TopProfileView.swift in Sources */,
 				60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */,
 				7805F33B2A2C65EC0071AB01 /* PlaceAnnotationView.swift in Sources */,
