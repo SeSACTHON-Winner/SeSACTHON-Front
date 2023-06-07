@@ -51,7 +51,7 @@ struct ProfileView: View {
                             .frame(width: 100)
                             .font(.system(size: 24))
                             .fontWeight(.bold)
-                        Image(systemName: "pencil")
+                        Image(systemName: "highlighter")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 16)
@@ -72,13 +72,13 @@ struct ProfileView: View {
                 }
             }
             .padding(.top, 69)
-            .padding(.bottom, 93)
+            .padding(.bottom, 60)
             
             ScrollView {
-               customListItem(profileImage: Image(""))
-               customListItem(profileImage: Image(""))
-               customListItem(profileImage: Image(""))
-               customListItem(profileImage: Image(""))
+                customListItem(profileImage: Image(""))
+                customListItem(profileImage: Image(""))
+                customListItem(profileImage: Image(""))
+                customListItem(profileImage: Image(""))
             }
             Spacer()
         }
@@ -90,58 +90,69 @@ struct ProfileView: View {
 extension ProfileView {
     
     private func customListItem(profileImage: Image) -> some View {
-        Color.init(hex: "D9D9D9")
-            .frame(height: 160)
-            .cornerRadius(10)
-            .padding(.top, 20)
-            .overlay {
-                VStack {
-                    HStack {
-                        Color.black
-                            .frame(width: 63,height: 63)
-                            .cornerRadius(10)
-                            .padding(.leading, 26)
-                        VStack(alignment: .leading, spacing: 11) {
-                            Text("2023.06.17")
-                                .font(.system(size: 24))
-                                .fontWeight(.bold)
-                            Text("수요일 효자시장 코스")
-                                .font(.system(size: 14))
-                                .fontWeight(.medium)
-                        }
-                        .padding(.leading, 27)
-                        Spacer()
+        
+        return ZStack {
+            Color.init(hex: "f5f5f5")
+                .frame(height: 160)
+                .cornerRadius(14)
+                .padding(.top, 20)
+                .padding(.horizontal, 10)
+                .shadow(radius: 3, x: 2, y: 2)
+            
+            VStack {
+                HStack {
+                    Color.black
+                        .frame(width: 63,height: 63)
+                        .cornerRadius(10)
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text("2023.06.17")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                        Text("수요일 효자시장 코스")
+                            .font(.system(size: 14))
+                            .fontWeight(.medium)
                     }
-                    .padding(.top, 27)
-                    HStack(spacing: 40) {
-                        VStack(alignment: .leading) {
-                            Text("1.09")
-                                .font(.system(size: 24))
-                                .fontWeight(.bold)
-                            Text("Km")
-                        }
-                        VStack(alignment: .leading) {
-                            Text("8'24'")
-                                .font(.system(size: 24))
-                                .fontWeight(.bold)
-                            Text("Pace")
-                        }
-                        VStack(alignment: .leading) {
-                            Text("09:13")
-                                .font(.system(size: 24))
-                                .fontWeight(.bold)
-                            Text("Time")
-                        }
-                        VStack(alignment: .leading) {
-                            Image(systemName: "1.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 21)
-                            Text("Help")
-                        }
+                    .padding(.leading, 27)
+                    Spacer()
+                }
+                .padding(.leading, 27)
+                .padding(.top, 27)
+                
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("1.09")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                        Text("Km")
+                    }
+                    VStack(alignment: .leading) {
+                        Text("8'24'")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                        Text("Pace")
+                    }
+                    .padding(.leading, 40)
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        Text("09:13")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                        Text("Time")
+                    }
+                    .padding(.leading, 10)
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        Image(systemName: "1.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 21)
+                        Text("Help")
                     }
                 }
+                
+                .padding(.horizontal, 26)
             }
+        }
     }
 }
 
