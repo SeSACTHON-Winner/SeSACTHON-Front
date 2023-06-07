@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "NewsSample1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Rectangle 136@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
