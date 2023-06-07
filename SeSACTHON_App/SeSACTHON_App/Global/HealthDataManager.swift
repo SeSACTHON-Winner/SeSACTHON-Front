@@ -9,7 +9,7 @@ import Foundation
 
 import HealthKit
 import SwiftUI
-
+/*
 class HealthDataManager: NSObject, ObservableObject {
     
     let healthStore = HealthData.healthStore
@@ -310,3 +310,4 @@ class HealthData {
         }
     }
 }
+*/
