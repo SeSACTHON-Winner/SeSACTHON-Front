@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @Environment(\.dismiss) private var dismiss
     @State var gotoRun = false
-    @State var isViewMore = false
+    @State var gotoMap = false
+    
     
     var body: some View {
         VStack(spacing: 0) {
@@ -64,22 +65,44 @@ struct HomeView: View {
                 .padding(.vertical)
                 .padding(.top, 24)
                 .background(.black)
-            Button {
-                gotoRun = true
-            } label: {
-                Text("START RUNNING")
-                    .frame(height: 50)
-                    .frame(maxWidth: .infinity)
-                    .background(.black)
-                    .font(.custom("SF Pro Text", size: 24))
-                    .foregroundColor(.sesacMint)
+            Rectangle().frame(height: 1.5).foregroundColor(.secondary)
+                .padding(.bottom)
+                .background(.black)
+            HStack(spacing: 0) {
+                Button {
+                    gotoMap = true
+                } label: {
+                    Text("Map")
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .background(.black)
+                        .font(.custom("SF Pro Text", size: 24))
+                        .foregroundColor(.sesacMint)
+                }
+                Divider()
+                Button {
+                    gotoRun = true
+                } label: {
+                    Text("RUN")
+                        .frame(height: 50)
+                        .frame(maxWidth: .infinity)
+                        .background(.black)
+                        .font(.custom("SF Pro Text", size: 24))
+                        .foregroundColor(.sesacMint)
+                }
+                
             }
+            .frame(height: 48)
+            
         }
         .frame(maxWidth: .infinity)
         .edgesIgnoringSafeArea([.top, .horizontal])
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $gotoRun) {
             MainRunView()
+        }
+        .navigationDestination(isPresented: $gotoMap) {
+            MainMapView()
         }
     }
 }
@@ -103,10 +126,6 @@ extension HomeView {
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
-//                        Text("RUN NEWS")
-//                            .font(.system(size: 18))
-//                            .fontWeight(.bold)
-//                            .foregroundColor(.sesacMint)
                         Text(title)
                             .font(.system(size: 26))
                             .fontWeight(.heavy)

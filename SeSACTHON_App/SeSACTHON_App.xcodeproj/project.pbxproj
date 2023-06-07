@@ -49,7 +49,6 @@
 		78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AA2A2758DF00915FCD /* ColorExtension.swift */; };
 		78F210AD2A27595400915FCD /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F210AC2A27595400915FCD /* FontExtension.swift */; };
 		78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */; };
-		78F734B92A27284C002AAE1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B82A27284C002AAE1A /* ContentView.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
 		B732D104897AD04850F98849 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */; };
@@ -123,7 +122,6 @@
 		78F210AC2A27595400915FCD /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		78F734B32A27284C002AAE1A /* SeSACTHON_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSACTHON_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_AppApp.swift; sourceTree = "<group>"; };
-		78F734B82A27284C002AAE1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 		78F734CA2A2728C1002AAE1A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				78F734B82A27284C002AAE1A /* ContentView.swift */,
 				780F9A1E2A28599D00B715BD /* MainMapView.swift */,
 				780F9A202A2859A500B715BD /* MainRunView.swift */,
 				60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */,
@@ -517,7 +514,6 @@
 				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				7898F03A2A2F128300B677A2 /* ProfileView.swift in Sources */,
 				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
-				78F734B92A27284C002AAE1A /* ContentView.swift in Sources */,
 				60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */,
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
