@@ -14,6 +14,7 @@ struct MainMapView: View {
     
     @State var placeMOArr: [PlaceMO] = [PlaceMO(name: "지곡회관", coordinate: CLLocationCoordinate2D(latitude: 36.01577810316272, longitude: 129.32320658359848)), PlaceMO(name: "dd", coordinate: CLLocationCoordinate2D(latitude: 36.016, longitude: 129.324))
     ]
+    @ObservedObject var locationManager = LocationDataManager()
     
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct MainMapView: View {
             VStack(spacing: 12) {
                 Spacer().frame(height: 40)
                 TopProfileView()
-                Label("address", systemImage: "smallcircle.filled.circle")
+                Label(locationManager.address, systemImage: "smallcircle.filled.circle")
                     .padding(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .frame(height: 36)
