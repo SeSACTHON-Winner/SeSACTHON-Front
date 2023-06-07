@@ -17,9 +17,12 @@ struct SeSACTHON_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
+            if UserDefaults.standard.bool(forKey: "login") {
                 HomeView()
+            } else {
+                LoginView()
             }
+            
         }
     }
 }
