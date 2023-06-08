@@ -32,7 +32,8 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection)
+                //MainRunningView(swpSelection: $swpSelection)
+                RootView()
             case 3:
                 RunEndView(swpSelection: $swpSelection)
             default:

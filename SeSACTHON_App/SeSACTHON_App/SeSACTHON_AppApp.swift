@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+let SIZE = 50.0
+let NAME = "Running"
+
 @main
 struct SeSACTHON_AppApp: App {
     

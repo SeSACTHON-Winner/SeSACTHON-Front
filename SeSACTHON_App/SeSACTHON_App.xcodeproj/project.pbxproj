@@ -14,10 +14,19 @@
 		6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CC2A3106AC004A49D1 /* MyMapError.swift */; };
 		6099D7D22A3106AC004A49D1 /* WorkoutFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */; };
 		6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */; };
+		6099D7D72A310928004A49D1 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D42A310928004A49D1 /* CLLocation.swift */; };
+		6099D7D82A310928004A49D1 /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */; };
+		6099D7D92A310928004A49D1 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D62A310928004A49D1 /* Date.swift */; };
+		6099D7E32A3109AA004A49D1 /* FloatingButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */; };
+		6099D7E42A3109AA004A49D1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DB2A3109AA004A49D1 /* MapView.swift */; };
+		6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */; };
+		6099D7E62A3109AA004A49D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DE2A3109AA004A49D1 /* View.swift */; };
+		6099D7E72A3109AA004A49D1 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DF2A3109AA004A49D1 /* InfoView.swift */; };
+		6099D7E82A3109AA004A49D1 /* RunListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E02A3109AA004A49D1 /* RunListView.swift */; };
+		6099D7E92A3109AA004A49D1 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E12A3109AA004A49D1 /* PermissionView.swift */; };
+		6099D7EA2A3109AA004A49D1 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E22A3109AA004A49D1 /* Blur.swift */; };
+		6099D7EC2A3109C8004A49D1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7EB2A3109C8004A49D1 /* RootView.swift */; };
 		60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B60F2A2D7F3300032504 /* MainRunningView.swift */; };
-		60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6112A2D7FF100032504 /* HealthDataManager.swift */; };
-		60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6132A2D817A00032504 /* HealthKitSupport.swift */; };
-		60B9B6162A2D81D700032504 /* HealthKitSupport+Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */; };
 		60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE552A29E98300312357 /* CustomCameraView.swift */; };
 		60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE572A29EA1200312357 /* CameraModel.swift */; };
 		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
@@ -95,11 +104,20 @@
 		6099D7CC2A3106AC004A49D1 /* MyMapError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMapError.swift; sourceTree = "<group>"; };
 		6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutFilter.swift; sourceTree = "<group>"; };
 		6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutType.swift; sourceTree = "<group>"; };
+		6099D7D42A310928004A49D1 /* CLLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
+		6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
+		6099D7D62A310928004A49D1 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingButtons.swift; sourceTree = "<group>"; };
+		6099D7DB2A3109AA004A49D1 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutBar.swift; sourceTree = "<group>"; };
+		6099D7DE2A3109AA004A49D1 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		6099D7DF2A3109AA004A49D1 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		6099D7E02A3109AA004A49D1 /* RunListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunListView.swift; sourceTree = "<group>"; };
+		6099D7E12A3109AA004A49D1 /* PermissionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		6099D7E22A3109AA004A49D1 /* Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		6099D7EB2A3109C8004A49D1 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		60B9B60E2A2D7DFB00032504 /* SeSACTHON_App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACTHON_App.entitlements; sourceTree = "<group>"; };
 		60B9B60F2A2D7F3300032504 /* MainRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunningView.swift; sourceTree = "<group>"; };
-		60B9B6112A2D7FF100032504 /* HealthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataManager.swift; sourceTree = "<group>"; };
-		60B9B6132A2D817A00032504 /* HealthKitSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSupport.swift; sourceTree = "<group>"; };
-		60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKitSupport+Strings.swift"; sourceTree = "<group>"; };
 		60E6CE552A29E98300312357 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
@@ -171,13 +189,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6099D7DD2A3109AA004A49D1 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				6099D7DE2A3109AA004A49D1 /* View.swift */,
+				6099D7DF2A3109AA004A49D1 /* InfoView.swift */,
+				6099D7E02A3109AA004A49D1 /* RunListView.swift */,
+				6099D7E12A3109AA004A49D1 /* PermissionView.swift */,
+				6099D7E22A3109AA004A49D1 /* Blur.swift */,
+			);
+			path = Extra;
+			sourceTree = "<group>";
+		};
 		60B9B6172A2D81ED00032504 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				6099D7C62A310623004A49D1 /* Haptics.swift */,
 				6099D7C72A310623004A49D1 /* HKHelper.swift */,
-				60B9B6132A2D817A00032504 /* HealthKitSupport.swift */,
-				60B9B6152A2D81D700032504 /* HealthKitSupport+Strings.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -266,7 +294,6 @@
 				78F734C62A272890002AAE1A /* Extension */,
 				78F734C52A27287A002AAE1A /* Components */,
 				78123B302A288C9C0060BA4F /* LocationDataManager.swift */,
-				60B9B6112A2D7FF100032504 /* HealthDataManager.swift */,
 				60B9B6172A2D81ED00032504 /* Utilities */,
 			);
 			path = Global;
@@ -275,6 +302,10 @@
 		78F734C52A27287A002AAE1A /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6099D7DD2A3109AA004A49D1 /* Extra */,
+				6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */,
+				6099D7DB2A3109AA004A49D1 /* MapView.swift */,
+				6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */,
 				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
 				78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */,
 				7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */,
@@ -288,6 +319,9 @@
 		78F734C62A272890002AAE1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6099D7D42A310928004A49D1 /* CLLocation.swift */,
+				6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */,
+				6099D7D62A310928004A49D1 /* Date.swift */,
 				78F210AA2A2758DF00915FCD /* ColorExtension.swift */,
 				78F210AC2A27595400915FCD /* FontExtension.swift */,
 				78D01C9A2A29F87600240004 /* ViewExtension.swift */,
@@ -340,6 +374,7 @@
 				789866B52A2DC02A00CA4722 /* HomeView.swift */,
 				7898F0392A2F128300B677A2 /* ProfileView.swift */,
 				78182A842A30B40E0037B54F /* LoginView.swift */,
+				6099D7EB2A3109C8004A49D1 /* RootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,30 +567,39 @@
 				7805F33D2A2C66BF0071AB01 /* CustomMapView.swift in Sources */,
 				7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */,
 				60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */,
+				6099D7E72A3109AA004A49D1 /* InfoView.swift in Sources */,
+				6099D7E42A3109AA004A49D1 /* MapView.swift in Sources */,
 				780F9A1F2A28599D00B715BD /* MainMapView.swift in Sources */,
 				789866B62A2DC02A00CA4722 /* HomeView.swift in Sources */,
 				7812A98A2A29D5F500D20EAF /* BlueSystemImageLabelStyle.swift in Sources */,
 				78F210AD2A27595400915FCD /* FontExtension.swift in Sources */,
 				60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */,
 				6099D7C82A310623004A49D1 /* Haptics.swift in Sources */,
+				6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */,
 				6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */,
+				6099D7E32A3109AA004A49D1 /* FloatingButtons.swift in Sources */,
+				6099D7D82A310928004A49D1 /* CLLocationCoordinate2D.swift in Sources */,
+				6099D7D92A310928004A49D1 /* Date.swift in Sources */,
 				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
 				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				7898F03A2A2F128300B677A2 /* ProfileView.swift in Sources */,
 				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
-				60B9B6142A2D817A00032504 /* HealthKitSupport.swift in Sources */,
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
+				6099D7EA2A3109AA004A49D1 /* Blur.swift in Sources */,
+				6099D7E62A3109AA004A49D1 /* View.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
+				6099D7E82A3109AA004A49D1 /* RunListView.swift in Sources */,
 				6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */,
+				6099D7EC2A3109C8004A49D1 /* RootView.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
+				6099D7D72A310928004A49D1 /* CLLocation.swift in Sources */,
+				6099D7E92A3109AA004A49D1 /* PermissionView.swift in Sources */,
 				6099D7D02A3106AC004A49D1 /* WorkoutViewModel.swift in Sources */,
 				7805F33F2A2C67730071AB01 /* TopProfileView.swift in Sources */,
-				60B9B6122A2D7FF100032504 /* HealthDataManager.swift in Sources */,
 				7805F33B2A2C65EC0071AB01 /* PlaceAnnotationView.swift in Sources */,
 				78182A852A30B40E0037B54F /* LoginView.swift in Sources */,
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
-				60B9B6162A2D81D700032504 /* HealthKitSupport+Strings.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
 				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
