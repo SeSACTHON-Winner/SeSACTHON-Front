@@ -16,23 +16,29 @@ struct RunningEndView: View {
         
         VStack(alignment: .leading, spacing: 0) {
             Spacer()
-            HStack {
-                VStack(alignment: .leading, spacing: -15) {
-                    Text("05 : 12")
-                        .font(.custom("SF Pro Text", size: 52))
-                        .tracking(-2)
-                    Text(": 58")
-                        .font(.custom("SF Pro Text", size: 34))
-                        .tracking(-2)
-                }
-                .foregroundColor(.sesacMint)
-                .italic()
-                Spacer()
-            }
+            Text("05 : 12")
+                .font(.custom("SF Pro Text", size: 52))
+                .tracking(-2)
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [.sesacMint, .sesacLightGreen],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            
+            
+            .foregroundColor(.sesacMint)
+            .italic()
+            Spacer()
             // MARK: - info
             runningInfoView()
         }
+        .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: $isRunningEnd) {
+            StartView()
+        }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
@@ -69,7 +75,7 @@ extension RunningEndView {
                 Text("도움 2개")
             }
             .tracking(-0.8)
-            .font(.custom("SF Pro Text", size: 16))
+            .font(.custom("SF Pro Text", size: 14))
             .padding(.leading, 20)
             HStack {
                 Button {
@@ -87,8 +93,7 @@ extension RunningEndView {
                 .buttonStyle(PlainButtonStyle())
                 .padding(.trailing, 16)
             }
-            .padding(.top)
-            Spacer()
+            .padding(.top, 13)
         }
     }
 }

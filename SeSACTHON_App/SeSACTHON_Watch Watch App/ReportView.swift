@@ -16,13 +16,11 @@ struct ReportView: View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: -10) {
                 Text("05 : 12")
-                    .font(.custom("SF Pro Text", size: 54))
-                    .tracking(-2.2)
-                Text(": 58")
-                    .font(.custom("SF Pro Text", size: 36))
+                    .font(.custom("SF Pro Text", size: 32))
                     .tracking(-2.2)
             }
             .frame(maxWidth: .infinity)
+            .frame(height: 40)
             .background()
             .backgroundStyle(
                 LinearGradient(
@@ -51,9 +49,11 @@ struct ReportView: View {
                         isNext = true
                     } label: {
                         HStack {
-                            Text("🌊")
-                                .font(.custom("SF Pro Text", size: 24))
-                            Text("자연재해")
+                            Image(systemName: "figure.stair.stepper")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 32)
+                            Text("높은 단차")
                                 .font(.custom("SF Pro Text", size: 14))
                         }
                     }
