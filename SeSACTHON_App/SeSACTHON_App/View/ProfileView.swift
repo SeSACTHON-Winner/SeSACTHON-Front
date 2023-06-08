@@ -45,7 +45,7 @@ struct ProfileView: View {
                     .scaledToFit()
                     .frame(width: 126)
                     .padding(.leading, 59)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                 VStack {
                     HStack {
                         TextField("닉네임", text: $nickname)

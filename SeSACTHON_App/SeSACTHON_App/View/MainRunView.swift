@@ -147,7 +147,7 @@ struct MainRunHomeView: View {
                 TopProfileView(title: "RUN")
                     .padding(.horizontal, 20)
                     .background(.black)
-                    
+                
                 HStack {
                     Image(systemName: "location.fill")
                         .resizable()
@@ -163,7 +163,7 @@ struct MainRunHomeView: View {
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
                 
-                Spacer().frame(height: 130)
+                Spacer().frame(height: 80)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows:layout, spacing: 20) {
                         ForEach(0...2, id: \.self) { _ in
@@ -186,13 +186,14 @@ struct MainRunHomeView: View {
                                             .font(.system(size: 20, weight: .semibold))
                                         Text("3.3km 40min")
                                             .font(.system(size: 14, weight: .regular))
-                                        
                                     }.foregroundColor(.white)
                                     Spacer()
-                                }.padding(20)
-                            }.frame(width: 312, height: 124)
-                                .background(Color("Darkgray"))
-                                .cornerRadius(8)
+                                }
+                                .padding(20)
+                            }
+                            .frame(width: 312, height: 124)
+                            .background(Color("Darkgray"))
+                            .cornerRadius(10)
                         }
                     }
                     .padding(.horizontal, 40)

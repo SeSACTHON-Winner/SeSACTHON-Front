@@ -14,13 +14,9 @@ struct RunEndView: View {
         ScrollView {
             VStack {
                 VStack(alignment: .leading){
-                    Spacer().frame(height: 30)
-                    HStack {
-                        Image(systemName: "stop.fill")
-                        Spacer()
-                        Image(systemName: "pause")
-                    }
-                    .foregroundColor(.blue)
+                    Spacer().frame(height: 60)
+                    TopProfileView(title: "FINISH")
+                        .foregroundColor(.blue)
                     Spacer()
                     Text("2023년 2월 5일")
                         .font(.system(size: 16, weight: .medium))
