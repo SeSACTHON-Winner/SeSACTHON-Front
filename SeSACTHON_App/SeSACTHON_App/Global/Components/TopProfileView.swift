@@ -33,15 +33,20 @@ struct TopProfileView: View {
                 .foregroundColor(.white)
                 .italic()
             Spacer()
-            Button {
-//                goProfile = true
-            } label: {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .frame(width: 34, height: 34)
-                    .padding(.leading)
-                    .foregroundColor(.white)
-            }
+//            Button {
+////                goProfile = true
+//            } label: {
+//                Image(systemName: "person.crop.circle.fill")
+//                    .resizable()
+//                    .frame(width: 34, height: 34)
+//                    .padding(.leading)
+//                    .foregroundColor(.white)
+//            }
+            Image(systemName: "person.crop.circle.fill")
+                .resizable()
+                .frame(width: 34, height: 34)
+                .padding(.leading)
+                .foregroundColor(.white)
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom)
