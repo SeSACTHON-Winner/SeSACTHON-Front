@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PlaceAnnotationView: View {
+    
+    @State var isTest: Bool
     var body: some View {
         VStack(spacing: 0) {
             
@@ -15,8 +17,11 @@ struct PlaceAnnotationView: View {
                 .cornerRadius(10)
                 .overlay {
                     HStack {
-                        Text("😅")
-                        Text("😂")
+                        if isTest {
+                            Text("😅")
+                        } else {
+                            Text("😂")
+                        }
                     }
                 }
                 .shadow(radius: 3)
@@ -30,8 +35,8 @@ struct PlaceAnnotationView: View {
     }
 }
 
-struct PlaceAnnotationView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaceAnnotationView()
-    }
-}
+//struct PlaceAnnotationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlaceAnnotationView()
+//    }
+//}

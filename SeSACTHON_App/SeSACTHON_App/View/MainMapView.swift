@@ -67,7 +67,7 @@ struct MainMapView: View {
                 Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: placeMOArr
                 ) { place in
                     MapAnnotation(coordinate: place.coordinate) {
-                        PlaceAnnotationView()
+                        PlaceAnnotationView(isTest: true)
                     }
                 }
                 .gesture(DragGesture().onChanged { _ in
