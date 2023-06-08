@@ -14,9 +14,6 @@ struct RunningTimeView: View {
                 Text("05 : 12")
                     .tracking(-2)
                     .font(.custom("SF Pro Text", size: 54))
-                Text(":58")
-                    .font(.custom("SF Pro Text", size: 36))
-                    .tracking(-2)
             }
             .frame(maxWidth: .infinity)
             .foregroundColor(.sesacMint)

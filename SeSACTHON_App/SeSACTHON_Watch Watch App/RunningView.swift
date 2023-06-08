@@ -21,6 +21,7 @@ struct RunningView: View {
                 .padding(.top, 30)
                 .padding(.leading, 10)
             RunningTimeView()
+            Spacer()
             HStack(alignment: .top, spacing: 10) {
                 Button {
                     isNext = true
@@ -33,8 +34,6 @@ struct RunningView: View {
                     if !isRunning {
                         isEnd = true
                     }
-                    
-                    
                 } label: {
                     watchRunningBtn(color: .white, systemName: isRunning ? "pause.fill" : "play.fill")
                 }

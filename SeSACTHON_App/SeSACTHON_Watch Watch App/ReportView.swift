@@ -12,17 +12,23 @@ struct ReportView: View {
     @State var isNext = false
     @Environment(\.dismiss) private var dismiss
     
+    enum dangerType {
+        case slope
+        case step
+        case narrow
+        case construct
+        case none
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: -10) {
                 Text("05 : 12")
-                    .font(.custom("SF Pro Text", size: 54))
-                    .tracking(-2.2)
-                Text(": 58")
-                    .font(.custom("SF Pro Text", size: 36))
+                    .font(.custom("SF Pro Text", size: 32))
                     .tracking(-2.2)
             }
             .frame(maxWidth: .infinity)
+            .frame(height: 40)
             .background()
             .backgroundStyle(
                 LinearGradient(
@@ -35,56 +41,11 @@ struct ReportView: View {
             .foregroundColor(.black)
             .italic()
             List {
-                Group {
-                    Button {
-                        isNext = true
-                    } label: {
-                        HStack {
-                            Text("🎢")
-                                .font(.custom("SF Pro Text", size: 24))
-                            Text("경사도")
-                                .font(.custom("SF Pro Text", size: 14))
-                        }
-                           
-                    }
-                    Button {
-                        isNext = true
-                    } label: {
-                        HStack {
-                            Text("🌊")
-                                .font(.custom("SF Pro Text", size: 24))
-                            Text("자연재해")
-                                .font(.custom("SF Pro Text", size: 14))
-                        }
-                    }
-                    Button {
-                        isNext = true
-                    } label: {
-                        HStack {
-                            Text("⛔")
-                                .font(.custom("SF Pro Text", size: 24))
-                            Text("좁은길")
-                                .font(.custom("SF Pro Text", size: 14))
-                        }
-                    }
-                    Button {
-                        isNext = true
-                    } label: {
-                        HStack {
-                            Text("🚧")
-                                .font(.custom("SF Pro Text", size: 24))
-                            Text("공사중")
-                                .font(.custom("SF Pro Text", size: 14))
-                        }
-                    }
-                }
-                .frame(height: 90)
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.sesacMint)
-                .navigationDestination(isPresented: $isNext) {
-                    EmptyView()
-                }
-
+                ReportButtonEmoji(emoji: "🎢", text: "경사도")
+                ReportButtonSymbol(image: Image(systemName: "figure.stair.stepper"), text: "높은 단차")
+                ReportButtonEmoji(emoji: "⛔", text: "좁은길")
+                ReportButtonEmoji(emoji: "🚧", text: "공사중")
+                
             }
             .listStyle(CarouselListStyle())
             
@@ -130,3 +91,58 @@ struct ReportView_Previews: PreviewProvider {
     }
 }
 
+struct ReportButtonEmoji: View {
+    
+    
+    @State var emoji: String
+    @State var text: String
+    @State  var isNext = false
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        Button {
+            text = "✅"
+            sleep(1)
+            dismiss()
+        } label: {
+            HStack {
+                Text(emoji)
+                    .font(.custom("SF Pro Text", size: 24))
+                Text(text)
+                    .font(.custom("SF Pro Text", size: 14))
+            }
+        }
+        .frame(height: 90)
+        .frame(maxWidth: .infinity)
+        .foregroundColor(.sesacMint)
+    }
+}
+
+struct ReportButtonSymbol: View {
+    
+    
+    @State var image: Image
+    @State var text: String
+    @State  var isNext = false
+    @Environment(\.dismiss) private var dismiss
+    
+    var body: some View {
+        Button {
+            text = "✅"
+            sleep(1)
+            dismiss()
+        } label: {
+            HStack {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 32)
+                Text(text)
+                    .font(.custom("SF Pro Text", size: 14))
+            }
+        }
+        .frame(height: 90)
+        .frame(maxWidth: .infinity)
+        .foregroundColor(.sesacMint)
+    }
+}

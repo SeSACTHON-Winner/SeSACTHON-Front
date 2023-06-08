@@ -16,9 +16,6 @@ struct RunningResultView: View {
                     Text("05 : 12")
                         .font(.custom("SF Pro Text", size: 38))
                         .tracking(-1)
-                    Text(": 58")
-                        .font(.custom("SF Pro Text", size: 25))
-                        .tracking(-1)
                 }
                 .padding(.bottom)
                 .foregroundStyle(

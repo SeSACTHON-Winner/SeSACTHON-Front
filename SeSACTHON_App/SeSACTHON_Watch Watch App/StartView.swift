@@ -21,9 +21,9 @@ struct StartView: View {
         .buttonStyle(PlainButtonStyle())
         .navigationDestination(isPresented: $isNext) {
             RunningView()
-
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden(true)
         
     }
 }
@@ -72,6 +72,7 @@ struct StartButton: View {
             Circle()
                 .foregroundColor(.black)
                 .frame(width: 120, height: 120)
+                .shadow(radius: 4)
             Text("Start")
                 .font(.custom("SF Pro Text", size: 32))
                 .foregroundStyle(
