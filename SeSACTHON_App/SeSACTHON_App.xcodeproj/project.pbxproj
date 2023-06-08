@@ -302,7 +302,6 @@
 		78F734C52A27287A002AAE1A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6099D7DD2A3109AA004A49D1 /* Extra */,
 				6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */,
 				6099D7DB2A3109AA004A49D1 /* MapView.swift */,
 				6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */,
@@ -319,6 +318,7 @@
 		78F734C62A272890002AAE1A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6099D7DD2A3109AA004A49D1 /* Extra */,
 				6099D7D42A310928004A49D1 /* CLLocation.swift */,
 				6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */,
 				6099D7D62A310928004A49D1 /* Date.swift */,

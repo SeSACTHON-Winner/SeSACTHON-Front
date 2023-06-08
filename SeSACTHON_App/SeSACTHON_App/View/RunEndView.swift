@@ -75,7 +75,7 @@ struct RunEndView: View {
                     }
                     Spacer()
                     TextField("hi", text: $courseName)
-                        
+                    
                         .textFieldStyle(.roundedBorder)
                         .cornerRadius(10)
                         .foregroundColor(.black)
@@ -94,7 +94,7 @@ struct RunEndView: View {
                         .padding(.leading, 24)
                         .padding(.vertical, 12)
                     RunRecentView()
-                      
+                    
                     RunRecentView()
                 }
                 
@@ -108,7 +108,7 @@ struct RunRecentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
-                Image(systemName: "map").resizable().frame(width: 50, height: 50).background(.blue).cornerRadius(5)
+                Image(systemName: "map").resizable().frame(width: 50, height: 50).background(.black).cornerRadius(5)
                 VStack(alignment: .leading, spacing: 8){
                     Text("2023.03.12")
                         .font(.system(size: 12, weight: .medium)).opacity(0.3)
@@ -151,7 +151,7 @@ struct RunRecentView: View {
         .padding(.horizontal, 24)
         .frame(height: 148)
         .frame(maxWidth: .infinity)
-        
+        .shadow(radius: 4, x: 2, y: 2)
         .padding(.bottom, 20)
     }
 }

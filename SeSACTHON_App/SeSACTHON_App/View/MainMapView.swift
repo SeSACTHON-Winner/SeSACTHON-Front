@@ -25,7 +25,7 @@ struct MainMapView: View {
             
             VStack(spacing: 12) {
                 Spacer().frame(height: 40)
-                TopProfileView()
+                TopProfileView(title: "MAP")
                 Label(locationManager.address, systemImage: "smallcircle.filled.circle")
                     .padding(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -74,11 +74,18 @@ struct ProfileView: View {
             .padding(.top, 69)
             .padding(.bottom, 60)
             
+            HStack {
+                Text("최근 활동")
+                Spacer()
+            }
+            .padding(.leading, 30)
+            .padding(.vertical)
+            
             ScrollView {
-                customListItem(profileImage: Image(""))
-                customListItem(profileImage: Image(""))
-                customListItem(profileImage: Image(""))
-                customListItem(profileImage: Image(""))
+                RunRecentView()
+                RunRecentView()
+                RunRecentView()
+                RunRecentView()
             }
             Spacer()
         }
