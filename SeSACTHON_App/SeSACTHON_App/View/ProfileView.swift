@@ -40,11 +40,12 @@ struct ProfileView: View {
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(radius: 3, x: 0 ,y: 4)
             HStack(spacing: 29) {
-                Image("Camera")
+                Image(systemName: "person.crop.circle.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 126)
                     .padding(.leading, 59)
+                    .foregroundColor(.white)
                 VStack {
                     HStack {
                         TextField("닉네임", text: $nickname)

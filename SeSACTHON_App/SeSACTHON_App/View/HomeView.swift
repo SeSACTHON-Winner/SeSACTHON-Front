@@ -28,10 +28,11 @@ struct HomeView: View {
                     NavigationLink {
                         ProfileView()
                     } label: {
-                        Image("Camera")
+                        Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .frame(width: 34, height: 34)
                             .padding(.leading)
+                            .foregroundColor(.white)
                     }
                 }
                 .frame(maxWidth: .infinity)

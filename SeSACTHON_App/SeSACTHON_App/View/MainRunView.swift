@@ -134,24 +134,26 @@ struct MainRunHomeView: View {
         GridItem(.flexible())
     ]
     @Binding var swpSelection: Int
+    @ObservedObject var locationManager = LocationDataManager()
     
     var body: some View {
         ZStack {
+            
+            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                .ignoresSafeArea()
+            
             VStack(spacing: 0) {
-                CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                    .ignoresSafeArea()
-            }
-            VStack(spacing: 0) {
-                Color.black.frame(height: 40)
+                Color.black.frame(height: 50)
                 TopProfileView(title: "RUN")
                     .padding(.horizontal, 20)
                     .background(.black)
+                    
                 HStack {
                     Image(systemName: "location.fill")
                         .resizable()
                         .foregroundColor(.blue)
                         .frame(width: 20, height: 20)
-                    Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
+                    Text(locationManager.address).foregroundColor(.white)
                         .font(.system(size: 17, weight: .regular))
                 }
                 .foregroundColor(.white)
