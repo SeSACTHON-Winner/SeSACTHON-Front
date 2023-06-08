@@ -12,6 +12,9 @@ import SwiftUI
 struct TopProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @State var goProfile = false
+    @State var title = ""
+    
     
     var body: some View {
         
@@ -25,21 +28,28 @@ struct TopProfileView: View {
                     .frame(width: 10, height: 16)
                     .foregroundColor(.white)
                     .padding(.trailing, 10)
-                    
             }
-            Text("Map")
+            Text(title)
                 .font(.custom("SF Pro Text", size: 32))
                 .foregroundColor(.white)
                 .italic()
             Spacer()
-            Image("Camera")
-                .resizable()
-                .frame(width: 34, height: 34)
-                .padding(.leading)
+            Button {
+                goProfile = true
+            } label: {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .frame(width: 34, height: 34)
+                    .padding(.leading)
+                    .foregroundColor(.white)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom)
         .background(.black)
+        .navigationDestination(isPresented: $goProfile) {
+            ProfileView()
+        }
     }
 }
 

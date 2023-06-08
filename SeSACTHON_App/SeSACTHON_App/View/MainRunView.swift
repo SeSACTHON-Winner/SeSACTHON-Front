@@ -13,7 +13,7 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-   
+    
     var body: some View {
         ZStack {
             switch swpSelection {
@@ -134,25 +134,27 @@ struct MainRunHomeView: View {
         GridItem(.flexible())
     ]
     @Binding var swpSelection: Int
+    @ObservedObject var locationManager = LocationDataManager()
     
     var body: some View {
         ZStack {
-            VStack(spacing: 0) {
-                CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                    .ignoresSafeArea()
-            }
             
-            VStack {
-                VStack {
-                    Spacer().frame(height: 36)
-                    HStack {
-                        Image(systemName: "location.fill")
-                            .resizable()
-                            .foregroundColor(.blue)
-                            .frame(width: 20, height: 20)
-                        Text("출발 위치 : 효성로 17번길 21 - 13").foregroundColor(.white)
-                            .font(.system(size: 17, weight: .regular))
-                    }
+            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                Color.black.frame(height: 50)
+                TopProfileView(title: "RUN")
+                    .padding(.horizontal, 20)
+                    .background(.black)
+                
+                HStack {
+                    Image(systemName: "location.fill")
+                        .resizable()
+                        .foregroundColor(.blue)
+                        .frame(width: 20, height: 20)
+                    Text(locationManager.address).foregroundColor(.white)
+                        .font(.system(size: 17, weight: .regular))
                 }
                 .foregroundColor(.white)
                 .frame(height: 96)
@@ -161,7 +163,7 @@ struct MainRunHomeView: View {
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
                 
-                Spacer().frame(height: 130)
+                Spacer().frame(height: 80)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHGrid(rows:layout, spacing: 20) {
                         ForEach(0...2, id: \.self) { _ in
@@ -184,13 +186,14 @@ struct MainRunHomeView: View {
                                             .font(.system(size: 20, weight: .semibold))
                                         Text("3.3km 40min")
                                             .font(.system(size: 14, weight: .regular))
-                                        
                                     }.foregroundColor(.white)
                                     Spacer()
-                                }.padding(20)
-                            }.frame(width: 312, height: 124)
-                                .background(Color("Darkgray"))
-                                .cornerRadius(8)
+                                }
+                                .padding(20)
+                            }
+                            .frame(width: 312, height: 124)
+                            .background(Color("Darkgray"))
+                            .cornerRadius(10)
                         }
                     }
                     .padding(.horizontal, 40)
@@ -207,7 +210,7 @@ struct MainRunHomeView: View {
                         .background(Color("MainColor"))
                         .cornerRadius(26)
                         .shadow(color: .black.opacity(0.25), radius: 2)
-
+                    
                 }.padding(.bottom, 14)
                 
                 HStack(alignment: .top, spacing: 28) {
@@ -247,9 +250,10 @@ struct MainRunHomeView: View {
                     }
                 }.padding(.bottom, 60)
             }
-            .edgesIgnoringSafeArea(.all)
+            
         }
         .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 
