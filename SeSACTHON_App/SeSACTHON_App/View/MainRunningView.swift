@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: RootView랑 MainRunningView 합칠 예정,,
 struct MainRunningView: View {
     @Binding var swpSelection: Int
     @State var currentDate = Date.now

@@ -10,7 +10,7 @@ import MapKit
 
 struct MainRunView: View {
     @State private var swpSelection = 0
-    var healthDataManager = HealthDataManager()
+    //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
    
@@ -32,7 +32,8 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection)
+                //MainRunningView(swpSelection: $swpSelection)
+                RootView()
             case 3:
                 RunEndView(swpSelection: $swpSelection)
             default:
@@ -41,8 +42,7 @@ struct MainRunView: View {
         }
         .navigationBarBackButtonHidden()
         .onAppear {
-            //healthDataManager.getHealthAuthorizationRequestStatus()
-            healthDataManager.requestHealthAuthorization()
+            //healthDataManager.requestHealthAuthorization()
         }
     }
 }
