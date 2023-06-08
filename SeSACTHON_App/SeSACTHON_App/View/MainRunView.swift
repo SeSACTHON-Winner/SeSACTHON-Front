@@ -21,6 +21,7 @@ struct MainRunView: View {
                 VStack(spacing: 0) {
                     CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
                         .ignoresSafeArea()
+                        
                 }
             default:
                 EmptyView()
@@ -199,30 +200,32 @@ struct MainRunHomeView: View {
                     .padding(.horizontal, 40)
                 }
                 Spacer()
-                NavigationLink {
-                    CustomCameraView()
-                } label: {
-                    Image(systemName: "bell.fill")
-                        .font(.system(size: 28, weight: .black))
-                        .italic()
-                        .foregroundColor(.black)
-                        .frame(width: 52, height: 52)
-                        .background(Color("MainColor"))
-                        .cornerRadius(26)
-                        .shadow(color: .black.opacity(0.25), radius: 2)
-                    
-                }.padding(.bottom, 14)
                 
                 HStack(alignment: .top, spacing: 28) {
                     NavigationLink {
-                        //SettingView()
+                        //                        CustomCameraView()
                     } label: {
-                        Image(systemName: "gearshape")
+                        Image("RunSetting")
                             .font(.system(size: 28, weight: .black))
                             .italic()
                             .foregroundColor(.black)
                             .frame(width: 52, height: 52)
-                            .background(Color("MainColor"))
+                            .cornerRadius(26)
+                            .shadow(color: .black.opacity(0.25), radius: 2)
+                    }.padding(.bottom, 14)
+                    Spacer().frame(width: 120)
+                    Spacer().frame(width: 52)
+                }
+                
+                HStack(alignment: .top, spacing: 28) {
+                    NavigationLink {
+                        CustomCameraView()
+                    } label: {
+                        Image("RunCamera")
+                            .font(.system(size: 28, weight: .black))
+                            .italic()
+                            .foregroundColor(.black)
+                            .frame(width: 52, height: 52)
                             .cornerRadius(26)
                             .shadow(color: .black.opacity(0.25), radius: 2)
                     }
@@ -240,9 +243,9 @@ struct MainRunHomeView: View {
                     }
                     
                     Button {
-                        //
+                        self.userTrackingMode = .follow
                     } label: {
-                        Image(systemName: "location.circle.fill")
+                        Image("RunLocation")
                             .resizable()
                             .foregroundColor(.black)
                             .frame(width: 52, height: 52)

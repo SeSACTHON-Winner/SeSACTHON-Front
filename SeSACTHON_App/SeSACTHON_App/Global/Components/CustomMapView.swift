@@ -20,5 +20,6 @@ struct CustomMapView: View {
             .gesture(DragGesture().onChanged { _ in
                 userTrackingMode = .none
             })
+            .tint(.sesacMint)
     }
 }
