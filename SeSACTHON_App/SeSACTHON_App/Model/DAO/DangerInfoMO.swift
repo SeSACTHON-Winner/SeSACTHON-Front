@@ -5,27 +5,27 @@
 //  Created by ChoiYujin on 2023/06/08.
 //
 
-import Foundation
+import SwiftUI
+import Combine
 
-class DangerInfoMO: ObservableObject, Identifiable {
+class DangerInfoMO: ObservableObject, Identifiable, Codable {
     
-    @Published var id: String
-    @Published var latitude: Double
-    @Published var longtitude: Double
-    @Published var picturePath: String
-    @Published var type: DangerType
+    var id: String
+    var latitude: Double
+    var longitude: Double
+    var picturePath: String
+    var type: String
     
-    init(id: String, latitude: Double, longtitude: Double, picturePath: String, type: DangerType) {
+    init(id: String, latitude: Double, longitude: Double, picturePath: String, type: DangerType) {
         self.id = id
         self.latitude = latitude
-        self.longtitude = longtitude
+        self.longitude = longitude
         self.picturePath = picturePath
-        self.type = type
+        self.type = type.rawValue
     }
     
     
-    enum DangerType: String {
-        
+    enum DangerType: String, Codable {
         case step = "step"
         case slope = "slope"
         case construction = "construction"

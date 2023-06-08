@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Alamofire
 
 struct MainMapView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
@@ -92,7 +93,7 @@ struct MainMapView: View {
             ZStack {
                 Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerArr
                 ) { danger in
-                    MapAnnotation(coordinate: .init(latitude: danger.latitude, longitude: danger.longtitude)) {
+                    MapAnnotation(coordinate: .init(latitude: danger.latitude, longitude: danger.longitude)) {
                         PlaceAnnotationView(type: danger.type)
                     }
                 }
@@ -120,7 +121,10 @@ struct MainMapView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            self.dangerArr = fetchDangerList()
+            print("fetchDangerList() : \(fetchDangerList())")
+//            self.dangerArr = fetchDangerList()
+            fetchAnnotationItems()
+            print("dangerArr \(dangerArr)")
         }
     }
 }
@@ -129,6 +133,19 @@ extension MainMapView {
     
     func fetchAnnotationItems() {
         // API가 완성되면 여기에 호출 코드 작성
+        
+        self.dangerArr.removeAll()
+        AF.request("http://35.72.228.224/adaStudy/dangerInfo.php")
+            .responseDecodable(of: [DangerInfoMO].self) { response in
+                guard let dangerInfoArray = response.value else {
+                    print("Failed to decode dangerInfoArray")
+                    return
+                }
+                print(response.value?.first?.latitude)
+                dangerArr = response.value!
+                print(dangerArr.description)
+            }
+        return
     }
     
     func getAddressFromCoordinates() {
