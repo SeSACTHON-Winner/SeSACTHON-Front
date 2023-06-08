@@ -106,41 +106,42 @@ struct HomeView: View {
 extension HomeView {
     
     func newsView(title: String, content: String, image: Image) -> some View {
-        return ZStack {
-            Color.clear.overlay {
-                image
-                    .resizable()
-                    .scaledToFill()
-            }
-            LinearGradient(
-                colors: [.clear, .black],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            VStack(alignment: .leading, spacing: 0) {
-                Spacer()
-                
-                HStack {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text(title)
-                            .font(.system(size: 26))
-                            .fontWeight(.heavy)
-                            .foregroundColor(.white)
-                            .padding(.vertical)
-                            .tracking(1)
-                        Text(content)
-                            .font(.system(size: 18))
-                            .fontWeight(.medium)
-                            .foregroundColor(.white)
-                            .lineSpacing(10)
-                    }
-                    Spacer()
+            return ZStack {
+                Color.clear.overlay {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                    LinearGradient(
+                        colors: [.clear, .black],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                 }
+                
+                VStack(alignment: .leading, spacing: 0) {
+                    Spacer()
+                    
+                    HStack {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(title)
+                                .font(.system(size: 26))
+                                .fontWeight(.heavy)
+                                .foregroundColor(.white)
+                                .padding(.vertical)
+                                .tracking(1)
+                            Text(content)
+                                .font(.system(size: 18))
+                                .fontWeight(.medium)
+                                .foregroundColor(.white)
+                                .lineSpacing(10)
+                        }
+                        Spacer()
+                    }
+                }
+                .padding(.bottom, 78)
+                .padding(.horizontal, 18)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.bottom, 78)
-            .padding(.horizontal, 18)
-            .frame(maxWidth: .infinity)
-        }
     }
 }
 
