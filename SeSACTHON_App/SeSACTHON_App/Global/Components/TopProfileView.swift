@@ -35,7 +35,7 @@ struct TopProfileView: View {
                 .italic()
             Spacer()
             Button {
-                goProfile = true
+//                goProfile = true
             } label: {
                 Image(systemName: "person.crop.circle.fill")
                     .resizable()
