@@ -13,7 +13,7 @@ extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
     
-    func fetchAnnotationItems() -> [PlaceMO] {
+    func fetchAnnotationItems() -> [DangerInfoMO] {
         // API가 완성되면 여기에 호출 코드 작성
         let dangerList: [DangerInfoMO] = [
             .init(id: "1", latitude: 36.015, longtitude: 129.323, picturePath: "wow1.png", type: .slope),
@@ -22,14 +22,8 @@ extension View {
             .init(id: "4", latitude: 36.018, longtitude: 129.326, picturePath: "wow4.png", type: .narrow)
         ]
         
-        var placeList: [PlaceMO] = []
-        
-        for danger in dangerList {
-            let placemo = PlaceMO(name: danger.type.rawValue, coordinate: .init(latitude: danger.latitude, longitude: danger.longtitude))
-            print(placemo)
-            placeList.append(placemo)
-        }
-        return placeList
+       
+        return dangerList
     }
     
     func fetchMember(id: String) -> MemberMO {
