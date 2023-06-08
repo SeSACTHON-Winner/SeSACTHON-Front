@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PlaceAnnotationView: View {
     
-    @State var isTest: Bool
+    
+    let type: DangerInfoMO.DangerType
+    
     var body: some View {
         VStack(spacing: 0) {
             
@@ -17,10 +19,18 @@ struct PlaceAnnotationView: View {
                 .cornerRadius(10)
                 .overlay {
                     HStack {
-                        if isTest {
-                            Text("😅")
-                        } else {
-                            Text("😂")
+                        switch type {
+                        case .slope:
+                            Text("🎢")
+                        case .step:
+                            Image(systemName: "figure.stair.stepper")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 32)
+                        case .construction:
+                            Text("🚧")
+                        case .narrow:
+                            Text("⛔")
                         }
                     }
                 }

@@ -11,21 +11,47 @@ import MapKit
 struct MainMapView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     @State var userTrackingMode: MapUserTrackingMode = .follow
-    
-    @State var placeMOArr: [PlaceMO] = [PlaceMO(name: "지곡회관", coordinate: CLLocationCoordinate2D(latitude: 36.01577810316272, longitude: 129.32320658359848)), PlaceMO(name: "dd", coordinate: CLLocationCoordinate2D(latitude: 36.016, longitude: 129.324))
-    ]
     @ObservedObject var locationManager = LocationDataManager()
     @State var searchText = ""
     @StateObject private var completerWrapper = LocalSearchCompleterWrapper()
     @State var isPlaceSelected: Bool = false
     @State var address: String = ""
+    @State var dangerArr: [DangerInfoMO] = []
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
             
             VStack(spacing: 12) {
                 Spacer().frame(height: 40)
-                TopProfileView(title: "MAP")
+                HStack {
+                    Button {
+                        dangerArr.removeAll()
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 10, height: 16)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 10)
+                    }
+                    Text("MAP")
+                        .font(.custom("SF Pro Text", size: 32))
+                        .foregroundColor(.white)
+                        .italic()
+                    Spacer()
+                    
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .frame(width: 34, height: 34)
+                        .padding(.leading)
+                        .foregroundColor(.white)
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.bottom)
+                .background(.black)
                 Label(locationManager.address, systemImage: "smallcircle.filled.circle")
                     .padding(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -64,10 +90,10 @@ struct MainMapView: View {
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             ZStack {
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: placeMOArr
-                ) { place in
-                    MapAnnotation(coordinate: place.coordinate) {
-                        PlaceAnnotationView(isTest: true)
+                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerArr
+                ) { danger in
+                    MapAnnotation(coordinate: .init(latitude: danger.latitude, longitude: danger.longtitude)) {
+                        PlaceAnnotationView(type: danger.type)
                     }
                 }
                 .gesture(DragGesture().onChanged { _ in
@@ -93,6 +119,9 @@ struct MainMapView: View {
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            self.dangerArr = fetchDangerList()
+        }
     }
 }
 
@@ -134,7 +163,7 @@ extension MainMapView {
             searchText = ""
             completerWrapper.searchResults.removeAll()
             isPlaceSelected = true
-            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude:  coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.00001, longitudeDelta: 0.00001))
+            region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude:  coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
             getAddressFromCoordinates()
             
             // Clear the search text and dismiss the keyboard

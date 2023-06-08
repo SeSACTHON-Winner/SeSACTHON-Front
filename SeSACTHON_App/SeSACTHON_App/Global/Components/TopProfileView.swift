@@ -12,7 +12,6 @@ import SwiftUI
 struct TopProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @State var goProfile = false
     @State var title = ""
     
     
@@ -35,7 +34,7 @@ struct TopProfileView: View {
                 .italic()
             Spacer()
             Button {
-                goProfile = true
+//                goProfile = true
             } label: {
                 Image(systemName: "person.crop.circle.fill")
                     .resizable()
@@ -47,9 +46,6 @@ struct TopProfileView: View {
         .frame(maxWidth: .infinity)
         .padding(.bottom)
         .background(.black)
-        .navigationDestination(isPresented: $goProfile) {
-            ProfileView()
-        }
     }
 }
 

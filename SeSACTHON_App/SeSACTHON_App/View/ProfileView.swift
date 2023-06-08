@@ -11,6 +11,7 @@ struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var nickname = ""
+    @State var member = MemberMO(id: "ID", nickname: "NICK", totalCount: 4, dangerInfoList: [], runningInfo: [])
     
     var body: some View {
         VStack(spacing: 0) {
@@ -44,18 +45,19 @@ struct ProfileView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 126)
-                    .padding(.leading, 59)
+                    .padding(.leading, 30)
                     .foregroundColor(.gray)
                 VStack {
                     HStack {
-                        TextField("닉네임", text: $nickname)
-                            .frame(width: 100)
-                            .font(.system(size: 24))
-                            .fontWeight(.bold)
+                        
                         Image(systemName: "highlighter")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 16)
+                        TextField(member.nickname, text: $nickname)
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                        
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
@@ -63,7 +65,7 @@ struct ProfileView: View {
                         Text("총 도움")
                             .font(.system(size: 18))
                             .fontWeight(.bold)
-                        Image(systemName: "1.circle.fill")
+                        Image(systemName: "\(member.totalCount).circle.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 21)
@@ -92,6 +94,9 @@ struct ProfileView: View {
         }
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
+        .onAppear {
+            self.member = fetchMember()
+        }
     }
 }
 
