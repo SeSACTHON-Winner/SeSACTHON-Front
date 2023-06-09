@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AuthenticationServices
+import Alamofire
 
 struct LoginView: View {
     
@@ -59,6 +60,15 @@ struct AppleSigninButton : View{
                         let email = appleIDCredential.email
                         let IdentityToken = String(data: appleIDCredential.identityToken!, encoding: .utf8)
                         let AuthorizationCode = String(data: appleIDCredential.authorizationCode!, encoding: .utf8)
+                        
+                        let url = "http://35.72.228.224/sesacthon/memberInfo.php"
+                        let params = ["uid" : UserIdentifier, "nickname" : "nothing", "total_count" : 0] as Dictionary
+                        AF.request(url, method: .post, parameters: params).responseString{
+                            print($0)
+                        }
+                        UserDefaults.standard.setValue(UserIdentifier, forKey: "uid")
+                        print("UserDefaults: \(UserDefaults.standard.string(forKey: "uid") ?? "Nothing")")
+                        
                     default:
                         break
                     }
