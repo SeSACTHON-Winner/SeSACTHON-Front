@@ -16,7 +16,7 @@ extension View {
     
     func fetchMember() -> MemberMO {
         
-        let member = MemberMO(id: "IDID", nickname: "Eugene", totalCount: 3, dangerInfoList: [], runningInfo: [])
+        let member = MemberMO(id: 1, uid: "testuid", nickname: "Eugene", totalCount: 3)
         
         return member
     }
@@ -24,14 +24,15 @@ extension View {
     func fetchDangerList() -> [DangerInfoMO] {
         
         var dangerArr: [DangerInfoMO] = [
-            .init(id: "1", latitude: 36.016, longitude: 129.324, picturePath: "/123.png", type: .step),
-            .init(id: "2", latitude: 36.017, longitude: 129.325, picturePath: "/124.png", type: .slope),
-            .init(id: "3", latitude: 36.018, longitude: 129.326, picturePath: "/125.png", type: .construction),
-            .init(id: "4", latitude: 36.019, longitude: 129.327, picturePath: "/126.png", type: .narrow)
+            .init(id: 1, uid: "testuid", latitude: 36.016, longitude: 129.324, picturePath: "/123.png", type: .step),
+            .init(id: 2, uid: "testuid", latitude: 36.017, longitude: 129.325, picturePath: "/124.png", type: .slope),
+            .init(id: 3, uid: "testuid", latitude: 36.018, longitude: 129.326, picturePath: "/125.png", type: .construction),
+            .init(id: 4, uid: "testuid", latitude: 36.019, longitude: 129.327, picturePath: "/126.png", type: .narrow)
         ]
         
         dangerArr.removeAll()
         AF.request("http://35.72.228.224/adaStudy/dangerInfo.php")
+        
             .responseDecodable(of: [DangerInfoMO].self) { response in
                 guard let dangerInfoArray = response.value else {
                     print("Failed to decode dangerInfoArray")
