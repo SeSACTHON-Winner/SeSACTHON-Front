@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Kingfisher
+import Alamofire
 
 struct RunEndView: View {
     @Binding var swpSelection: Int
     @State var courseName: String = "효자공원 철길 코스"
+    @State var runningArr: [RunningInfo] = []
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -89,16 +93,43 @@ struct RunEndView: View {
                         .font(.system(size: 16, weight: .heavy))
                         .padding(.leading, 24)
                         .padding(.vertical, 12)
-//                    RunRecentView(runData: RunningInfo.init(id: 1, uid: "test", date: <#T##Date#>, runningName: <#T##String#>, distance: <#T##Double#>, pace: <#T##String#>, time: <#T##String#>, helpCount: <#T##Int#>, picturePath: <#T##String#>))
-                    
-//                    RunRecentView()
+                    ForEach(runningArr, id: \.self) { runninginfo in
+                        RunRecentView(runData: runninginfo)
+                    }
                 }
                 
             }
             
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            fetchRunningInfo { result in
+                switch result {
+                case .success(let data):
+                    runningArr = data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+        }
     }
 }
+
+extension RunEndView {
+    func fetchRunningInfo(completion: @escaping (Result<[RunningInfo], AFError>) -> Void) {
+        
+        let url = "http://35.72.228.224/sesacthon/runningInfo.php"
+        let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+        
+        AF.request(url, method: .get, parameters: params)
+            .responseDecodable(of: [RunningInfo].self) {
+                completion($0.result)
+                print($0.result)
+            }
+    }
+}
+
 
 struct RunRecentView: View {
     
@@ -107,7 +138,22 @@ struct RunRecentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
-                Image(systemName: "map").resizable().frame(width: 50, height: 50).background(.black).cornerRadius(5)
+                // MARK: - Image 교체
+                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
+                    .placeholder { //플레이스 홀더 설정
+                        Image(systemName: "map")
+                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                    .onSuccess {r in //성공
+                        print("succes: \(r)")
+                    }
+                    .onFailure { e in //실패
+                        print("failure: \(e)")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 50, height: 50)
+                    .background(.black)
+                    .cornerRadius(5)
                 VStack(alignment: .leading, spacing: 8){
                     Text(runData.date)
                         .font(.system(size: 12, weight: .medium)).opacity(0.3)
