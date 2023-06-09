@@ -14,12 +14,7 @@ extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
     
-    func fetchMember() -> MemberMO {
-        
-        let member = MemberMO(id: 1, uid: "testuid", nickname: "Eugene", totalCount: 3)
-        
-        return member
-    }
+    
     
     func fetchDangerList() -> [DangerInfoMO] {
         
