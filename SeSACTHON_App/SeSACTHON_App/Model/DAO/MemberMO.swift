@@ -7,19 +7,19 @@
 
 import Foundation
 
-class MemberMO: ObservableObject, Identifiable {
+class MemberMO: ObservableObject, Identifiable, Codable {
     
-    @Published var id: String
-    @Published var nickname: String
-    @Published var totalCount: Int
-    @Published var dangerInfoList: [DangerInfoMO]
-    @Published var runningInfo: [RunningInfo]
+    var id: Int
+    var uid: String
+    var nickname: String
+    var totalCount: Int
     
-    init(id: String, nickname: String, totalCount: Int, dangerInfoList: [DangerInfoMO], runningInfo: [RunningInfo]) {
+    
+    init(id: Int, uid: String, nickname: String, totalCount: Int) {
         self.id = id
+        self.uid = uid
         self.nickname = nickname
         self.totalCount = totalCount
-        self.dangerInfoList = dangerInfoList
-        self.runningInfo = runningInfo
     }
+
 }

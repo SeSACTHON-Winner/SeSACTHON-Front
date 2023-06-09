@@ -10,14 +10,16 @@ import Combine
 
 class DangerInfoMO: ObservableObject, Identifiable, Codable {
     
-    var id: String
+    var id: Int
+    var uid: String
     var latitude: Double
     var longitude: Double
     var picturePath: String
     var type: String
     
-    init(id: String, latitude: Double, longitude: Double, picturePath: String, type: DangerType) {
+    init(id: Int, uid: String, latitude: Double, longitude: Double, picturePath: String, type: DangerType) {
         self.id = id
+        self.uid = uid
         self.latitude = latitude
         self.longitude = longitude
         self.picturePath = picturePath

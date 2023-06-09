@@ -7,20 +7,21 @@
 
 import Foundation
 
-class RunningInfo: ObservableObject, Identifiable {
+class RunningInfo: ObservableObject, Identifiable, Codable {
     
-    @Published var id: String
-    @Published var date: Date
-    @Published var runningName: String
-    @Published var distance: Double
-    @Published var pace: String
-    @Published var time: String
-    @Published var helpCount: Int
-    @Published var picturePath: String
+    var id: Int
+    var uid: String
+    var date: Date
+    var runningName: String
+    var distance: Double
+    var pace: String
+    var time: String
+    var helpCount: Int
+    var picturePath: String
 
-    
-    init(id: String, date: Date, runningName: String, distance: Double, pace: String, time: String, helpCount: Int, picturePath: String) {
+    init(id: Int, uid: String, date: Date, runningName: String, distance: Double, pace: String, time: String, helpCount: Int, picturePath: String) {
         self.id = id
+        self.uid = uid
         self.date = date
         self.runningName = runningName
         self.distance = distance

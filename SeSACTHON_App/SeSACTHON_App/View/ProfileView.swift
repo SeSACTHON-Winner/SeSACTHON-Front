@@ -11,7 +11,7 @@ struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var nickname = ""
-    @State var member = MemberMO(id: "ID", nickname: "NICK", totalCount: 4, dangerInfoList: [], runningInfo: [])
+    @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4)
     
     var body: some View {
         VStack(spacing: 0) {
