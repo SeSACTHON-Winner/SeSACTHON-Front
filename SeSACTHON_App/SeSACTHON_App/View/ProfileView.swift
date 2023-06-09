@@ -11,93 +11,144 @@ import Alamofire
 struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @State var nickname = ""
+    @State var nickname: String = ""
     @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4)
     @State var runningArr: [RunningInfo] = []
+    @State var isNickEditable = false
+    
+    @State var nickText = ""
     
     var body: some View {
-            VStack(spacing: 0) {
-                Color.black.frame(height: 50)
-                HStack {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 10, height: 16)
-                            .foregroundColor(.white)
-                            .padding(.trailing, 10)
-                    }
-                    Text("PROFILE")
-                        .font(.custom("SF Pro Text", size: 32))
-                        .foregroundColor(.white)
-                        .italic()
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.bottom)
-                .padding(.horizontal)
-                .background(.black)
-                Color.black.frame(height: 20)
-                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                    .shadow(radius: 3, x: 0 ,y: 4)
-                HStack(spacing: 29) {
-                    Image(systemName: "person.crop.circle.fill")
+        VStack(spacing: 0) {
+            Color.black.frame(height: 50)
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "chevron.backward")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 126)
-                        .padding(.leading, 30)
-                        .foregroundColor(.gray)
-                    VStack {
-                        HStack {
-                            
+                        .frame(width: 10, height: 16)
+                        .foregroundColor(.white)
+                        .padding(.trailing, 10)
+                }
+                Text("PROFILE")
+                    .font(.custom("SF Pro Text", size: 32))
+                    .foregroundColor(.white)
+                    .italic()
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.bottom)
+            .padding(.horizontal)
+            .background(.black)
+            Color.black.frame(height: 20)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .shadow(radius: 3, x: 0 ,y: 4)
+            HStack(spacing: 29) {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 126)
+                    .padding(.leading, 30)
+                    .foregroundColor(.gray)
+                VStack {
+                    HStack {
+                        
+                        Button {
+                            isNickEditable = true
+                        } label: {
                             Image(systemName: "highlighter")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 16)
+                        }
+                        
+                        // MARK: - Nickname
+                        if isNickEditable {
                             TextField(member.nickname, text: $nickname)
                                 .font(.system(size: 24))
                                 .fontWeight(.bold)
-                            
-                            Spacer()
-                        }
-                        .frame(maxWidth: .infinity)
-                        HStack {
-                            Text("총 도움")
-                                .font(.system(size: 18))
+                                .onSubmit {
+                                    
+                                    let url = "http://35.72.228.224/sesacthon/memberInfo.php"
+                                    let uid = UserDefaults.standard.string(forKey: "uid") ?? ""
+                                    print("uid : \(uid)")
+                                    //                                        let params = ["nickname" : self.nickname, "uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+                                    let params = ["nickname" : self.nickname, "uid" : uid] as Dictionary
+                                    AF.request(url, method: .put, parameters: params).responseString {
+                                        print($0.result)
+                                        fetchMember { result in
+                                            switch result {
+                                            case .success(let data):
+                                                member = data
+                                                print(data.nickname)
+                                                nickText = data.nickname
+                                                isNickEditable = false
+                                            case .failure(let error):
+                                                print("\n\n\nmember\n\n\n")
+                                                print(error)
+                                            }
+                                        }
+                                    }
+
+                                    
+                                }
+                        } else {
+                            Text(member.nickname)
+                                .font(.system(size: 24))
                                 .fontWeight(.bold)
-                            Image(systemName: "\(member.totalCount).circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 21)
-                            Spacer()
                         }
-                        .frame(maxWidth: .infinity)
+                        Spacer()
                     }
-                }
-                .padding(.top, 69)
-                .padding(.bottom, 60)
-                
-                HStack {
-                    Text("최근 활동")
-                    Spacer()
-                }
-                .padding(.leading, 30)
-                .padding(.vertical)
-                
-                ScrollView {
-                    
-                    ForEach(runningArr, id: \.self) { runninginfo in
-                        RunRecentView(runData: runninginfo)
+                    .frame(maxWidth: .infinity)
+                    HStack {
+                        Text("총 도움")
+                            .font(.system(size: 18))
+                            .fontWeight(.bold)
+                        Image(systemName: "\(member.totalCount).circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 21)
+                        Spacer()
                     }
+                    .frame(maxWidth: .infinity)
                 }
+            }
+            .padding(.top, 69)
+            .padding(.bottom, 60)
+            
+            HStack {
+                Text("최근 활동")
                 Spacer()
             }
+            .padding(.leading, 30)
+            .padding(.vertical)
+            
+            ScrollView {
+                
+                ForEach(runningArr, id: \.self) { runninginfo in
+                    RunRecentView(runData: runninginfo)
+                }
+            }
+            Spacer()
+        }
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
         .onAppear {
-            self.member = fetchMember()
+            
+            fetchMember { result in
+                switch result {
+                case .success(let data):
+                    member = data
+                    print("data.nickname : \(data.nickname)")
+                    nickText = data.nickname
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+            
             fetchRunningInfo { result in
                 switch result {
                 case .success(let data):
@@ -112,6 +163,19 @@ struct ProfileView: View {
 }
 
 extension ProfileView {
+    
+    func fetchMember(completion: @escaping (Result<MemberMO, AFError>) -> Void) {
+        
+        let url = "http://35.72.228.224/sesacthon/memberInfo.php"
+        let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+        
+        AF.request(url, method: .get, parameters: params)
+            .responseDecodable(of: MemberMO.self) {
+                completion($0.result)
+                print($0.result)
+                
+            }
+    }
     
     func fetchRunningInfo(completion: @escaping (Result<[RunningInfo], AFError>) -> Void) {
         
@@ -193,10 +257,10 @@ extension ProfileView {
 }
 
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ProfileView()
-        }
-    }
-}
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            ProfileView()
+//        }
+//    }
+//}

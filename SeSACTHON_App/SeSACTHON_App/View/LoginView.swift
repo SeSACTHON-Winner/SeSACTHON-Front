@@ -72,7 +72,6 @@ struct AppleSigninButton : View{
                     default:
                         break
                     }
-                    print("dd")
                     UserDefaults.standard.setValue(true, forKey: "login")
                     isLogin = true
                 case .failure(let error):
