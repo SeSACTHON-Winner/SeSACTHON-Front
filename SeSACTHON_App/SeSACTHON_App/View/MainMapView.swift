@@ -135,12 +135,17 @@ extension MainMapView {
         // API가 완성되면 여기에 호출 코드 작성
         
         self.dangerArr.removeAll()
-        AF.request("http://35.72.228.224/adaStudy/dangerInfo.php")
+        AF.request("http://35.72.228.224/sesacthon/dangerInfo.php")
             .responseDecodable(of: [DangerInfoMO].self) { response in
                 guard let dangerInfoArray = response.value else {
                     print("Failed to decode dangerInfoArray")
                     return
                 }
+                
+                for mo in response.value! {
+                    print("mo : \(mo)")
+                }
+                
                 print(response.value?.first?.latitude)
                 dangerArr = response.value!
                 print(dangerArr.description)

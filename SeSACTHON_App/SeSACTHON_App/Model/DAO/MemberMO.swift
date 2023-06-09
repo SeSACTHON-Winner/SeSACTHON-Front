@@ -7,12 +7,12 @@
 
 import Foundation
 
-class MemberMO: ObservableObject, Identifiable {
+class MemberMO: ObservableObject, Identifiable, Codable {
     
-    @Published var id: Int
-    @Published var uid: String
-    @Published var nickname: String
-    @Published var totalCount: Int
+    var id: Int
+    var uid: String
+    var nickname: String
+    var totalCount: Int
     
     
     init(id: Int, uid: String, nickname: String, totalCount: Int) {
