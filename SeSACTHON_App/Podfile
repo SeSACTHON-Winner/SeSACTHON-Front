@@ -7,5 +7,6 @@ target 'SeSACTHON_App' do
 
   # Pods for SeSACTHON_App
   pod 'Alamofire'
+  pod 'Kingfisher', '~> 7.0'  
 
 end

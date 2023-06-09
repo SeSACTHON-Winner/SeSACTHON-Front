@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Kingfisher
+import Alamofire
 
 struct RunEndView: View {
     @Binding var swpSelection: Int
     @State var courseName: String = "효자공원 철길 코스"
+    @State var runningArr: [RunningInfo] = []
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -89,26 +93,71 @@ struct RunEndView: View {
                         .font(.system(size: 16, weight: .heavy))
                         .padding(.leading, 24)
                         .padding(.vertical, 12)
-                    RunRecentView()
-                    
-                    RunRecentView()
+                    ForEach(runningArr, id: \.self) { runninginfo in
+                        RunRecentView(runData: runninginfo)
+                    }
                 }
                 
             }
             
-        }.edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            fetchRunningInfo { result in
+                switch result {
+                case .success(let data):
+                    runningArr = data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
+        }
     }
 }
 
+extension RunEndView {
+    func fetchRunningInfo(completion: @escaping (Result<[RunningInfo], AFError>) -> Void) {
+        
+        let url = "http://35.72.228.224/sesacthon/runningInfo.php"
+        let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+        
+        AF.request(url, method: .get, parameters: params)
+            .responseDecodable(of: [RunningInfo].self) {
+                completion($0.result)
+                print($0.result)
+            }
+    }
+}
+
+
 struct RunRecentView: View {
+    
+    @State var runData: RunningInfo
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
-                Image(systemName: "map").resizable().frame(width: 50, height: 50).background(.black).cornerRadius(5)
+                // MARK: - Image 교체
+                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
+                    .placeholder { //플레이스 홀더 설정
+                        Image(systemName: "map")
+                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                    .onSuccess {r in //성공
+                        print("succes: \(r)")
+                    }
+                    .onFailure { e in //실패
+                        print("failure: \(e)")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 50, height: 50)
+                    .background(.black)
+                    .cornerRadius(5)
                 VStack(alignment: .leading, spacing: 8){
-                    Text("2023.03.12")
+                    Text(runData.date)
                         .font(.system(size: 12, weight: .medium)).opacity(0.3)
-                    Text("효자시장 우동전용 산책길")
+                    Text(runData.runningName)
                         .font(.system(size: 14, weight: .medium)).opacity(0.5)
                 }
                 Spacer()
@@ -116,25 +165,25 @@ struct RunRecentView: View {
             }
             HStack(spacing: 26.0) {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("1.24")
+                    Text(String(format: "%.2f", runData.distance))
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Km")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("15:07")
+                    Text(runData.time)
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Time")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("203")
+                    Text("\(runData.cal)")
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Kcal")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("2")
+                    Text("\(runData.helpCount)")
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("도움")
                         .font(.system(size: 12, weight: .regular))
