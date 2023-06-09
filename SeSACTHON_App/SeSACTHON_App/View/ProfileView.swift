@@ -6,101 +6,124 @@
 //
 
 import SwiftUI
+import Alamofire
 
 struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var nickname = ""
     @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4)
+    @State var runningArr: [RunningInfo] = []
     
     var body: some View {
-        VStack(spacing: 0) {
-            Color.black.frame(height: 50)
-            HStack {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.backward")
+            VStack(spacing: 0) {
+                Color.black.frame(height: 50)
+                HStack {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 10, height: 16)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 10)
+                    }
+                    Text("PROFILE")
+                        .font(.custom("SF Pro Text", size: 32))
+                        .foregroundColor(.white)
+                        .italic()
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.bottom)
+                .padding(.horizontal)
+                .background(.black)
+                Color.black.frame(height: 20)
+                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                    .shadow(radius: 3, x: 0 ,y: 4)
+                HStack(spacing: 29) {
+                    Image(systemName: "person.crop.circle.fill")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 10, height: 16)
-                        .foregroundColor(.white)
-                        .padding(.trailing, 10)
+                        .frame(width: 126)
+                        .padding(.leading, 30)
+                        .foregroundColor(.gray)
+                    VStack {
+                        HStack {
+                            
+                            Image(systemName: "highlighter")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16)
+                            TextField(member.nickname, text: $nickname)
+                                .font(.system(size: 24))
+                                .fontWeight(.bold)
+                            
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        HStack {
+                            Text("총 도움")
+                                .font(.system(size: 18))
+                                .fontWeight(.bold)
+                            Image(systemName: "\(member.totalCount).circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 21)
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
                 }
-                Text("PROFILE")
-                    .font(.custom("SF Pro Text", size: 32))
-                    .foregroundColor(.white)
-                    .italic()
+                .padding(.top, 69)
+                .padding(.bottom, 60)
+                
+                HStack {
+                    Text("최근 활동")
+                    Spacer()
+                }
+                .padding(.leading, 30)
+                .padding(.vertical)
+                
+                ScrollView {
+                    
+                    ForEach(runningArr, id: \.self) { runninginfo in
+                        RunRecentView(runData: runninginfo)
+                    }
+                }
                 Spacer()
             }
-            .frame(maxWidth: .infinity)
-            .padding(.bottom)
-            .padding(.horizontal)
-            .background(.black)
-            Color.black.frame(height: 20)
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                .shadow(radius: 3, x: 0 ,y: 4)
-            HStack(spacing: 29) {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 126)
-                    .padding(.leading, 30)
-                    .foregroundColor(.gray)
-                VStack {
-                    HStack {
-                        
-                        Image(systemName: "highlighter")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 16)
-                        TextField(member.nickname, text: $nickname)
-                            .font(.system(size: 24))
-                            .fontWeight(.bold)
-                        
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-                    HStack {
-                        Text("총 도움")
-                            .font(.system(size: 18))
-                            .fontWeight(.bold)
-                        Image(systemName: "\(member.totalCount).circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 21)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
-            .padding(.top, 69)
-            .padding(.bottom, 60)
-            
-            HStack {
-                Text("최근 활동")
-                Spacer()
-            }
-            .padding(.leading, 30)
-            .padding(.vertical)
-            
-            ScrollView {
-                RunRecentView()
-                RunRecentView()
-                RunRecentView()
-                RunRecentView()
-            }
-            Spacer()
-        }
         .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
         .onAppear {
             self.member = fetchMember()
+            fetchRunningInfo { result in
+                switch result {
+                case .success(let data):
+                    runningArr = data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
         }
     }
 }
 
 extension ProfileView {
+    
+    func fetchRunningInfo(completion: @escaping (Result<[RunningInfo], AFError>) -> Void) {
+        
+        let url = "http://35.72.228.224/sesacthon/runningInfo.php"
+        let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+        
+        AF.request(url, method: .get, parameters: params)
+            .responseDecodable(of: [RunningInfo].self) {
+                completion($0.result)
+                print($0.result)
+            }
+    }
     
     private func customListItem(profileImage: Image) -> some View {
         

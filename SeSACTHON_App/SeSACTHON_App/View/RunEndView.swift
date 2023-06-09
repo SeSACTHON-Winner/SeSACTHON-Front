@@ -89,9 +89,9 @@ struct RunEndView: View {
                         .font(.system(size: 16, weight: .heavy))
                         .padding(.leading, 24)
                         .padding(.vertical, 12)
-                    RunRecentView()
+//                    RunRecentView(runData: RunningInfo.init(id: 1, uid: "test", date: <#T##Date#>, runningName: <#T##String#>, distance: <#T##Double#>, pace: <#T##String#>, time: <#T##String#>, helpCount: <#T##Int#>, picturePath: <#T##String#>))
                     
-                    RunRecentView()
+//                    RunRecentView()
                 }
                 
             }
@@ -101,14 +101,17 @@ struct RunEndView: View {
 }
 
 struct RunRecentView: View {
+    
+    @State var runData: RunningInfo
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(spacing: 12) {
                 Image(systemName: "map").resizable().frame(width: 50, height: 50).background(.black).cornerRadius(5)
                 VStack(alignment: .leading, spacing: 8){
-                    Text("2023.03.12")
+                    Text(runData.date)
                         .font(.system(size: 12, weight: .medium)).opacity(0.3)
-                    Text("효자시장 우동전용 산책길")
+                    Text(runData.runningName)
                         .font(.system(size: 14, weight: .medium)).opacity(0.5)
                 }
                 Spacer()
@@ -116,25 +119,25 @@ struct RunRecentView: View {
             }
             HStack(spacing: 26.0) {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("1.24")
+                    Text(String(format: "%.2f", runData.distance))
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Km")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("15:07")
+                    Text(runData.time)
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Time")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("203")
+                    Text("\(runData.cal)")
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("Kcal")
                         .font(.system(size: 12, weight: .regular))
                 }
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("2")
+                    Text("\(runData.helpCount)")
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("도움")
                         .font(.system(size: 12, weight: .regular))
