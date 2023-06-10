@@ -13,10 +13,12 @@ struct CustomCameraView: View {
     var body: some View {
         ZStack {
             if let previewImage = viewModel.recentImage {
-                ZStack {
+                VStack {
                     Image(uiImage: previewImage)
                         .resizable()
+                        .frame(width: 260, height: 260)
                         .aspectRatio(contentMode: .fit)
+                        
                     SelectStatusView()
                 }
             } else {
@@ -63,61 +65,76 @@ struct CustomCameraView: View {
 
 struct CameraView_Previews: PreviewProvider {
     static var previews: some View {
-//        CustomCameraView()
+//       CustomCameraView()
         SelectStatusView()
     }
 }
 
 
 enum Status: String, CaseIterable {
-    case gradient = "경사도, 턱 높음"
-    case water = "좁은 길"
-    case road = "자연재해"
-    case natural = "공사중"
+    case gradient = "🎢 경사도"
+    case narrow = "⛔ 좁은 길"
+    case road = "↕️ 높은 단차"
+    case natural = "🚧 공사중"
 }
 
 struct SelectStatusView: View {
-    @State var selection: Status?
-    var gridItem = [ GridItem(.flexible(), spacing: 10) ]
+    @State var selection: Status = .gradient
+    @ObservedObject var locationManager = LocationDataManager()
+
+    var gridItem = [ GridItem(.flexible(), spacing: 8) ]
     var body: some View {
         VStack {
+            HStack {
+                Text(locationManager.address)
+                    .foregroundColor(.white)
+                    .font(.system(size: 17, weight: .regular))
+            }
+            .foregroundColor(.white)
+            .frame(height: 96)
+            .frame(maxWidth: .infinity)
+            .background(Color.black)
+            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+            
             Spacer()
             LazyVGrid(columns: gridItem) {
                 ForEach(Status.allCases, id:  \.rawValue) { item in
-                    Text(selection == item ? "🍎" + item.rawValue :  "🥚" + item.rawValue)
+                    Text(item.rawValue)
+                        .font(.system(size: 16, weight: selection == item ? .bold : .regular))
                         .frame(height: 60)
                         .onTapGesture {
                             selection = item
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(selection == item ? .black : .black.opacity(0.5))
                 }
-                
-                .frame(maxWidth: .infinity, alignment: .center)
-                .background(.ultraThinMaterial)
+                .foregroundColor(.white)
                 .cornerRadius(16)
-                
+                .padding(.horizontal, 96)
             }
-            .shadow(color: .black.opacity(0.15) ,radius: 4, x: 2, y: 2)
-            .padding(.bottom, 100)
+            //.shadow(color: .black.opacity(0.15) ,radius: 4, x: 2, y: 2)
+            .padding(.bottom, 96)
             
-            HStack {
+            HStack(spacing: 32) {
                 Button {
-                    //pop? binding
+                    //TODO: pop? binding으로 이전뷰로 넘기기
                 } label: {
-                    Text("러닝하기")
+                    Image("camerabig")
+                        .resizable()
                 }
-                .frame(width: 100, height: 80)
-                .background(.ultraThinMaterial)
+                .frame(width: 120, height: 120)
                 
                 NavigationLink {
-                    ReportSubmitView()
+                    ReportSubmitView(selection: $selection)
                 } label: {
-                    Text("제보하기")
+                    Image("send") .resizable()
                 }
-                .frame(width: 100, height: 80)
-                .background(.ultraThinMaterial)
+                .frame(width: 120, height: 120)
             }
-            .padding(.bottom, 80)
-        }
-        .padding(.horizontal, 60)
+            .padding(.bottom, 93)
+            
+        }.edgesIgnoringSafeArea(.all)
+       
     }
 }
