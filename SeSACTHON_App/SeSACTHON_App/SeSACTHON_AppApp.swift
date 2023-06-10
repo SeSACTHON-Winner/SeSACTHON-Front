@@ -22,8 +22,14 @@ struct SeSACTHON_AppApp: App {
         WindowGroup {
             if UserDefaults.standard.bool(forKey: "login") {
                 HomeView()
+                    .onAppear {
+                        sleep(1)
+                    }
             } else {
                 LoginView()
+                    .onAppear {
+                        sleep(1)
+                    }
             }
             
         }
