@@ -17,7 +17,7 @@ struct LoginView: View {
         ZStack {
             Color.clear
                 .overlay {
-                    Image("LoadingImg")
+                    Image("LoginScreen")
                 }
             VStack {
                 Spacer()

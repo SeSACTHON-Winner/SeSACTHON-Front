@@ -13,7 +13,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIImageName</key>
-		<string>LoadingImg</string>
+		<string>LaunchScreen</string>
 	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
