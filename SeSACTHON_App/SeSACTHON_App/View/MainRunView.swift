@@ -35,10 +35,15 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection)
-                //RootView(region: $region)
+                MainRunningView(swpSelection: $swpSelection, workout: vm.newWorkout)
+                    .onAppear {
+                        Task {
+                            await vm.startWorkout(type: .running)
+                        }
+                    }
             case 3:
-                RunEndView(swpSelection: $swpSelection)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout!)
+                
             default:
                 EmptyView()
             }

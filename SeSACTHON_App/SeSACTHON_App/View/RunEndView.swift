@@ -13,7 +13,9 @@ struct RunEndView: View {
     @Binding var swpSelection: Int
     @State var courseName: String = "효자공원 철길 코스"
     @State var runningArr: [RunningInfo] = []
-    
+    @EnvironmentObject var vm: WorkoutViewModel
+    var workout: Workout
+
     var body: some View {
         ScrollView {
             VStack {
@@ -22,49 +24,57 @@ struct RunEndView: View {
                     TopProfileView(title: "FINISH")
                         .foregroundColor(.blue)
                     Spacer()
-                    Text("2023년 2월 5일")
+                    Text(formatDate(workout.date))
                         .font(.system(size: 16, weight: .medium))
                         .multilineTextAlignment(.center)
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {
-                            Text("15.1km")
-                                .font(.system(size: 64, weight: .black)).italic()
+                            //Text("15.1km")
+                          
+                            Text("\(Measurement(value: workout.distance, unit: UnitLength.meters).formatted())")
+                            
+                                .font(.system(size: 14, weight: .black)).italic()
                                 .frame(alignment: .leading)
                                 .foregroundColor(Color("MainColor"))
+                                .onAppear {
+                                    print((Measurement(value: workout.distance, unit: UnitLength.meters).converted(to: UnitLength.kilometers)))
+                                }
                             Spacer().frame(height: 20)
                             HStack(spacing: 20) {
                                 Text("시간")
                                     .font(.system(size: 12, weight: .medium))
                                     .frame(width: 60, alignment: .leading)
-                                Text("14:13:22")
+                                //Text("14:13:22")
+                                Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("소모 칼로리")
                                     .font(.system(size: 12, weight: .medium))                 .multilineTextAlignment(.leading)
                                     .frame(width: 60, alignment: .leading)
-                                Text("321 kcal")
+                                Text("00 kcal")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("평균 페이스")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                 
-                                Text("6’12”")
+                                //TODO: Text("6’12”") 수정
+                                Text("\(Measurement(value: workout.duration / workout.distance , unit: UnitSpeed.kilometersPerHour).formatted())")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("도움 개수")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                 
-                                Text("2")
+                                Text("0")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("총 도움")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                 
-                                Text("13")
+                                Text("0")
                                     .font(.system(size: 24, weight: .bold)).italic()
                                     .foregroundColor(Color("MainColor"))
                                 
@@ -112,6 +122,24 @@ struct RunEndView: View {
                 }
             }
             
+        }
+    }
+    
+    func formatDate(_ date: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy년 M월 d일"
+            return dateFormatter.string(from: date)
+    }
+    func formatDuration(_ duration: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = [.pad]
+        
+        if let formattedDuration = formatter.string(from: duration) {
+            return formattedDuration
+        } else {
+            return ""
         }
     }
 }
@@ -203,6 +231,6 @@ struct RunRecentView: View {
 
 struct RunEndView_Previews: PreviewProvider {
     static var previews: some View {
-        RunEndView(swpSelection: .constant(2))
+        RunEndView(swpSelection: .constant(2), workout: .example)
     }
 }

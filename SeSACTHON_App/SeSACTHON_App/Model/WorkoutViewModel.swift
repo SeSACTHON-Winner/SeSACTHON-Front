@@ -338,7 +338,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         timer?.cancel()
         recording = false
         
-        let workout = newWorkout
+        var workout = newWorkout
         workouts.append(workout)
         updatePolylines()
         filterWorkouts()

@@ -39,16 +39,20 @@ struct RootView: View {
             
             VStack(spacing: 10) {
                 Spacer()
-                if let workout = vm.selectedWorkout { // 기록이 이루어지면 다른 "WorkoutBar"를 표시
-                    WorkoutBar(workout: workout, new: false)
+                if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                   
+                    WorkoutBar(workout: workout, new: false).onAppear {
+                        print("false workbar")
+                    }
                 }
                 
                 if swpSelection == 2 {
                     FloatingButtons()
-                    
                 }
                 if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                    WorkoutBar(workout: vm.newWorkout, new: true)
+                    WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                        print("true workbar")
+                    }
                 }
             }
             .padding(10)

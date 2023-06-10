@@ -17,17 +17,16 @@ struct FloatingButtons: View {
     
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Button {
                 updateTrackingMode()
             } label: {
-                Image(systemName: trackingModeImage)
+                Image(systemName: trackingModeImage).resizable()
                     .frame(width: 52, height: 52)
                     .foregroundColor(.black).opacity(0.8)
                     .scaleEffect(vm.scale)
-            }
-            HStack(spacing: 0) {
-                
+            }.padding(.trailing, 140)
+            
                 Menu {
                     Picker("Date", selection: $vm.workoutDate) {
                         Text("All")
@@ -57,15 +56,15 @@ struct FloatingButtons: View {
                 } label: {
                     if vm.loadingWorkouts {
                         ProgressView()
-                            .frame(width: SIZE, height: SIZE)
+                            .frame(width: 52, height: 52)
                     } else if !vm.workouts.isEmpty {
                         Image(systemName: "line.3.horizontal.decrease.circle" + (vm.workoutType == nil && vm.workoutDate == nil ? "" : ".fill"))
-                            .frame(width: SIZE, height: SIZE)
+                            .resizable()
+                            .frame(width: 52, height: 52)
                     }
-                }
-                Divider().frame(height: SIZE)
-                
-                if vm.recording {
+                }.padding(.trailing, 140)
+                .padding(.bottom, 240)
+               /* if vm.recording {
                     Button {
                         showStopConfirmation = true
                     } label: {
@@ -89,22 +88,22 @@ struct FloatingButtons: View {
                         }
                     }
                 } else {
-                    Button {
-                        Task {
-                            await vm.startWorkout(type: .running)
-                        }
-                    } label: {     
-                        Text("Go")
-                            .font(.system(size: 32, weight: .black))
-                            .italic()
-                            .foregroundColor(.white)
-                            .frame(width: 120, height: 120)
-                            .background(.black)
-                            .cornerRadius(60)
-                    }
+//                    Button {
+//                        Task {
+//                            await vm.startWorkout(type: .running)
+//                        }
+//                    } label: {
+//                        Text("Go")
+//                            .font(.system(size: 32, weight: .black))
+//                            .italic()
+//                            .foregroundColor(.white)
+//                            .frame(width: 120, height: 120)
+//                            .background(.black)
+//                            .cornerRadius(60)
+//                    }
                    
-                }
-            }            
+                }*/
+                     
         }
     }
     
