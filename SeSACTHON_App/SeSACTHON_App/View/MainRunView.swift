@@ -12,16 +12,15 @@ struct MainRunView: View {
     @State private var swpSelection = 0
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-    
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     var body: some View {
         ZStack {
             switch swpSelection {
             case 0, 1, 2:
                 VStack(spacing: 0) {
-                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                        .ignoresSafeArea()
-                        
+//                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+//                        .ignoresSafeArea()
+                    RootView(region: $region)
                 }
             default:
                 EmptyView()
@@ -34,7 +33,7 @@ struct MainRunView: View {
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
                 //MainRunningView(swpSelection: $swpSelection)
-                RootView()
+                RootView(region: $region)
             case 3:
                 RunEndView(swpSelection: $swpSelection)
             default:

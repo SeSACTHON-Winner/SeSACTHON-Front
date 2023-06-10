@@ -9,15 +9,22 @@
 import SwiftUI
 import CoreLocation
 
+import MapKit
+
 struct RootView: View {
     @Environment(\.scenePhase) var scenePhase
     @StateObject var vm = WorkoutViewModel()
     @AppStorage("launchedBefore") var launchedBefore = false
     @State var welcome = false
     
+    
+    @Binding var region : MKCoordinateRegion
+    @State var userTrackingMode: MapUserTrackingMode = .follow
+    
     var body: some View {
         ZStack(alignment: .bottom) {
-            MapView()
+            MapView(region: $region)
+           // CustomMapView(userTrackingMode: $userTrackingMode, region: $region)
                 .ignoresSafeArea()
             
             VStack(spacing: 10) {
