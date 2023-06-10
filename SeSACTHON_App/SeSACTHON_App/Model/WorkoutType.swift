@@ -9,14 +9,11 @@ import HealthKit
 import SwiftUI
 
 enum WorkoutType: String, CaseIterable {
-    case walk = "Walk"
     case run = "Run"
     case other = "Other"
     
     var colour: Color {
         switch self {
-        case .walk:
-            return .green
         case .run:
             return .red
         case .other:
@@ -26,8 +23,6 @@ enum WorkoutType: String, CaseIterable {
     
     var hkType: HKWorkoutActivityType {
         switch self {
-        case .walk:
-            return .walking
         case .run:
             return .running
         default:
@@ -37,8 +32,6 @@ enum WorkoutType: String, CaseIterable {
     
     init(hkType: HKWorkoutActivityType) {
         switch hkType {
-        case .walking:
-            self = .walk
         case .running:
             self = .run
         default:

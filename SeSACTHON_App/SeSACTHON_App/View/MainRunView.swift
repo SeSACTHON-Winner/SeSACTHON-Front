@@ -13,6 +13,9 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    
+    @StateObject var vm = WorkoutViewModel()
+
     var body: some View {
         ZStack {
             switch swpSelection {
@@ -20,7 +23,7 @@ struct MainRunView: View {
                 VStack(spacing: 0) {
 //                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
 //                        .ignoresSafeArea()
-                    RootView(region: $region)
+                    RootView(swpSelection: $swpSelection, region: $region)
                 }
             default:
                 EmptyView()
@@ -32,8 +35,8 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                //MainRunningView(swpSelection: $swpSelection)
-                RootView(region: $region)
+                MainRunningView(swpSelection: $swpSelection)
+                //RootView(region: $region)
             case 3:
                 RunEndView(swpSelection: $swpSelection)
             default:
@@ -44,6 +47,7 @@ struct MainRunView: View {
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
         }
+        .environmentObject(vm)
     }
 }
 
@@ -136,11 +140,14 @@ struct MainRunHomeView: View {
     @Binding var swpSelection: Int
     @ObservedObject var locationManager = LocationDataManager()
     
+    @EnvironmentObject var vm: WorkoutViewModel
+
+    
     var body: some View {
         ZStack {
             
-            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                .ignoresSafeArea()
+//            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+//                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 Color.black.frame(height: 50)
@@ -241,15 +248,15 @@ struct MainRunHomeView: View {
                             .cornerRadius(60)
                     }
                     
-                    Button {
-                        self.userTrackingMode = .follow
-                    } label: {
-                        Image("RunLocation")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 52, height: 52)
-                            .shadow(radius: 2)
-                    }
+//                    Button {
+//                        self.userTrackingMode = .follow
+//                    } label: {
+//                        Image("RunLocation")
+//                            .resizable()
+//                            .foregroundColor(.black)
+//                            .frame(width: 52, height: 52)
+//                            .shadow(radius: 2)
+//                    }
                 }.padding(.bottom, 60)
             }
             

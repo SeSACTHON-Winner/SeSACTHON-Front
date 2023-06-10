@@ -13,11 +13,14 @@ import MapKit
 
 struct RootView: View {
     @Environment(\.scenePhase) var scenePhase
-    @StateObject var vm = WorkoutViewModel()
+    
+    @EnvironmentObject var vm: WorkoutViewModel
+
     @AppStorage("launchedBefore") var launchedBefore = false
     @State var welcome = false
     
-    
+    @Binding var swpSelection: Int
+
     @Binding var region : MKCoordinateRegion
     @State var userTrackingMode: MapUserTrackingMode = .follow
     
@@ -36,10 +39,14 @@ struct RootView: View {
             
             VStack(spacing: 10) {
                 Spacer()
-                if let workout = vm.selectedWorkout { // 녹음이 이루어지면 다른 "WorkoutBar"를 표시
+                if let workout = vm.selectedWorkout { // 기록이 이루어지면 다른 "WorkoutBar"를 표시
                     WorkoutBar(workout: workout, new: false)
                 }
-                FloatingButtons()
+                
+                if swpSelection == 2 {
+                    FloatingButtons()
+                    
+                }
                 if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
                     WorkoutBar(workout: vm.newWorkout, new: true)
                 }
@@ -83,7 +90,7 @@ struct RootView: View {
                 vm.updateHealthStatus()
             }
         }
-        .environmentObject(vm) // ViewModel을 환경 객체로 설정합니다.
+        //.environmentObject(vm) // ViewModel을 환경 객체로 설정합니다.
     }
 }
 
