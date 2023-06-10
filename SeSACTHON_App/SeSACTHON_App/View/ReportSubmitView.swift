@@ -8,30 +8,32 @@
 import SwiftUI
 
 struct ReportSubmitView: View {
+    @Binding var selection: Status
     var body: some View {
         VStack(spacing: 40) {
             Spacer().frame(height: 134)
             VStack {
                 Spacer()
-                Text("3") //TODO: Data 연결
+                Text("\(selection.rawValue)")
+                Text("1") //TODO: Data 연결
                     .font(.system(size: 128, weight: .black))
-                    .foregroundColor(.teal)
+                    .foregroundColor(Color("MainColor"))
                     .italic()
-                Text("무성씨는 최고의 알리미")
+                Text("첫번째 보고 감사합니다")
                 Spacer()
                 NavigationLink {
                     //TODO: 커스텀 카메라 뷰로 이동 pop으로 수정
                     MainRunView()
                 } label: {
-                    Text("다른 사진찍기")
+                    Text("새로운 보고하기")
+                        .font(.system(size: 12, weight: .medium))
+
                 }
                 .frame(width: 144, height: 32)
                 .foregroundColor(.black)
                 .background(.white)
                 .cornerRadius(16)
                 
-                Text("앨범 보기")
-                    .font(.system(size: 10, weight: .black))
                 Spacer()
             }
             .frame(minWidth: 274)
@@ -46,10 +48,9 @@ struct ReportSubmitView: View {
             } label: {
                 Text("Go Run")
                     .font(.system(size: 30, weight: .black))
-                    .foregroundColor(.teal)
+                    .foregroundColor(Color("MainColor"))
                     .italic()
                     .frame(width: 120, height: 120)
-                    .foregroundColor(.white)
                     .background(.black)
                     .cornerRadius(60)
             }
@@ -60,6 +61,6 @@ struct ReportSubmitView: View {
 
 struct ReportSubmitView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportSubmitView()
+        ReportSubmitView(selection: .constant(.gradient))
     }
 }

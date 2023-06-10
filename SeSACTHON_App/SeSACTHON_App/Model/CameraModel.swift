@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import SwiftUI
+import Photos
 
 class Camera: NSObject, ObservableObject {
     var session = AVCaptureSession()
@@ -23,8 +24,7 @@ class Camera: NSObject, ObservableObject {
     
     // 카메라 셋업 과정을 담당하는 함수,
     func setUpCamera() {
-        if let device = AVCaptureDevice.default(.builtInWideAngleCamera,
-                                                for: .video, position: .back) {
+        if let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
             do { // 카메라가 사용 가능하면 세션에 input과 output을 연결
                 videoDeviceInput = try AVCaptureDeviceInput(device: device)
                 if session.canAddInput(videoDeviceInput) {
@@ -44,6 +44,25 @@ class Camera: NSObject, ObservableObject {
     }
     
     func requestAndCheckPermissions() {
+        // 앨범 권한 상태 확인
+        let requiredAccessLevel: PHAccessLevel = .readWrite
+        PHPhotoLibrary.requestAuthorization(for: requiredAccessLevel) { authorizationStatus in
+            switch authorizationStatus {
+            case .limited:
+                print("limited authorization granted")
+            case .authorized:
+                print("authorization granted")
+                DispatchQueue.main.async { // 권한이 있는 경우에만 비동기적으로 호출
+                    self.setUpCamera()
+                }
+            default:
+                //FIXME: Implement handling for all authorizationStatus
+                print("Unimplemented")
+                
+            }
+        }
+        
+        
         // 카메라 권한 상태 확인
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .notDetermined:
