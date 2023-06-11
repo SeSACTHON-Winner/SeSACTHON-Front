@@ -15,14 +15,14 @@ struct MainRunView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
     @StateObject var vm = WorkoutViewModel()
-
+    
     var body: some View {
         ZStack {
             switch swpSelection {
             case 0, 1, 2:
                 VStack(spacing: 0) {
-//                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-//                        .ignoresSafeArea()
+                    //                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                    //                        .ignoresSafeArea()
                     RootView(swpSelection: $swpSelection, region: $region)
                 }
             default:
@@ -146,110 +146,123 @@ struct MainRunHomeView: View {
     @ObservedObject var locationManager = LocationDataManager()
     
     @EnvironmentObject var vm: WorkoutViewModel
-
+    
+    // MARK: - Camera
+    @State private var showingImagePicker = false
+    @State var pickedImage: Image?
+    enum Status: String, CaseIterable {
+        case gradient = "🎢 경사도"
+        case narrow = "⛔ 좁은 길"
+        case road = "↕️ 높은 단차"
+        case natural = "🚧 공사중"
+    }
+    @State var selection: Status = .gradient
     
     var body: some View {
-        ZStack {
-            
-//            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-//                .ignoresSafeArea()
-            
-            VStack(spacing: 0) {
-                Color.black.frame(height: 50)
-                TopProfileView(title: "RUN")
-                    .padding(.horizontal, 20)
-                    .background(.black)
+            ZStack {
                 
-                HStack {
-                    Image(systemName: "location.fill")
-                        .resizable()
-                        .foregroundColor(.blue)
-                        .frame(width: 20, height: 20)
-                    Text(locationManager.address).foregroundColor(.white)
-                        .font(.system(size: 17, weight: .regular))
-                }
-                .foregroundColor(.white)
-                .frame(height: 96)
-                .frame(maxWidth: .infinity)
-                .background(Color.black)
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                //            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+                //                .ignoresSafeArea()
                 
-                Spacer().frame(height: 80)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHGrid(rows:layout, spacing: 20) {
-                        ForEach(0...2, id: \.self) { _ in
-                            HStack {
-                                HStack(spacing: 20) {
-                                    Image(systemName: "map.fill")
-                                        .resizable()
-                                        .padding(16)
-                                        .foregroundColor(.black)
-                                        .frame(width: 82, height: 82)
-                                        .background(.white)
-                                        .cornerRadius(8)
-                                    
-                                    //TODO: 데이터 연결
-                                    VStack(alignment: .leading) {
-                                        Text("오전동")
-                                            .font(.system(size: 10, weight: .regular))
-                                        Spacer().frame(height: 16)
-                                        Text("최근 기록")
-                                            .font(.system(size: 20, weight: .semibold))
-                                        Text("3.3km 40min")
-                                            .font(.system(size: 14, weight: .regular))
-                                    }.foregroundColor(.white)
-                                    Spacer()
-                                }
-                                .padding(20)
-                            }
-                            .frame(width: 312, height: 124)
-                            .background(Color("Darkgray"))
-                            .cornerRadius(10)
-                        }
+                VStack(spacing: 0) {
+                    Color.black.frame(height: 50)
+                    TopProfileView(title: "RUN")
+                        .padding(.horizontal, 20)
+                        .background(.black)
+                    
+                    HStack {
+                        Image(systemName: "location.fill")
+                            .resizable()
+                            .foregroundColor(.blue)
+                            .frame(width: 20, height: 20)
+                        Text(locationManager.address).foregroundColor(.white)
+                            .font(.system(size: 17, weight: .regular))
                     }
-                    .padding(.horizontal, 40)
-                }
-                Spacer()
-                
-                HStack(alignment: .top, spacing: 28) {
-                    NavigationLink {
-                        CustomCameraView()
-                    } label: {
-                        Image("RunCamera")
-                            .font(.system(size: 28, weight: .black))
-                            .italic()
-                            .foregroundColor(.black)
-                            .frame(width: 52, height: 52)
-                            .cornerRadius(26)
-                            .shadow(color: .black.opacity(0.25), radius: 2)
+                    .foregroundColor(.white)
+                    .frame(height: 96)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.black)
+                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                    .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                    
+                    
+                    if let selectedImage = pickedImage {
+                        
+                        selectedImage
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .cornerRadius(10)
+                            .padding(.vertical)
+                        ForEach(Status.allCases, id:  \.rawValue) { item in
+                            Text(item.rawValue)
+                                .font(.system(size: 16, weight: selection == item ? .bold : .regular))
+                                .frame(height: 44)
+                                .onTapGesture {
+                                    selection = item
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .background(selection == item ? .black : .black.opacity(0.5))
+                                .cornerRadius(16)
+                                .padding(.bottom)
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 96)
+                        Spacer()
+                    } else {
+                        Spacer().frame(height: 80)
+                        // MARK: - 말풍선
+                        Color.black.frame(height: 100)
+                        Spacer()
                     }
                     
-                    Button {
-                        swpSelection = 1
-                    } label: {
-                        Text("Go")
-                            .font(.system(size: 32, weight: .black))
-                            .italic()
-                            .foregroundColor(.white)
-                            .frame(width: 120, height: 120)
-                            .background(.black)
-                            .cornerRadius(60)
-                    }
-                    Button {
-                        //self.userTrackingMode = .follow
-                        updateTrackingMode()
-                    } label: {
-                        Image("RunLocation")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 52, height: 52)
-                            .shadow(radius: 2)
-                    }
-                }.padding(.bottom, 60)
+                    
+                    HStack(alignment: .top, spacing: 28) {
+                        
+                        Button {
+                            self.showingImagePicker = true
+                        } label: {
+                            Image("RunCamera")
+                                .font(.system(size: 28, weight: .black))
+                                .italic()
+                                .foregroundColor(.black)
+                                .frame(width: 52, height: 52)
+                                .cornerRadius(26)
+                                .shadow(color: .black.opacity(0.25), radius: 2)
+                        }
+                        .fullScreenCover(isPresented: $showingImagePicker) {
+                            SUImagePicker(sourceType: .camera) { (image) in
+                                self.pickedImage = Image(uiImage: image)
+                                print(image)
+                            }
+                            .ignoresSafeArea()
+                        }
+ 
+                        Button {
+                            swpSelection = 1
+                        } label: {
+                            Text("Go")
+                                .font(.system(size: 32, weight: .black))
+                                .italic()
+                                .foregroundColor(.white)
+                                .frame(width: 120, height: 120)
+                                .background(.black)
+                                .cornerRadius(60)
+                        }
+                        Button {
+                            //self.userTrackingMode = .follow
+                            updateTrackingMode()
+                        } label: {
+                            Image("RunLocation")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 52, height: 52)
+                                .shadow(radius: 2)
+                        }
+                    }.padding(.bottom, 60)
+                }
+                
             }
-            
-        }
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.top)
     }

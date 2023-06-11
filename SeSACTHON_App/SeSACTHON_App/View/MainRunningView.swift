@@ -24,6 +24,18 @@ struct MainRunningView: View {
     
     let workout: Workout
     
+    
+    // MARK: - Camera
+    @State private var showingImagePicker = false
+    @State var pickedImage: Image?
+    enum Status: String, CaseIterable {
+        case gradient = "🎢 경사도"
+        case narrow = "⛔ 좁은 길"
+        case road = "↕️ 높은 단차"
+        case natural = "🚧 공사중"
+    }
+    @State var selection: Status = .gradient
+    
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
         VStack {
@@ -48,8 +60,8 @@ struct MainRunningView: View {
             .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
             
             Spacer()
-            NavigationLink {
-                CustomCameraView()
+            Button {
+                self.showingImagePicker = true
             }  label: {
                 Image("RunCamera").resizable()
                     .frame(width: 52, height: 52)
@@ -57,6 +69,13 @@ struct MainRunningView: View {
             }
             .shadow(color: .black.opacity(0.25), radius: 2)
             .padding(.bottom, 8)
+            .fullScreenCover(isPresented: $showingImagePicker) {
+                SUImagePicker(sourceType: .camera) { (image) in
+                    self.pickedImage = Image(uiImage: image)
+                    print(image)
+                }
+                .ignoresSafeArea()
+            }
             
             
             HStack(spacing: 50) {
