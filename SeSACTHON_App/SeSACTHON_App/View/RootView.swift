@@ -27,32 +27,24 @@ struct RootView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             MapView(region: $region)
-           // CustomMapView(userTrackingMode: $userTrackingMode, region: $region)
                 .ignoresSafeArea()
-            
-            VStack(spacing: 10) {
-                Blur()
-                    .ignoresSafeArea()
-                Spacer()
-                    .layoutPriority(1)
-            }
             
             VStack(spacing: 10) {
                 Spacer()
                 if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                   
                     WorkoutBar(workout: workout, new: false).onAppear {
                         print("false workbar")
                     }
                 }
                 
-                if swpSelection == 2 {
-                    FloatingButtons()
-                }
                 if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
                     WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
                         print("true workbar")
                     }
+                }
+                
+                if swpSelection == 2 {
+                    FloatingButtons()
                 }
             }
             .padding(10)

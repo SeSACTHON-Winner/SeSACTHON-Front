@@ -42,7 +42,7 @@ struct MainRunView: View {
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout!)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example)
                 
             default:
                 EmptyView()
@@ -222,13 +222,8 @@ struct MainRunHomeView: View {
                         Button {
                             self.showingImagePicker = true
                         } label: {
-                            Image("RunCamera")
-                                .font(.system(size: 28, weight: .black))
-                                .italic()
-                                .foregroundColor(.black)
+                            Image("RunCamera").resizable()
                                 .frame(width: 52, height: 52)
-                                .cornerRadius(26)
-                                .shadow(color: .black.opacity(0.25), radius: 2)
                         }
                         .fullScreenCover(isPresented: $showingImagePicker) {
                             SUImagePicker(sourceType: .camera) { (image) in
@@ -246,7 +241,7 @@ struct MainRunHomeView: View {
                                 .italic()
                                 .foregroundColor(.white)
                                 .frame(width: 120, height: 120)
-                                .background(.black)
+                                .background(Color("222222"))
                                 .cornerRadius(60)
                         }
                         Button {
@@ -255,19 +250,14 @@ struct MainRunHomeView: View {
                         } label: {
                             Image("RunLocation")
                                 .resizable()
-                                .foregroundColor(.black)
                                 .frame(width: 52, height: 52)
-                                .shadow(radius: 2)
                         }
                     }.padding(.bottom, 60)
                 }
-                
             }
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.top)
     }
-    
-    
     
     func updateTrackingMode() {
         var mode: MKUserTrackingMode {

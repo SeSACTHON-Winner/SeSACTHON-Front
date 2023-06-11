@@ -51,6 +51,7 @@ struct MainRunningView: View {
                         .font(.system(size: 48, weight: .black)).italic()
                     Spacer()
                 }.padding(.leading, 28)
+                
             }
             .foregroundColor(.white)
             .frame(height: 120)
@@ -101,8 +102,11 @@ struct MainRunningView: View {
                     if vm.recording {
                         Button {
                             stopTimer()
-                            showStopConfirmation = true
-                            
+                            //showStopConfirmation = true
+                            Task {
+                                await vm.endWorkout()
+                            }
+                            swpSelection = 3
                         } label: {
                             Text("END")
                                 .font(.system(size: 24, weight: .black))
@@ -113,19 +117,18 @@ struct MainRunningView: View {
                                 .cornerRadius(60)
                         }
                         .padding(.bottom, 60)
-                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
-                            Button("Cancel", role: .cancel) {}
-                            Button("Stop & Discard", role: .destructive) {
-                                vm.discardWorkout()
-                            }
-                            Button("Finish & Save") {
-                                Task {
-                                    await vm.endWorkout()
-                                    
-                                }
-                                swpSelection = 3
-                            }
-                        }
+//                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
+//                            Button("Cancel", role: .cancel) {}
+//                            Button("Stop & Discard", role: .destructive) {
+//                                vm.discardWorkout()
+//                            }
+//                            Button("Finish & Save") {
+//                                Task {
+//                                    await vm.endWorkout()
+//                                }
+//                                swpSelection = 3
+//                            }
+//                        }
                         
                         Button {
                             runState = "run"
@@ -159,49 +162,7 @@ struct MainRunningView: View {
                                 }
                             }
                         } .padding(.bottom, 60)
-                        
-                    }
-                    
-                  
-                    
-                    
-//                    Button {
-//                        runState = "run"
-//                        startTimer()
-//                    } label: {
-//                        ZStack {
-//                            Circle()
-//                                .foregroundColor(Color("MainColor"))
-//                                .scaleEffect(isAnimating ? 1.35 : 1.0)
-//                                .opacity(isAnimating ? 0.5 : 0)
-//
-//                            Circle()
-//                                .foregroundColor(Color("MainColor"))
-//                                .scaleEffect(isAnimating ? 1.2 : 1.0)
-//                                .opacity(isAnimating ? 0.8 : 0)
-//                            Circle()
-//                                .foregroundColor(.black)
-//                        }
-//                        .frame(width: 120, height: 120)
-//                        .overlay(
-//                            Text("RESTART")
-//                                .font(.system(size: 24, weight: .black))
-//                                .italic()
-//                                .foregroundColor(Color("MainColor"))
-//                                .frame(width: 120, height: 120)
-//                                .background(.black)
-//                                .cornerRadius(60)
-//
-//                        )
-//                        .onAppear {
-//                            withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
-//                                self.isAnimating.toggle()
-//
-//                            }
-//                        }
-//                    }
-//                    .padding(.bottom, 60)
-                    
+                     }
                 }
             }
             .onAppear {
