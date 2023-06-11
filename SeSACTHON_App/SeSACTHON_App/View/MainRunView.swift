@@ -214,22 +214,6 @@ struct MainRunHomeView: View {
                 
                 HStack(alignment: .top, spacing: 28) {
                     NavigationLink {
-                        //                        CustomCameraView()
-                    } label: {
-                        Image("RunSetting")
-                            .font(.system(size: 28, weight: .black))
-                            .italic()
-                            .foregroundColor(.black)
-                            .frame(width: 52, height: 52)
-                            .cornerRadius(26)
-                            .shadow(color: .black.opacity(0.25), radius: 2)
-                    }.padding(.bottom, 14)
-                    Spacer().frame(width: 120)
-                    Spacer().frame(width: 52)
-                }
-                
-                HStack(alignment: .top, spacing: 28) {
-                    NavigationLink {
                         CustomCameraView()
                     } label: {
                         Image("RunCamera")
@@ -252,16 +236,16 @@ struct MainRunHomeView: View {
                             .background(.black)
                             .cornerRadius(60)
                     }
-                    
-//                    Button {
-//                        self.userTrackingMode = .follow
-//                    } label: {
-//                        Image("RunLocation")
-//                            .resizable()
-//                            .foregroundColor(.black)
-//                            .frame(width: 52, height: 52)
-//                            .shadow(radius: 2)
-//                    }
+                    Button {
+                        //self.userTrackingMode = .follow
+                        updateTrackingMode()
+                    } label: {
+                        Image("RunLocation")
+                            .resizable()
+                            .foregroundColor(.black)
+                            .frame(width: 52, height: 52)
+                            .shadow(radius: 2)
+                    }
                 }.padding(.bottom, 60)
             }
             
@@ -269,6 +253,35 @@ struct MainRunHomeView: View {
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.top)
     }
+    
+    
+    
+    func updateTrackingMode() {
+        var mode: MKUserTrackingMode {
+            switch vm.trackingMode {
+            case .none:
+                return .follow
+            case .follow:
+                return .followWithHeading
+            default:
+                return .none
+            }
+        }
+        //ViewModel의 updateTrackingMode() 함수를 호출하고 계산된 "mode" 변수를 전달합니다.
+        vm.updateTrackingMode(mode)
+    }
+    
+    var trackingModeImage: String {
+        switch vm.trackingMode {
+        case .none:
+            return "location.circle"
+        case .follow:
+            return "location.circle.fill"
+        default:
+            return "location.north.line.fill"
+        }
+    }
+    
 }
 
 struct MainRunView_Previews: PreviewProvider {

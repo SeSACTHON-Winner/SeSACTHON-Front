@@ -11,7 +11,7 @@ import Alamofire
 
 struct RunEndView: View {
     @Binding var swpSelection: Int
-    @State var courseName: String = "효자공원 철길 코스"
+    @State var courseName: String = ""
     @State var runningArr: [RunningInfo] = []
     @EnvironmentObject var vm: WorkoutViewModel
     var workout: Workout
@@ -19,27 +19,28 @@ struct RunEndView: View {
     var body: some View {
         ScrollView {
             VStack {
-                VStack(alignment: .leading){
+                VStack {
                     Spacer().frame(height: 60)
                     TopProfileView(title: "FINISH")
                         .foregroundColor(.blue)
                     Spacer()
-                    Text(formatDate(workout.date))
-                        .font(.system(size: 16, weight: .medium))
+                    HStack(alignment: .center) {
+                        Text(formatDate(workout.date))
+                            .font(.system(size: 16, weight: .medium))
                         .multilineTextAlignment(.center)
+                        
+                    }
                     HStack {
                         VStack(alignment: .leading, spacing: 20) {
                             //Text("15.1km")
-                          
                             Text("\(Measurement(value: workout.distance, unit: UnitLength.meters).formatted())")
-                            
-                                .font(.system(size: 14, weight: .black)).italic()
+                                .font(.system(size: 64, weight: .black)).italic()
                                 .frame(alignment: .leading)
                                 .foregroundColor(Color("MainColor"))
                                 .onAppear {
                                     print((Measurement(value: workout.distance, unit: UnitLength.meters).converted(to: UnitLength.kilometers)))
-                                }
-                            Spacer().frame(height: 20)
+                                } //TODO: 코드 분석,,
+                            Spacer().frame(height: 12)
                             HStack(spacing: 20) {
                                 Text("시간")
                                     .font(.system(size: 12, weight: .medium))
@@ -60,7 +61,7 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                 
                                 //TODO: Text("6’12”") 수정
-                                Text("\(Measurement(value: workout.duration / workout.distance , unit: UnitSpeed.kilometersPerHour).formatted())")
+                                Text("\(Measurement(value: workout.distance / workout.duration, unit: UnitSpeed.metersPerSecond).formatted())")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
@@ -77,15 +78,16 @@ struct RunEndView: View {
                                 Text("0")
                                     .font(.system(size: 24, weight: .bold)).italic()
                                     .foregroundColor(Color("MainColor"))
-                                
                             }
-                            
                         }
                         Spacer()
                     }
                     Spacer()
-                    TextField("hi", text: $courseName)
-                    
+                    HStack {
+                        Text("시작 - \(workout.date.formattedApple())")
+                        Spacer()
+                    }
+                    TextField("코스 이름을 입력해주세요", text: $courseName)
                         .textFieldStyle(.roundedBorder)
                         .cornerRadius(10)
                         .foregroundColor(.black)
@@ -93,7 +95,7 @@ struct RunEndView: View {
                 }
                 .padding(.horizontal, 28)
                 .foregroundColor(.white)
-                .frame(maxHeight: 568)
+                .frame(maxHeight: 580)
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)

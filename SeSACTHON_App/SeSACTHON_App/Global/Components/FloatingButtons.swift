@@ -14,7 +14,6 @@ struct FloatingButtons: View {
     @State var showWorkoutTypeChoice = false
     @State var showStopConfirmation = false
     @State var showFilterView = false
-    
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,48 +21,48 @@ struct FloatingButtons: View {
                 updateTrackingMode()
             } label: {
                 Image(systemName: trackingModeImage).resizable()
-                    .frame(width: 52, height: 52)
+                    .frame(width: 42, height: 42)
                     .foregroundColor(.black).opacity(0.8)
                     .scaleEffect(vm.scale)
-            }.padding(.trailing, 140)
+            }.padding(.trailing, 60)
             
-                Menu {
-                    Picker("Date", selection: $vm.workoutDate) {
-                        Text("All")
-                            .tag(nil as WorkoutDate?)
-                        ForEach(WorkoutDate.allCases.reversed(), id: \.self) { type in
-                            Text(type.rawValue)
-                                .tag(type as WorkoutDate?)
+            Menu {
+                Picker("Date", selection: $vm.workoutDate) {
+                    Text("All")
+                        .tag(nil as WorkoutDate?)
+                    ForEach(WorkoutDate.allCases.reversed(), id: \.self) { type in
+                        Text(type.rawValue)
+                            .tag(type as WorkoutDate?)
+                    }
+                }
+                .pickerStyle(.menu)
+                
+                Picker("Type", selection: $vm.workoutType) {
+                    Text("All")
+                        .tag(nil as WorkoutType?)
+                    ForEach(WorkoutType.allCases.reversed(), id: \.self) { type in
+                        Label {
+                            Text(type.rawValue + "s")
+                        } icon: {
+                            Image(uiImage: UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(hierarchicalColor: UIColor(type.colour)))!)
                         }
+                        .tag(type as WorkoutType?)
                     }
-                    .pickerStyle(.menu)
-                    
-                    Picker("Type", selection: $vm.workoutType) {
-                        Text("All")
-                            .tag(nil as WorkoutType?)
-                        ForEach(WorkoutType.allCases.reversed(), id: \.self) { type in
-                            Label {
-                                Text(type.rawValue + "s")
-                            } icon: {
-                                Image(uiImage: UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(hierarchicalColor: UIColor(type.colour)))!)
-                            }
-                            .tag(type as WorkoutType?)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Text("Filter Workouts")
-                } label: {
-                    if vm.loadingWorkouts {
-                        ProgressView()
-                            .frame(width: 52, height: 52)
-                    } else if !vm.workouts.isEmpty {
-                        Image(systemName: "line.3.horizontal.decrease.circle" + (vm.workoutType == nil && vm.workoutDate == nil ? "" : ".fill"))
-                            .resizable()
-                            .frame(width: 52, height: 52)
-                    }
-                }.padding(.trailing, 140)
-                .padding(.bottom, 240)
+                }
+                .pickerStyle(.menu)
+                
+                Text("Filter Workouts")
+            } label: {
+                if vm.loadingWorkouts {
+                    ProgressView()
+                        .frame(width: 42, height: 42)
+                } else if !vm.workouts.isEmpty {
+                    Image(systemName: "line.3.horizontal.decrease.circle" + (vm.workoutType == nil && vm.workoutDate == nil ? "" : ".fill"))
+                        .resizable()
+                        .frame(width: 42, height: 42)
+                }
+            }.padding(.trailing, 320)
+            .padding(.bottom, 100)
                /* if vm.recording {
                     Button {
                         showStopConfirmation = true

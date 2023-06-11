@@ -33,7 +33,8 @@ struct MainRunningView: View {
                     // 기존 timer
                     // Text("\(formattedTime(time))")
                     //workout timer Version
-                    Text(DateComponentsFormatter().string(from: workout.duration) ?? "")
+                    //Text(DateComponentsFormatter().string(from: workout.duration) ?? "")
+                    Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 48, weight: .black)).italic()
                     Spacer()
@@ -50,13 +51,8 @@ struct MainRunningView: View {
             NavigationLink {
                 CustomCameraView()
             }  label: {
-                Image(systemName: "bell.fill")
-                    .font(.system(size: 28, weight: .black))
-                    .italic()
-                    .foregroundColor(.black)
+                Image("RunCamera").resizable()
                     .frame(width: 52, height: 52)
-                    .background(Color("MainColor"))
-                    .cornerRadius(26)
                 
             }
             .shadow(color: .black.opacity(0.25), radius: 2)
@@ -98,7 +94,6 @@ struct MainRunningView: View {
                             Button("Cancel", role: .cancel) {}
                             Button("Stop & Discard", role: .destructive) {
                                 vm.discardWorkout()
-                                
                             }
                             Button("Finish & Save") {
                                 Task {
