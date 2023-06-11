@@ -14,7 +14,8 @@ struct TopProfileView: View {
     @Environment(\.dismiss) private var dismiss
     @State var title = ""
     
-    
+    @EnvironmentObject var vm: WorkoutViewModel
+
     var body: some View {
         
         HStack {
@@ -47,6 +48,10 @@ struct TopProfileView: View {
                 .frame(width: 34, height: 34)
                 .padding(.leading)
                 .foregroundColor(.white)
+            
+                .onTapGesture {
+                    vm.showRunListView = true
+                }
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom)

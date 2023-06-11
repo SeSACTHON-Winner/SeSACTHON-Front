@@ -14,17 +14,17 @@ struct FloatingButtons: View {
     @State var showWorkoutTypeChoice = false
     @State var showStopConfirmation = false
     @State var showFilterView = false
-    
+
     var body: some View {
-        HStack(spacing: 0) {
+        VStack(alignment: .leading) {
             Button {
                 updateTrackingMode()
             } label: {
-                Image(systemName: trackingModeImage)
-                    .frame(width: SIZE, height: SIZE)
+                Image(systemName: trackingModeImage).resizable()
+                    .frame(width: 42, height: 42)
+                    .foregroundColor(.black).opacity(0.8)
                     .scaleEffect(vm.scale)
-            }
-            Divider().frame(height: SIZE)
+            }.padding(.trailing, 60)
             
             Menu {
                 Picker("Date", selection: $vm.workoutDate) {
@@ -55,61 +55,55 @@ struct FloatingButtons: View {
             } label: {
                 if vm.loadingWorkouts {
                     ProgressView()
-                        .frame(width: SIZE, height: SIZE)
+                        .frame(width: 42, height: 42)
                 } else if !vm.workouts.isEmpty {
                     Image(systemName: "line.3.horizontal.decrease.circle" + (vm.workoutType == nil && vm.workoutDate == nil ? "" : ".fill"))
-                        .frame(width: SIZE, height: SIZE)
+                        .resizable()
+                        .frame(width: 42, height: 42)
                 }
-            }
-            Divider().frame(height: SIZE)
-            
-            if vm.recording {
-                Button {
-                    showStopConfirmation = true
-                } label: {
-                    Image(systemName: "stop.fill")
-                        .frame(width: SIZE, height: SIZE)
-                }
-                .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
-                    Button("Cancel", role: .cancel) {}
-                    Button("Stop & Discard", role: .destructive) {
-                        vm.discardWorkout()
+            }.padding(.trailing, 320)
+            .padding(.bottom, 100)
+               /* if vm.recording {
+                    Button {
+                        showStopConfirmation = true
+                    } label: {
+                        Text("STOP")
+                            .font(.system(size: 32, weight: .black))
+                            .italic()
+                            .foregroundColor(.white)
+                            .frame(width: 120, height: 120)
+                            .background(.black)
+                            .cornerRadius(60)
                     }
-                    Button("Finish & Save") {
-                        Task {
-                            await vm.endWorkout()
+                    .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
+                        Button("Cancel", role: .cancel) {}
+                        Button("Stop & Discard", role: .destructive) {
+                            vm.discardWorkout()
                         }
-                    }
-                }
-            } else {
-                Button {
-                    showWorkoutTypeChoice = true
-                } label: {
-                    Image(systemName: "record.circle")
-                        .frame(width: SIZE, height: SIZE)
-                }
-                .confirmationDialog("Record a Workout", isPresented: $showWorkoutTypeChoice, titleVisibility: .visible) {
-                    Button("Cancel", role: .cancel) {}
-                    ForEach(WorkoutType.allCases, id: \.self) { type in
-                        Button(type.rawValue) {
+                        Button("Finish & Save") {
                             Task {
-                                await vm.startWorkout(type: type.hkType)
+                                await vm.endWorkout()
                             }
                         }
                     }
-                }
-            }
-            Divider().frame(height: SIZE)
-            
-            Button {
-                vm.showRunListView = true
-            } label: {
-                Image(systemName: "person.circle")
-                    .frame(width: SIZE, height: SIZE)
-            }
+                } else {
+//                    Button {
+//                        Task {
+//                            await vm.startWorkout(type: .running)
+//                        }
+//                    } label: {
+//                        Text("Go")
+//                            .font(.system(size: 32, weight: .black))
+//                            .italic()
+//                            .foregroundColor(.white)
+//                            .frame(width: 120, height: 120)
+//                            .background(.black)
+//                            .cornerRadius(60)
+//                    }
+                   
+                }*/
+                     
         }
-        .font(.system(size: SIZE/2))
-        .materialBackground()
     }
     
     func updateTrackingMode() {
@@ -131,9 +125,9 @@ struct FloatingButtons: View {
     var trackingModeImage: String {
         switch vm.trackingMode {
         case .none:
-            return "location"
+            return "location.circle"
         case .follow:
-            return "location.fill"
+            return "location.circle.fill"
         default:
             return "location.north.line.fill"
         }

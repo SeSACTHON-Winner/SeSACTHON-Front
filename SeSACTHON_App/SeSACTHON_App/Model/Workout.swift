@@ -53,7 +53,7 @@ class Workout: NSObject {
         self.init(type: workout.type, polyline: workout.polyline, locations: workout.locations, date: workout.date, duration: workout.duration)
     }
 
-    static let example = Workout(type: .walk, polyline: MKPolyline(), locations: [], date: .now, duration: 3456)
+    static let example = Workout(type: .run, polyline: MKPolyline(), locations: [], date: .now, duration: 3456)
 }
 
 extension Workout: MKOverlay {

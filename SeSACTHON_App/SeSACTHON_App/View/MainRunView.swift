@@ -13,6 +13,9 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    
+    @StateObject var vm = WorkoutViewModel()
+
     var body: some View {
         ZStack {
             switch swpSelection {
@@ -20,7 +23,7 @@ struct MainRunView: View {
                 VStack(spacing: 0) {
 //                    CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
 //                        .ignoresSafeArea()
-                    RootView(region: $region)
+                    RootView(swpSelection: $swpSelection, region: $region)
                 }
             default:
                 EmptyView()
@@ -32,10 +35,15 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                //MainRunningView(swpSelection: $swpSelection)
-                RootView(region: $region)
+                MainRunningView(swpSelection: $swpSelection, workout: vm.newWorkout)
+                    .onAppear {
+                        Task {
+                            await vm.startWorkout(type: .running)
+                        }
+                    }
             case 3:
-                RunEndView(swpSelection: $swpSelection)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout!)
+                
             default:
                 EmptyView()
             }
@@ -44,6 +52,7 @@ struct MainRunView: View {
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
         }
+        .environmentObject(vm)
     }
 }
 
@@ -136,11 +145,14 @@ struct MainRunHomeView: View {
     @Binding var swpSelection: Int
     @ObservedObject var locationManager = LocationDataManager()
     
+    @EnvironmentObject var vm: WorkoutViewModel
+
+    
     var body: some View {
         ZStack {
             
-            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
-                .ignoresSafeArea()
+//            CustomMapView(userTrackingMode: self.$userTrackingMode, region: self.$region)
+//                .ignoresSafeArea()
             
             VStack(spacing: 0) {
                 Color.black.frame(height: 50)
@@ -202,22 +214,6 @@ struct MainRunHomeView: View {
                 
                 HStack(alignment: .top, spacing: 28) {
                     NavigationLink {
-                        //                        CustomCameraView()
-                    } label: {
-                        Image("RunSetting")
-                            .font(.system(size: 28, weight: .black))
-                            .italic()
-                            .foregroundColor(.black)
-                            .frame(width: 52, height: 52)
-                            .cornerRadius(26)
-                            .shadow(color: .black.opacity(0.25), radius: 2)
-                    }.padding(.bottom, 14)
-                    Spacer().frame(width: 120)
-                    Spacer().frame(width: 52)
-                }
-                
-                HStack(alignment: .top, spacing: 28) {
-                    NavigationLink {
                         CustomCameraView()
                     } label: {
                         Image("RunCamera")
@@ -240,9 +236,9 @@ struct MainRunHomeView: View {
                             .background(.black)
                             .cornerRadius(60)
                     }
-                    
                     Button {
-                        self.userTrackingMode = .follow
+                        //self.userTrackingMode = .follow
+                        updateTrackingMode()
                     } label: {
                         Image("RunLocation")
                             .resizable()
@@ -257,6 +253,35 @@ struct MainRunHomeView: View {
         .navigationBarBackButtonHidden(true)
         .edgesIgnoringSafeArea(.top)
     }
+    
+    
+    
+    func updateTrackingMode() {
+        var mode: MKUserTrackingMode {
+            switch vm.trackingMode {
+            case .none:
+                return .follow
+            case .follow:
+                return .followWithHeading
+            default:
+                return .none
+            }
+        }
+        //ViewModel의 updateTrackingMode() 함수를 호출하고 계산된 "mode" 변수를 전달합니다.
+        vm.updateTrackingMode(mode)
+    }
+    
+    var trackingModeImage: String {
+        switch vm.trackingMode {
+        case .none:
+            return "location.circle"
+        case .follow:
+            return "location.circle.fill"
+        default:
+            return "location.north.line.fill"
+        }
+    }
+    
 }
 
 struct MainRunView_Previews: PreviewProvider {
