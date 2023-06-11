@@ -8,5 +8,13 @@ target 'SeSACTHON_App' do
   # Pods for SeSACTHON_App
   pod 'Alamofire'
   pod 'Kingfisher', '~> 7.0'  
+end
+
+target 'SeSACTHON_Watch Watch App' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for SeSACTHON_Watch Watch App
+  pod 'Alamofire'
 
 end
