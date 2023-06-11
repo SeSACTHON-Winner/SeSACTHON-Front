@@ -50,10 +50,11 @@ struct RunEndView: View {
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
+                                //TODO: 칼로리 잘 받아오나 확인
                                 Text("소모 칼로리")
                                     .font(.system(size: 12, weight: .medium))                 .multilineTextAlignment(.leading)
                                     .frame(width: 60, alignment: .leading)
-                                Text("00 kcal")
+                                Text("\(Measurement(value: workout.calories, unit: UnitEnergy.kilocalories).formatted())")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
@@ -62,6 +63,8 @@ struct RunEndView: View {
                                 
                                 //TODO: Text("6’12”") 수정
                                 Text("\(Measurement(value: workout.distance / workout.duration, unit: UnitSpeed.metersPerSecond).formatted())")
+                                    .font(.system(size: 24, weight: .bold)).italic()
+                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {

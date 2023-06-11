@@ -58,7 +58,11 @@ struct MainRunningView: View {
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
-            
+            .onAppear {
+                print(workout.pace)
+            }.onDisappear {
+                print(workout.pace)
+            }
             Spacer()
             Button {
                 self.showingImagePicker = true

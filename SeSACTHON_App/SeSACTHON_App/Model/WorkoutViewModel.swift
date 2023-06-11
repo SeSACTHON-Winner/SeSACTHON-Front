@@ -22,8 +22,9 @@ class WorkoutViewModel: NSObject, ObservableObject {
     @Published var startDate = Date()
     @Published var metres = 0.0 // 추적하는 동안 이동한 거리
     @Published var locations = [CLLocation]() // 경로를 나타내는 CLLocation 전체 배열
+    @Published var calory = 0.0
+    @Published var pace = 0.0
 
-    
     // 위치 표를 기반으로 MKPolyline을 반환하는 계산 속성
     var polyline: MKPolyline {
         let coords = locations.map(\.coordinate)
@@ -33,7 +34,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     // View Model의 현재 상태를 기반으로 새 훈련 객체를 반환하는 계산된 속성입니다.
     var newWorkout: Workout {
         let duration = Date.now.timeIntervalSince(startDate)
-        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration)
+        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace)
     }
     
     
@@ -175,6 +176,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
                     if !locations.isEmpty {
                         // 트레이닝 데이터와 좌표를 사용하여 새 Workout 개체를 만듭니다
                         let workout = Workout(hkWorkout: hkWorkout, locations: locations)
+                        
                         DispatchQueue.main.async {
                             // 연습 목록에 연습 추가
                             self.workouts.append(workout)
@@ -183,6 +185,14 @@ class WorkoutViewModel: NSObject, ObservableObject {
                                 // 트레이닝을 표시할 경우 필터링된 트레이닝 목록에 추가한 후 지도에 표시합니다
                                 self.filteredWorkouts.append(workout)
                                 self.mapView?.addOverlay(workout, level: .aboveRoads)
+                            }
+                            
+                        }
+                        
+                        // 칼로리 불러오기
+                        HKHelper.loadCalories(for: hkWorkout) { calories in
+                            DispatchQueue.main.async {
+                                workout.calories = calories
                             }
                         }
                     }
@@ -307,7 +317,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
         
         Haptics.success()
         startDate = .now// 훈련 시작 날짜를 정하다
-
+        pace = 0
+        calory = 0
         recording = true
         timer = Timer.publish(every: 0.5, on: .main, in: .default).autoconnect().sink { _ in // 0.5초마다 사용자 인터페이스를 진동시킬 수 있는 타이머를 만듭니다.
 
@@ -323,6 +334,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
         timer?.cancel()
         recording = false
         
+        pace = 0
+        calory = 0
         metres = 0
         locations = []
         updatePolylines()
@@ -344,9 +357,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         filterWorkouts()
         selectWorkout(workout)
         
-        metres = 0
-        locations = []
-        
+       
         do {
             try await workoutBuilder?.endCollection(at: .now) // 훈련 자료 수집을 마쳤습니다.
 
@@ -357,6 +368,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
         } catch {
             showError(.endingWorkout) // 작업을 완료하는 데 문제가 있으면 오류 메시지를 표시합니다.
         }
+        metres = 0
+        locations = []
+        pace = 0
+        calory = 0
     }
     
     // MARK: - Map
@@ -488,3 +503,4 @@ extension WorkoutViewModel: MKMapViewDelegate {
         mapView.deselectAnnotation(view.annotation, animated: false)
     }
 }
+
