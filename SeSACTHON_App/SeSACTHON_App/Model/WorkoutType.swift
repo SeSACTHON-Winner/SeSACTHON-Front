@@ -15,9 +15,9 @@ enum WorkoutType: String, CaseIterable {
     var colour: Color {
         switch self {
         case .run:
-            return .red
+            return .black.opacity(0.4)
         case .other:
-            return .yellow
+            return .black.opacity(0.1)
         }
     }
     

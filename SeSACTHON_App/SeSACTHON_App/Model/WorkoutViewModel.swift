@@ -457,15 +457,15 @@ extension WorkoutViewModel: MKMapViewDelegate {
         if let polyline = overlay as? MKPolyline {
             // 폴리라인 렌더링 만들기
             let render = MKPolylineRenderer(polyline: polyline)
-            render.lineWidth = 5
+            render.lineWidth = 8
             // 폴리선이 현재 트레이닝의 선택인 경우 주황색, 인디고 색상을 사용하십시오
-            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? .orange : .indigo)
+            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? Color("MainColor"): .black)
             return render
             // 오버레이가 연습이라면 (워크아웃)
         } else if let workout = overlay as? Workout {
             // 연습용 폴리라인 렌더링 만들기
             let render = MKPolylineRenderer(polyline: workout.polyline)
-            render.lineWidth = 5
+            render.lineWidth = 6
             // 트레이닝 형식과 연결된 색상 사용하기
             render.strokeColor = UIColor(workout.type.colour)
             return render
