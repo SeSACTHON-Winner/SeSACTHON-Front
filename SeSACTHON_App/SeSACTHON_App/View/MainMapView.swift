@@ -53,20 +53,26 @@ struct MainMapView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.bottom)
                 .background(.black)
-                Label(locationManager.address, systemImage: "smallcircle.filled.circle")
-                    .padding(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .frame(height: 36)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .labelStyle(MintSystemImageLabelStyle())
+
                 HStack {
                     Image(systemName: "magnifyingglass")
-                    TextField("검색하는 곳", text: $searchText)
-                        .onChange(of: searchText) { newValue in
-                            userTrackingMode = .none
-                            completerWrapper.search(query: newValue)
-                        }
+                    
+                    if isPlaceSelected {
+                        TextField(locationManager.address, text: $address)
+                            .onChange(of: searchText) { newValue in
+                                userTrackingMode = .none
+                                completerWrapper.search(query: newValue)
+                            }
+                    } else {
+                        TextField(locationManager.address, text: $searchText)
+                            .onChange(of: searchText) { newValue in
+                                userTrackingMode = .none
+                                completerWrapper.search(query: newValue)
+                            }
+                    }
+                    
+
+                    
                 }
                 .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -78,6 +84,8 @@ struct MainMapView: View {
                     List(completerWrapper.searchResults, id: \.self) { result in
                         Button {
                             handleSearchResultTapped(result)
+                            address = result.title
+                            isPlaceSelected = true
                         } label: {
                             Text(result.title)
                         }
@@ -109,6 +117,7 @@ struct MainMapView: View {
                         Button {
                             if userTrackingMode == .none {
                                 userTrackingMode = .follow
+                                isPlaceSelected = false
                             }
                         } label: {
                             Image("CurrentLocationBtn").frame(width: 50, height: 50)
