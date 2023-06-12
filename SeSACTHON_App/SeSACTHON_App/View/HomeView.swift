@@ -7,17 +7,20 @@
 
 import SwiftUI
 import AuthenticationServices
+import Kingfisher
+import Alamofire
 
 struct HomeView: View {
     
     @State var gotoRun = false
     @State var gotoMap = false
     @State var isLogin = false
+    @State var imagePath = "images.default.png"
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Color.black.frame(height: 50)
+                Color.black.frame(height: 60)
                 HStack {
                     
                     Text("Home")
@@ -28,18 +31,28 @@ struct HomeView: View {
                     NavigationLink {
                         ProfileView()
                     } label: {
-                        Image(systemName: "person.crop.circle.fill")
+                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "map")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
                             .resizable()
                             .frame(width: 34, height: 34)
+                            .clipShape(Circle())
                             .padding(.leading)
-                            .foregroundColor(.white)
+                        
                     }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.bottom)
                 .padding(.horizontal)
                 .background(.black)
-                Color.black.frame(height: 40)
+                Color.black.frame(height: 30)
                     .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                     .shadow(radius: 3, x: 0 ,y: 4)
                 ZStack {
@@ -98,50 +111,58 @@ struct HomeView: View {
             .navigationDestination(isPresented: $gotoMap) {
                 MainMapView()
             }.background(.black)
-            
         }//.edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            var url = URL(string: "http://35.72.228.224/sesacthon/profileImage.php")!
+            let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            AF.request(url, method: .get, parameters: params).responseString { picturePath in
+                print(picturePath)
+                self.imagePath = picturePath.value ?? "images/default.png"
+            }
+            print("KFImage : \(GlobalProfilePath.picture_path)")
+        }
     }
 }
 
 extension HomeView {
     
     func newsView(title: String, content: String, image: Image) -> some View {
-            return ZStack {
-                Color.clear.overlay {
-                    image
-                        .resizable()
-                        .scaledToFill()
-                    LinearGradient(
-                        colors: [.clear, .black],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                }
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    Spacer()
-                    
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(title)
-                                .font(.system(size: 26))
-                                .fontWeight(.heavy)
-                                .foregroundColor(.white)
-                                .padding(.vertical)
-                                .tracking(1)
-                            Text(content)
-                                .font(.system(size: 18))
-                                .fontWeight(.medium)
-                                .foregroundColor(.white)
-                                .lineSpacing(10)
-                        }
-                        Spacer()
-                    }
-                }
-                .padding(.bottom, 78)
-                .padding(.horizontal, 18)
-                .frame(maxWidth: .infinity)
+        return ZStack {
+            Color.clear.overlay {
+                image
+                    .resizable()
+                    .scaledToFill()
+                LinearGradient(
+                    colors: [.clear, .black],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Spacer()
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(title)
+                            .font(.system(size: 26))
+                            .fontWeight(.heavy)
+                            .foregroundColor(.white)
+                            .padding(.vertical)
+                            .tracking(1)
+                        Text(content)
+                            .font(.system(size: 18))
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            .lineSpacing(10)
+                    }
+                    Spacer()
+                }
+            }
+            .padding(.bottom, 78)
+            .padding(.horizontal, 18)
+            .frame(maxWidth: .infinity)
+        }
     }
 }
 
@@ -153,3 +174,6 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
+class GlobalProfilePath : ObservableObject {
+    static var picture_path: String = ""
+}
