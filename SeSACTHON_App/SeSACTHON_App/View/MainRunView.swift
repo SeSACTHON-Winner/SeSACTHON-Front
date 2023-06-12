@@ -212,7 +212,8 @@ struct MainRunHomeView: View {
                     } else {
                         Spacer().frame(height: 80)
                         // MARK: - 말풍선
-                        Color.black.frame(height: 100)
+                        SpeechBubble(text: "hello")
+                        //Color.black.frame(height: 100)
                         Spacer()
                     }
                     
@@ -296,6 +297,38 @@ struct MainRunHomeView: View {
     }
     
 }
+struct SpeechBubble: View{
+    var text: String
+    var body: some View{
+        VStack{
+            ZStack{
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color("Darkgray"))
+                    .frame(width: 297,height: 103)
+                Text("hello")
+            }
+            Triangle()
+                .fill(Color("Darkgray"))
+                .frame(width:27,height:27)
+                .offset(x:-105, y:-20)
+            
+        }
+    }
+    struct Triangle: Shape {
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            
+            path.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+            path.closeSubpath()
+            
+            return path
+        }
+    }
+}
+
+
 
 struct MainRunView_Previews: PreviewProvider {
     static var previews: some View {
