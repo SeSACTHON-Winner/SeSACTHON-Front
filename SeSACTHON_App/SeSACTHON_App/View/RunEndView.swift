@@ -68,11 +68,10 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
 
-                                //TODO: Text("6’12”") 수정
                                 Text("\(formatPace())")
                                     .font(.system(size: 24, weight: .bold)).italic()
-                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
-                                    .font(.system(size: 24, weight: .bold)).italic()
+//                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
+//                                    .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("도움 개수")
