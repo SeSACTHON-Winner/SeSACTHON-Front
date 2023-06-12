@@ -19,6 +19,7 @@ struct ReportView: View {
         case construct
         case none
     }
+    //
     
     var body: some View {
         VStack(spacing: 0) {
