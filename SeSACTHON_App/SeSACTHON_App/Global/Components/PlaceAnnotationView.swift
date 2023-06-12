@@ -10,43 +10,132 @@ import SwiftUI
 struct PlaceAnnotationView: View {
     
     
-    let type: String
+    let danger: DangerInfoGroup
+    var slopeCount: Int
+    var stepCount: Int
+    var constructionCount: Int
+    var narrowCount: Int
+    let listLength: Int
+    
+    init(danger: DangerInfoGroup) {
+        self.danger = danger
+        self.listLength = danger.list.count
+        self.slopeCount = 0
+        self.stepCount = 0
+        self.narrowCount = 0
+        self.constructionCount = 0
+        
+        for i in danger.list {
+            switch i.type {
+            case "slope":
+                slopeCount += 1
+            case "step":
+                stepCount += 1
+            case "construction":
+                constructionCount += 1
+            case "narrow":
+                narrowCount += 1
+            default:
+                continue
+            }
+        }
+    }
+    
+    func calWidth() -> Int{
+        var returnValue = 0
+        if slopeCount > 0 {
+            returnValue += 1
+        }
+        if stepCount > 0 {
+            returnValue += 1
+        }
+        if narrowCount > 0 {
+            returnValue += 1
+        }
+        if constructionCount > 0 {
+            returnValue += 1
+        }
+        print(returnValue)
+        return returnValue
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             
-            Color.white.frame(width: 100, height: 60)
+            Color.white
+                .frame(width: 50 * CGFloat(calWidth()), height: 80)
                 .cornerRadius(10)
-                    .overlay {
-                        HStack {
-                            switch type {
-                            case "slope":
-                                Text("🎢")
-                            case "step":
-                                Image(systemName: "figure.stair.stepper")
+                .overlay {
+                    HStack {
+                        if slopeCount > 0 {
+                            VStack{
+                                Image("icon_slope")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32)
+                                Text("\(slopeCount)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if stepCount > 0 {
+                            VStack{
+                                Image("icon_step")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 32)
-                            case "construction":
-                                Text("🚧")
-                            case "narrow":
-                                Text("⛔")
-                            default:
-                                Text("")
+                                Text("\(stepCount)")
+                                    .foregroundColor(.black)
                             }
                         }
-                        .shadow(radius: 2, x: 2, y: 2)
-                        Image(systemName: "arrowtriangle.down.fill")
-                            .font(.caption)
-                            .scaleEffect(2)
-                            .foregroundColor(.white)
-                            .offset(x: 0, y: 36)
-                            .shadow(radius: 2, x: 0, y: 6)
+                        if constructionCount > 0 {
+                            VStack{
+                                Image("icon_construction")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 32)
+                                Text("\(constructionCount)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if narrowCount > 0 {
+                            VStack{
+                                Image("icon_narrow")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 32)
+                                Text("\(narrowCount)")
+                                    .foregroundColor(.black)
+                            }
+                        }
                     }
-                .shadow(radius: 2, x: 2, y: 2)
+                    //.shadow(radius: 2, x: 2, y: 2)
+                }
+            
+            Image(systemName: "arrowtriangle.down.fill")
+                .font(.caption)
+                .scaleEffect(2)
+                .foregroundColor(.white)
+//                .offset(x: 0, y: 46)
+            //.shadow(radius: 2, x: 0, y: 6)
+            
+            Image("dangerDot")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 32)
+                .overlay{
+                    Text("\(slopeCount + stepCount + constructionCount + narrowCount)")
+                        .frame(height: 32)
+                        .foregroundColor(.white)
+                }
+            
+            
         }
+        
+        //.shadow(radius: 2, x: 2, y: 2)
+        
     }
 }
+
 
 //struct PlaceAnnotationView_Previews: PreviewProvider {
 //    static var previews: some View {
