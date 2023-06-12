@@ -183,32 +183,32 @@ struct RunRecentView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack(spacing: 12) {
-                // MARK: - Image 교체
-                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
-                    .placeholder { //플레이스 홀더 설정
-                        Image(systemName: "map")
-                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                    .onSuccess {r in //성공
-                        print("succes: \(r)")
-                    }
-                    .onFailure { e in //실패
-                        print("failure: \(e)")
-                    }
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 50, height: 50)
-                    .background(.black)
-                    .cornerRadius(5)
-                VStack(alignment: .leading, spacing: 8){
-                    Text(runData.date)
-                        .font(.system(size: 12, weight: .medium)).opacity(0.3)
-                    Text(runData.runningName)
-                        .font(.system(size: 14, weight: .medium)).opacity(0.5)
-                }
-                Spacer()
-                
-            }
+                        HStack(spacing: 12) {
+                            // MARK: - Image 교체
+                            KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
+                                .placeholder { //플레이스 홀더 설정
+                                    Image(systemName: "map")
+                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                .onSuccess {r in //성공
+                                    print("succes: \(r)")
+                                }
+                                .onFailure { e in //실패
+                                    print("failure: \(e)")
+                                }
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .background(.black)
+                                .cornerRadius(5)
+                            VStack(alignment: .leading, spacing: 8){
+                                Text(runData.date)
+                                    .font(.system(size: 12, weight: .medium)).opacity(0.3)
+                                Text(runData.runningName)
+                                    .font(.system(size: 14, weight: .medium)).opacity(0.5)
+                            }
+                            Spacer()
+                            
+                        }
             HStack(spacing: 26.0) {
                 VStack(alignment: .leading, spacing: 14) {
                     Text(String(format: "%.2f", runData.distance))
