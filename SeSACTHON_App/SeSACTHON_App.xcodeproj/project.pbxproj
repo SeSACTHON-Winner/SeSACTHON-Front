@@ -18,7 +18,6 @@
 		6099D7D72A310928004A49D1 /* CLLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D42A310928004A49D1 /* CLLocation.swift */; };
 		6099D7D82A310928004A49D1 /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */; };
 		6099D7D92A310928004A49D1 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7D62A310928004A49D1 /* Date.swift */; };
-		6099D7E32A3109AA004A49D1 /* FloatingButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */; };
 		6099D7E42A3109AA004A49D1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DB2A3109AA004A49D1 /* MapView.swift */; };
 		6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */; };
 		6099D7E62A3109AA004A49D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DE2A3109AA004A49D1 /* View.swift */; };
@@ -104,6 +103,7 @@
 /* Begin PBXFileReference section */
 		2328ED6E389A50720E3B0835 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_Watch Watch App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_Watch Watch App/Pods-SeSACTHON_Watch Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60817E7A2A362F8000B5C3A6 /* SeSACTHON-Watch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-Watch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerInfoGroup.swift; sourceTree = "<group>"; };
 		6099D7C62A310623004A49D1 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		6099D7C72A310623004A49D1 /* HKHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKHelper.swift; sourceTree = "<group>"; };
@@ -115,7 +115,6 @@
 		6099D7D42A310928004A49D1 /* CLLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocation.swift; sourceTree = "<group>"; };
 		6099D7D52A310928004A49D1 /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
 		6099D7D62A310928004A49D1 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingButtons.swift; sourceTree = "<group>"; };
 		6099D7DB2A3109AA004A49D1 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutBar.swift; sourceTree = "<group>"; };
 		6099D7DE2A3109AA004A49D1 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -230,6 +229,7 @@
 		7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				60817E7A2A362F8000B5C3A6 /* SeSACTHON-Watch-Watch-App-Info.plist */,
 				7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */,
 				7846157D2A2CAA8100C83C89 /* StartView.swift */,
 				784615822A2CB8E200C83C89 /* ReportView.swift */,
@@ -329,7 +329,6 @@
 		78F734C52A27287A002AAE1A /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6099D7DA2A3109AA004A49D1 /* FloatingButtons.swift */,
 				6099D7DB2A3109AA004A49D1 /* MapView.swift */,
 				6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */,
 				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
@@ -651,7 +650,6 @@
 				6099D7C82A310623004A49D1 /* Haptics.swift in Sources */,
 				6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */,
 				6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */,
-				6099D7E32A3109AA004A49D1 /* FloatingButtons.swift in Sources */,
 				6099D7D82A310928004A49D1 /* CLLocationCoordinate2D.swift in Sources */,
 				6099D7D92A310928004A49D1 /* Date.swift in Sources */,
 				78DCF7452A3619FA00984866 /* SUImagePicker.swift in Sources */,
@@ -706,6 +704,7 @@
 				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
@@ -714,7 +713,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -737,6 +738,7 @@
 				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
@@ -745,7 +747,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -895,6 +899,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = dd;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSMotionUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -940,6 +945,7 @@
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = dd;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSMotionUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -952,7 +958,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
+
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
