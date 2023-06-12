@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 let SIZE = 50.0
 let NAME = "Running"
@@ -23,6 +24,9 @@ struct SeSACTHON_AppApp: App {
             if UserDefaults.standard.bool(forKey: "login") {
                 HomeView()
                     .onAppear {
+                        
+                        
+                        
                         sleep(1)
                     }
             } else {
@@ -48,3 +52,4 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         NotificationCenter.default.post(name: Notification.Name("ResumeTimer"), object: nil)
     }
 }
+

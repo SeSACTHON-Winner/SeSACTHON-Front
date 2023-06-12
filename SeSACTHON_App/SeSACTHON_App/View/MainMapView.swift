@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import Alamofire
+import Kingfisher
 
 struct MainMapView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
@@ -20,114 +21,124 @@ struct MainMapView: View {
     @State var dangerArr: [DangerInfoMO] = []
     @Environment(\.dismiss) private var dismiss
     @State var dangerGroupArr: [DangerInfoGroup] = []
+    @State var imagePath = "images/default.png"
     
     var body: some View {
-        VStack {
-            
-            VStack(spacing: 12) {
-                Spacer().frame(height: 40)
-                HStack {
-                    Button {
-                        dangerArr.removeAll()
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 10, height: 16)
-                            .foregroundColor(.white)
-                            .padding(.trailing, 10)
-                    }
-                    Text("MAP")
-                        .font(.custom("SF Pro Text", size: 32))
-                        .foregroundColor(.white)
-                        .italic()
-                    Spacer()
-                    
-                    Image(systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .frame(width: 34, height: 34)
-                        .padding(.leading)
-                        .foregroundColor(.white)
-                    
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.bottom)
-                .background(.black)
-
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    
-                    if isPlaceSelected {
-                        TextField(locationManager.address, text: $address)
-                            .onChange(of: searchText) { newValue in
-                                userTrackingMode = .none
-                                completerWrapper.search(query: newValue)
-                            }
-                    } else {
-                        TextField(locationManager.address, text: $searchText)
-                            .onChange(of: searchText) { newValue in
-                                userTrackingMode = .none
-                                completerWrapper.search(query: newValue)
-                            }
-                    }
-                    
-
-                    
-                }
-                .padding(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .frame(height: 36)
-                .background(Color.white)
-                .cornerRadius(10)
-                .padding(.bottom, 18)
-                if !completerWrapper.searchResults.isEmpty && searchText != "" {
-                    List(completerWrapper.searchResults, id: \.self) { result in
-                        Button {
-                            handleSearchResultTapped(result)
-                            address = result.title
-                            isPlaceSelected = true
-                        } label: {
-                            Text(result.title)
-                        }
-                    }
-                    .listStyle(.plain)
-                    .frame(height: 160)
-                }
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-            ZStack {
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerGroupArr
-                ) { danger in
-                    MapAnnotation(coordinate: .init(latitude: danger.latitude_mod, longitude: danger.longitude_mod)) {
-                        PlaceAnnotationView.init(danger: danger)
-                    }
-                }
-                .gesture(DragGesture().onChanged { _ in
-                    userTrackingMode = .none
-                })
-                .tint(.mint)
+            VStack {
                 
-                VStack {
-                    Spacer()
+                VStack(spacing: 12) {
+                    Spacer().frame(height: 40)
                     HStack {
-                        Spacer()
                         Button {
-                            if userTrackingMode == .none {
-                                userTrackingMode = .follow
-                                isPlaceSelected = false
-                            }
+                            dangerArr.removeAll()
+                            dismiss()
                         } label: {
-                            Image("CurrentLocationBtn").frame(width: 50, height: 50)
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 10, height: 16)
+                                .foregroundColor(.white)
+                                .padding(.trailing, 10)
+                        }
+                        Text("MAP")
+                            .font(.custom("SF Pro Text", size: 32))
+                            .foregroundColor(.white)
+                            .italic()
+                        Spacer()
+                        
+                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "map")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
+                            .resizable()
+                            .frame(width: 34, height: 34)
+                            .clipShape(Circle())
+                            .padding(.leading)
+                        
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom)
+                    .background(.black)
+
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        
+                        if isPlaceSelected {
+                            TextField(locationManager.address, text: $address)
+                                .onChange(of: searchText) { newValue in
+                                    userTrackingMode = .none
+                                    completerWrapper.search(query: newValue)
+                                }
+                        } else {
+                            TextField(locationManager.address, text: $searchText)
+                                .onChange(of: searchText) { newValue in
+                                    userTrackingMode = .none
+                                    completerWrapper.search(query: newValue)
+                                }
+                        }
+                        
+
+                        
+                    }
+                    .padding(.leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 36)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.bottom, 18)
+                    if !completerWrapper.searchResults.isEmpty && searchText != "" {
+                        List(completerWrapper.searchResults, id: \.self) { result in
+                            Button {
+                                handleSearchResultTapped(result)
+                                address = result.title
+                                isPlaceSelected = true
+                            } label: {
+                                Text(result.title)
+                            }
+                        }
+                        .listStyle(.plain)
+                        .frame(height: 160)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                ZStack {
+                    Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerGroupArr
+                    ) { danger in
+                        MapAnnotation(coordinate: .init(latitude: danger.latitude_mod, longitude: danger.longitude_mod)) {
+                            PlaceAnnotationView.init(danger: danger)
                         }
                     }
-                    .padding(40)
+                    .gesture(DragGesture().onChanged { _ in
+                        userTrackingMode = .none
+                    })
+                    .tint(.mint)
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Button {
+                                if userTrackingMode == .none {
+                                    userTrackingMode = .follow
+                                    isPlaceSelected = false
+                                }
+                            } label: {
+                                Image("CurrentLocationBtn").frame(width: 50, height: 50)
+                            }
+                        }
+                        .padding(40)
+                    }
                 }
             }
-        }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
         .onAppear {
@@ -135,6 +146,13 @@ struct MainMapView: View {
 //            self.dangerArr = fetchDangerList()
             fetchAnnotationItems()
             print("dangerArr \(dangerArr)")
+            var url = URL(string: "http://35.72.228.224/sesacthon/profileImage.php")!
+            let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            AF.request(url, method: .get, parameters: params).responseString { picturePath in
+                print(picturePath)
+                self.imagePath = picturePath.value ?? "images/default.png"
+            }
+            print("KFImage : \(GlobalProfilePath.picture_path)")
         }
     }
 }
