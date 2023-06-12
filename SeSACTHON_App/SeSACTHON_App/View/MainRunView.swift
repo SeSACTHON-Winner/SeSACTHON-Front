@@ -152,10 +152,10 @@ struct MainRunHomeView: View {
     @State private var showingImagePicker = false
     @State var pickedImage: Image?
     enum Status: String, CaseIterable {
-        case gradient = "🎢 경사도"
-        case narrow = "⛔ 좁은 길"
-        case road = "↕️ 높은 턱"
-        case natural = "🚧 공사중"
+        case gradient = "경사도"
+        case narrow = "좁은 길"
+        case road = "높은 턱"
+        case natural = "공사중"
     }
     @State var selection: Status = .gradient
     
@@ -188,25 +188,38 @@ struct MainRunHomeView: View {
                 
                 
                 if let selectedImage = pickedImage {
-                    
-                    selectedImage
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
+                    Color.white
+                        .frame(width: 210, height: 210)
                         .cornerRadius(10)
+                        .overlay {
+                            selectedImage
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 200, height: 200)
+                                .cornerRadius(10)
+                        }
                         .padding(.vertical)
+
                     ForEach(Status.allCases, id:  \.rawValue) { item in
-                        Text(item.rawValue)
-                            .font(.system(size: 16, weight: selection == item ? .bold : .regular))
-                            .frame(height: 44)
-                            .onTapGesture {
-                                selection = item
-                            }
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .background(selection == item ? .black : .black.opacity(0.5))
-                            .cornerRadius(16)
-                            .padding(.bottom)
+                        HStack {
+                            Image("icon_\(returnEngRawvalue(type: item))")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30)
+                            Text(item.rawValue)
+                                .font(.system(size: 16, weight: selection == item ? .bold : .regular))
+                                .frame(height: 44)
+                                .foregroundColor(Color.init(hex: "808080"))
+                                .onTapGesture {
+                                    selection = item
+                                }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(selection == item ? .white : .white.opacity(0.5))
+                        .cornerRadius(16)
+                        .padding(.bottom)
                     }
+                    .frame(width: 176)
                     .foregroundColor(.white)
                     .padding(.horizontal, 96)
                     HStack {
@@ -268,11 +281,6 @@ struct MainRunHomeView: View {
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
                             }
-                            
-                            
-                            
-                            
-                            
                         } label: {
                             Image("SendButton")
                                 .resizable()
@@ -348,6 +356,21 @@ struct MainRunHomeView: View {
             return "step"
         }
     }
+    
+    func returnEngRawvalue(type: Status) -> String {
+        switch type {
+        case .gradient:
+            return "slope"
+        case .narrow:
+            return "narrow"
+        case .natural:
+            return "construction"
+        case .road:
+            return "step"
+        }
+    }
+    
+    
     
     func updateTrackingMode() {
         var mode: MKUserTrackingMode {
