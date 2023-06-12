@@ -10,6 +10,7 @@ import MapKit
 import HealthKit
 
 //Not Use
+/*
 struct FloatingButtons: View {
     @EnvironmentObject var vm: WorkoutViewModel
     @State var showWorkoutTypeChoice = false
@@ -153,3 +154,4 @@ struct FloatingButtons_Previews: PreviewProvider {
             .environmentObject(WorkoutViewModel())
     }
 }
+*/

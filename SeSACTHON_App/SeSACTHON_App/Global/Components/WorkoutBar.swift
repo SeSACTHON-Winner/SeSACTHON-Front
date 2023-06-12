@@ -19,7 +19,7 @@ struct WorkoutBar: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text(workout.type.rawValue)
+                Text("Running--")
                     .font(.headline)
                 Spacer()
                 if new {

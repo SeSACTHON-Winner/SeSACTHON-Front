@@ -18,7 +18,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     // MARK: - Properties
     // Workout Tracking
     @Published var recording = false // 현재 트레이닝 모니터링이 활성 상태인지 여부
-    @Published var type = WorkoutType.other
+    @Published var type: HKWorkoutActivityType = .running
     @Published var startDate = Date()
     @Published var metres = 0.0 // 추적하는 동안 이동한 거리
     @Published var locations = [CLLocation]() // 경로를 나타내는 CLLocation 전체 배열
@@ -89,9 +89,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     
     // Filters
     // 현재 선택된 트레이닝 타입 필터입니다.
-    @Published var workoutType: WorkoutType? { didSet {
-        filterWorkouts()
-    }}
+    @Published var workoutType = HKWorkoutActivityType.running
     
     
     // 현재 선택된 트레이닝 날짜 필터입니다.
@@ -299,7 +297,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
 
         config.locationType = .outdoor // 외부 경로의 종류를 설정합니다.
         
-        self.type = WorkoutType(hkType: type) // 어떤 종류의 훈련이 적절한지 결정합니다.
+        self.type = HKWorkoutActivityType.running // 어떤 종류의 훈련이 적절한지 결정합니다.
 
         routeBuilder = HKWorkoutRouteBuilder(healthStore: healthStore, device: .local()) // GPS 데이터를 캡처하기 위한 경로 생성기를 만들었습니다.
 
@@ -482,7 +480,7 @@ extension WorkoutViewModel: MKMapViewDelegate {
             let render = MKPolylineRenderer(polyline: workout.polyline)
             render.lineWidth = 6
             // 트레이닝 형식과 연결된 색상 사용하기
-            render.strokeColor = UIColor(workout.type.colour)
+            render.strokeColor = UIColor(.black.opacity(0.4))
             return render
         }
         // 오버레이가 폴리라인이나 트레이닝이 아니라면 기본 렌더링을 사용하십시오

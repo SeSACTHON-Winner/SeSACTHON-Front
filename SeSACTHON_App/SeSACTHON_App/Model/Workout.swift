@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 class Workout: NSObject {
-    let type: WorkoutType
+    let type: HKWorkoutActivityType
     let polyline: MKPolyline
     let locations: [CLLocation]
     let date: Date
@@ -21,7 +21,8 @@ class Workout: NSObject {
     var calories: Double // 소모된 총 칼로리
     let pace: Double // 평균 페이스
     
-    init(type: WorkoutType, polyline: MKPolyline, locations: [CLLocation], date: Date, duration: Double, calories: Double, pace: Double) {
+    init(type: HKWorkoutActivityType
+, polyline: MKPolyline, locations: [CLLocation], date: Date, duration: Double, calories: Double, pace: Double) {
         self.type = type
         self.polyline = polyline
         self.locations = locations
@@ -36,7 +37,7 @@ class Workout: NSObject {
     //TODO: 칼로리 단위 수정
     convenience init(hkWorkout: HKWorkout, locations: [CLLocation]) {
         let coords = locations.map(\.coordinate)
-        let type = WorkoutType(hkType: hkWorkout.workoutActivityType) // HealthKit의 운동 타입을 로컬 운동 타입으로 변환합니다.
+        let type = hkWorkout.workoutActivityType // HealthKit의 운동 타입을 로컬 운동 타입으로 변환합니다.
         let polyline = MKPolyline(coordinates: coords, count: coords.count)
         let date = hkWorkout.startDate
         let duration = hkWorkout.duration
@@ -84,7 +85,7 @@ class Workout: NSObject {
         }
     }
     
-    static let example = Workout(type: .run, polyline: MKPolyline(), locations: [], date: .now, duration: 3456, calories: 0.0, pace: 0.0)
+    static let example = Workout(type: .running, polyline: MKPolyline(), locations: [], date: .now, duration: 3456, calories: 0.0, pace: 0.0)
 }
 
 //
