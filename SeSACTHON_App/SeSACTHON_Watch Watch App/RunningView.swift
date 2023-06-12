@@ -30,20 +30,17 @@ struct RunningView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 Button {
+                    print("pause")
                     isRunning.toggle()
-                    if !isRunning {
-                        isEnd = true
-                    }
                 } label: {
                     watchRunningBtn(color: .white, systemName: isRunning ? "pause.fill" : "play.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.leading, 10)
                 Button {
-                    // MARK: - restart logic
-                    
+                    isEnd = true
                 } label: {
-                    watchRunningBtn(color: .white, systemName: "repeat")
+                    watchRunningBtn(color: .white, systemName: "stop.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
             }
@@ -57,7 +54,6 @@ struct RunningView: View {
         }
         .navigationDestination(isPresented: $isEnd) {
             RunningEndView()
-                
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

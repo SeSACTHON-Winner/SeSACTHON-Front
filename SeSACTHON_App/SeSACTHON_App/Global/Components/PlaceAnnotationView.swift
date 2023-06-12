@@ -19,6 +19,7 @@ struct PlaceAnnotationView: View {
     var narrowCount: Int
     let listLength: Int
     @State var dotClick = false
+    @State var picturePath: String?
     
     init(danger: DangerInfoGroup) {
         self.danger = danger
@@ -27,6 +28,20 @@ struct PlaceAnnotationView: View {
         self.stepCount = 0
         self.narrowCount = 0
         self.constructionCount = 0
+        self.picturePath = danger.list.first?.picturePath ?? "images/test1.jpg"
+        print("Danger list count: \(danger.list.count)")
+        if let firstPicturePath = danger.list.first?.picturePath {
+            print("First picture path: \(firstPicturePath)")
+            self.picturePath = danger.list.first?.picturePath
+            PicturePath.picturePath = danger.list.first?.picturePath ?? "images/test1.jpg"
+            print("PicturePath.picturePath : \(PicturePath.picturePath)")
+            print("Danger list count: \(danger.list.count)")
+        } else {
+            print("First picture path is nil")
+            
+        }
+        print("Assigned picture path: \(self.picturePath)")
+        print("Assigned picture path: \(self.picturePath)")
         
         for i in danger.list {
             switch i.type {
@@ -64,22 +79,36 @@ struct PlaceAnnotationView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
-            if dotClick {
-                Color.white
-                    .frame(width: 50 * CGFloat(calWidth()), height: 80)
-                    .cornerRadius(10)
-                    .overlay {
-                        HStack {
-                            if slopeCount > 0 {
-                                VStack{
-                                    Image("icon_slope")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 32)
-                                    Text("\(slopeCount)")
-                                        .foregroundColor(.black)
-                                }
+
+            KFImage(URL(string: "http://35.72.228.224/sesacthon/\(PicturePath.picturePath)")!)
+                .placeholder { //플레이스 홀더 설정
+                    Image(systemName: "map")
+                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                .onSuccess {r in //성공
+                    print("succes: \(r)")
+                }
+                .onFailure { e in //실패
+                    print("failure: \(e)")
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .background(.black)
+                .cornerRadius(5)
+            if dotClick {                
+            Color.white
+                .frame(width: 50 * CGFloat(calWidth()), height: 80)
+                .cornerRadius(10)
+                .overlay {
+                    HStack {
+                        if slopeCount > 0 {
+                            VStack{
+                                Image("icon_slope")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 32)
+                                Text("\(slopeCount)")
+                                    .foregroundColor(.black)
                             }
                             if stepCount > 0 {
                                 VStack{
@@ -112,8 +141,7 @@ struct PlaceAnnotationView: View {
                                 }
                             }
                         }
-                    }
-                
+                    }        
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.caption)
                     .scaleEffect(2)
@@ -122,6 +150,16 @@ struct PlaceAnnotationView: View {
             else{
                 Spacer().frame(width:0, height: 90)
             }
+
+                    //.shadow(radius: 2, x: 2, y: 2)
+                }
+            
+            Image(systemName: "arrowtriangle.down.fill")
+                .font(.caption)
+                .scaleEffect(2)
+                .foregroundColor(.white)
+        }
+
             
             Image("dangerDot")
                 .resizable()
@@ -145,3 +183,8 @@ struct PlaceAnnotationView: View {
 //        PlaceAnnotationView()
 //    }
 //}
+
+
+class PicturePath {
+    static var picturePath = ""
+}

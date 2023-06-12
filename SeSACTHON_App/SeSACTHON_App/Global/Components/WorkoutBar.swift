@@ -19,7 +19,7 @@ struct WorkoutBar: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text(workout.type.rawValue)
+                Text("Running--")
                     .font(.headline)
                 Spacer()
                 if new {
@@ -40,8 +40,8 @@ struct WorkoutBar: View {
                 Spacer(minLength: 0)
                 WorkoutStat(name: "Speed", value: Measurement(value: workout.distance / workout.duration, unit: UnitSpeed.metersPerSecond).formatted()) // 포맷된 속도를 표시합니다.
                 Spacer(minLength: 0)
-
-                WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
+                WorkoutStat(name: "Calory", value: workout.calories.formatted())
+               // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                 Spacer(minLength: 0)
             }
         }

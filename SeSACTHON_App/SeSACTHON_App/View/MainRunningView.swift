@@ -39,6 +39,7 @@ struct MainRunningView: View {
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
         VStack {
+            
             VStack {
                 Spacer().frame(height: 60)
                 HStack {
@@ -51,14 +52,30 @@ struct MainRunningView: View {
                         .font(.system(size: 48, weight: .black)).italic()
                     Spacer()
                 }.padding(.leading, 28)
+                
+                if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                    WorkoutBar(workout: workout, new: false).onAppear {
+                        print("false workbar")
+                    }
+                }
+                
+                if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+                    WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                        print("true workbar")
+                    }
+                }
             }
             .foregroundColor(.white)
-            .frame(height: 120)
+            .frame(height: 240)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
-            
+            .onAppear {
+                print(workout.pace)
+            }.onDisappear {
+                print(workout.pace)
+            }
             Spacer()
             Button {
                 self.showingImagePicker = true
@@ -91,14 +108,17 @@ struct MainRunningView: View {
                             .frame(width: 120, height: 120)
                             .background(.black)
                             .cornerRadius(60)
-                    }.padding(.bottom, 60)
+                    }.padding(.bottom, 94)
                 }
                 else if runState == "stop" {
                     if vm.recording {
                         Button {
                             stopTimer()
-                            showStopConfirmation = true
-                            
+                            //showStopConfirmation = true
+                            Task {
+                                await vm.endWorkout()
+                            }
+                            swpSelection = 3
                         } label: {
                             Text("END")
                                 .font(.system(size: 24, weight: .black))
@@ -108,20 +128,19 @@ struct MainRunningView: View {
                                 .background(.black)
                                 .cornerRadius(60)
                         }
-                        .padding(.bottom, 60)
-                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
-                            Button("Cancel", role: .cancel) {}
-                            Button("Stop & Discard", role: .destructive) {
-                                vm.discardWorkout()
-                            }
-                            Button("Finish & Save") {
-                                Task {
-                                    await vm.endWorkout()
-                                    
-                                }
-                                swpSelection = 3
-                            }
-                        }
+                        .padding(.bottom, 94)
+//                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
+//                            Button("Cancel", role: .cancel) {}
+//                            Button("Stop & Discard", role: .destructive) {
+//                                vm.discardWorkout()
+//                            }
+//                            Button("Finish & Save") {
+//                                Task {
+//                                    await vm.endWorkout()
+//                                }
+//                                swpSelection = 3
+//                            }
+//                        }
                         
                         Button {
                             runState = "run"
@@ -154,50 +173,8 @@ struct MainRunningView: View {
                                     
                                 }
                             }
-                        } .padding(.bottom, 60)
-                        
-                    }
-                    
-                  
-                    
-                    
-//                    Button {
-//                        runState = "run"
-//                        startTimer()
-//                    } label: {
-//                        ZStack {
-//                            Circle()
-//                                .foregroundColor(Color("MainColor"))
-//                                .scaleEffect(isAnimating ? 1.35 : 1.0)
-//                                .opacity(isAnimating ? 0.5 : 0)
-//
-//                            Circle()
-//                                .foregroundColor(Color("MainColor"))
-//                                .scaleEffect(isAnimating ? 1.2 : 1.0)
-//                                .opacity(isAnimating ? 0.8 : 0)
-//                            Circle()
-//                                .foregroundColor(.black)
-//                        }
-//                        .frame(width: 120, height: 120)
-//                        .overlay(
-//                            Text("RESTART")
-//                                .font(.system(size: 24, weight: .black))
-//                                .italic()
-//                                .foregroundColor(Color("MainColor"))
-//                                .frame(width: 120, height: 120)
-//                                .background(.black)
-//                                .cornerRadius(60)
-//
-//                        )
-//                        .onAppear {
-//                            withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
-//                                self.isAnimating.toggle()
-//
-//                            }
-//                        }
-//                    }
-//                    .padding(.bottom, 60)
-                    
+                        } .padding(.bottom, 94)
+                     }
                 }
             }
             .onAppear {
@@ -252,7 +229,7 @@ struct MainRunningView: View {
     
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.allowedUnits = [.minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
         //timeString = formatter.string(from: time) ?? ""
