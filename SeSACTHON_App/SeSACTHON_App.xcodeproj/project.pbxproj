@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1068485B2A36E2E100BFB309 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1068485A2A36E2E100BFB309 /* SpeechBubble.swift */; };
 		4397B2912A36B89B00FB5BCA /* DangerInfoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */; };
 		6099D7C82A310623004A49D1 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C62A310623004A49D1 /* Haptics.swift */; };
 		6099D7C92A310623004A49D1 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C72A310623004A49D1 /* HKHelper.swift */; };
@@ -72,8 +73,8 @@
 		78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */; };
 		78F734BB2A27284C002AAE1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		78F734BE2A27284C002AAE1A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */; };
-		7A91B677D9305B6550F8AF80 /* Pods_SeSACTHON_Watch_Watch_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98030FACCF17A458984918A1 /* Pods_SeSACTHON_Watch_Watch_App.framework */; };
-		B732D104897AD04850F98849 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */; };
+		8C578766339D51D87370E94C /* Pods_SeSACTHON_Watch_Watch_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE78AD10B92DA859ADCD9E01 /* Pods_SeSACTHON_Watch_Watch_App.framework */; };
+		D59185AFF5D2AE7022381579 /* Pods_SeSACTHON_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886FF94F59C000F3C5A89E3A /* Pods_SeSACTHON_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1068485A2A36E2E100BFB309 /* SpeechBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
 		2328ED6E389A50720E3B0835 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_Watch Watch App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_Watch Watch App/Pods-SeSACTHON_Watch Watch App.release.xcconfig"; sourceTree = "<group>"; };
 		367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerInfoGroup.swift; sourceTree = "<group>"; };
@@ -130,7 +132,7 @@
 		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubmitView.swift; sourceTree = "<group>"; };
 		60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEndView.swift; sourceTree = "<group>"; };
-		73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
+		72F2550A3061B07BBD30FBFD /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
 		7805F3382A2C65A40071AB01 /* PlaceMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMO.swift; sourceTree = "<group>"; };
 		7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotationView.swift; sourceTree = "<group>"; };
 		7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapView.swift; sourceTree = "<group>"; };
@@ -169,9 +171,9 @@
 		78F734B62A27284C002AAE1A /* SeSACTHON_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_AppApp.swift; sourceTree = "<group>"; };
 		78F734BA2A27284C002AAE1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78F734BD2A27284C002AAE1A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		94EF985379C1F7B568AC9669 /* Pods-SeSACTHON_Watch Watch App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_Watch Watch App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_Watch Watch App/Pods-SeSACTHON_Watch Watch App.debug.xcconfig"; sourceTree = "<group>"; };
-		98030FACCF17A458984918A1 /* Pods_SeSACTHON_Watch_Watch_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_Watch_Watch_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
+		7F861B500E1B1ABF71F84B41 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_Watch Watch App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_Watch Watch App/Pods-SeSACTHON_Watch Watch App.release.xcconfig"; sourceTree = "<group>"; };
+		886FF94F59C000F3C5A89E3A /* Pods_SeSACTHON_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE78AD10B92DA859ADCD9E01 /* Pods_SeSACTHON_Watch_Watch_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSACTHON_Watch_Watch_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A91B677D9305B6550F8AF80 /* Pods_SeSACTHON_Watch_Watch_App.framework in Frameworks */,
+				8C578766339D51D87370E94C /* Pods_SeSACTHON_Watch_Watch_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,20 +189,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B732D104897AD04850F98849 /* Pods_SeSACTHON_App.framework in Frameworks */,
+				D59185AFF5D2AE7022381579 /* Pods_SeSACTHON_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22D1DD01A52F84A62B01E4D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				886FF94F59C000F3C5A89E3A /* Pods_SeSACTHON_App.framework */,
+				CE78AD10B92DA859ADCD9E01 /* Pods_SeSACTHON_Watch_Watch_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3EEF771B45A7D15201C5742E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */,
-				73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */,
-				94EF985379C1F7B568AC9669 /* Pods-SeSACTHON_Watch Watch App.debug.xcconfig */,
-				2328ED6E389A50720E3B0835 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */,
+				72F2550A3061B07BBD30FBFD /* Pods-SeSACTHON_App.debug.xcconfig */,
+				340F31DC22FBCCC2134C10D2 /* Pods-SeSACTHON_App.release.xcconfig */,
+				1E9DF920961C9CE7B35C1551 /* Pods-SeSACTHON_Watch Watch App.debug.xcconfig */,
+				7F861B500E1B1ABF71F84B41 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -277,7 +288,7 @@
 				78F734B52A27284C002AAE1A /* SeSACTHON_App */,
 				7885013D2A2C3B0400932C42 /* SeSACTHON_Watch Watch App */,
 				3EEF771B45A7D15201C5742E /* Pods */,
-				B1C252A92649DB7E3F200112 /* Frameworks */,
+				22D1DD01A52F84A62B01E4D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -337,6 +348,7 @@
 				7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */,
 				7805F33E2A2C67730071AB01 /* TopProfileView.swift */,
 				7898F0352A2F102A00B677A2 /* YoutubeView.swift */,
+				1068485A2A36E2E100BFB309 /* SpeechBubble.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -408,15 +420,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		B1C252A92649DB7E3F200112 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				367DCCCBB9934B3FF745ABBF /* Pods_SeSACTHON_App.framework */,
-				98030FACCF17A458984918A1 /* Pods_SeSACTHON_Watch_Watch_App.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F48F2423302A135894EFE1FE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,11 +434,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7885014A2A2C3B0500932C42 /* Build configuration list for PBXNativeTarget "SeSACTHON_Watch Watch App" */;
 			buildPhases = (
-				32A7B23128A5FC1A3EAFA092 /* [CP] Check Pods Manifest.lock */,
+				F2A4569561BCAAC8D5F57C5D /* [CP] Check Pods Manifest.lock */,
 				788501382A2C3B0400932C42 /* Sources */,
 				788501392A2C3B0400932C42 /* Frameworks */,
 				7885013A2A2C3B0400932C42 /* Resources */,
-				2F67306A564A7CC1F9E1296A /* [CP] Embed Pods Frameworks */,
+				E706C72C395F874EF02AD4B3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -450,12 +453,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78F734C12A27284C002AAE1A /* Build configuration list for PBXNativeTarget "SeSACTHON_App" */;
 			buildPhases = (
-				0CE832052E32733871883E52 /* [CP] Check Pods Manifest.lock */,
+				E2CA8883819624B5138D3187 /* [CP] Check Pods Manifest.lock */,
 				78F734AF2A27284B002AAE1A /* Sources */,
 				78F734B02A27284B002AAE1A /* Frameworks */,
 				78F734B12A27284B002AAE1A /* Resources */,
 				7885014D2A2C3B0500932C42 /* Embed Watch Content */,
-				32ECFF20EA28195EF904D4EE /* [CP] Embed Pods Frameworks */,
+				B4A033047E2E02F7E0468A33 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -528,7 +531,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CE832052E32733871883E52 /* [CP] Check Pods Manifest.lock */ = {
+		B4A033047E2E02F7E0468A33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2CA8883819624B5138D3187 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -550,7 +570,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2F67306A564A7CC1F9E1296A /* [CP] Embed Pods Frameworks */ = {
+		E706C72C395F874EF02AD4B3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -567,7 +587,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_Watch Watch App/Pods-SeSACTHON_Watch Watch App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		32A7B23128A5FC1A3EAFA092 /* [CP] Check Pods Manifest.lock */ = {
+		F2A4569561BCAAC8D5F57C5D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -587,23 +607,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		32ECFF20EA28195EF904D4EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -665,6 +668,7 @@
 				6099D7E82A3109AA004A49D1 /* RunListView.swift in Sources */,
 				6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */,
 				6099D7EC2A3109C8004A49D1 /* RootView.swift in Sources */,
+				1068485B2A36E2E100BFB309 /* SpeechBubble.swift in Sources */,
 				78D01C9B2A29F87600240004 /* ViewExtension.swift in Sources */,
 				6099D7D72A310928004A49D1 /* CLLocation.swift in Sources */,
 				6099D7E92A3109AA004A49D1 /* PermissionView.swift in Sources */,
@@ -694,7 +698,7 @@
 /* Begin XCBuildConfiguration section */
 		7885014B2A2C3B0500932C42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 94EF985379C1F7B568AC9669 /* Pods-SeSACTHON_Watch Watch App.debug.xcconfig */;
+			baseConfigurationReference = 1E9DF920961C9CE7B35C1551 /* Pods-SeSACTHON_Watch Watch App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -726,7 +730,7 @@
 		};
 		7885014C2A2C3B0500932C42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2328ED6E389A50720E3B0835 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */;
+			baseConfigurationReference = 7F861B500E1B1ABF71F84B41 /* Pods-SeSACTHON_Watch Watch App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -872,7 +876,7 @@
 		};
 		78F734C22A27284C002AAE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6D57D870D774FB0B3AF7456 /* Pods-SeSACTHON_App.debug.xcconfig */;
+			baseConfigurationReference = 72F2550A3061B07BBD30FBFD /* Pods-SeSACTHON_App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -918,7 +922,7 @@
 		};
 		78F734C32A27284C002AAE1A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73EF21E272AF2B2C60F89059 /* Pods-SeSACTHON_App.release.xcconfig */;
+			baseConfigurationReference = 340F31DC22FBCCC2134C10D2 /* Pods-SeSACTHON_App.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
