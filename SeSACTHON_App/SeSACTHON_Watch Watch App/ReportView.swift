@@ -19,6 +19,7 @@ struct ReportView: View {
         case construct
         case none
     }
+    //.
     
     var body: some View {
         VStack(spacing: 0) {
@@ -41,10 +42,10 @@ struct ReportView: View {
             .foregroundColor(.black)
             .italic()
             List {
-                ReportButtonEmoji(emoji: "🎢", text: "경사도")
-                ReportButtonSymbol(image: Image(systemName: "figure.stair.stepper"), text: "높은 단차")
-                ReportButtonEmoji(emoji: "⛔", text: "좁은길")
-                ReportButtonEmoji(emoji: "🚧", text: "공사중")
+                ReportButtonEmoji(emoji: "elevation_white", text: "경사도")
+                ReportButtonEmoji(emoji: "step_white", text: "높은 턱")
+                ReportButtonEmoji(emoji: "narrow_white", text: "좁은길")
+                ReportButtonEmoji(emoji: "construction_white", text: "공사중")
                 
             }
             .listStyle(CarouselListStyle())
@@ -106,10 +107,13 @@ struct ReportButtonEmoji: View {
             dismiss()
         } label: {
             HStack {
-                Text(emoji)
-                    .font(.custom("SF Pro Text", size: 24))
+                Image(emoji)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30)
                 Text(text)
                     .font(.custom("SF Pro Text", size: 14))
+                    .padding(.leading, 5)
             }
         }
         .frame(height: 90)

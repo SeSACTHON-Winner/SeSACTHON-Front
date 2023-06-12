@@ -19,6 +19,7 @@ struct MainMapView: View {
     @State var address: String = ""
     @State var dangerArr: [DangerInfoMO] = []
     @Environment(\.dismiss) private var dismiss
+    @State var dangerGroupArr: [DangerInfoGroup] = []
     
     var body: some View {
         VStack {
@@ -99,10 +100,10 @@ struct MainMapView: View {
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
             ZStack {
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerArr
+                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerGroupArr
                 ) { danger in
-                    MapAnnotation(coordinate: .init(latitude: danger.latitude, longitude: danger.longitude)) {
-                        PlaceAnnotationView(type: danger.type)
+                    MapAnnotation(coordinate: .init(latitude: danger.latitude_mod, longitude: danger.longitude_mod)) {
+                        PlaceAnnotationView.init(danger: danger)
                     }
                 }
                 .gesture(DragGesture().onChanged { _ in
@@ -158,6 +159,35 @@ extension MainMapView {
                 print(response.value?.first?.latitude)
                 dangerArr = response.value!
                 print(dangerArr.description)
+                
+                //
+                for one in dangerArr {
+                    print("dangerGroup 만들기 실행")
+                    var la = floor(one.latitude*10000)/10000
+                    var lo = floor(one.longitude*10000)/10000
+                    if dangerGroupArr.isEmpty{
+                        var temp = DangerInfoGroup.init(latitude_mod: la, longitude_mod: lo)
+                        temp.list.append(one)
+                        dangerGroupArr.append(temp)
+                    }
+                    else{
+                        var flag = true
+                        for groupOne in dangerGroupArr {
+                            if groupOne.latitude_mod == la && groupOne.longitude_mod == lo {
+                                groupOne.list.append(one)
+                                flag = false
+                                break
+                            }
+                        }
+                        if flag {
+                            var temp = DangerInfoGroup.init(latitude_mod: la, longitude_mod: lo)
+                            temp.list.append(one)
+                            dangerGroupArr.append(temp)
+                        }
+                    }
+                    
+                }
+                //
             }
         return
     }
