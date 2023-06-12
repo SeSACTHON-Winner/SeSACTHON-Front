@@ -19,35 +19,26 @@ struct WorkoutBar: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text(workout.type.rawValue)
-                    .font(.headline)
                 Spacer()
-                if new {
-                    Image(systemName: "circle.fill")
-                        .foregroundColor(.red)
-                        .font(.subheadline)
-                        .opacity(vm.pulse ? 1 : 0)
-                } else {
+                if !new {
                     Text(workout.date.formattedApple()) //포맷된 날짜를 표시합니다.
                 }
             }
-            .animation(.default, value: vm.pulse)
             
             HStack {
                 WorkoutStat(name: "Distance", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
                 Spacer(minLength: 0)
-                WorkoutStat(name: "Duration", value: DateComponentsFormatter().string(from: workout.duration) ?? "")//포맷된 시간을 표시합니다.
+                WorkoutStat(name: "Pace", value: formatPace()) // 포맷된 속도를 표시합니다.
                 Spacer(minLength: 0)
-                WorkoutStat(name: "Speed", value: Measurement(value: workout.distance / workout.duration, unit: UnitSpeed.metersPerSecond).formatted()) // 포맷된 속도를 표시합니다.
+                WorkoutStat(name: "Calory", value: workout.calories.formatted())
+               // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                 Spacer(minLength: 0)
-
-                WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
+                //TODO: 도움개수 연결
+                WorkoutStat(name: "도움개수", value: "0")//포맷된 시간을 표시합니다.
                 Spacer(minLength: 0)
             }
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .materialBackground()
         .transition(.move(edge: .bottom).combined(with: .opacity))
         .onTapGesture {
             vm.zoomTo(workout)
@@ -73,6 +64,18 @@ struct WorkoutBar: View {
             )
         }
     }
+    
+    func formatPace() -> String {
+        let seconds = workout.duration * 1000 / workout.distance
+        
+        if seconds.isFinite {
+            let minutes = Int(seconds / 60)
+            let remainingSeconds = Int(seconds.truncatingRemainder(dividingBy: 60))
+            return "\(minutes)'\(remainingSeconds)\""
+        } else {
+            return "Invalid Pace"
+        }
+    }
 }
 
 
@@ -94,9 +97,10 @@ struct WorkoutStat: View {
         VStack(spacing: 3) {
             Text(name)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(.white).opacity(0.6)
             Text(value)
                 .font(.headline)
+                .foregroundColor(.white)
         }
     }
 }
