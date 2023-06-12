@@ -28,23 +28,12 @@ struct RootView: View {
         ZStack(alignment: .bottom) {
             MapView(region: $region)
                 .ignoresSafeArea()
-            
-            VStack(spacing: 10) {
+                .tint(.sesacMint)
+            VStack{
                 Spacer()
-                if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                    WorkoutBar(workout: workout, new: false).onAppear {
-                        print("false workbar")
-                    }
-                }
-                
-                if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                    WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
-                        print("true workbar")
-                    }
-                }
                 
                 if swpSelection == 2 {
-                    FloatingButtons()
+                    //FloatingButtons()
                 }
             }
             .padding(10)

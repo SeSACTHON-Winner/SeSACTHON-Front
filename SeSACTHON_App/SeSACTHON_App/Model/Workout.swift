@@ -33,6 +33,7 @@ class Workout: NSObject {
         self.pace = pace
     }
     
+    //TODO: 칼로리 단위 수정
     convenience init(hkWorkout: HKWorkout, locations: [CLLocation]) {
         let coords = locations.map(\.coordinate)
         let type = WorkoutType(hkType: hkWorkout.workoutActivityType) // HealthKit의 운동 타입을 로컬 운동 타입으로 변환합니다.
@@ -48,9 +49,11 @@ class Workout: NSObject {
                 // Handle error
                 return
             }
-            
+
             for sample in samples {
-                let energy = sample.quantity.doubleValue(for: HKUnit.kilocalorie())
+                let energy = sample.quantity.doubleValue(for: HKUnit.largeCalorie())
+                print("energyquery", energy)
+
                 calories += energy
             }
         }

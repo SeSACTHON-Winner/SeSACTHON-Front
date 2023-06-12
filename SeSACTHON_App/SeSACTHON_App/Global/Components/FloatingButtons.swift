@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 import HealthKit
 
+//Not Use
 struct FloatingButtons: View {
     @EnvironmentObject var vm: WorkoutViewModel
     @State var showWorkoutTypeChoice = false
@@ -63,6 +64,9 @@ struct FloatingButtons: View {
                 }
             }.padding(.trailing, 320)
             .padding(.bottom, 100)
+             
+             
+            
                /* if vm.recording {
                     Button {
                         showStopConfirmation = true

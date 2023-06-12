@@ -39,6 +39,7 @@ struct MainRunningView: View {
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
         VStack {
+            
             VStack {
                 Spacer().frame(height: 60)
                 HStack {
@@ -52,9 +53,20 @@ struct MainRunningView: View {
                     Spacer()
                 }.padding(.leading, 28)
                 
+                if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                    WorkoutBar(workout: workout, new: false).onAppear {
+                        print("false workbar")
+                    }
+                }
+                
+                if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+                    WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                        print("true workbar")
+                    }
+                }
             }
             .foregroundColor(.white)
-            .frame(height: 120)
+            .frame(height: 240)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -96,7 +108,7 @@ struct MainRunningView: View {
                             .frame(width: 120, height: 120)
                             .background(.black)
                             .cornerRadius(60)
-                    }.padding(.bottom, 60)
+                    }.padding(.bottom, 94)
                 }
                 else if runState == "stop" {
                     if vm.recording {
@@ -116,7 +128,7 @@ struct MainRunningView: View {
                                 .background(.black)
                                 .cornerRadius(60)
                         }
-                        .padding(.bottom, 60)
+                        .padding(.bottom, 94)
 //                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
 //                            Button("Cancel", role: .cancel) {}
 //                            Button("Stop & Discard", role: .destructive) {
@@ -161,7 +173,7 @@ struct MainRunningView: View {
                                     
                                 }
                             }
-                        } .padding(.bottom, 60)
+                        } .padding(.bottom, 94)
                      }
                 }
             }
@@ -217,7 +229,7 @@ struct MainRunningView: View {
     
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.allowedUnits = [.minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
         //timeString = formatter.string(from: time) ?? ""

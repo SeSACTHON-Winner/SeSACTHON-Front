@@ -89,7 +89,7 @@ struct HKHelper {
         }
         healthStore.execute(routeQuery)
     }
-    
+    /*
     static func loadCalories(hkWorkout: HKWorkout, completion: @escaping (Double) -> Void) {
             let type = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
             let predicate = HKQuery.predicateForObjects(from: hkWorkout)
@@ -107,7 +107,7 @@ struct HKHelper {
                 completion(totalCalories)
             }
             healthStore.execute(query)
-        }
+        }*/
     
     // HealthKit API에서 트레이닝의 칼로리 불러오기
     static func loadCalories(for hkWorkout: HKWorkout, completion: @escaping (Double) -> Void) {
@@ -131,7 +131,7 @@ struct HKHelper {
             // 칼로리 합산
             var totalCalories: Double = 0
             for sample in samples {
-                totalCalories += sample.quantity.doubleValue(for: HKUnit.kilocalorie())
+                totalCalories += sample.quantity.doubleValue(for: HKUnit.kilocalorie()) * 100
             }
             
             // 검색된 총 칼로리를 반환

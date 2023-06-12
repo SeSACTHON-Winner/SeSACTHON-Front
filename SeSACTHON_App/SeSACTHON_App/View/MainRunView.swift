@@ -125,7 +125,7 @@ struct MainRunStart: View {
                     }
                 }
             }
-            .padding(.bottom, 60)
+            .padding(.bottom, 94)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -241,7 +241,7 @@ struct MainRunHomeView: View {
                                 .italic()
                                 .foregroundColor(.white)
                                 .frame(width: 120, height: 120)
-                                .background(Color("222222"))
+                                .background(Color("#222222"))
                                 .cornerRadius(60)
                         }
                         Button {
