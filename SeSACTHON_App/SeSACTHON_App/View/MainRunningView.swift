@@ -41,7 +41,7 @@ struct MainRunningView: View {
         VStack {
             
             VStack {
-                Spacer().frame(height: 60)
+                Spacer().frame(height: 80)
                 HStack {
                     // 기존 timer
                     // Text("\(formattedTime(time))")
@@ -64,9 +64,10 @@ struct MainRunningView: View {
                         print("true workbar")
                     }
                 }
+                Spacer().frame(height: 40)
             }
             .foregroundColor(.white)
-            .frame(height: 240)
+            .frame(height: 200)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -76,6 +77,7 @@ struct MainRunningView: View {
             }.onDisappear {
                 print(workout.pace)
             }
+            
             Spacer()
             Button {
                 self.showingImagePicker = true
