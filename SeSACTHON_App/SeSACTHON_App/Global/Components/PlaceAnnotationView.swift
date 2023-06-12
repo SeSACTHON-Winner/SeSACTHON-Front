@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 import Kingfisher
 
 struct PlaceAnnotationView: View {
@@ -17,6 +18,7 @@ struct PlaceAnnotationView: View {
     var constructionCount: Int
     var narrowCount: Int
     let listLength: Int
+    @State var dotClick = false
     @State var picturePath: String?
     
     init(danger: DangerInfoGroup) {
@@ -77,6 +79,7 @@ struct PlaceAnnotationView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+
             KFImage(URL(string: "http://35.72.228.224/sesacthon/\(PicturePath.picturePath)")!)
                 .placeholder { //플레이스 홀더 설정
                     Image(systemName: "map")
@@ -92,6 +95,7 @@ struct PlaceAnnotationView: View {
                 .frame(width: 50, height: 50)
                 .background(.black)
                 .cornerRadius(5)
+            if dotClick {                
             Color.white
                 .frame(width: 50 * CGFloat(calWidth()), height: 80)
                 .cornerRadius(10)
@@ -106,38 +110,47 @@ struct PlaceAnnotationView: View {
                                 Text("\(slopeCount)")
                                     .foregroundColor(.black)
                             }
-                        }
-                        if stepCount > 0 {
-                            VStack{
-                                Image("icon_step")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 32)
-                                Text("\(stepCount)")
-                                    .foregroundColor(.black)
+                            if stepCount > 0 {
+                                VStack{
+                                    Image("icon_step")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 32)
+                                    Text("\(stepCount)")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            if constructionCount > 0 {
+                                VStack{
+                                    Image("icon_construction")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 32)
+                                    Text("\(constructionCount)")
+                                        .foregroundColor(.black)
+                                }
+                            }
+                            if narrowCount > 0 {
+                                VStack{
+                                    Image("icon_narrow")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 32)
+                                    Text("\(narrowCount)")
+                                        .foregroundColor(.black)
+                                }
                             }
                         }
-                        if constructionCount > 0 {
-                            VStack{
-                                Image("icon_construction")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 32)
-                                Text("\(constructionCount)")
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        if narrowCount > 0 {
-                            VStack{
-                                Image("icon_narrow")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 32)
-                                Text("\(narrowCount)")
-                                    .foregroundColor(.black)
-                            }
-                        }
-                    }
+                    }        
+                Image(systemName: "arrowtriangle.down.fill")
+                    .font(.caption)
+                    .scaleEffect(2)
+                    .foregroundColor(.white)
+            }
+            else{
+                Spacer().frame(width:0, height: 90)
+            }
+
                     //.shadow(radius: 2, x: 2, y: 2)
                 }
             
@@ -145,8 +158,8 @@ struct PlaceAnnotationView: View {
                 .font(.caption)
                 .scaleEffect(2)
                 .foregroundColor(.white)
-            //                .offset(x: 0, y: 46)
-            //.shadow(radius: 2, x: 0, y: 6)
+        }
+
             
             Image("dangerDot")
                 .resizable()
@@ -157,12 +170,10 @@ struct PlaceAnnotationView: View {
                         .frame(height: 32)
                         .foregroundColor(.white)
                 }
-            
-            
+                .onTapGesture {
+                    self.dotClick.toggle()
+                }
         }
-        
-        //.shadow(radius: 2, x: 2, y: 2)
-        
     }
 }
 
