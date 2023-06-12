@@ -7,7 +7,7 @@
 
 import HealthKit
 import SwiftUI
-
+/*
 enum WorkoutType: String, CaseIterable {
     case run = "Run"
     case other = "Other"
@@ -38,4 +38,4 @@ enum WorkoutType: String, CaseIterable {
             self = .other
         }
     }
-}
+}*/

@@ -66,19 +66,19 @@ struct HomeView: View {
                     Button {
                         gotoMap = true
                     } label: {
-                        Text("Map")
-                            .frame(height: 50)
+                        Text("MAP")
+                            .frame(height: 40)
                             .frame(maxWidth: .infinity)
                             .background(.black)
                             .font(.custom("SF Pro Text", size: 24))
-                            .foregroundColor(.sesacMint)
+                            .foregroundColor(.white)
                     }
                     Divider()
                     Button {
                         gotoRun = true
                     } label: {
                         Text("RUN")
-                            .frame(height: 50)
+                            .frame(height: 40)
                             .frame(maxWidth: .infinity)
                             .background(.black)
                             .font(.custom("SF Pro Text", size: 24))
@@ -97,9 +97,9 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $gotoMap) {
                 MainMapView()
-            }
+            }.background(.black)
             
-        }  
+        }//.edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -20,6 +20,9 @@ struct HKHelper {
         let types: Set = [
             HKObjectType.workoutType(),
             HKSeriesType.workoutRoute(),
+            HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+            HKObjectType.quantityType(forIdentifier: .runningSpeed)!
+
             //HKQuantityType.activitySummaryType() //TODO: 여기 칼로리서 찾아보기??
         ]
         
@@ -33,11 +36,14 @@ struct HKHelper {
         // 두 종류의 데이터를 공유할 수 있는 권한이 있는지 여부를 결정합니다.
         let workoutStatus = healthStore.authorizationStatus(for: HKObjectType.workoutType())
         let routeStatus = healthStore.authorizationStatus(for: HKSeriesType.workoutRoute())
+        let calorieStatus = healthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!) // 칼로리 데이터에 대한 권한 상태
+
         
         // 두 종류의 데이터를 공유할 수 있는 권한이 있는지 여부를 결정합니다.
-        if workoutStatus == .sharingAuthorized && routeStatus == .sharingAuthorized {
-            return .sharingAuthorized
-        } else if workoutStatus == .notDetermined && routeStatus == .notDetermined {
+        if workoutStatus == .sharingAuthorized && routeStatus == .sharingAuthorized && calorieStatus == .sharingAuthorized {
+             return .sharingAuthorized
+        }
+        else if workoutStatus == .notDetermined && routeStatus == .notDetermined && calorieStatus == .notDetermined {
             return .notDetermined
         } else {
             return .sharingDenied
@@ -83,6 +89,59 @@ struct HKHelper {
         }
         healthStore.execute(routeQuery)
     }
+    /*
+    static func loadCalories(hkWorkout: HKWorkout, completion: @escaping (Double) -> Void) {
+            let type = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
+            let predicate = HKQuery.predicateForObjects(from: hkWorkout)
+            
+            let query = HKSampleQuery(sampleType: type, predicate: predicate, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { query, samples, error in
+                guard let quantitySamples = samples as? [HKQuantitySample] else {
+                    completion(0.0)
+                    return
+                }
+                
+                let totalCalories = quantitySamples.reduce(0.0) { (result, sample) in
+                    return result + sample.quantity.doubleValue(for: HKUnit.kilocalorie())
+                }
+                
+                completion(totalCalories)
+            }
+            healthStore.execute(query)
+        }*/
+    
+    // HealthKit API에서 트레이닝의 칼로리 불러오기
+    static func loadCalories(for hkWorkout: HKWorkout, completion: @escaping (Double) -> Void) {
+        // 칼로리 속성을 쿼리하기 위한 HKObjectQuery 생성
+        let caloriesQuery = HKQuery.predicateForObjects(from: hkWorkout)
+        
+        // HealthKit의 기본 세션 사용
+        let healthStore = HKHealthStore()
+        
+        // 칼로리 데이터 유형
+        let caloriesType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!
+        
+        // HKObjectQuery를 사용하여 칼로리 측정값 검색
+        let query = HKSampleQuery(sampleType: caloriesType, predicate: caloriesQuery, limit: HKObjectQueryNoLimit, sortDescriptors: nil) { (query, samples, error) in
+            guard let samples = samples as? [HKQuantitySample], error == nil else {
+                print("Failed to retrieve calories for workout: \(error?.localizedDescription ?? "")")
+                completion(0)
+                return
+            }
+            
+            // 칼로리 합산
+            var totalCalories: Double = 0
+            for sample in samples {
+                totalCalories += sample.quantity.doubleValue(for: HKUnit.kilocalorie()) * 100
+            }
+            
+            // 검색된 총 칼로리를 반환
+            completion(totalCalories)
+        }
+        
+        // HealthKit의 기본 세션에서 쿼리 실행
+        healthStore.execute(query)
+    }
+        
 }
 
 
