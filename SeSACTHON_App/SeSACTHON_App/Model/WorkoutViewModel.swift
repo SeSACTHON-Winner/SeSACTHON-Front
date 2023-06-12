@@ -58,7 +58,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     var routeBuilder: HKWorkoutRouteBuilder?
     
     // 녹화 중 훈련의 경과 시간을 업데이트하는 타이머를 취소하는 데 사용됩니다.
-    var timer: Cancellable?
+    //var timer: Cancellable?
     
     // Map 맵 속성
     @Published var trackingMode = MKUserTrackingMode.none
@@ -100,9 +100,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
     // View
     @Published var degrees = 0.0
     @Published var scale = 1.0
-    @Published var pulse = false
     @Published var showInfoView = false
     @Published var showRunListView = false
+    //TODO: 카메라 report하면 reportCountView += 1 / 러닝 끝나면 =
+    @Published var reportCount = 0
 
     // Errors
     @Published var showErrorAlert = false
@@ -318,10 +319,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
         pace = 0
         calory = 0
         recording = true
-        timer = Timer.publish(every: 0.5, on: .main, in: .default).autoconnect().sink { _ in // 0.5초마다 사용자 인터페이스를 진동시킬 수 있는 타이머를 만듭니다.
-
-            self.pulse.toggle()
-        }
+//        timer = Timer.publish(every: 0.5, on: .main, in: .default).autoconnect().sink { _ in // 0.5초마다 사용자 인터페이스를 진동시킬 수 있는 타이머를 만듭니다.
+//
+//            self.pulse.toggle()
+//        }
     }
 
     
@@ -329,7 +330,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         // 백그라운드에서 위치 업데이트를 금지하다
         locationManager.allowsBackgroundLocationUpdates = false
         
-        timer?.cancel()
+        //timer?.cancel()
         recording = false
         
         pace = 0
@@ -346,9 +347,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
     func endWorkout() async {
         locationManager.allowsBackgroundLocationUpdates = false
         
-        timer?.cancel()
+        //timer?.cancel()
         recording = false
-        
         var workout = newWorkout
         workouts.append(workout)
         updatePolylines()
@@ -370,6 +370,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
         locations = []
         pace = 0
         calory = 0
+        
+        ///RoportCount 신고개수 초기화
+        reportCount = 0
+
     }
     
     // MARK: - Map

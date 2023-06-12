@@ -25,12 +25,11 @@ class DangerInfoMO: ObservableObject, Identifiable, Codable {
         self.picturePath = picturePath
         self.type = type.rawValue
     }
-    
-    
-    enum DangerType: String, Codable {
-        case step = "step"
-        case slope = "slope"
-        case construction = "construction"
-        case narrow = "narrow"
-    }
+}
+
+enum DangerType: String, Codable {
+    case step = "step"
+    case slope = "slope"
+    case construction = "construction"
+    case narrow = "narrow"
 }

@@ -16,20 +16,20 @@ struct InfoView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
-                VStack(spacing: 0) {
-                    Image("logo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 70, height: 70)
-                        .cornerRadius(15)
-                        .padding(.bottom)
-                    Text((welcome ? "Welcome to\n" : "") + NAME)
-                        .font(.largeTitle.bold())
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 5)
-                    
+                HStack(alignment: .center) {
+                    VStack(spacing: 0) {
+                        Image("logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 70, height: 70)
+                            .cornerRadius(15)
+                            .padding(.bottom)
+                        Text((welcome ? "Welcome to\n" : "") + NAME)
+                            .font(.largeTitle.bold())
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 5)
+                    }
                 }
-                .horizontallyCentred()
                 .padding(.bottom, 30)
                 
 

@@ -212,7 +212,8 @@ struct MainRunHomeView: View {
                     } else {
                         Spacer().frame(height: 80)
                         // MARK: - 말풍선
-                        Color.black.frame(height: 100)
+                        SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
+                        //Color.black.frame(height: 100)
                         Spacer()
                     }
                     
@@ -286,7 +287,6 @@ struct MainRunHomeView: View {
     }
     
 }
-
 struct MainRunView_Previews: PreviewProvider {
     static var previews: some View {
         MainRunView()

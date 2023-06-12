@@ -7,16 +7,20 @@
 
 import SwiftUI
 import Alamofire
+import Kingfisher
 
 struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var nickname: String = ""
-    @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4)
+    @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4, picturePath: "")
     @State var runningArr: [RunningInfo] = []
     @State var isNickEditable = false
     
     @State var nickText = ""
+    
+    @State var showPhoto = false
+    @State var profileUIimage: UIImage?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -46,12 +50,80 @@ struct ProfileView: View {
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(radius: 3, x: 0 ,y: 4)
             HStack(spacing: 29) {
-                Image(systemName: "person.crop.circle.fill")
+                
+                // MARK: - profile image
+                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(member.picturePath)")!)
+                    .placeholder { //플레이스 홀더 설정
+                        Image(systemName: "map")
+                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                    .onSuccess {r in //성공
+                        print("succes: \(r)")
+                    }
+                    .onFailure { e in //실패
+                        print("Fail : \(member.picturePath)")
+                        print("failure: \(e)")
+                        
+                    }
                     .resizable()
                     .scaledToFit()
                     .frame(width: 126)
+                    .clipShape(Circle())
                     .padding(.leading, 30)
-                    .foregroundColor(.gray)
+                    .onTapGesture {
+                        showPhoto = true
+                    }
+                    .fullScreenCover(isPresented: $showPhoto) {
+                        SUImagePicker(sourceType: UIImagePickerController.SourceType.photoLibrary) { (image) in
+                            
+                            // MARK: - ImageUpload
+                            self.profileUIimage = image
+                            print(image)
+                            var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
+                            
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyMMddHHmmss"
+
+                            let currentDate = Date()
+                            let formattedDate = dateFormatter.string(from: currentDate)
+                            let photoName = "\(member.nickname)\(formattedDate)"
+                            var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(member.nickname)"] as Dictionary
+                            AF.upload(multipartFormData: { multipartFormData in
+                                    if let imageData = image.jpegData(compressionQuality: 0.5) {
+                                        multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
+                                    }
+                                }, to: url).response { response in
+                                    switch response.result {
+                                    case .success(let value):
+                                        if let data = value {
+                                            // Process the response data as needed
+                                            let responseString = String(data: data, encoding: .utf8)
+                                            print("Response: \(responseString ?? "")")
+                                        }
+                                        print("Photo uploaded successfully")
+                                        
+                                    case .failure(let error):
+                                        print("Photo upload failed with error: \(error)")
+                                    }
+                                }
+                            url = URL(string: "http://35.72.228.224/sesacthon/memberInfo.php")!
+                            let uid = UserDefaults.standard.string(forKey: "uid") ?? ""
+                            params = ["picture_path" : "images/\(photoName).jpg", "uid" : uid] as Dictionary
+                            AF.request(url, method: .put, parameters: params).responseString {
+                                print($0.result)
+                                fetchMember { result in
+                                    switch result {
+                                    case .success(let data):
+                                        member = data
+                                    case .failure(let error):
+                                        print("\n\n\nmember\n\n\n")
+                                        print(error)
+                                    }
+                                }
+                            }
+                        }
+                        .ignoresSafeArea()
+                    }
+                
                 VStack {
                     HStack {
                         
@@ -74,7 +146,7 @@ struct ProfileView: View {
                                     let url = "http://35.72.228.224/sesacthon/memberInfo.php"
                                     let uid = UserDefaults.standard.string(forKey: "uid") ?? ""
                                     print("uid : \(uid)")
-                                    //                                        let params = ["nickname" : self.nickname, "uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+                   
                                     let params = ["nickname" : self.nickname, "uid" : uid] as Dictionary
                                     AF.request(url, method: .put, parameters: params).responseString {
                                         print($0.result)
@@ -91,7 +163,7 @@ struct ProfileView: View {
                                             }
                                         }
                                     }
-
+                                    
                                     
                                 }
                         } else {
