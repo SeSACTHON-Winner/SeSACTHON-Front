@@ -69,7 +69,7 @@ struct RunEndView: View {
                                     .foregroundColor(.white.opacity(0.6))
 
                                 //TODO: Text("6’12”") 수정
-                                Text("\(Measurement(value: workout.distance / workout.duration, unit: UnitSpeed.metersPerSecond).formatted())")
+                                Text("\(formatPace())")
                                     .font(.system(size: 24, weight: .bold)).italic()
                                 Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
                                     .font(.system(size: 24, weight: .bold)).italic()
@@ -158,6 +158,17 @@ struct RunEndView: View {
             return formattedDuration
         } else {
             return ""
+        }
+    }
+    func formatPace() -> String {
+        let seconds = workout.duration * 1000 / workout.distance
+        
+        if seconds.isFinite {
+            let minutes = Int(seconds / 60)
+            let remainingSeconds = Int(seconds.truncatingRemainder(dividingBy: 60))
+            return "\(minutes)'\(remainingSeconds)\""
+        } else {
+            return "Invalid Pace"
         }
     }
 }
