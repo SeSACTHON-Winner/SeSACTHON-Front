@@ -87,11 +87,11 @@ struct ProfileView: View {
                             let formattedDate = dateFormatter.string(from: currentDate)
                             let photoName = "\(member.nickname)\(formattedDate)"
                             var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(member.nickname)"] as Dictionary
-                            AF.upload(multipartFormData: { multipartFormData in
-                                    if let imageData = image.jpegData(compressionQuality: 0.5) {
-                                        multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
-                                    }
-                                }, to: url).response { response in
+                                AF.upload(multipartFormData: { multipartFormData in
+                                        if let imageData = image.jpegData(compressionQuality: 0.5) {
+                                            multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
+                                        }
+                                    }, to: url).response { response in
                                     switch response.result {
                                     case .success(let value):
                                         if let data = value {
