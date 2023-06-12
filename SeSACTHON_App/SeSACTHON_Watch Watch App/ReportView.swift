@@ -6,19 +6,15 @@
 //
 
 import SwiftUI
+import Alamofire
+import WatchConnectivity
 
 struct ReportView: View {
     
     @State var isNext = false
     @Environment(\.dismiss) private var dismiss
     
-    enum dangerType {
-        case slope
-        case step
-        case narrow
-        case construct
-        case none
-    }
+    
     //.
     
     var body: some View {
@@ -42,10 +38,10 @@ struct ReportView: View {
             .foregroundColor(.black)
             .italic()
             List {
-                ReportButtonEmoji(emoji: "elevation_white", text: "경사도")
-                ReportButtonEmoji(emoji: "step_white", text: "높은 턱")
-                ReportButtonEmoji(emoji: "narrow_white", text: "좁은길")
-                ReportButtonEmoji(emoji: "construction_white", text: "공사중")
+                ReportButtonEmoji(emoji: "elevation_white", dangertype: .slope)
+                ReportButtonEmoji(emoji: "step_white", dangertype: .step)
+                ReportButtonEmoji(emoji: "narrow_white", dangertype: .narrow)
+                ReportButtonEmoji(emoji: "construction_white", dangertype: .construct)
                 
             }
             .listStyle(CarouselListStyle())
@@ -96,22 +92,34 @@ struct ReportButtonEmoji: View {
     
     
     @State var emoji: String
-    @State var text: String
     @State  var isNext = false
+    @State var dangertype: dangerType
     @Environment(\.dismiss) private var dismiss
     
+    @State var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    @State var locattionmanager = WatchLocationDataManager()
+    
     var body: some View {
-        Button {
-            text = "✅"
-            sleep(1)
-            dismiss()
-        } label: {
+            Button {
+                coordinate = locattionmanager.returnLocation()
+                
+                var url = URL(string: "http://35.72.228.224/sesacthon/dangerInfo.php")!
+                let uid = UserDefaults.standard.string(forKey: "uid")
+                let params = ["uid" : uid, "latitude" : coordinate.latitude, "longitude" : coordinate.longitude, "type" : returnEngRaw()] as Dictionary
+                
+                AF.request(url, method: .post, parameters: params).responseString {
+                    print($0)
+                }
+                
+                sleep(1)
+                dismiss()
+            } label: {
             HStack {
                 Image(emoji)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30)
-                Text(text)
+                Text(dangertype.rawValue)
                     .font(.custom("SF Pro Text", size: 14))
                     .padding(.leading, 5)
             }
@@ -119,34 +127,34 @@ struct ReportButtonEmoji: View {
         .frame(height: 90)
         .frame(maxWidth: .infinity)
         .foregroundColor(.sesacMint)
+
     }
+    
+    func returnEngRaw() -> String {
+        switch self.dangertype {
+        case .step:
+            return "step"
+        case .slope:
+            return "slope"
+        case .narrow:
+            return "narrow"
+        case .construct:
+            return "construct"
+        }
+    }
+    
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
+        if let uid = userInfo["uid"] as? String {
+            // Use the `uid` value in your watch app
+            UserDefaults.standard.setValue(uid, forKey: "uid")
+        }
+    }
+    
 }
 
-struct ReportButtonSymbol: View {
-    
-    
-    @State var image: Image
-    @State var text: String
-    @State  var isNext = false
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        Button {
-            text = "✅"
-            sleep(1)
-            dismiss()
-        } label: {
-            HStack {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 32)
-                Text(text)
-                    .font(.custom("SF Pro Text", size: 14))
-            }
-        }
-        .frame(height: 90)
-        .frame(maxWidth: .infinity)
-        .foregroundColor(.sesacMint)
-    }
+enum dangerType: String {
+    case slope = "경사도"
+    case step = "높은 턱"
+    case narrow = "좁은길"
+    case construct = "공사중"
 }

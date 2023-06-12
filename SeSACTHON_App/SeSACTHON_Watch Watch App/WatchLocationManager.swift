@@ -1,14 +1,14 @@
 //
-//  LocationDataManager.swift
-//  SeSACTHON_App
+//  WatchLocationManager.swift
+//  SeSACTHON_Watch Watch App
 //
-//  Created by ChoiYujin on 2023/06/01.
+//  Created by ChoiYujin on 2023/06/12.
 //
 
 import Foundation
 import CoreLocation
 
-class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegate {
+class WatchLocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var locationManager = CLLocationManager()
     @Published var authorizationStatus: CLAuthorizationStatus?
     
@@ -22,7 +22,6 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
         locationManager.requestAlwaysAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
-        locationManager.startMonitoringSignificantLocationChanges()
         locationManager.allowsBackgroundLocationUpdates = true
     }
     

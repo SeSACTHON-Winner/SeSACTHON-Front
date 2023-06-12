@@ -8,6 +8,7 @@
 import SwiftUI
 import AuthenticationServices
 import Alamofire
+import WatchConnectivity
 
 struct LoginView: View {
     
@@ -67,6 +68,8 @@ struct AppleSigninButton : View{
                             print($0)
                         }
                         UserDefaults.standard.setValue(UserIdentifier, forKey: "uid")
+                        let userInfo = ["uid": UserIdentifier]
+                        WCSession.default.transferCurrentComplicationUserInfo(userInfo)
                         print("UserDefaults: \(UserDefaults.standard.string(forKey: "uid") ?? "Nothing")")
                         
                     default:

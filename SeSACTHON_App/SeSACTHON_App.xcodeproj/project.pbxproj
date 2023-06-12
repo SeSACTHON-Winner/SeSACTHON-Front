@@ -52,6 +52,7 @@
 		786B24492A2D983F0048013C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78F734BA2A27284C002AAE1A /* Assets.xcassets */; };
 		786B244B2A2DA0820048013C /* RunningResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B244A2A2DA0820048013C /* RunningResultView.swift */; };
 		786B244D2A2DA4CD0048013C /* watchBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786B244C2A2DA4CD0048013C /* watchBackButton.swift */; };
+		786DFC402A37066C00368AA5 /* WatchLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 786DFC3F2A37066C00368AA5 /* WatchLocationManager.swift */; };
 		7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */; };
 		788501462A2C3B0500932C42 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788501452A2C3B0500932C42 /* Preview Assets.xcassets */; };
 		788501492A2C3B0500932C42 /* SeSACTHON_Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -150,6 +151,7 @@
 		784615842A2CB8F700C83C89 /* RunningTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimeView.swift; sourceTree = "<group>"; };
 		786B244A2A2DA0820048013C /* RunningResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultView.swift; sourceTree = "<group>"; };
 		786B244C2A2DA4CD0048013C /* watchBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = watchBackButton.swift; sourceTree = "<group>"; };
+		786DFC3F2A37066C00368AA5 /* WatchLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchLocationManager.swift; sourceTree = "<group>"; };
 		7885013C2A2C3B0400932C42 /* SeSACTHON_Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSACTHON_Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSACTHON_WatchApp.swift; sourceTree = "<group>"; };
 		788501452A2C3B0500932C42 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				60817E7A2A362F8000B5C3A6 /* SeSACTHON-Watch-Watch-App-Info.plist */,
 				7885013E2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift */,
+				786DFC3F2A37066C00368AA5 /* WatchLocationManager.swift */,
 				7846157D2A2CAA8100C83C89 /* StartView.swift */,
 				784615822A2CB8E200C83C89 /* ReportView.swift */,
 				784615802A2CB26200C83C89 /* RunningView.swift */,
@@ -617,6 +620,7 @@
 				7885014F2A2C3B6100932C42 /* FontExtension.swift in Sources */,
 				786B244B2A2DA0820048013C /* RunningResultView.swift in Sources */,
 				784615852A2CB8F700C83C89 /* RunningTimeView.swift in Sources */,
+				786DFC402A37066C00368AA5 /* WatchLocationManager.swift in Sources */,
 				7885013F2A2C3B0400932C42 /* SeSACTHON_WatchApp.swift in Sources */,
 				784615832A2CB8E200C83C89 /* ReportView.swift in Sources */,
 				7846157E2A2CAA8100C83C89 /* StartView.swift in Sources */,
@@ -706,14 +710,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -738,14 +747,19 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -908,7 +922,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2";
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -954,7 +968,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2";
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
