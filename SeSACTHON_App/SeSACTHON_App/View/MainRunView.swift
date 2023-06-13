@@ -110,7 +110,7 @@ struct MainRunStart: View {
                         .scaleEffect(isAnimating ? 1.2 : 1.0)
                         .opacity(isAnimating ? 0.8 : 0)
                     Circle()
-                        .foregroundColor(.black)
+                        .foregroundColor(Color("#222222"))
                 }
                 .frame(width: 120, height: 120)
                 .overlay(
@@ -118,6 +118,7 @@ struct MainRunStart: View {
                         .font(.system(size: 28, weight: .black))
                         .italic()
                         .foregroundColor(.white)
+                    
                 )
                 .onAppear {
                     withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatCount(8)) {
@@ -166,7 +167,7 @@ struct MainRunHomeView: View {
         ZStack {
             
             VStack(spacing: 0) {
-                Color.black.frame(height: 50)
+                Color.black.frame(height: 76)
                 TopProfileView(title: "RUN")
                     .padding(.horizontal, 20)
                     .background(.black)
