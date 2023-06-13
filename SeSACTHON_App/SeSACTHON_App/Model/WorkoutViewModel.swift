@@ -63,7 +63,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     var routeBuilder: HKWorkoutRouteBuilder?
     
     // 녹화 중 훈련의 경과 시간을 업데이트하는 타이머를 취소하는 데 사용됩니다.
-    //var timer: Cancellable?
+    var timer: Cancellable?
     
     // Map 맵 속성
     @Published var trackingMode = MKUserTrackingMode.none
@@ -309,15 +309,12 @@ class WorkoutViewModel: NSObject, ObservableObject {
         guard healthAuth else { return }
         
         let config = HKWorkoutConfiguration() // 훈련할 수 있는 환경을 조성하다
-
         config.activityType = type // 입력 매개 변수에 따라 활동 유형을 설정합니다.
-
         config.locationType = .outdoor // 외부 경로의 종류를 설정합니다.
         
         self.type = HKWorkoutActivityType.running // 어떤 종류의 훈련이 적절한지 결정합니다.
 
         routeBuilder = HKWorkoutRouteBuilder(healthStore: healthStore, device: .local()) // GPS 데이터를 캡처하기 위한 경로 생성기를 만들었습니다.
-
         workoutBuilder = HKWorkoutBuilder(healthStore: healthStore, configuration: config, device: .local())// 훈련 데이터를 캡처할 훈련 생성자를 만듭니다.
 
         do {
@@ -346,7 +343,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         // 백그라운드에서 위치 업데이트를 금지하다
         locationManager.allowsBackgroundLocationUpdates = false
         
-        //timer?.cancel()
+        timer?.cancel()
         recording = false
         
         pace = 0
@@ -363,7 +360,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     func endWorkout() async {
         locationManager.allowsBackgroundLocationUpdates = false
         
-        //timer?.cancel()
+        timer?.cancel()
         recording = false
         var workout = newWorkout
         workouts.append(workout)
@@ -520,7 +517,7 @@ extension WorkoutViewModel: MKMapViewDelegate {
             let render = MKPolylineRenderer(polyline: polyline)
             render.lineWidth = 8
             // 폴리선이 현재 트레이닝의 선택인 경우 주황색, 인디고 색상을 사용하십시오
-            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? .black.opacity(0.75): .black)
+            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? Color("MainColor"): .black)
             return render
             // 오버레이가 연습이라면 (워크아웃)
         } else if let workout = overlay as? Workout {

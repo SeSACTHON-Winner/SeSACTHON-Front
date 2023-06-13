@@ -17,7 +17,7 @@ struct RunEndView: View {
     var workout: Workout
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var locationManager = LocationDataManager()
-    
+    @Binding var time: TimeInterval
     
     var body: some View {
         ScrollView {
@@ -114,8 +114,8 @@ struct RunEndView: View {
                                     .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
                                 
-                                //Text("14:13:22")
-                                Text("\(formatDuration(workout.duration))")
+                                Text("\(formatDuration(time))")
+                                //Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
@@ -229,7 +229,7 @@ struct RunEndView: View {
         }
     }
     func formatPace() -> String {
-        let seconds = workout.duration * 1000 / workout.distance
+        let seconds = time * 1000 / workout.distance
         
         if seconds.isFinite {
             let minutes = Int(seconds / 60)
@@ -325,9 +325,9 @@ struct RunRecentView: View {
         .padding(.bottom, 20)
     }
 }
-
-struct RunEndView_Previews: PreviewProvider {
-    static var previews: some View {
-        RunEndView(swpSelection: .constant(2), workout: .example)
-    }
-}
+//
+//struct RunEndView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RunEndView(swpSelection: .constant(2), workout: .example)
+//    }
+//}
