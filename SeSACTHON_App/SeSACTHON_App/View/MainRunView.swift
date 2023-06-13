@@ -162,10 +162,12 @@ struct MainRunHomeView: View {
     
     @State var sendImage: UIImage?
     
+    @State var isSendNotConfirmed = true
+    
     
     var body: some View {
         ZStack {
-            
+        
             VStack(spacing: 0) {
                 Color.black.frame(height: 76)
                 TopProfileView(title: "RUN")
@@ -187,8 +189,9 @@ struct MainRunHomeView: View {
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
                 
-                
-                    if let selectedImage = pickedImage {
+                if let selectedImage = pickedImage {
+                    
+                    if isSendNotConfirmed {
                         Color.white
                             .frame(width: 210, height: 210)
                             .cornerRadius(10)
@@ -200,7 +203,7 @@ struct MainRunHomeView: View {
                                     .cornerRadius(10)
                             }
                             .padding(.vertical)
-
+                        
                         ForEach(Status.allCases, id:  \.rawValue) { item in
                             HStack {
                                 Image("icon_\(returnEngRawvalue(type: item))")
@@ -258,8 +261,7 @@ struct MainRunHomeView: View {
                                             print("Response: \(responseString ?? "")")
                                         }
                                         print("Photo uploaded successfully")
-                                        self.pickedImage = nil
-                                        
+                                        isSendNotConfirmed = false
                                     case .failure(let error):
                                         print("Photo upload failed with error: \(error)")
                                     }
@@ -300,49 +302,53 @@ struct MainRunHomeView: View {
                         
                         Spacer()
                     } else {
-                        Spacer().frame(height: 80)
-                        // MARK: - 말풍선
-                        SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
-                        //Color.black.frame(height: 100)
-                        Spacer()
-                        HStack(alignment: .top, spacing: 28) {
-                            
-                            Button {
-                                self.showingImagePicker = true
-                            } label: {
-                                Image("RunCamera").resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                            .fullScreenCover(isPresented: $showingImagePicker) {
-                                SUImagePicker(sourceType: .camera) { (image) in
-                                    self.sendImage = image
-                                    self.pickedImage = Image(uiImage: image)
-                                    print(image)
-                                }
-                                .ignoresSafeArea()
-                            }
-                            
-                            Button {
-                                swpSelection = 1
-                            } label: {
-                                Text("Go")
-                                    .font(.system(size: 32, weight: .black))
-                                    .italic()
-                                    .foregroundColor(.white)
-                                    .frame(width: 120, height: 120)
-                                    .background(Color("#222222"))
-                                    .cornerRadius(60)
-                            }
-                            Button {
-                                //self.userTrackingMode = .follow
-                                updateTrackingMode()
-                            } label: {
-                                Image("RunLocation")
-                                    .resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                        }.padding(.bottom, 60)
+                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
+                    
+                } else {
+                    Spacer().frame(height: 80)
+                    // MARK: - 말풍선
+                    SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
+                    //Color.black.frame(height: 100)
+                    Spacer()
+                    HStack(alignment: .top, spacing: 28) {
+                        
+                        Button {
+                            self.showingImagePicker = true
+                        } label: {
+                            Image("RunCamera").resizable()
+                                .frame(width: 52, height: 52)
+                        }
+                        .fullScreenCover(isPresented: $showingImagePicker) {
+                            SUImagePicker(sourceType: .camera) { (image) in
+                                self.sendImage = image
+                                self.pickedImage = Image(uiImage: image)
+                                print(image)
+                            }
+                            .ignoresSafeArea()
+                        }
+                        
+                        Button {
+                            swpSelection = 1
+                        } label: {
+                            Text("Go")
+                                .font(.system(size: 32, weight: .black))
+                                .italic()
+                                .foregroundColor(.white)
+                                .frame(width: 120, height: 120)
+                                .background(Color("#222222"))
+                                .cornerRadius(60)
+                        }
+                        Button {
+                            //self.userTrackingMode = .follow
+                            updateTrackingMode()
+                        } label: {
+                            Image("RunLocation")
+                                .resizable()
+                                .frame(width: 52, height: 52)
+                        }
+                    }.padding(.bottom, 60)
+                }
                 
                 
                 
@@ -377,7 +383,7 @@ struct MainRunHomeView: View {
             return "step"
         }
     }
-
+    
     
     func updateTrackingMode() {
         var mode: MKUserTrackingMode {
