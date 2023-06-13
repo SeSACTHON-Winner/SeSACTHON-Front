@@ -20,7 +20,7 @@ struct WorkoutBar: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
-                    WorkoutStat(name: "거리", value: Measurement(value: time, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
+                    WorkoutStat(name: "거리", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
                     Spacer()
                     WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
                     Spacer()
