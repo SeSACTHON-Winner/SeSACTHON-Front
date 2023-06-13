@@ -8,6 +8,7 @@
 import SwiftUI
 
 class DangerInfoGroup: ObservableObject, Identifiable, Codable {
+    var id = UUID()
     var latitude_mod: Double
     var longitude_mod: Double
     var list: [DangerInfoMO] = []

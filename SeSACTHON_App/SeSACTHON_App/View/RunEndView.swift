@@ -17,7 +17,9 @@ struct RunEndView: View {
     var workout: Workout
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var locationManager = LocationDataManager()
-    
+    @Binding var time: TimeInterval
+    @State var totalCount = 0
+    @State var imagePath = "images/default.png"
     
     var body: some View {
         ScrollView {
@@ -77,12 +79,20 @@ struct RunEndView: View {
                             .italic()
                         Spacer()
                         
-                        Image(systemName: "person.crop.circle.fill")
+                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "map")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
                             .resizable()
                             .frame(width: 34, height: 34)
+                            .clipShape(Circle())
                             .padding(.leading)
-                            .foregroundColor(.white)
-                        
                             .onTapGesture {
                                 vm.showRunListView = true
                             }
@@ -114,8 +124,8 @@ struct RunEndView: View {
                                     .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
                                 
-                                //Text("14:13:22")
-                                Text("\(formatDuration(workout.duration))")
+                                Text("\(formatDuration(time))")
+                                //Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
@@ -154,7 +164,7 @@ struct RunEndView: View {
                                     .foregroundColor(.white.opacity(0.6))
                                 
                                 
-                                Text("0")
+                                Text("\(totalCount)")
                                     .font(.system(size: 24, weight: .bold)).italic()
                                     .foregroundColor(Color("MainColor"))
                             }
@@ -200,12 +210,37 @@ struct RunEndView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
+            var url = URL(string: "http://35.72.228.224/sesacthon/profileImage.php")!
+            var params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            AF.request(url, method: .get, parameters: params).responseString { picturePath in
+                print(picturePath)
+                self.imagePath = picturePath.value ?? "images/default.png"
+            }
+            print("KFImage : \(GlobalProfilePath.picture_path)")
+            
             fetchRunningInfo { result in
                 switch result {
                 case .success(let data):
                     runningArr = data
                 case .failure(let error):
                     print(error)
+                }
+            }
+            
+            url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
+            params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            
+            AF.request(url, method: .get, parameters: params).responseString { response in
+                switch response.result {
+                case .success(let value):
+                    if let intValue = Int(value) {
+                        self.totalCount = intValue
+                    } else {
+                        print("Invalid integer format")
+                    }
+                    
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
                 }
             }
         }
@@ -229,7 +264,7 @@ struct RunEndView: View {
         }
     }
     func formatPace() -> String {
-        let seconds = workout.duration * 1000 / workout.distance
+        let seconds = time * 1000 / workout.distance
         
         if seconds.isFinite {
             let minutes = Int(seconds / 60)
@@ -325,9 +360,9 @@ struct RunRecentView: View {
         .padding(.bottom, 20)
     }
 }
-
-struct RunEndView_Previews: PreviewProvider {
-    static var previews: some View {
-        RunEndView(swpSelection: .constant(2), workout: .example)
-    }
-}
+//
+//struct RunEndView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RunEndView(swpSelection: .constant(2), workout: .example)
+//    }
+//}

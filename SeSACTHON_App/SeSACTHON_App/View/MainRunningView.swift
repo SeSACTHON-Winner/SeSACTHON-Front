@@ -16,8 +16,9 @@ struct MainRunningView: View {
     @State var showStopConfirmation = false
     
     @Environment(\.scenePhase) private var scenePhase
-    @State private var time: TimeInterval = 0
+    @Binding var time: TimeInterval
     @State private var timer: Timer?
+    
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
     
@@ -35,24 +36,24 @@ struct MainRunningView: View {
         case road = "높은 단차"
         case natural = "공사중"
     }
-    @State var selection: Status = .gradient
+    @State var selection: MainRunningView.Status = .gradient
     @State var sendImage: UIImage?
     @ObservedObject var locationManager = LocationDataManager()
+    
+    @State var isSendNotConfirmed = true
     
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
         VStack {
-            
             VStack {
                 Spacer().frame(height: 80)
                 HStack {
                     // 기존 timer
-                    // Text("\(formattedTime(time))")
+                    Text("\(formattedTime(time))")
                     //workout timer Version
-                    //Text(DateComponentsFormatter().string(from: workout.duration) ?? "")
-                    Text("\(formattedTime(workout.duration))")
+                    //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
-                        .font(.system(size: 48, weight: .black)).italic()
+                        .font(.system(size: 80, weight: .black)).italic()
                         .onChange(of: workout.duration) { _ in
                             let watchRunDAO = WatchRunDAO(isStart: true, duration: workout.duration, distance: workout.distance, helpNum: 2)
                             guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
@@ -60,33 +61,32 @@ struct MainRunningView: View {
                                 session.sendMessageData(data, replyHandler: nil)
                             }
                             print("workout.duration = \(workout.duration)")
-                        }
-                    Spacer()
-                }.padding(.leading, 28)
+                        }             
+                } .padding(.bottom, 4)
+          
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
                         //TODO: 나중에 지우기
                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                            WorkoutBar(workout: workout, new: false).onAppear {
+                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
                                 print("false workbar")
                             }
                         }
                        
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true).onAppear {
                                 print("true workbar")
                             }
                         }
-                        
                     }
                    Spacer()
                 }
-                Spacer().frame(height: 40)
+                Spacer().frame(height: 36)
                 
             }
             .foregroundColor(.white)
-            .frame(height: 200)
+            .frame(height: 218)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -99,119 +99,119 @@ struct MainRunningView: View {
 
           
                 if let selectedImage = pickedImage {
-                    
-                    Color.white
-                        .frame(width: 210, height: 210)
-                        .cornerRadius(10)
-                        .overlay {
-                            selectedImage
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 200, height: 200)
-                                .cornerRadius(10)
-                        }
-                        .padding(.vertical)
-                    
-                    ForEach(Status.allCases, id:  \.rawValue) { item in
-                        HStack {
-                            Image("icon_\(returnEngRawvalue(type: item))")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30)
-                            Text(item.rawValue)
-                                .font(.system(size: 16, weight: selection == item ? .bold : .regular))
-                                .frame(height: 44)
-                                .foregroundColor(Color.init(hex: "808080"))
-                                .onTapGesture {
-                                    selection = item
-                                }
-                        }
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .background(selection == item ? .white : .white.opacity(0.5))
-                        .cornerRadius(16)
-                        .padding(.vertical, 4)
-                    }
-                    .frame(width: 176)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 96)
-                    HStack {
-                        Button {
-                            showingImagePicker = true
-
-                        } label: {
-                            Image("CameraButton")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 120)
-                        }
-                        .padding(.bottom, 94)
-                      
-                        Button {
-                            
-                            // 사진 전송
-                            var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
-                            
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "yyMMddHHmmss"
-                            
-                            let currentDate = Date()
-                            let formattedDate = dateFormatter.string(from: currentDate)
-                            let photoName = "\(formattedDate)"
-                            var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(photoName)"] as Dictionary
-                            AF.upload(multipartFormData: { multipartFormData in
-                                if let imageData = sendImage!.jpegData(compressionQuality: 0.5) {
-                                    print("\n\n\nimageData.description: \(imageData.description)\n\n\n")
-                                    multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
-                                }
-                            }, to: url).response { response in
-                                switch response.result {
-                                case .success(let value):
-                                    if let data = value {
-                                        // Process the response data as needed
-                                        let responseString = String(data: data, encoding: .utf8)
-                                        print("Response: \(responseString ?? "")")
-                                    }
-                                    print("Photo uploaded successfully")
-                                    self.pickedImage = nil
-                                    
-                                case .failure(let error):
-                                    print("Photo upload failed with error: \(error)")
-                                }
+                    if isSendNotConfirmed {
+                        Color.white
+                            .frame(width: 210, height: 210)
+                            .cornerRadius(10)
+                            .overlay {
+                                selectedImage
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 200, height: 200)
+                                    .cornerRadius(10)
                             }
-                            
-                            /*
-                             - uid : Apple Login 사용자 identifier 변수 (String)
-                             - latitude : 위도 (Double)
-                             - longitude : 경도 (Double)
-                             - picturePath : 사진 경로, image/전송한파일명.jpg 입니다. (String)
-                             - 이미지 전송 api 사용한 후에 사용할 것
-                             - type : 위험요소 분류, "slope", "construction", "narrow", "step" (String)
-                             */
-                            
-                            let coordinate = locationManager.returnLocation()
-                            url = URL(string: "http://35.72.228.224/sesacthon/dangerInfo.php")!
-                            let uid = UserDefaults.standard.string(forKey: "uid")!
-                            let dangerparams = ["uid" : uid, "latitude" : coordinate.latitude, "longitude" : coordinate.longitude, "type" : returnEngRaw(), "picturePath" : "images/\(photoName).jpg"] as Dictionary
-                            
-                            AF.request(url, method: .post, parameters: dangerparams).responseString {
-                                print($0)
-                            }
-                            url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
-                            let totalCountParams = ["uid" : uid] as Dictionary
-                            AF.request(url, method: .put, parameters: totalCountParams).responseString {
-                                print($0)
-                            }
-                        } label: {
-                            Image("SendButton")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 120)
-                        }
+                            .padding(.vertical)
                         
+                        ForEach(Status.allCases, id:  \.rawValue) { item in
+                            HStack {
+                                Image("icon_\(returnEngRawvalue(type: item))")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30)
+                                Text(item.rawValue)
+                                    .font(.system(size: 16, weight: selection == item ? .bold : .regular))
+                                    .frame(height: 44)
+                                    .foregroundColor(Color.init(hex: "808080"))
+                                    .onTapGesture {
+                                        selection = item
+                                    }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .background(selection == item ? .white : .white.opacity(0.5))
+                            .cornerRadius(16)
+                            .padding(.vertical, 4)
+                        }
+                        .frame(width: 176)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 96)
+                        HStack {
+                            Button {
+                                showingImagePicker = true
+                            } label: {
+                                Image("CameraButton")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 120)
+                            }
+                            Button {
+                                
+                                // 사진 전송
+                                var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
+                                
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.dateFormat = "yyMMddHHmmss"
+                                
+                                let currentDate = Date()
+                                let formattedDate = dateFormatter.string(from: currentDate)
+                                let photoName = "\(formattedDate)"
+                                var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(photoName)"] as Dictionary
+                                AF.upload(multipartFormData: { multipartFormData in
+                                    if let imageData = sendImage!.jpegData(compressionQuality: 0.5) {
+                                        print("\n\n\nimageData.description: \(imageData.description)\n\n\n")
+                                        multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
+                                    }
+                                }, to: url).response { response in
+                                    switch response.result {
+                                    case .success(let value):
+                                        if let data = value {
+                                            // Process the response data as needed
+                                            let responseString = String(data: data, encoding: .utf8)
+                                            print("Response: \(responseString ?? "")")
+                                        }
+                                        print("Photo uploaded successfully")
+                                        isSendNotConfirmed = false
+                                    case .failure(let error):
+                                        print("Photo upload failed with error: \(error)")
+                                    }
+                                }
+                                
+                                /*
+                                 - uid : Apple Login 사용자 identifier 변수 (String)
+                                 - latitude : 위도 (Double)
+                                 - longitude : 경도 (Double)
+                                 - picturePath : 사진 경로, image/전송한파일명.jpg 입니다. (String)
+                                 - 이미지 전송 api 사용한 후에 사용할 것
+                                 - type : 위험요소 분류, "slope", "construction", "narrow", "step" (String)
+                                 */
+                                
+                                let coordinate = locationManager.returnLocation()
+                                url = URL(string: "http://35.72.228.224/sesacthon/dangerInfo.php")!
+                                let uid = UserDefaults.standard.string(forKey: "uid")!
+                                let dangerparams = ["uid" : uid, "latitude" : coordinate.latitude, "longitude" : coordinate.longitude, "type" : returnEngRaw(), "picturePath" : "images/\(photoName).jpg"] as Dictionary
+                                
+                                AF.request(url, method: .post, parameters: dangerparams).responseString {
+                                    print($0)
+                                }
+                                
+                                url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
+                                let totalCountParams = ["uid" : uid] as Dictionary
+                                AF.request(url, method: .put, parameters: totalCountParams).responseString {
+                                    print($0)
+                                }
+                            } label: {
+                                Image("SendButton")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 120)
+                            }
+                            
+                        }
+                        .padding(.top)
+                        
+                        Spacer()
+                    } else {
+                        RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
-                    
-                    Spacer()
-                    
                 } else {
                     
                     Spacer()
@@ -299,6 +299,7 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
+                        startTimer()
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                             pauseTimer()
