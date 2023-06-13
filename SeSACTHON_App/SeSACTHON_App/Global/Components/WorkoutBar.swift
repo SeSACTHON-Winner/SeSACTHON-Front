@@ -2,7 +2,7 @@
 //  WorkoutBar.swift
 //  Running
 //
-//  Created by Ah lucie nous gênes 🍄 on 15/01/2023.
+//  Created by JinheeLee on 15/01/2023.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct WorkoutBar: View {
     @EnvironmentObject var vm: WorkoutViewModel
     @State var showWorkoutView = false
     @State var offset = Double.zero
-    
+    @Binding var time: TimeInterval
     let workout: Workout
     let new: Bool
     
@@ -20,19 +20,19 @@ struct WorkoutBar: View {
 
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
-                    WorkoutStat(name: "Distance", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
+                    WorkoutStat(name: "거리", value: Measurement(value: time, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
                     Spacer()
-                    WorkoutStat(name: "Pace", value: formatPace()) // 포맷된 속도를 표시합니다.
+                    WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
                     Spacer()
-                    WorkoutStat(name: "Calory", value: workout.calories.formatted())
+                    WorkoutStat(name: "칼로리", value: workout.calories.formatted())
                     // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                     Spacer()
                     //TODO: 도움개수 연결
                     WorkoutStat(name: "도움개수", value: "0")//포맷된 시간을 표시합니다.
-                    //Spacer()
+
                 }
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 12).padding(.bottom, 8)
             .transition(.move(edge: .bottom).combined(with: .opacity))
             .onTapGesture {
                 vm.zoomTo(workout)
@@ -57,7 +57,6 @@ struct WorkoutBar: View {
                     }
                 )
             }
-
     }
     
     func formatPace() -> String {
@@ -72,17 +71,17 @@ struct WorkoutBar: View {
         }
     }
 }
-
-
-struct WorkoutBar_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            Map(mapRect: .constant(MKMapRect()))
-            WorkoutBar(workout: .example, new: true)
-                .environmentObject(WorkoutViewModel())
-        }
-    }
-}
+//
+//
+//struct WorkoutBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            Map(mapRect: .constant(MKMapRect()))
+//            WorkoutBar(time: $time, workout: .example, new: true)
+//                .environmentObject(WorkoutViewModel())
+//        }
+//    }
+//}
 
 struct WorkoutStat: View {
     let name: String
@@ -91,11 +90,11 @@ struct WorkoutStat: View {
     var body: some View {
         VStack(spacing: 3) {
             Text(name)
-                .font(.subheadline)
-                .foregroundColor(.white).opacity(0.6)
+                .font(.system(size: 12, weight: .light)).italic()
+                .foregroundColor(.white).opacity(0.7)
             Text(value)
-                .font(.headline)
                 .foregroundColor(.white)
-        }
+                .font(.system(size: 20, weight: .bold)).italic()
+        }.frame(width: 80)
     }
 }

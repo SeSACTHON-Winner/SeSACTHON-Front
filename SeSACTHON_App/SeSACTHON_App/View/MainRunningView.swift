@@ -16,8 +16,9 @@ struct MainRunningView: View {
     @State var showStopConfirmation = false
     
     @Environment(\.scenePhase) private var scenePhase
-    @State private var time: TimeInterval = 0
+    @Binding var time: TimeInterval
     @State private var timer: Timer?
+    
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
     
@@ -44,17 +45,15 @@ struct MainRunningView: View {
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
         VStack {
-            
             VStack {
                 Spacer().frame(height: 80)
                 HStack {
                     // 기존 timer
-                    // Text("\(formattedTime(time))")
+                    Text("\(formattedTime(time))")
                     //workout timer Version
-                    //Text(DateComponentsFormatter().string(from: workout.duration) ?? "")
-                    Text("\(formattedTime(workout.duration))")
+                    //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
-                        .font(.system(size: 48, weight: .black)).italic()
+                        .font(.system(size: 80, weight: .black)).italic()
                         .onChange(of: workout.duration) { _ in
                             let watchRunDAO = WatchRunDAO(isStart: true, duration: workout.duration, distance: workout.distance, helpNum: 2)
                             guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
@@ -62,33 +61,32 @@ struct MainRunningView: View {
                                 session.sendMessageData(data, replyHandler: nil)
                             }
                             print("workout.duration = \(workout.duration)")
-                        }
-                    Spacer()
-                }.padding(.leading, 28)
+                        }             
+                } }.padding(.bottom, 4)
+          
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
                         //TODO: 나중에 지우기
                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                            WorkoutBar(workout: workout, new: false).onAppear {
+                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
                                 print("false workbar")
                             }
                         }
                        
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true).onAppear {
                                 print("true workbar")
                             }
                         }
-                        
                     }
                    Spacer()
                 }
-                Spacer().frame(height: 40)
+                Spacer().frame(height: 36)
                 
             }
             .foregroundColor(.white)
-            .frame(height: 200)
+            .frame(height: 218)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
