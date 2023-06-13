@@ -188,6 +188,11 @@ struct MainRunningView: View {
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
                             }
+                            url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
+                            let totalCountParams = ["uid" : uid] as Dictionary
+                            AF.request(url, method: .put, parameters: totalCountParams).responseString {
+                                print($0)
+                            }
                         } label: {
                             Image("SendButton")
                                 .resizable()
