@@ -20,7 +20,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Color.black.frame(height: 60)
+                Color.black.frame(height: 76)
                 HStack {
                     
                     Text("Home")
@@ -97,10 +97,8 @@ struct HomeView: View {
                             .font(.custom("SF Pro Text", size: 24))
                             .foregroundColor(.sesacMint)
                     }
-                    
                 }
-                .frame(height: 48)
-                
+                .frame(height: 48)      
             }
             .frame(maxWidth: .infinity)
             .edgesIgnoringSafeArea([.top, .horizontal])
@@ -143,7 +141,7 @@ extension HomeView {
                 Spacer()
                 
                 HStack {
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text(title)
                             .font(.system(size: 26))
                             .fontWeight(.heavy)
@@ -154,7 +152,7 @@ extension HomeView {
                             .font(.system(size: 18))
                             .fontWeight(.medium)
                             .foregroundColor(.white)
-                            .lineSpacing(10)
+                            .lineSpacing(6)
                     }
                     Spacer()
                 }

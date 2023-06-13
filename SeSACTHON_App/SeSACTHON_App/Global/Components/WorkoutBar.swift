@@ -17,52 +17,47 @@ struct WorkoutBar: View {
     let new: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack {
-                Spacer()
-                if !new {
-                    Text(workout.date.formattedApple()) //포맷된 날짜를 표시합니다.
+
+            VStack(alignment: .leading, spacing: 5) {
+                HStack {
+                    WorkoutStat(name: "Distance", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
+                    Spacer()
+                    WorkoutStat(name: "Pace", value: formatPace()) // 포맷된 속도를 표시합니다.
+                    Spacer()
+                    WorkoutStat(name: "Calory", value: workout.calories.formatted())
+                    // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
+                    Spacer()
+                    //TODO: 도움개수 연결
+                    WorkoutStat(name: "도움개수", value: "0")//포맷된 시간을 표시합니다.
+                    //Spacer()
                 }
             }
-            
-            HStack {
-                WorkoutStat(name: "Distance", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
-                Spacer(minLength: 0)
-                WorkoutStat(name: "Pace", value: formatPace()) // 포맷된 속도를 표시합니다.
-                Spacer(minLength: 0)
-                WorkoutStat(name: "Calory", value: workout.calories.formatted())
-               // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
-                Spacer(minLength: 0)
-                //TODO: 도움개수 연결
-                WorkoutStat(name: "도움개수", value: "0")//포맷된 시간을 표시합니다.
-                Spacer(minLength: 0)
+            .padding(.horizontal, 12)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .onTapGesture {
+                vm.zoomTo(workout)
             }
-        }
-        .padding(.horizontal, 12)
-        .transition(.move(edge: .bottom).combined(with: .opacity))
-        .onTapGesture {
-            vm.zoomTo(workout)
-        }
-        .if(!new) { $0
-            .offset(x: 0, y: offset)
-            .opacity((100 - offset)/100)
-            .gesture(DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    if value.translation.height > 0 {
-                        offset = value.translation.height
-                    }
-                }
-                .onEnded { value in
-                    if value.predictedEndTranslation.height > 50 {
-                        vm.selectedWorkout = nil // 훈련이 임계값을 초과하는 경우 훈련을 무시합니다.
-                    } else {
-                        withAnimation(.spring()) {
-                            offset = 0 // 스와이프 제스처 종료 시 오프셋을 재설정합니다.
+            .if(!new) { $0
+                .offset(x: 0, y: offset)
+                .opacity((100 - offset)/100)
+                .gesture(DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        if value.translation.height > 0 {
+                            offset = value.translation.height
                         }
                     }
-                }
-            )
-        }
+                    .onEnded { value in
+                        if value.predictedEndTranslation.height > 50 {
+                            vm.selectedWorkout = nil // 훈련이 임계값을 초과하는 경우 훈련을 무시합니다.
+                        } else {
+                            withAnimation(.spring()) {
+                                offset = 0 // 스와이프 제스처 종료 시 오프셋을 재설정합니다.
+                            }
+                        }
+                    }
+                )
+            }
+
     }
     
     func formatPace() -> String {

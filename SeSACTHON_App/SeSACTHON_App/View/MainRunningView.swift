@@ -55,19 +55,27 @@ struct MainRunningView: View {
                         .font(.system(size: 48, weight: .black)).italic()
                     Spacer()
                 }.padding(.leading, 28)
-                
-                if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                    WorkoutBar(workout: workout, new: false).onAppear {
-                        print("false workbar")
+                HStack (alignment: .center){
+                    Spacer()
+                    VStack {
+                        //TODO: 나중에 지우기
+                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                            WorkoutBar(workout: workout, new: false).onAppear {
+                                print("false workbar")
+                            }
+                        }
+                       
+                        if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+                            WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
+                                print("true workbar")
+                            }
+                        }
+                        
                     }
-                }
-                
-                if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                    WorkoutBar(workout: vm.newWorkout, new: true).onAppear {
-                        print("true workbar")
-                    }
+                   Spacer()
                 }
                 Spacer().frame(height: 40)
+                
             }
             .foregroundColor(.white)
             .frame(height: 200)
@@ -214,7 +222,7 @@ struct MainRunningView: View {
                                     .italic()
                                     .foregroundColor(.white)
                                     .frame(width: 120, height: 120)
-                                    .background(.black)
+                                    .background(Color("#222222"))
                                     .cornerRadius(60)
                             }.padding(.bottom, 94)
                         }
@@ -239,7 +247,7 @@ struct MainRunningView: View {
                                         .italic()
                                         .foregroundColor(.white)
                                         .frame(width: 120, height: 120)
-                                        .background(.black)
+                                        .background(Color("#222222"))
                                         .cornerRadius(60)
                                 }
                                 .padding(.bottom, 94)
@@ -259,20 +267,18 @@ struct MainRunningView: View {
                                             .scaleEffect(isAnimate ? 1.2 : 1.0)
                                             .opacity(isAnimate ? 0.8 : 0)
                                         Circle()
-                                            .foregroundColor(.black)
+                                            .foregroundColor(Color("#222222"))
                                     }
                                     .frame(width: 120, height: 120)
                                     .overlay(
                                         Text("RESTART")
-                                            .font(.system(size: 24, weight: .black))
+                                            .font(.system(size: 22, weight: .black))
                                             .italic()
                                             .foregroundColor(Color("MainColor"))
-                                            .cornerRadius(60)
                                     )
                                     .onAppear {
                                         withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
                                             self.isAnimate.toggle()
-                                            
                                         }
                                     }
                                 } .padding(.bottom, 94)
@@ -307,10 +313,7 @@ struct MainRunningView: View {
                             time += elapsedTime
                         }
                     }
-                    
-                    
                 }
-            
         }
         .edgesIgnoringSafeArea(.all)
         .fullScreenCover(isPresented: $showingImagePicker) {
