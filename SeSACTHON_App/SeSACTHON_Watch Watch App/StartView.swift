@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct StartView: View {
-    
-    @State var isNext = false
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     
     var body: some View {
-        
         Button {
-            isNext = true
+            wsManager.go = true
+//            wsManager.sendMessage(message: ["go" : true])
         } label: {
             StartButton()
         }
         .buttonStyle(PlainButtonStyle())
-        .navigationDestination(isPresented: $isNext) {
+        .navigationDestination(isPresented: $wsManager.go) {
             RunningView()
         }
         .ignoresSafeArea()

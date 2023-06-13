@@ -14,11 +14,15 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     @StateObject var vm = WorkoutViewModel()
     
     var body: some View {
         ZStack {
+            Rectangle().frame(height: 0).onChange(of: wsManager.go) { newValue in
+                print("wsManager.go changed")
+                swpSelection = 1
+            }
             switch swpSelection {
             case 0, 1, 2:
                 VStack(spacing: 0) {
@@ -52,6 +56,7 @@ struct MainRunView: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
+            
         }
         .environmentObject(vm)
     }
@@ -324,6 +329,10 @@ struct MainRunHomeView: View {
                             
                             Button {
                                 swpSelection = 1
+                                //TODO: go message 보내기
+//                                if let session = WatchSessionManager.sharedManager.validSession{
+//                                    session.sendMessage(["go" : true], replyHandler: nil)
+//                                }
                             } label: {
                                 Text("Go")
                                     .font(.system(size: 32, weight: .black))

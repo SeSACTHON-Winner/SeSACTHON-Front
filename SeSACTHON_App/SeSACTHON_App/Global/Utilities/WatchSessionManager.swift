@@ -3,8 +3,7 @@ import WatchConnectivity
 class WatchSessionManager: NSObject, WCSessionDelegate,ObservableObject {
 
     static let sharedManager = WatchSessionManager()
-    @Published var counter = 0
-    @Published var isConnected = false
+    @Published var go = false
     @Published var watchRunDAO = WatchRunDAO(isStart: false, duration: 0.0, distance: 0.0, helpNum: 0)
     private override init() {
         super.init()
@@ -41,25 +40,6 @@ class WatchSessionManager: NSObject, WCSessionDelegate,ObservableObject {
         #endif
         
         return nil
-    }
-    func handShake(){
-        DispatchQueue.global(qos: .background).async {
-            while(true){
-                if let session = self.validSession{
-                    if session.isReachable{
-                        DispatchQueue.main.async {
-                            self.isConnected = true
-                        }
-                    }
-                }
-                else{
-                    DispatchQueue.main.async {
-                        self.isConnected = false
-                    }
-                }
-                sleep(1)
-            }
-        }
     }
     func startSession() {
         session?.delegate = self
@@ -169,9 +149,18 @@ extension WatchSessionManager {
     // Receiver
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         // handle receiving message
-        DispatchQueue.main.async {
-            let count = message["counter"] as? Int ?? 10000
-            self.counter = count
+        print("m")
+        switch(message.keys.first){
+        case "go":
+            print("go = true")
+            DispatchQueue.main.async {
+                let go = message["go"] as? Bool ?? false
+                self.go = true
+            }
+        case .none:
+            print("none")
+        case .some(_):
+            print("some")
         }
     }
 
@@ -181,7 +170,7 @@ extension WatchSessionManager {
             guard let message = try? JSONDecoder().decode(WatchRunDAO.self, from: messageData) else {
                 return
             }
-            print("received message.duration = \(message.duration)")
+            //print("received message.duration = \(message.duration)")
             self.watchRunDAO = message
         }
     }
