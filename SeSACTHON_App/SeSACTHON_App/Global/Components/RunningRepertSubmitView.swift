@@ -18,12 +18,14 @@ struct RunningReportSubmitView: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Spacer().frame(height: 130)
+            
             VStack {
-                Spacer()
+                
                 Image("\(returnEngRawvalue(type: selection))_white")
                     .resizable()
                     .scaledToFit()
+                    .frame(width: 40)
+                    .padding(.vertical)
                     .frame(width: 40)
                 Text("\(selection.rawValue)")
                 Text("1") //TODO: Data 연결
@@ -31,18 +33,20 @@ struct RunningReportSubmitView: View {
                     .foregroundColor(Color("MainColor"))
                     .italic()
                 Text("도움 감사드립니다.")
+                    .padding(.vertical)
                 Spacer()
             }
             .frame(minWidth: 274)
             .background(.black)
             .foregroundColor(.white)
             .cornerRadius(14)
+            .padding(.top, 50)
             
             Button {
                 isSendNotConfirmed = true
-              
+                
                 pickedImage = nil
-    
+                
             } label: {
                 Text("새로운 보고하기")
                     .font(.system(size: 12, weight: .medium))
@@ -55,9 +59,9 @@ struct RunningReportSubmitView: View {
             
             Button {
                 isSendNotConfirmed = true
-      
+                
                 pickedImage = nil
-            
+                
             } label: {
                 Text("Go Run")
                     .font(.system(size: 30, weight: .black))

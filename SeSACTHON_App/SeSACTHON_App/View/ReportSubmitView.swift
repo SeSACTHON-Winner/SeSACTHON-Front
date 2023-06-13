@@ -16,14 +16,16 @@ struct ReportSubmitView: View {
     
     var body: some View {
         VStack(spacing: 40) {
-            Spacer().frame(height: 130)
+            
             VStack {
-                Spacer()
                 
                 Image("\(returnEngRawvalue(type: selection))_white")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40)
+                    .padding(.vertical)
+                
+                
                 Text("\(selection.rawValue)")
                 Text("1") //TODO: Data 연결
                     .font(.system(size: 128, weight: .black))
@@ -37,6 +39,7 @@ struct ReportSubmitView: View {
             .background(.black)
             .foregroundColor(.white)
             .cornerRadius(14)
+            .padding(.top, 50)
             
             Button {
                 isSendNotConfirmed = true
@@ -69,10 +72,8 @@ struct ReportSubmitView: View {
             }
             .padding(.bottom, 94)
         }
-        .ignoresSafeArea()
         .onAppear {
             print("returnEngRawvalue(type: selection): \(returnEngRawvalue(type: selection))")
-            print("assets: \(returnEngRawvalue(type: selection))_white")
         }
     }
 }
