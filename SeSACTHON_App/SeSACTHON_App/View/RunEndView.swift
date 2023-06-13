@@ -18,6 +18,7 @@ struct RunEndView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var locationManager = LocationDataManager()
     @State var totalCount = 0
+    @State var imagePath = "images/default.png"
     
     
     var body: some View {
@@ -78,12 +79,20 @@ struct RunEndView: View {
                             .italic()
                         Spacer()
                         
-                        Image(systemName: "person.crop.circle.fill")
+                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "map")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
                             .resizable()
                             .frame(width: 34, height: 34)
+                            .clipShape(Circle())
                             .padding(.leading)
-                            .foregroundColor(.white)
-                        
                             .onTapGesture {
                                 vm.showRunListView = true
                             }
@@ -201,6 +210,14 @@ struct RunEndView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
+            var url = URL(string: "http://35.72.228.224/sesacthon/profileImage.php")!
+            var params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            AF.request(url, method: .get, parameters: params).responseString { picturePath in
+                print(picturePath)
+                self.imagePath = picturePath.value ?? "images/default.png"
+            }
+            print("KFImage : \(GlobalProfilePath.picture_path)")
+            
             fetchRunningInfo { result in
                 switch result {
                 case .success(let data):
@@ -210,8 +227,8 @@ struct RunEndView: View {
                 }
             }
             
-            let url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
-            let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
+            params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
             
             AF.request(url, method: .get, parameters: params).responseString { response in
                 switch response.result {
