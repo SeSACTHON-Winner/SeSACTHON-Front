@@ -17,6 +17,7 @@ struct SeSACTHON_AppApp: App {
     init() {
         // Font 파일 추가 Sample
         Font.registerFonts(fontName: "SF-Pro-Text-BlackItalic")
+        WatchSessionManager.sharedManager.startSession()
     }
     
     var body: some Scene {

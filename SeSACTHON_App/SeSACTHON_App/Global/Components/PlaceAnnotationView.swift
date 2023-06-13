@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import MapKit
 import Kingfisher
 
 struct PlaceAnnotationView: View {
 
+    @EnvironmentObject var FUUID: FocusUUID
     
+    var annotationViewId = UUID()
     let danger: DangerInfoGroup
     var slopeCount: Int
     var stepCount: Int
@@ -22,6 +25,7 @@ struct PlaceAnnotationView: View {
     var imageMainList = [Image("icon_slope_main"), Image("icon_step_main"), Image("icon_narrow_main"), Image("icon_construction_main")]
 
     init(danger: DangerInfoGroup) {
+    
         self.danger = danger
         self.listLength = danger.list.count
         self.slopeCount = 0
@@ -40,8 +44,8 @@ struct PlaceAnnotationView: View {
             print("First picture path is nil")
             
         }
-        print("Assigned picture path: \(self.picturePath)")
-        print("Assigned picture path: \(self.picturePath)")
+        //print("Assigned picture path: \(self.picturePath)")
+        //print("Assigned picture path: \(self.picturePath)")
         
         for i in danger.list {
             switch i.type {
@@ -103,99 +107,134 @@ struct PlaceAnnotationView: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            if dotClick {
-                VStack{
-                    Color.white
-                        .frame(width: 200, height: 250)
-                        .cornerRadius(10)
-                        .overlay {
-                            VStack{
-                                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(PicturePath.picturePath)")!)
-                                    .placeholder { //플레이스 홀더 설정
-                                        Image(systemName: "map")
-                                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                    .onSuccess {r in //성공
-                                        print("succes: \(r)")
-                                    }
-                                    .onFailure { e in //실패
-                                        print("failure: \(e)")
-                                    }
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 150, height: 150)
-                                    .background(.black)
-                                    .cornerRadius(5)
-                                
-                                HStack {
-                                    if slopeCount > 0 {
-                                        VStack{
-                                            Image("icon_slope")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 30)
-                                            Text("\(slopeCount)")
-                                                .foregroundColor(.black)
+            if FUUID.focusUUID == danger.id {
+                if dotClick {
+                    VStack{
+                        Color.white
+                            .frame(width: 200, height: 250)
+                            .cornerRadius(10)
+                            .overlay {
+                                VStack{
+                                    KFImage(URL(string: "http://35.72.228.224/sesacthon/\(PicturePath.picturePath)")!)
+                                        .placeholder { //플레이스 홀더 설정
+                                            Image(systemName: "map")
+                                        }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                        .onSuccess {r in //성공
+                                            print("succes: \(r)")
                                         }
-                                    }
-                                    if stepCount > 0 {
-                                        VStack{
-                                            Image("icon_step")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(height: 30)
-                                            Text("\(stepCount)")
-                                                .foregroundColor(.black)
+                                        .onFailure { e in //실패
+                                            print("failure: \(e)")
                                         }
-                                    }
-                                    if constructionCount > 0 {
-                                        VStack{
-                                            Image("icon_construction")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(height: 30)
-                                            Text("\(constructionCount)")
-                                                .foregroundColor(.black)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 150, height: 150)
+                                        .background(.black)
+                                        .cornerRadius(5)
+                                    
+                                    HStack {
+                                        if slopeCount > 0 {
+                                            VStack{
+                                                Image("icon_slope")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 30)
+                                                Text("\(slopeCount)")
+                                                    .foregroundColor(.black)
+                                            }
                                         }
-                                    }
-                                    if narrowCount > 0 {
-                                        VStack{
-                                            Image("icon_narrow")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(height: 30)
-                                            Text("\(narrowCount)")
-                                                .foregroundColor(.black)
+                                        if stepCount > 0 {
+                                            VStack{
+                                                Image("icon_step")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(height: 30)
+                                                Text("\(stepCount)")
+                                                    .foregroundColor(.black)
+                                            }
+                                        }
+                                        if constructionCount > 0 {
+                                            VStack{
+                                                Image("icon_construction")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(height: 30)
+                                                Text("\(constructionCount)")
+                                                    .foregroundColor(.black)
+                                            }
+                                        }
+                                        if narrowCount > 0 {
+                                            VStack{
+                                                Image("icon_narrow")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(height: 30)
+                                                Text("\(narrowCount)")
+                                                    .foregroundColor(.black)
+                                            }
                                         }
                                     }
                                 }
                             }
+                        
+                        Image(systemName: "arrowtriangle.down.fill")
+                            .font(.caption)
+                            .scaleEffect(2)
+                            .foregroundColor(.white)
+                    }
+                    .transition(.scale)
+                    .onTapGesture {
+                        if FUUID.focusUUID != danger.id && dotClick == false{
+                            withAnimation(.spring()){
+                                FUUID.focusUUID = danger.id
+                                dotClick = true
+                            }
                         }
-                    
-                    Image(systemName: "arrowtriangle.down.fill")
-                        .font(.caption)
-                        .scaleEffect(2)
-                        .foregroundColor(.white)
+                        else if FUUID.focusUUID != danger.id && dotClick == true{
+                            FUUID.focusUUID = annotationViewId
+                            dotClick = false
+                        }
+                        else if FUUID.focusUUID == danger.id && dotClick == false {
+                            withAnimation(.spring()){
+                                dotClick = true
+                            }
+                        }
+                        else if FUUID.focusUUID == danger.id && dotClick == true{
+                            FUUID.focusUUID = annotationViewId
+                            dotClick = false
+                        }
+                    }
                 }
-                .onTapGesture {
-                    dotClick.toggle()
-                }
-                
             }
-            
             
             calMain()
                 .resizable()
                 .scaledToFit()
                 .frame(height: 32)
                 .onTapGesture {
-                    dotClick.toggle()
+                    if FUUID.focusUUID != danger.id && dotClick == false{
+                        withAnimation(.spring()){
+                            FUUID.focusUUID = danger.id
+                            dotClick = true
+                        }
+                    }
+                    else if FUUID.focusUUID != danger.id && dotClick == true{
+                        dotClick = false
+                    }
+                    else if FUUID.focusUUID == danger.id && dotClick == false {
+                        withAnimation(.spring()){
+                            dotClick = true
+                        }
+                    }
+                    else if FUUID.focusUUID == danger.id && dotClick == true{
+                        dotClick = false
+                    }
                 }
-                
-            
-            
         }
-        if dotClick {
-            Spacer().frame(width: 0, height: 260)
+        
+        if FUUID.focusUUID == danger.id {
+            if dotClick {
+                Spacer().frame(width: 0, height: 260)
+            }
         }
 
     }

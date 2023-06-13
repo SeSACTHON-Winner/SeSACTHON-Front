@@ -1,15 +1,17 @@
 //
-//  ReportSubmitView.swift
+//  RunningRepertSubmitView.swift
 //  SeSACTHON_App
 //
-//  Created by Lee Jinhee on 2023/06/02.
+//  Created by ChoiYujin on 2023/06/13.
 //
+
+import Foundation
 
 import SwiftUI
 
-struct ReportSubmitView: View {
+struct RunningReportSubmitView: View {
     
-    @Binding var selection: MainRunHomeView.Status
+    @Binding var selection: MainRunningView.Status
     @Binding var pickedImage: Image?
     @Binding var isSendNotConfirmed: Bool
     
@@ -24,8 +26,7 @@ struct ReportSubmitView: View {
                     .scaledToFit()
                     .frame(width: 40)
                     .padding(.vertical)
-                
-                
+                    .frame(width: 40)
                 Text("\(selection.rawValue)")
                 Text("1") //TODO: Data 연결
                     .font(.system(size: 128, weight: .black))
@@ -71,23 +72,20 @@ struct ReportSubmitView: View {
                     .cornerRadius(60)
             }
             .padding(.bottom, 94)
-        }
-        .onAppear {
-            print("returnEngRawvalue(type: selection): \(returnEngRawvalue(type: selection))")
-        }
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
-struct ReportSubmitView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "bolt")), isSendNotConfirmed: .constant(false))
-        }
-    }
-}
+//struct RunningReportSubmitView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "d")), isSendNotConfirmed: .constant(false))
+//        }
+//    }
+//}
 
-extension ReportSubmitView {
-    func returnEngRawvalue(type: MainRunHomeView.Status) -> String {
+extension RunningReportSubmitView {
+    func returnEngRawvalue(type: MainRunningView.Status) -> String {
         switch type {
         case .gradient:
             return "elevation"

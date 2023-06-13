@@ -18,6 +18,7 @@ struct RunEndView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var locationManager = LocationDataManager()
     @Binding var time: TimeInterval
+    @State var totalCount = 0
     
     var body: some View {
         ScrollView {
@@ -154,7 +155,7 @@ struct RunEndView: View {
                                     .foregroundColor(.white.opacity(0.6))
                                 
                                 
-                                Text("0")
+                                Text("\(totalCount)")
                                     .font(.system(size: 24, weight: .bold)).italic()
                                     .foregroundColor(Color("MainColor"))
                             }
@@ -206,6 +207,23 @@ struct RunEndView: View {
                     runningArr = data
                 case .failure(let error):
                     print(error)
+                }
+            }
+            
+            let url = URL(string: "http://35.72.228.224/sesacthon/helpCount.php")!
+            let params = ["uid" : UserDefaults.standard.string(forKey: "uid")] as Dictionary
+            
+            AF.request(url, method: .get, parameters: params).responseString { response in
+                switch response.result {
+                case .success(let value):
+                    if let intValue = Int(value) {
+                        self.totalCount = intValue
+                    } else {
+                        print("Invalid integer format")
+                    }
+                    
+                case .failure(let error):
+                    print("Request failed with error: \(error)")
                 }
             }
         }
