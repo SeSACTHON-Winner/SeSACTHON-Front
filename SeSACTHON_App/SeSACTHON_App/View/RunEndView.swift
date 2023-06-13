@@ -15,19 +15,87 @@ struct RunEndView: View {
     @State var runningArr: [RunningInfo] = []
     @EnvironmentObject var vm: WorkoutViewModel
     var workout: Workout
-
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject var locationManager = LocationDataManager()
+    
+    
     var body: some View {
         ScrollView {
             VStack {
                 VStack {
                     Spacer().frame(height: 60)
-                    TopProfileView(title: "FINISH")
-                        .foregroundColor(.blue)
+                    HStack {
+                        Button {
+                            // MARK: - 사진 업로드
+                            var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyMMddHHmmss"
+                            let currentDate = Date()
+                            let formattedDate = dateFormatter.string(from: currentDate)
+                            let photoName = "RunInfo-\(formattedDate)"
+                            var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(photoName)"] as Dictionary
+                            AF.upload(multipartFormData: { multipartFormData in
+                                if let imageData = workout.courseImage.jpegData(compressionQuality: 0.5) {
+                                    print("\n\n\nimageData.description: \(imageData.description)\n\n\n")
+                                    multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
+                                }
+                            }, to: url).response { response in
+                                switch response.result {
+                                case .success(let value):
+                                    if let data = value {
+                                        // Process the response data as needed
+                                        let responseString = String(data: data, encoding: .utf8)
+                                        print("Response: \(responseString ?? "")")
+                                    }
+                                    print("Photo uploaded successfully")
+                                    
+                                case .failure(let error):
+                                    print("Photo upload failed with error: \(error)")
+                                }
+                            }
+                            // MARK: - 러닝 정보 업로드
+                            let coordinate = locationManager.returnLocation()
+                            url = URL(string: "http://35.72.228.224/sesacthon/runningInfo.php")!
+                            let uid = UserDefaults.standard.string(forKey: "uid")!
+                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(workout.duration))","runningName" : "\(courseName)" , "helpCount" : 0, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance] as Dictionary
+                            
+                            AF.request(url, method: .post, parameters: dangerparams).responseString {
+                                print($0)
+                            }
+                            dismiss()
+                        } label: {
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 10, height: 16)
+                                .foregroundColor(.white)
+                                .padding(.trailing, 10)
+                        }
+                        Text("Finish")
+                            .font(.custom("SF Pro Text", size: 32))
+                            .foregroundColor(.white)
+                            .italic()
+                        Spacer()
+                        
+                        Image(systemName: "person.crop.circle.fill")
+                            .resizable()
+                            .frame(width: 34, height: 34)
+                            .padding(.leading)
+                            .foregroundColor(.white)
+                        
+                            .onTapGesture {
+                                vm.showRunListView = true
+                            }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom)
+                    .background(.black)
+                    .foregroundColor(.blue)
                     Spacer()
                     HStack(alignment: .center) {
                         Text(formatDate(workout.date))
                             .font(.system(size: 16, weight: .medium))
-                        .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.center)
                         
                     }
                     HStack {
@@ -45,7 +113,7 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))
                                     .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
-
+                                
                                 //Text("14:13:22")
                                 Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
@@ -66,17 +134,17 @@ struct RunEndView: View {
                                 Text("평균 페이스")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
-
+                                
                                 Text("\(formatPace())")
                                     .font(.system(size: 24, weight: .bold)).italic()
-//                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
-//                                    .font(.system(size: 24, weight: .bold)).italic()
+                                //                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
+                                //                                    .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("도움 개수")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
-
+                                
                                 Text("0")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
@@ -84,7 +152,7 @@ struct RunEndView: View {
                                 Text("총 도움")
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
-
+                                
                                 
                                 Text("0")
                                     .font(.system(size: 24, weight: .bold)).italic()
@@ -123,7 +191,7 @@ struct RunEndView: View {
                         Spacer()
                     }
                     .padding(.vertical, 12)
-                       
+                    
                     ForEach(runningArr, id: \.self) { runninginfo in
                         RunRecentView(runData: runninginfo)
                     }
@@ -144,9 +212,9 @@ struct RunEndView: View {
     }
     
     func formatDate(_ date: Date) -> String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy년 M월 d일"
-            return dateFormatter.string(from: date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 M월 d일"
+        return dateFormatter.string(from: date)
     }
     func formatDuration(_ duration: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
@@ -194,32 +262,32 @@ struct RunRecentView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-                        HStack(spacing: 12) {
-                            // MARK: - Image 교체
-                            KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
-                                .placeholder { //플레이스 홀더 설정
-                                    Image(systemName: "map")
-                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                .onSuccess {r in //성공
-                                    print("succes: \(r)")
-                                }
-                                .onFailure { e in //실패
-                                    print("failure: \(e)")
-                                }
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .background(.black)
-                                .cornerRadius(5)
-                            VStack(alignment: .leading, spacing: 8){
-                                Text(runData.date)
-                                    .font(.system(size: 12, weight: .medium)).opacity(0.3)
-                                Text(runData.runningName)
-                                    .font(.system(size: 14, weight: .medium)).opacity(0.5)
-                            }
-                            Spacer()
-                            
-                        }
+            HStack(spacing: 12) {
+                // MARK: - Image 교체
+                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(runData.picturePath)")!)
+                    .placeholder { //플레이스 홀더 설정
+                        Image(systemName: "map")
+                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                    .onSuccess {r in //성공
+                        print("succes: \(r)")
+                    }
+                    .onFailure { e in //실패
+                        print("failure: \(e)")
+                    }
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 50, height: 50)
+                    .background(.black)
+                    .cornerRadius(5)
+                VStack(alignment: .leading, spacing: 8){
+                    Text(runData.date)
+                        .font(.system(size: 12, weight: .medium)).opacity(0.3)
+                    Text(runData.runningName)
+                        .font(.system(size: 14, weight: .medium)).opacity(0.5)
+                }
+                Spacer()
+                
+            }
             HStack(spacing: 26.0) {
                 VStack(alignment: .leading, spacing: 14) {
                     Text(String(format: "%.2f", runData.distance))
