@@ -8,7 +8,6 @@
 import SwiftUI
 import Alamofire
 
-//TODO: RootView랑 MainRunningView 합칠 예정,,
 struct MainRunningView: View {
     @Binding var swpSelection: Int
     @State var currentDate = Date.now
@@ -81,6 +80,8 @@ struct MainRunningView: View {
             }.onDisappear {
                 print(workout.pace)
             }
+
+          
                 if let selectedImage = pickedImage {
                     
                     Color.white
@@ -120,12 +121,15 @@ struct MainRunningView: View {
                     HStack {
                         Button {
                             showingImagePicker = true
+
                         } label: {
                             Image("CameraButton")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 120)
                         }
+                        .padding(.bottom, 94)
+                      
                         Button {
                             
                             // 사진 전송
@@ -217,12 +221,18 @@ struct MainRunningView: View {
                         else if runState == "stop" {
                             if vm.recording {
                                 Button {
-                                    stopTimer()
-                                    //showStopConfirmation = true
+                                   stopTimer()
+
+                                    vm.zoomTo(workout)
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        vm.saveMapViewAsImage()
+                                    }
                                     Task {
                                         await vm.endWorkout()
                                     }
-                                    swpSelection = 3
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                        swpSelection = 3
+                                    }
                                 } label: {
                                     Text("END")
                                         .font(.system(size: 24, weight: .black))
@@ -233,19 +243,7 @@ struct MainRunningView: View {
                                         .cornerRadius(60)
                                 }
                                 .padding(.bottom, 94)
-                                //                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
-                                //                            Button("Cancel", role: .cancel) {}
-                                //                            Button("Stop & Discard", role: .destructive) {
-                                //                                vm.discardWorkout()
-                                //                            }
-                                //                            Button("Finish & Save") {
-                                //                                Task {
-                                //                                    await vm.endWorkout()
-                                //                                }
-                                //                                swpSelection = 3
-                                //                            }
-                                //                        }
-                                
+                               
                                 Button {
                                     runState = "run"
                                     startTimer()

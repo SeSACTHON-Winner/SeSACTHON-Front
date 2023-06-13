@@ -73,7 +73,7 @@ struct WorkoutBar: View {
             let remainingSeconds = Int(seconds.truncatingRemainder(dividingBy: 60))
             return "\(minutes)'\(remainingSeconds)\""
         } else {
-            return "Invalid Pace"
+            return "0\'0\""
         }
     }
 }

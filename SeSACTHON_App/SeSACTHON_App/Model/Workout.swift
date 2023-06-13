@@ -20,9 +20,9 @@ class Workout: NSObject {
     //let elevation: Double // 운동의 총 고도차
     var calories: Double // 소모된 총 칼로리
     let pace: Double // 평균 페이스
+    var courseImage: UIImage
     
-    init(type: HKWorkoutActivityType
-, polyline: MKPolyline, locations: [CLLocation], date: Date, duration: Double, calories: Double, pace: Double) {
+    init(type: HKWorkoutActivityType, polyline: MKPolyline, locations: [CLLocation], date: Date, duration: Double, calories: Double, pace: Double, courseImage: UIImage) {
         self.type = type
         self.polyline = polyline
         self.locations = locations
@@ -32,6 +32,7 @@ class Workout: NSObject {
         //self.elevation = locations.elevation //CLLocation 클래스의 확장을 사용하여 총 고도차를 계산합니다.
         self.calories = calories
         self.pace = pace
+        self.courseImage = courseImage
     }
     
     //TODO: 칼로리 단위 수정
@@ -41,6 +42,7 @@ class Workout: NSObject {
         let polyline = MKPolyline(coordinates: coords, count: coords.count)
         let date = hkWorkout.startDate
         let duration = hkWorkout.duration
+        let courseImage: UIImage = UIImage()
         
         var calories: Double = 0.0
         let energyType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!
@@ -77,15 +79,15 @@ class Workout: NSObject {
         HKHealthStore().execute(energyQuery)
         HKHealthStore().execute(paceQuery)
         
-        let workout = Workout(type: type, polyline: polyline, locations: locations, date: date, duration: duration, calories: calories, pace: pace)
-        self.init(type: workout.type, polyline: workout.polyline, locations: workout.locations, date: workout.date, duration: workout.duration, calories: workout.calories, pace: workout.pace)
+        let workout = Workout(type: type, polyline: polyline, locations: locations, date: date, duration: duration, calories: calories, pace: pace, courseImage: courseImage)
+        self.init(type: workout.type, polyline: workout.polyline, locations: workout.locations, date: workout.date, duration: workout.duration, calories: workout.calories, pace: workout.pace, courseImage: workout.courseImage)
         
         queryGroup.notify(queue: .main) {
             
         }
     }
     
-    static let example = Workout(type: .running, polyline: MKPolyline(), locations: [], date: .now, duration: 3456, calories: 0.0, pace: 0.0)
+    static let example = Workout(type: .running, polyline: MKPolyline(), locations: [], date: .now, duration: 3456, calories: 0.0, pace: 0.0, courseImage: UIImage())
 }
 
 //

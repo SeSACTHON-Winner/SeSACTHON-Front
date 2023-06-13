@@ -10,6 +10,7 @@ import HealthKit
 import MapKit
 import SwiftUI
 import Combine
+import Photos
 
 
 // MainActor를 사용하면 모든 뷰 템플릿 업데이트가 주 스레드에서 수행되도록 할 수 있다.
@@ -24,6 +25,9 @@ class WorkoutViewModel: NSObject, ObservableObject {
     @Published var locations = [CLLocation]() // 경로를 나타내는 CLLocation 전체 배열
     @Published var calory = 0.0
     @Published var pace = 0.0
+    
+    //코스 캡쳐 이미지
+    @Published var courseImage: UIImage = UIImage()
 
     // 위치 표를 기반으로 MKPolyline을 반환하는 계산 속성
     var polyline: MKPolyline {
@@ -34,9 +38,10 @@ class WorkoutViewModel: NSObject, ObservableObject {
     // View Model의 현재 상태를 기반으로 새 훈련 객체를 반환하는 계산된 속성입니다.
     var newWorkout: Workout {
         let duration = Date.now.timeIntervalSince(startDate)
-        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace)
+        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace, courseImage: courseImage)
     }
     
+
     
     // HealthKit 속성 및 사용 권한
     @Published var showPermissionsView = false
@@ -265,10 +270,21 @@ class WorkoutViewModel: NSObject, ObservableObject {
     func selectWorkout(_ workout: Workout?) {
         // 지정한 작업 선택
         selectedWorkout = workout
+        
         // 워크아웃을 선택하면 선택한 워크아웃을 확대합니다
         if let workout {
             zoomTo(workout)
+           
         }
+        //추가
+        if let selectedWorkout {
+            zoomTo(selectedWorkout)
+        }
+        //MARK: 맵뷰 이미지 저장
+       
+        saveMapViewAsImage()
+        
+
     }
     
     func zoomTo(_ overlay: MKOverlay) {
@@ -353,9 +369,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
         workouts.append(workout)
         updatePolylines()
         filterWorkouts()
-        selectWorkout(workout)
+        selectWorkout(workout) //save image too
         
-       
         do {
             try await workoutBuilder?.endCollection(at: .now) // 훈련 자료 수집을 마쳤습니다.
 
@@ -376,6 +391,35 @@ class WorkoutViewModel: NSObject, ObservableObject {
 
     }
     
+    func saveMapViewAsImage() {
+        guard let mapView = mapView else { return }
+        mapView.showsUserLocation = false
+
+        //MARK: 코스 이미지 사이즈 설정
+        let renderer = UIGraphicsImageRenderer(size: mapView.bounds.size)
+        let image = renderer.image { context in
+            mapView.drawHierarchy(in: mapView.bounds, afterScreenUpdates: true)
+        }
+        self.courseImage = image
+        print(courseImage, image)
+        //타입으로 변환
+        
+        // Save the image to the Photos library
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }) { success, error in
+            if success {
+                print("Map view image saved to Photos library.")
+            } else if let error = error {
+                print("Error saving map view image: \(error.localizedDescription)")
+            } else {
+                print("Failed to save map view image.")
+            }
+        }
+        mapView.showsUserLocation = true
+
+    }
+    
     // MARK: - Map
     func updateTrackingMode(_ newMode: MKUserTrackingMode) {
         // 지도 보기 사용자 추적 모드 업데이트
@@ -388,7 +432,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.trackingMode = newMode
                 withAnimation(.easeInOut(duration: 0.25)) {
-                    self.scale = 1
+                    self.scale = 3
                 }
             }
         } else {
@@ -476,7 +520,7 @@ extension WorkoutViewModel: MKMapViewDelegate {
             let render = MKPolylineRenderer(polyline: polyline)
             render.lineWidth = 8
             // 폴리선이 현재 트레이닝의 선택인 경우 주황색, 인디고 색상을 사용하십시오
-            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? Color("MainColor"): .black)
+            render.strokeColor = UIColor(polyline == selectedWorkout?.polyline ? .black.opacity(0.75): .black)
             return render
             // 오버레이가 연습이라면 (워크아웃)
         } else if let workout = overlay as? Workout {
