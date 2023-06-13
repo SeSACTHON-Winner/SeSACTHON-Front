@@ -62,7 +62,7 @@ struct MainRunningView: View {
                             }
                             print("workout.duration = \(workout.duration)")
                         }             
-                } }.padding(.bottom, 4)
+                } .padding(.bottom, 4)
           
                 HStack (alignment: .center){
                     Spacer()
@@ -299,6 +299,7 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
+                        startTimer()
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                             pauseTimer()
