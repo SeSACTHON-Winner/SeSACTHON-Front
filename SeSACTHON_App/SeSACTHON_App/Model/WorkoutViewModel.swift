@@ -38,6 +38,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     // View Model의 현재 상태를 기반으로 새 훈련 객체를 반환하는 계산된 속성입니다.
     var newWorkout: Workout {
         let duration = Date.now.timeIntervalSince(startDate)
+        
         return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace, courseImage: courseImage)
     }
     
