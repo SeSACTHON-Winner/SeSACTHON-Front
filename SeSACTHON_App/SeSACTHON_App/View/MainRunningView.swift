@@ -22,7 +22,7 @@ struct MainRunningView: View {
     @State private var isAnimate = false
     
     @EnvironmentObject var vm: WorkoutViewModel
-    
+    var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
     
     
@@ -53,6 +53,14 @@ struct MainRunningView: View {
                     Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 48, weight: .black)).italic()
+                        .onChange(of: workout.duration) { _ in
+                            let watchRunDAO = WatchRunDAO(isStart: true, duration: workout.duration, distance: workout.distance, helpNum: 2)
+                            guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
+                            if let session = wsManager.validSession{
+                                session.sendMessageData(data, replyHandler: nil)
+                            }
+                            print("workout.duration = \(workout.duration)")
+                        }
                     Spacer()
                 }.padding(.leading, 28)
                 HStack (alignment: .center){
@@ -291,7 +299,6 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
-                        startTimer()
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                             pauseTimer()

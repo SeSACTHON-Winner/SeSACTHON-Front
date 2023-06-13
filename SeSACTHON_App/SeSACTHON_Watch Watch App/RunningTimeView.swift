@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct RunningTimeView: View {
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: -10) {
-                Text("05 : 12")
+                Text("\(formattedTime(wsManager.watchRunDAO.duration))")
                     .tracking(-2)
                     .font(.custom("SF Pro Text", size: 54))
             }
@@ -25,7 +26,14 @@ struct RunningTimeView: View {
         
     }
 }
-
+private func formattedTime(_ time: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+    //timeString = formatter.string(from: time) ?? ""
+    return formatter.string(from: time) ?? ""
+}
 struct RunningTimeView_Previews: PreviewProvider {
     static var previews: some View {
         RunningTimeView()
