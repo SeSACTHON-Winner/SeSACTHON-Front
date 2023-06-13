@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct CustomCameraView: View {
+    
     @ObservedObject var viewModel = CameraViewModel()
+
     
     var body: some View {
         ZStack {
@@ -72,10 +74,10 @@ struct CameraView_Previews: PreviewProvider {
 
 
 enum Status: String, CaseIterable {
-    case gradient = "🎢 경사도"
-    case narrow = "⛔ 좁은 길"
-    case road = "↕️ 높은 단차"
-    case natural = "🚧 공사중"
+    case gradient = "경사도"
+    case narrow = "좁은 길"
+    case road = "높은 단차"
+    case natural = "공사중"
 }
 
 struct SelectStatusView: View {
@@ -126,7 +128,7 @@ struct SelectStatusView: View {
                 .frame(width: 120, height: 120)
                 
                 NavigationLink {
-                    ReportSubmitView(selection: $selection)
+//                    ReportSubmitView(selection: $selection, uiImage: <#T##Binding<UIImage>#>)
                 } label: {
                     Image("send") .resizable()
                 }
