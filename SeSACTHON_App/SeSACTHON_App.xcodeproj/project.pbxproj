@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1068485B2A36E2E100BFB309 /* SpeechBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1068485A2A36E2E100BFB309 /* SpeechBubble.swift */; };
 		4397B2912A36B89B00FB5BCA /* DangerInfoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */; };
+		4397B2932A385A3100FB5BCA /* FocusUUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4397B2922A385A3100FB5BCA /* FocusUUID.swift */; };
 		6099D7C82A310623004A49D1 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C62A310623004A49D1 /* Haptics.swift */; };
 		6099D7C92A310623004A49D1 /* HKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7C72A310623004A49D1 /* HKHelper.swift */; };
 		6099D7CF2A3106AC004A49D1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7CA2A3106AC004A49D1 /* Workout.swift */; };
@@ -107,6 +108,7 @@
 		1068485A2A36E2E100BFB309 /* SpeechBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechBubble.swift; sourceTree = "<group>"; };
 		434AFC65124216A26E8B86EB /* Pods-SeSACTHON_App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.release.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.release.xcconfig"; sourceTree = "<group>"; };
 		4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerInfoGroup.swift; sourceTree = "<group>"; };
+		4397B2922A385A3100FB5BCA /* FocusUUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusUUID.swift; sourceTree = "<group>"; };
 		60817E7A2A362F8000B5C3A6 /* SeSACTHON-Watch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SeSACTHON-Watch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6099D7C62A310623004A49D1 /* Haptics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		6099D7C72A310623004A49D1 /* HKHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HKHelper.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				7805F3382A2C65A40071AB01 /* PlaceMO.swift */,
 				78DCF7442A3619FA00984866 /* SUImagePicker.swift */,
 				4397B2902A36B89B00FB5BCA /* DangerInfoGroup.swift */,
+				4397B2922A385A3100FB5BCA /* FocusUUID.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */,
 				6099D7C82A310623004A49D1 /* Haptics.swift in Sources */,
 				6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */,
+				4397B2932A385A3100FB5BCA /* FocusUUID.swift in Sources */,
 				6099D7D12A3106AC004A49D1 /* MyMapError.swift in Sources */,
 				6099D7D82A310928004A49D1 /* CLLocationCoordinate2D.swift in Sources */,
 				6099D7D92A310928004A49D1 /* Date.swift in Sources */,
