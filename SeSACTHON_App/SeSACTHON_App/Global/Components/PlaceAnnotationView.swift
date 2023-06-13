@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct PlaceAnnotationView: View {
-    
+
     
     let danger: DangerInfoGroup
     var slopeCount: Int
@@ -176,6 +176,9 @@ struct PlaceAnnotationView: View {
                         .scaleEffect(2)
                         .foregroundColor(.white)
                 }
+                .onTapGesture {
+                    dotClick.toggle()
+                }
                 
             }
             
@@ -190,6 +193,9 @@ struct PlaceAnnotationView: View {
                 
             
             
+        }
+        if dotClick {
+            Spacer().frame(width: 0, height: 260)
         }
 
     }
