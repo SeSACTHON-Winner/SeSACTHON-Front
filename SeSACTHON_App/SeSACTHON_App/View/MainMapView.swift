@@ -11,6 +11,10 @@ import Alamofire
 import Kingfisher
 
 struct MainMapView: View {
+    
+    var mainUUID = FocusUUID()
+    var mapUUID = UUID()
+    
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.748433, longitude: 126.123), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     @State var userTrackingMode: MapUserTrackingMode = .follow
     @ObservedObject var locationManager = LocationDataManager()
@@ -82,9 +86,6 @@ struct MainMapView: View {
                                     completerWrapper.search(query: newValue)
                                 }
                         }
-                        
-
-                        
                     }
                     .padding(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -110,15 +111,24 @@ struct MainMapView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                
                 ZStack {
                     Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerGroupArr
                     ) { danger in
                         MapAnnotation(coordinate: .init(latitude: danger.latitude_mod, longitude: danger.longitude_mod)) {
                             PlaceAnnotationView.init(danger: danger)
+                                .onLongPressGesture {
+                                    withAnimation(.easeIn(duration: 0.4)) {
+                                        self.region.center.latitude = danger.latitude_mod
+                                        self.region.center.longitude = danger.longitude_mod
+                                    }
+                                }
+                                .environmentObject(mainUUID)
                         }
                     }
                     .gesture(DragGesture().onChanged { _ in
                         userTrackingMode = .none
+                        mainUUID.focusUUID = mapUUID
                     })
                     .tint(.mint)
                     
