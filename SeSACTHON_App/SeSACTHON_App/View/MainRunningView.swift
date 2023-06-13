@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: RootView랑 MainRunningView 합칠 예정,,
+
 struct MainRunningView: View {
     @Binding var swpSelection: Int
     @State var currentDate = Date.now
@@ -83,8 +83,7 @@ struct MainRunningView: View {
                 self.showingImagePicker = true
             }  label: {
                 Image("RunCamera").resizable()
-                    .frame(width: 52, height: 52)
-                
+                    .frame(width: 52, height: 52) 
             }
             .shadow(color: .black.opacity(0.25), radius: 2)
             .padding(.bottom, 8)
@@ -95,7 +94,6 @@ struct MainRunningView: View {
                 }
                 .ignoresSafeArea()
             }
-            
             
             HStack(spacing: 50) {
                 if runState == "run" {
@@ -116,11 +114,17 @@ struct MainRunningView: View {
                     if vm.recording {
                         Button {
                             stopTimer()
-                            //showStopConfirmation = true
+                            
+                            vm.zoomTo(workout)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                vm.saveMapViewAsImage()
+                            }
                             Task {
                                 await vm.endWorkout()
                             }
-                            swpSelection = 3
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                swpSelection = 3
+                            }
                         } label: {
                             Text("END")
                                 .font(.system(size: 24, weight: .black))
@@ -131,18 +135,6 @@ struct MainRunningView: View {
                                 .cornerRadius(60)
                         }
                         .padding(.bottom, 94)
-//                        .confirmationDialog("Stop Workout?", isPresented: $showStopConfirmation, titleVisibility: .visible) {
-//                            Button("Cancel", role: .cancel) {}
-//                            Button("Stop & Discard", role: .destructive) {
-//                                vm.discardWorkout()
-//                            }
-//                            Button("Finish & Save") {
-//                                Task {
-//                                    await vm.endWorkout()
-//                                }
-//                                swpSelection = 3
-//                            }
-//                        }
                         
                         Button {
                             runState = "run"
@@ -172,7 +164,6 @@ struct MainRunningView: View {
                             .onAppear {
                                 withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
                                     self.isAnimate.toggle()
-                                    
                                 }
                             }
                         } .padding(.bottom, 94)

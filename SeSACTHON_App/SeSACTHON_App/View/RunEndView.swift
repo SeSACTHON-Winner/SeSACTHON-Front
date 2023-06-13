@@ -40,7 +40,6 @@ struct RunEndView: View {
                                 .onAppear {
                                     print((Measurement(value: workout.distance, unit: UnitLength.meters).converted(to: UnitLength.kilometers)))
                                 } //TODO: 코드 분석,,
-                            
                             HStack(spacing: 20) {
                                 Text("시간")
                                     .font(.system(size: 12, weight: .medium))
@@ -116,6 +115,8 @@ struct RunEndView: View {
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
                 Spacer()
                 VStack (alignment: .center){
+                    //코스 이미지 확인: 가끔 nil일 때도 있고, 확대하면 또 보이는 경우도 있는데, 수정해볼 예정
+                    Image(uiImage: workout.courseImage).resizable().frame(width: 250, height: 500).background(.pink)
                     HStack {
                         Text("최근 활동")
                             .font(.system(size: 16, weight: .heavy))
@@ -126,7 +127,7 @@ struct RunEndView: View {
                     ForEach(runningArr, id: \.self) { runninginfo in
                         RunRecentView(runData: runninginfo)
                     }
-                } .padding(.leading, 24)
+                }.padding(.leading, 24)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -167,7 +168,7 @@ struct RunEndView: View {
             let remainingSeconds = Int(seconds.truncatingRemainder(dividingBy: 60))
             return "\(minutes)'\(remainingSeconds)\""
         } else {
-            return "Invalid Pace"
+            return "0\'0\""
         }
     }
 }
