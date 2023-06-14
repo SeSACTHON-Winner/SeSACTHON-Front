@@ -61,7 +61,7 @@ struct RunEndView: View {
                             let coordinate = locationManager.returnLocation()
                             url = URL(string: "http://35.72.228.224/sesacthon/runningInfo.php")!
                             let uid = UserDefaults.standard.string(forKey: "uid")!
-                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(workout.duration))","runningName" : "\(courseName)" , "helpCount" : 0, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance] as Dictionary
+                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(workout.duration))","runningName" : "\(courseName)" , "helpCount" : 0, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance / 1000] as Dictionary
                             
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
