@@ -13,7 +13,7 @@ struct ProfileView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var nickname: String = ""
-    @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICK", totalCount: 4, picturePath: "")
+    @State var member = MemberMO(id: 0, uid: "dd", nickname: "NICKNAME", totalCount: 4, picturePath: "")
     @State var runningArr: [RunningInfo] = []
     @State var isNickEditable = false
     
@@ -55,7 +55,7 @@ struct ProfileView: View {
                 // MARK: - profile image
                 KFImage(URL(string: "http://35.72.228.224/sesacthon/\(member.picturePath)")!)
                     .placeholder { //플레이스 홀더 설정
-                        Image(systemName: "map")
+                        Image(systemName: "person.fill").resizable().padding(20).frame(width: 126, height: 126).foregroundColor(.black.opacity(0.4))
                     }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                     .onSuccess {r in //성공
                         print("succes: \(r)")
@@ -66,8 +66,8 @@ struct ProfileView: View {
                         
                     }
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 126)
+                    .scaledToFill()
+                    .frame(width: 126, height: 126)
                     .clipShape(Circle())
                     .padding(.leading, 30)
                     .onTapGesture {
@@ -193,6 +193,8 @@ struct ProfileView: View {
             
             HStack {
                 Text("최근 활동")
+                    .font(.system(size: 16))
+                    .fontWeight(.semibold)
                 Spacer()
             }
             .padding(.leading, 30)
