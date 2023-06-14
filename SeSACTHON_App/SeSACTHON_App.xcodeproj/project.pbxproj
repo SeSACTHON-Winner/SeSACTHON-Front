@@ -29,14 +29,10 @@
 		6099D7E52A3109AA004A49D1 /* WorkoutBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */; };
 		6099D7E62A3109AA004A49D1 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DE2A3109AA004A49D1 /* View.swift */; };
 		6099D7E72A3109AA004A49D1 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7DF2A3109AA004A49D1 /* InfoView.swift */; };
-		6099D7E82A3109AA004A49D1 /* RunListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E02A3109AA004A49D1 /* RunListView.swift */; };
 		6099D7E92A3109AA004A49D1 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E12A3109AA004A49D1 /* PermissionView.swift */; };
 		6099D7EA2A3109AA004A49D1 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7E22A3109AA004A49D1 /* Blur.swift */; };
 		6099D7EC2A3109C8004A49D1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099D7EB2A3109C8004A49D1 /* RootView.swift */; };
 		60B9B6102A2D7F3300032504 /* MainRunningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B9B60F2A2D7F3300032504 /* MainRunningView.swift */; };
-		60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE552A29E98300312357 /* CustomCameraView.swift */; };
-		60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE572A29EA1200312357 /* CameraModel.swift */; };
-		60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE592A29EA6B00312357 /* CameraViewModel.swift */; };
 		60E6CE5C2A29EBDE00312357 /* ReportSubmitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */; };
 		60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */; };
 		7805F3392A2C65A40071AB01 /* PlaceMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805F3382A2C65A40071AB01 /* PlaceMO.swift */; };
@@ -133,15 +129,11 @@
 		6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutBar.swift; sourceTree = "<group>"; };
 		6099D7DE2A3109AA004A49D1 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		6099D7DF2A3109AA004A49D1 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		6099D7E02A3109AA004A49D1 /* RunListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunListView.swift; sourceTree = "<group>"; };
 		6099D7E12A3109AA004A49D1 /* PermissionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		6099D7E22A3109AA004A49D1 /* Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		6099D7EB2A3109C8004A49D1 /* RootView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		60B9B60E2A2D7DFB00032504 /* SeSACTHON_App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeSACTHON_App.entitlements; sourceTree = "<group>"; };
 		60B9B60F2A2D7F3300032504 /* MainRunningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRunningView.swift; sourceTree = "<group>"; };
-		60E6CE552A29E98300312357 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
-		60E6CE572A29EA1200312357 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
-		60E6CE592A29EA6B00312357 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		60E6CE5B2A29EBDE00312357 /* ReportSubmitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubmitView.swift; sourceTree = "<group>"; };
 		60E6CE5D2A2A4C5C00312357 /* RunEndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunEndView.swift; sourceTree = "<group>"; };
 		72F2550A3061B07BBD30FBFD /* Pods-SeSACTHON_App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSACTHON_App.debug.xcconfig"; path = "Target Support Files/Pods-SeSACTHON_App/Pods-SeSACTHON_App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,7 +229,6 @@
 			children = (
 				6099D7DE2A3109AA004A49D1 /* View.swift */,
 				6099D7DF2A3109AA004A49D1 /* InfoView.swift */,
-				6099D7E02A3109AA004A49D1 /* RunListView.swift */,
 				6099D7E12A3109AA004A49D1 /* PermissionView.swift */,
 				6099D7E22A3109AA004A49D1 /* Blur.swift */,
 			);
@@ -362,7 +353,6 @@
 			children = (
 				6099D7DB2A3109AA004A49D1 /* MapView.swift */,
 				6099D7DC2A3109AA004A49D1 /* WorkoutBar.swift */,
-				60E6CE552A29E98300312357 /* CustomCameraView.swift */,
 				78D01C9C2A29F8AA00240004 /* RoundedCorner.swift */,
 				7805F33A2A2C65EC0071AB01 /* PlaceAnnotationView.swift */,
 				7805F33C2A2C66BF0071AB01 /* CustomMapView.swift */,
@@ -406,8 +396,6 @@
 				6099D7CA2A3106AC004A49D1 /* Workout.swift */,
 				6099D7CD2A3106AC004A49D1 /* WorkoutFilter.swift */,
 				6099D7CE2A3106AC004A49D1 /* WorkoutType.swift */,
-				60E6CE572A29EA1200312357 /* CameraModel.swift */,
-				60E6CE592A29EA6B00312357 /* CameraViewModel.swift */,
 				78D01CA22A2A095C00240004 /* CurrentLocationMO.swift */,
 				7805F3382A2C65A40071AB01 /* PlaceMO.swift */,
 				78DCF7442A3619FA00984866 /* SUImagePicker.swift */,
@@ -686,16 +674,13 @@
 				6099D7D92A310928004A49D1 /* Date.swift in Sources */,
 				78DCF7452A3619FA00984866 /* SUImagePicker.swift in Sources */,
 				10E37C872A3886EF00DD4F9B /* WatchRunDAO.swift in Sources */,
-				60E6CE582A29EA1200312357 /* CameraModel.swift in Sources */,
 				7805F3412A2C6B9D0071AB01 /* MintSystemImageLabelStyle.swift in Sources */,
 				7898F03A2A2F128300B677A2 /* ProfileView.swift in Sources */,
-				60E6CE562A29E98300312357 /* CustomCameraView.swift in Sources */,
 				60E6CE5E2A2A4C5C00312357 /* RunEndView.swift in Sources */,
 				78D01C9D2A29F8AA00240004 /* RoundedCorner.swift in Sources */,
 				6099D7EA2A3109AA004A49D1 /* Blur.swift in Sources */,
 				6099D7E62A3109AA004A49D1 /* View.swift in Sources */,
 				78123B312A288C9C0060BA4F /* LocationDataManager.swift in Sources */,
-				6099D7E82A3109AA004A49D1 /* RunListView.swift in Sources */,
 				6099D7D32A3106AC004A49D1 /* WorkoutType.swift in Sources */,
 				10E37C8A2A39A56900DD4F9B /* RunStateManager.swift in Sources */,
 				6099D7EC2A3109C8004A49D1 /* RootView.swift in Sources */,
@@ -713,7 +698,6 @@
 				780F9A212A2859A500B715BD /* MainRunView.swift in Sources */,
 				78F734B72A27284C002AAE1A /* SeSACTHON_AppApp.swift in Sources */,
 				78F210AB2A2758DF00915FCD /* ColorExtension.swift in Sources */,
-				60E6CE5A2A29EA6B00312357 /* CameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,7 +721,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_Watch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = UG6UT639QH;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
@@ -748,13 +732,13 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "d.SeSACTHON-App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "d.SeSACTHON-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -774,7 +758,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_Watch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
@@ -785,13 +769,13 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "d.SeSACTHON-App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "d.SeSACTHON-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -928,7 +912,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = UG6UT639QH;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -954,7 +938,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2";
+				PRODUCT_BUNDLE_IDENTIFIER = "d.SeSACTHON-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -975,7 +959,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = VJUK3HBJ2M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -1001,7 +985,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App2";
+				PRODUCT_BUNDLE_IDENTIFIER = "d.SeSACTHON-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
