@@ -13,6 +13,7 @@ class RunStateManager : ObservableObject{
     private var timer: Timer?
     var wsManager = WatchSessionManager.sharedManager
     var vm : WorkoutViewModel?
+    var courseImage: UIImage = UIImage()
     static let shared = RunStateManager()
     init(){
     }
@@ -22,21 +23,27 @@ class RunStateManager : ObservableObject{
     func stopButtonClicked(){
         stopTimer()
         runState = "stop"
+        Haptics.tap()
         wsManager.sendPause()
     }
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
          wsManager.sendStop()
-         await vm!.zoomTo(workout)
-         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-             self.vm!.saveMapViewAsImage()
-         }
+        await vm!.zoomTo(workout)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if let img = self.vm!.saveMapViewAsImage() {
+                self.courseImage = img
+            }
+        }
          Task {
              await vm!.endWorkout()
          }
-         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
              swpSelection.wrappedValue = 3
          }
+        ////
+        Haptics.tap()
+         stopTimer()
     }
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
@@ -52,6 +59,7 @@ class RunStateManager : ObservableObject{
         }
     }
     func restartButtonClicked(){
+        Haptics.tap()
         runState = "run"
         startTimer()
         wsManager.sendStart()

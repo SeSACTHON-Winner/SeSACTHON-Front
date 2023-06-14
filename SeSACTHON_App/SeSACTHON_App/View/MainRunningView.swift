@@ -235,49 +235,6 @@ struct MainRunningView: View {
                             //MARK: StopButton
                             Button {
                                 rsManager.stopButtonClicked()
-// =======
-//                     Spacer().frame(width: 120)
-//                     Spacer().frame(width: 52, height: 52)
-//                 }
-// //                .offset(x: 0, y: 10)
-                
-                
-                
-                
-//                 HStack(spacing: 50) {
-//                     if runState == "run" {
-//                         Button {
-//                             Haptics.tap()
-//                             stopTimer()
-//                             runState = "stop"
-//                         } label: {
-//                             Text("STOP")
-//                                 .font(.system(size: 28, weight: .black))
-//                                 .italic()
-//                                 .foregroundColor(.white)
-//                                 .frame(width: 120, height: 120)
-//                                 .background(Color("#222222"))
-//                                 .cornerRadius(60)
-//                         }.padding(.bottom, 94)
-//                     }
-//                     else if runState == "stop" {
-//                         if vm.recording {
-//                             Button {
-//                                 Haptics.tap()
-//                                 stopTimer()
-//                                 vm.zoomTo(workout)
-//                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                                     if let img = vm.saveMapViewAsImage() {
-//                                         courseImage = img
-//                                     }
-//                                 }
-//                                 Task {
-//                                     await vm.endWorkout()
-//                                 }
-//                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                                     swpSelection = 3
-//                                 }
-// >>>>>>> develop
                             } label: {
                                 Text("END")
                                     .font(.system(size: 24, weight: .black))
@@ -336,40 +293,9 @@ struct MainRunningView: View {
                                         withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
                                             self.isAnimate.toggle()
                                         }
-// =======
-
-//                             Button {
-//                                 Haptics.tap()
-//                                 runState = "run"
-//                                 startTimer()
-//                             } label: {
-//                                 ZStack {
-//                                     Circle()
-//                                         .foregroundColor(Color("MainColor"))
-//                                         .scaleEffect(isAnimate ? 1.35 : 1.0)
-//                                         .opacity(isAnimate ? 0.5 : 0)
-                                    
-//                                     Circle()
-//                                         .foregroundColor(Color("MainColor"))
-//                                         .scaleEffect(isAnimate ? 1.2 : 1.0)
-//                                         .opacity(isAnimate ? 0.8 : 0)
-//                                     Circle()
-//                                         .foregroundColor(Color("#222222"))
-//                                 }
-//                                 .frame(width: 120, height: 120)
-//                                 .overlay(
-//                                     Text("RESTART")
-//                                         .font(.system(size: 22, weight: .black))
-//                                         .italic()
-//                                         .foregroundColor(Color("MainColor"))
-//                                 )
-//                                 .onAppear {
-//                                     withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
-//                                         self.isAnimate.toggle()
-// >>>>>>> develop
                                     }
-                                }
-                            } .padding(.bottom, 94)
+                                }.padding(.bottom, 94)
+                            }
                         }
                     }
                     .onAppear {
@@ -399,35 +325,6 @@ struct MainRunningView: View {
                             let elapsedTime = foregroundTime - backgroundTime
                             rsManager.time += elapsedTime
                         }
-// =======
-//                 }
-//                 .onAppear {
-//                     startTimer()
-//                     // 백그라운드 상태 진입 알림 구독
-//                     NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
-//                         pauseTimer()
-//                     }
-//                     // 포그라운드 상태 진입 알림 구독
-//                     NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-//                         resumeTimer()
-//                     }
-//                 }
-//                 .onDisappear {
-//                     stopTimer()
-                    
-//                     // 알림 구독 해제
-//                     NotificationCenter.default.removeObserver(self)
-//                 }
-//                 .onChange(of: scenePhase) { phase in
-//                     if phase == .background {
-//                         // Store the current time in the background
-//                         backgroundTime = Date().timeIntervalSinceReferenceDate
-//                     } else if phase == .active {
-//                         // Calculate the elapsed time when returning to the foreground
-//                         let foregroundTime = Date().timeIntervalSinceReferenceDate
-//                         let elapsedTime = foregroundTime - backgroundTime
-//                         time += elapsedTime
-// >>>>>>> develop
                     }
                 }
             }
