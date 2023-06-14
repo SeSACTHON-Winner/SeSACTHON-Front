@@ -36,9 +36,10 @@ struct RunningEndView: View {
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
-        .navigationDestination(isPresented: $isRunningEnd) {
-            StartView()
-        }
+        //MARK: 혹시 모르니 체크!
+//        .navigationDestination(isPresented: $isRunningEnd) {
+//            StartView()
+//        }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button {
@@ -79,7 +80,10 @@ extension RunningEndView {
             .padding(.leading, 20)
             HStack {
                 Button {
-                    isRunningEnd = true
+                    //MARK: 혹시모르니 체크! 스탑 버튼
+                    //isRunningEnd = true
+                    wsManager.sendStop()
+                    dismiss()
                 } label: {
                     watchCircleSytemImageBtn(color: .sesacMint, systemName: "checkmark")
                 }
@@ -87,6 +91,7 @@ extension RunningEndView {
                 Spacer()
                 Button {
                     dismiss()
+                    wsManager.sendStart()
                 } label: {
                     watchCircleSytemImageBtn(color: .white, systemName: "xmark")
                 }

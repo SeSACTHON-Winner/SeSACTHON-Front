@@ -14,19 +14,13 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-
+    @State private var isRestart = false;
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
-    @State var time: TimeInterval = 0
+    @ObservedObject var runStateManager = RunStateManager.shared
     @StateObject var vm = WorkoutViewModel()
     
     var body: some View {
         ZStack {
-            Text("\(wsManager.watchRunDAO.distance)")
-                .frame(height: 0)
-                .onChange(of: wsManager.watchRunDAO.isStart) { _ in
-                    print("changed")
-                swpSelection = 1
-            }
             switch swpSelection {
             case 0, 1, 2:
                 VStack(spacing: 0) {
@@ -44,14 +38,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, time: $time, workout: vm.newWorkout)
+                MainRunningView(swpSelection: $swpSelection,workout: vm.newWorkout)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time)
                 
             default:
                 EmptyView()
@@ -60,9 +54,25 @@ struct MainRunView: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
+            runStateManager.initialize(vm: vm)
             NotificationCenter.default.addObserver(forName: Notification.Name("start"), object: nil, queue: nil) { _ in
                 swpSelection = 1
                 print("Notification center work -> start : swpselection = 1")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("restart"), object: nil, queue: nil) { _ in
+                swpSelection = 2
+                runStateManager.restartButtonClicked()
+                print("Notification center work -> restart : swpselection = 2")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("pause"), object: nil, queue: nil) { _ in
+                runStateManager.stopButtonClicked()
+                print("Notification center work -> pause : swpselection = pause")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("stop"), object: nil, queue: nil){ _ in
+                Task.init {
+                    await runStateManager.endButtonClicked(workout: vm.newWorkout, swpSelection: $swpSelection)
+                    print("Notification center work -> stop : swpselection = stop")
+                }
             }
             
         }

@@ -14,12 +14,6 @@ struct StartView: View {
         if wsManager.watchRunDAO.isStart{
             RunningView()
         }
-        else if wsManager.watchRunDAO.isPause{
-            
-        }
-        else if wsManager.watchRunDAO.isStop{
-            
-        }
         else{
             Button {
                 wsManager.sendStart()

@@ -175,10 +175,16 @@ extension WatchSessionManager {
             guard let message = try? JSONDecoder().decode(WatchRunDAO.self, from: messageData) else {
                 return
             }
+            let isRestart = self.watchRunDAO.isPause
             print("received message.duration = \(message.duration)")
             self.watchRunDAO = message
-            if message.isStart{
-                NotificationCenter.default.post(name: Notification.Name("start"), object: nil)
+            if message.isStart && !message.isPause && !message.isStop{
+                if isRestart{
+                    NotificationCenter.default.post(name: Notification.Name("restart"), object: nil)
+                }
+                else{
+                    NotificationCenter.default.post(name: Notification.Name("start"), object: nil)
+                }
             }
             else if message.isPause{
                 NotificationCenter.default.post(name: Notification.Name("pause"), object: nil)

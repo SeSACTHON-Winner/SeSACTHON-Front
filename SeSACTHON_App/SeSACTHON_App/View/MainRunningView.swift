@@ -11,22 +11,16 @@ import Alamofire
 struct MainRunningView: View {
     @Binding var swpSelection: Int
     @State var currentDate = Date.now
-    @State var runState = "run"
-    
     @State var showStopConfirmation = false
-    
     @Environment(\.scenePhase) private var scenePhase
-    @Binding var time: TimeInterval
-    @State private var timer: Timer?
     
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
+    @ObservedObject var rsManager = RunStateManager.shared
     
     @EnvironmentObject var vm: WorkoutViewModel
     var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
-    
-    
     // MARK: - Camera
     @State private var showingImagePicker = false
     @State var pickedImage: Image?
@@ -49,15 +43,11 @@ struct MainRunningView: View {
                 Spacer().frame(height: 80)
                 HStack {
                     // 기존 timer
-                    Text("\(formattedTime(time))")
+                    Text("\(formattedTime(rsManager.time))")
                     //workout timer Version
                     //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 80, weight: .black)).italic()
-                    //MARK: send workout message 여기 잘 안먹음 바꿔줄 예정
-                        .onChange(of: workout.duration) { _ in
-                            wsManager.sendWatchRunDao()
-                        }             
                 } .padding(.bottom, 4)
           
                 HStack (alignment: .center){
@@ -65,13 +55,13 @@ struct MainRunningView: View {
                     VStack {
                         //TODO: 나중에 지우기
                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
+                            WorkoutBar(time: $rsManager.time, workout: workout, new: false).onAppear {
                                 print("false workbar")
                             }
                         }
                        
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true).onAppear {
+                            WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true).onAppear {
                                 print("true workbar")
                             }
                         }
@@ -221,10 +211,10 @@ struct MainRunningView: View {
                     .shadow(color: .black.opacity(0.25), radius: 2)
                     .padding(.bottom, 8)
                     HStack(spacing: 50) {
-                        if runState == "run" {
+                        if rsManager.runState == "run" {
+                            //MARK: StopButton
                             Button {
-                                stopTimer()
-                                runState = "stop"
+                                rsManager.stopButtonClicked()
                             } label: {
                                 Text("STOP")
                                     .font(.system(size: 28, weight: .black))
@@ -235,20 +225,14 @@ struct MainRunningView: View {
                                     .cornerRadius(60)
                             }.padding(.bottom, 94)
                         }
-                        else if runState == "stop" {
+                        else if rsManager.runState == "stop" {
                             if vm.recording {
+                                //MARK: EndButton
                                 Button {
-                                   stopTimer()
-
-                                    vm.zoomTo(workout)
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                        vm.saveMapViewAsImage()
-                                    }
-                                    Task {
-                                        await vm.endWorkout()
-                                    }
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        swpSelection = 3
+                                    Task{
+                                        
+                                        print("task")
+                                     await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
                                     }
                                 } label: {
                                     Text("END")
@@ -260,10 +244,9 @@ struct MainRunningView: View {
                                         .cornerRadius(60)
                                 }
                                 .padding(.bottom, 94)
-                               
+                               //MARK: Restart Button
                                 Button {
-                                    runState = "run"
-                                    startTimer()
+                                    rsManager.restartButtonClicked()
                                 } label: {
                                     ZStack {
                                         Circle()
@@ -295,18 +278,18 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
-                        startTimer()
+                        rsManager.startTimer()
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
-                            pauseTimer()
+                            rsManager.pauseTimer()
                         }
                         // 포그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                            resumeTimer()
+                            rsManager.resumeTimer()
                         }
                     }
                     .onDisappear {
-                        stopTimer()
+                        rsManager.stopTimer()
                         
                         // 알림 구독 해제
                         NotificationCenter.default.removeObserver(self)
@@ -319,7 +302,7 @@ struct MainRunningView: View {
                             // Calculate the elapsed time when returning to the foreground
                             let foregroundTime = Date().timeIntervalSinceReferenceDate
                             let elapsedTime = foregroundTime - backgroundTime
-                            time += elapsedTime
+                            rsManager.time += elapsedTime
                         }
                     }
                 }
@@ -334,25 +317,7 @@ struct MainRunningView: View {
             .ignoresSafeArea()
         }
     }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            DispatchQueue.main.async {
-                self.time += 1
-            }
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            RunLoop.current.add(self.timer!, forMode: .common)
-            RunLoop.current.run()
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
+
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
@@ -360,17 +325,6 @@ struct MainRunningView: View {
         formatter.zeroFormattingBehavior = .pad
         //timeString = formatter.string(from: time) ?? ""
         return formatter.string(from: time) ?? ""
-    }
-    
-    // 백그라운드 상태 진입 시 타이머 일시 중지
-    private func pauseTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    // 포그라운드 상태 진입 시 타이머 재개
-    private func resumeTimer() {
-        startTimer()
     }
 }
 

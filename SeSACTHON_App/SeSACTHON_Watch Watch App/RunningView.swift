@@ -35,17 +35,19 @@ struct RunningView: View {
                     print("pause")
                     wsManager.watchRunDAO.isPause ? wsManager.sendStart() : wsManager.sendPause()
                 } label: {
-                    watchRunningBtn(color: .white, systemName: wsManager.watchRunDAO.isPause ? "pause.fill" : "play.fill")
+                    watchRunningBtn(color: .white, systemName: wsManager.watchRunDAO.isPause ? "play.fill" : "pause.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.leading, 10)
-                
+                //MARK: stop button
                 Button {
-                    wsManager.sendStop()
+                    wsManager.sendPause()
+                    isEnd = true
                 } label: {
                     watchRunningBtn(color: .white, systemName: "stop.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
+                
             }
             .padding(.vertical, 20)
             .padding(.leading, 10)
@@ -55,7 +57,7 @@ struct RunningView: View {
         .navigationDestination(isPresented: $isNext) {
             ReportView()
         }
-        .navigationDestination(isPresented: $wsManager.watchRunDAO.isStop) {
+        .navigationDestination(isPresented: $isEnd) {
             RunningEndView()
         }
         .navigationBarBackButtonHidden(true)

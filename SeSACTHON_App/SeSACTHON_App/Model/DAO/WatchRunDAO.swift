@@ -38,8 +38,8 @@ struct WatchRunDAO : Codable,Hashable{
         return self;
     }
     mutating func stop() -> WatchRunDAO{
-        self.isStart = true;
-        self.isPause = true;
+        self.isStart = false;
+        self.isPause = false;
         self.isStop = true;
         return self;
     }
