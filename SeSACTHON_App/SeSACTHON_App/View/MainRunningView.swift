@@ -221,15 +221,24 @@ struct MainRunningView: View {
             } else {
                 
                 Spacer()
-                Button {
-                    self.showingImagePicker = true
-                }  label: {
-                    Image("RunCamera").resizable()
-                        .frame(width: 52, height: 52)
-                    
+                HStack(spacing: 20) {
+                    Button {
+                        self.showingImagePicker = true
+                    }  label: {
+                        Image("RunCamera").resizable()
+                            .frame(width: 52, height: 52)
+                        
+                    }
+                    .shadow(color: .black.opacity(0.25), radius: 2)
+                    .padding(.bottom, 8)
+                    Spacer().frame(width: 120)
+                    Spacer().frame(width: 52, height: 52)
                 }
-                .shadow(color: .black.opacity(0.25), radius: 2)
-                .padding(.bottom, 8)
+//                .offset(x: 0, y: 10)
+                
+                
+                
+                
                 HStack(spacing: 50) {
                     if runState == "run" {
                         Button {
