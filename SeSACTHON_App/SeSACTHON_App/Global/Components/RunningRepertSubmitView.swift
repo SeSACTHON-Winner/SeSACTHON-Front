@@ -46,21 +46,6 @@ struct RunningReportSubmitView: View {
                     
                     Button {
                         isSendNotConfirmed = true
-                        
-                        pickedImage = nil
-                        
-                    } label: {
-                        Text("새로운 보고하기")
-                            .font(.system(size: 12, weight: .medium))
-                    }
-                    .frame(width: 144, height: 32)
-                    .foregroundColor(.black)
-                    .background(.white)
-                    .cornerRadius(16)
-                    .shadow(radius: 4, x: 2, y: 2)
-                    
-                    Button {
-                        isSendNotConfirmed = true
                         pickedImage = nil
                         Haptics.tap()
                     } label: {

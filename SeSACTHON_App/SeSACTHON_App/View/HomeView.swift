@@ -17,6 +17,8 @@ struct HomeView: View {
     @State var isLogin = false
     @State var imagePath = "images.default.png"
     
+    @StateObject var vm = WorkoutViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -118,7 +120,7 @@ struct HomeView: View {
                 self.imagePath = picturePath.value ?? "images/default.png"
             }
             print("KFImage : \(GlobalProfilePath.picture_path)")
-        }
+        }.environmentObject(vm)
     }
 }
 

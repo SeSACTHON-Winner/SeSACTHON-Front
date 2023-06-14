@@ -9,7 +9,7 @@ import Foundation
 import Kingfisher
 import SwiftUI
 
-class GlobalProfileImage {
+class GlobalProfileImage { 
     
     static var profile = KFImage(URL(string: "http://35.72.228.224/sesacthon/images/test.jpg")!)
             .placeholder { //플레이스 홀더 설정

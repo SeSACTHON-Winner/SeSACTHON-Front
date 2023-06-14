@@ -13,8 +13,8 @@ struct MainRunningView: View {
     @State var currentDate = Date.now
     @State var showStopConfirmation = false
     @Environment(\.scenePhase) private var scenePhase
-//     @Binding var time: TimeInterval
-//     @State private var timer: Timer?
+    //     @Binding var time: TimeInterval
+    //     @State private var timer: Timer?
     @Binding var courseImage: UIImage
     
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
@@ -114,7 +114,7 @@ struct MainRunningView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .background(selection == item ? .white : .white.opacity(0.5))
                         .cornerRadius(16)
-                        .padding(.vertical, 4)
+                        .shadow(radius: 3, x: 1, y: 3)
                     }
                     .frame(width: 176)
                     .foregroundColor(.white)
@@ -192,7 +192,6 @@ struct MainRunningView: View {
                                 .scaledToFit()
                                 .frame(width: 120)
                         }
-                        
                     }
                     .padding(.top)
                     
@@ -207,7 +206,7 @@ struct MainRunningView: View {
                     Button {
                         self.showingImagePicker = true
                     }  label: {
-                        Image("RunCamera").resizable()
+                        Image("FinalCamera").resizable()
                             .frame(width: 52, height: 52)
                         
                     }
@@ -235,7 +234,7 @@ struct MainRunningView: View {
                                     Task{
                                         print("task")
                                         await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
-                                        }
+                                    }
                                 } label: {
                                     Text("END")
                                         .font(.system(size: 24, weight: .black))
@@ -244,9 +243,9 @@ struct MainRunningView: View {
                                         .frame(width: 120, height: 120)
                                         .background(Color("#222222"))
                                         .cornerRadius(60)
-
+                                    
                                 }.padding(.bottom, 94)
-                               //MARK: Restart Button
+                                //MARK: Restart Button
                                 Button {
                                     rsManager.restartButtonClicked(workout: workout)
                                 } label: {
@@ -320,7 +319,7 @@ struct MainRunningView: View {
             .ignoresSafeArea()
         }
     }
-
+    
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
