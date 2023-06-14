@@ -250,6 +250,7 @@ struct MainRunHomeView: View {
                             .background(selection == item ? .white : .white.opacity(0.5))
                             .cornerRadius(16)
                             .padding(.vertical, 4)
+                            .shadow(radius: 3, x: 1, y: 3)
                         }
                         .frame(width: 176)
                         .foregroundColor(.white)
@@ -332,53 +333,8 @@ struct MainRunHomeView: View {
                     } else {
                         Spacer().frame(height: 20)
                         // MARK: - 말풍선
-                        SpeechBubble(text: "안전한 보행로를 위해\n장애물을 신고해주세요.")
-                            .opacity(speechBubbleOpacity)
-                            .onAppear{
-                                withAnimation(.easeIn(duration: 1)){
-                                    speechBubbleOpacity = 1.0
-                                }
-                            }
                         //Color.black.frame(height: 100)
                         Spacer()
-                        HStack(alignment: .top, spacing: 28) {
-                            
-                            Button {
-                                self.showingImagePicker = true
-                            } label: {
-                                Image("RunCamera").resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                            .fullScreenCover(isPresented: $showingImagePicker) {
-                                SUImagePicker(sourceType: .camera) { (image) in
-                                    self.sendImage = image
-                                    self.pickedImage = Image(uiImage: image)
-                                    print(image)
-                                }
-                                .ignoresSafeArea()
-                            }
-                            //MARK: go 버튼 -> 시작 메세지 보냄
-                            Button {
-                                swpSelection = 1
-                                wsManager.sendStart()
-                            } label: {
-                                Text("Go")
-                                    .font(.system(size: 32, weight: .black))
-                                    .italic()
-                                    .foregroundColor(.white)
-                                    .frame(width: 120, height: 120)
-                                    .background(Color("#222222"))
-                                    .cornerRadius(60)
-                            }
-                            Button {
-                                //self.userTrackingMode = .follow
-                                updateTrackingMode()
-                            } label: {
-                                Image("RunLocation")
-                                    .resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                        }.padding(.bottom, 60)
                         ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
                     
@@ -400,7 +356,7 @@ struct MainRunHomeView: View {
                             Haptics.tap()
                             self.showingImagePicker = true
                         } label: {
-                            Image("RunCamera").resizable()
+                            Image("FinalCamera").resizable()
                                 .frame(width: 52, height: 52)
                         }
                         .fullScreenCover(isPresented: $showingImagePicker) {
@@ -430,7 +386,7 @@ struct MainRunHomeView: View {
                             updateTrackingMode()
                             Haptics.success()
                         } label: {
-                            Image("RunLocation")
+                            Image("FinalLocation")
                                 .resizable()
                                 .frame(width: 52, height: 52)
                         }
