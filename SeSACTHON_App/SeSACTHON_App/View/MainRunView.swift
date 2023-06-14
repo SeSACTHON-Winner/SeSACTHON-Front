@@ -227,7 +227,7 @@ struct MainRunHomeView: View {
                     
                     if isSendNotConfirmed {
                         Color.white
-                            .frame(width: 210, height: 210)
+                            .frame(width: 204, height: 204)
                             .cornerRadius(10)
                             .overlay {
                                 selectedImage
@@ -261,7 +261,7 @@ struct MainRunHomeView: View {
                         .frame(width: 176)
                         .foregroundColor(.white)
                         .padding(.horizontal, 96)
-                        HStack {
+                        HStack(spacing: 32) {
                             Button {
                                 showingImagePicker = true
                             } label: {

@@ -46,12 +46,9 @@ struct MainRunningView: View {
     var body: some View {
         VStack {
             VStack {
-                Spacer().frame(height: 80)
+                Color.black.frame(height: 84)
                 HStack {
-                    // 기존 timer
                     Text("\(formattedTime(rsManager.time))")
-                    //workout timer Version
-                    //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 80, weight: .black)).italic()
                 } .padding(.bottom, 4)
@@ -65,11 +62,10 @@ struct MainRunningView: View {
                     }
                     Spacer()
                 }
-                Spacer().frame(height: 36)
-                
+                Spacer().frame(height: (pickedImage != nil) ? 24 : 36)
             }
             .foregroundColor(.white)
-            .frame(height: 218)
+            .frame(height: (pickedImage != nil) ?  120 : 242)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -83,8 +79,9 @@ struct MainRunningView: View {
             
             if let selectedImage = pickedImage {
                 if isSendNotConfirmed {
+                    Spacer()
                     Color.white
-                        .frame(width: 210, height: 210)
+                        .frame(width: 204, height: 204)
                         .cornerRadius(10)
                         .overlay {
                             selectedImage
@@ -94,7 +91,7 @@ struct MainRunningView: View {
                                 .cornerRadius(10)
                         }
                         .padding(.vertical)
-                    
+                    Spacer()
                     ForEach(Status.allCases, id:  \.rawValue) { item in
                         HStack {
                             Image("icon_\(returnEngRawvalue(type: item))")
@@ -117,7 +114,8 @@ struct MainRunningView: View {
                     .frame(width: 176)
                     .foregroundColor(.white)
                     .padding(.horizontal, 96)
-                    HStack {
+                    Spacer()
+                    HStack(spacing: 32) {
                         Button {
                             showingImagePicker = true
                         } label: {
@@ -126,6 +124,7 @@ struct MainRunningView: View {
                                 .scaledToFit()
                                 .frame(width: 120)
                         }
+                        
                         Button {
                             
                             print("helpCount : \(helpCount)")
@@ -193,23 +192,26 @@ struct MainRunningView: View {
                     }
                     .padding(.top)
                     
-                    Spacer()
+                    Spacer().frame(height: 80)
                 } else {
+                    Spacer()
                     RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                 }
             } else {
                 
                 Spacer()
-                HStack(spacing: 20) {
-                    Button {
-                        self.showingImagePicker = true
-                    }  label: {
-                        Image("FinalCamera").resizable()
-                            .frame(width: 52, height: 52)
-                        
-                    }
-                    .shadow(color: .black.opacity(0.25), radius: 2)
-                    .padding(.bottom, 8)
+                VStack(spacing: 16) {
+                    HStack {
+                        Button {
+                            self.showingImagePicker = true
+                        }  label: {
+                            Image("FinalCamera").resizable()
+                                .frame(width: 52, height: 52)
+                        }
+                        .shadow(color: .black.opacity(0.25), radius: 2)
+
+                        Spacer()
+                    }.offset(x: 56, y: 8)
                     HStack(spacing: 50) {
                         if rsManager.runState == "run" {
                             //MARK: StopButton
