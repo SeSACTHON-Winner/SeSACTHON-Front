@@ -26,9 +26,6 @@ class WorkoutViewModel: NSObject, ObservableObject {
     @Published var calory = 0.0
     @Published var pace = 0.0
     
-    //코스 캡쳐 이미지
-    @Published var courseImage: UIImage = UIImage()
-
     // 위치 표를 기반으로 MKPolyline을 반환하는 계산 속성
     var polyline: MKPolyline {
         let coords = locations.map(\.coordinate)
@@ -39,7 +36,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
     var newWorkout: Workout {
         let duration = Date.now.timeIntervalSince(startDate)
         
-        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace, courseImage: courseImage)
+        return Workout(type: type, polyline: polyline, locations: locations, date: startDate, duration: duration, calories: calory, pace: pace)
     }
     
 
@@ -283,7 +280,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         }
         //MARK: 맵뷰 이미지 저장
        
-        saveMapViewAsImage()
+        //saveMapViewAsImage()
         
 
     }
@@ -389,8 +386,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
 
     }
     
-    func saveMapViewAsImage() {
-        guard let mapView = mapView else { return }
+    func saveMapViewAsImage() -> UIImage? {
+        guard let mapView = mapView else { return nil }
         mapView.showsUserLocation = false
 
         //MARK: 코스 이미지 사이즈 설정
@@ -398,9 +395,8 @@ class WorkoutViewModel: NSObject, ObservableObject {
         let image = renderer.image { context in
             mapView.drawHierarchy(in: mapView.bounds, afterScreenUpdates: true)
         }
-        self.courseImage = image
-        print(courseImage, image)
-        //타입으로 변환
+        //
+        //courseImage = image
         
         // Save the image to the Photos library
         PHPhotoLibrary.shared().performChanges({
@@ -415,7 +411,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
             }
         }
         mapView.showsUserLocation = true
-
+        return image
     }
     
     // MARK: - Map

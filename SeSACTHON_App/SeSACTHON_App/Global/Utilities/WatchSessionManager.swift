@@ -1,15 +1,12 @@
 import WatchConnectivity
+import SwiftUI
 
 class WatchSessionManager: NSObject, WCSessionDelegate,ObservableObject {
-
     static let sharedManager = WatchSessionManager()
-    @Published var counter = 0
-    @Published var isConnected = false
-    @Published var watchRunDAO = WatchRunDAO(isStart: false, duration: 0.0, distance: 0.0, helpNum: 0)
+    @Published var watchRunDAO = WatchRunDAO()
     private override init() {
         super.init()
     }
-
     private let session: WCSession? = WCSession.isSupported() ? WCSession.default : nil
 
     @available(iOS 9.3, *)
@@ -41,25 +38,6 @@ class WatchSessionManager: NSObject, WCSessionDelegate,ObservableObject {
         #endif
         
         return nil
-    }
-    func handShake(){
-        DispatchQueue.global(qos: .background).async {
-            while(true){
-                if let session = self.validSession{
-                    if session.isReachable{
-                        DispatchQueue.main.async {
-                            self.isConnected = true
-                        }
-                    }
-                }
-                else{
-                    DispatchQueue.main.async {
-                        self.isConnected = false
-                    }
-                }
-                sleep(1)
-            }
-        }
     }
     func startSession() {
         session?.delegate = self
@@ -150,6 +128,26 @@ extension WatchSessionManager {
         }
         return nil
     }
+    //send WatcchRunDao to paired Device
+    func sendWatchRunDao(){
+        guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
+        validReachableSession?.sendMessageData(data, replyHandler: nil)
+    }
+    // send Start WatchRunDAO
+    func sendStart(){
+        watchRunDAO = watchRunDAO.start()
+        sendWatchRunDao()
+    }
+    // send Stop WatchRunDAO
+    func sendStop(){
+        watchRunDAO = watchRunDAO.stop()
+        sendWatchRunDao()
+    }
+    // send Pause WatchRunDAO
+    func sendPause(){
+        watchRunDAO = watchRunDAO.pause()
+        sendWatchRunDao()
+    }
 
     // Sender
     func sendMessage(message: [String : AnyObject],
@@ -169,10 +167,6 @@ extension WatchSessionManager {
     // Receiver
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
         // handle receiving message
-        DispatchQueue.main.async {
-            let count = message["counter"] as? Int ?? 10000
-            self.counter = count
-        }
     }
 
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
@@ -181,8 +175,23 @@ extension WatchSessionManager {
             guard let message = try? JSONDecoder().decode(WatchRunDAO.self, from: messageData) else {
                 return
             }
+            let isRestart = self.watchRunDAO.isPause
             print("received message.duration = \(message.duration)")
             self.watchRunDAO = message
+            if message.isStart && !message.isPause && !message.isStop{
+                if isRestart{
+                    NotificationCenter.default.post(name: Notification.Name("restart"), object: nil)
+                }
+                else{
+                    NotificationCenter.default.post(name: Notification.Name("start"), object: nil)
+                }
+            }
+            else if message.isPause{
+                NotificationCenter.default.post(name: Notification.Name("pause"), object: nil)
+            }
+            else if message.isStop{
+                NotificationCenter.default.post(name: Notification.Name("stop"), object: nil)
+            }
         }
     }
 }

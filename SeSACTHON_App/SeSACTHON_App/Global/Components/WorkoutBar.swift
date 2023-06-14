@@ -16,6 +16,8 @@ struct WorkoutBar: View {
     let workout: Workout
     let new: Bool
     
+    @Binding var helpCount: Int
+
     var body: some View {
 
             VStack(alignment: .leading, spacing: 5) {
@@ -23,12 +25,10 @@ struct WorkoutBar: View {
                     WorkoutStat(name: "거리", value: Measurement(value: workout.distance, unit: UnitLength.meters).formatted())//포맷된 거리를 표시합니다.
                     Spacer()
                     WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
-                    Spacer()
-                    WorkoutStat(name: "칼로리", value: workout.calories.formatted())
-                    // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
+//                  // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                     Spacer()
                     //TODO: 도움개수 연결
-                    WorkoutStat(name: "도움개수", value: "0")//포맷된 시간을 표시합니다.
+                    WorkoutStat(name: "도움개수", value: helpCount.formatted())
 
                 }
             }
@@ -95,6 +95,6 @@ struct WorkoutStat: View {
             Text(value)
                 .foregroundColor(.white)
                 .font(.system(size: 20, weight: .bold)).italic()
-        }.frame(width: 80)
+        }.frame(width: 72)
     }
 }

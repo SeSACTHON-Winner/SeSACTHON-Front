@@ -17,62 +17,65 @@ struct RunningReportSubmitView: View {
     
     
     var body: some View {
-        VStack(spacing: 40) {
-            
-            VStack {
-                
-                Image("\(returnEngRawvalue(type: selection))_white")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40)
-                    .padding(.vertical)
-                    .frame(width: 40)
-                Text("\(selection.rawValue)")
-                Text("1") //TODO: Data 연결
-                    .font(.system(size: 128, weight: .black))
-                    .foregroundColor(Color("MainColor"))
-                    .italic()
-                Text("도움 감사드립니다.")
-                    .padding(.vertical)
-                Spacer()
-            }
-            .frame(minWidth: 274)
-            .background(.black)
-            .foregroundColor(.white)
-            .cornerRadius(14)
-            .padding(.top, 50)
-            
-            Button {
-                isSendNotConfirmed = true
-                
-                pickedImage = nil
-                
-            } label: {
-                Text("새로운 보고하기")
-                    .font(.system(size: 12, weight: .medium))
-            }
-            .frame(width: 144, height: 32)
-            .foregroundColor(.black)
-            .background(.white)
-            .cornerRadius(16)
-            .shadow(radius: 4, x: 2, y: 2)
-            
-            Button {
-                isSendNotConfirmed = true
-                
-                pickedImage = nil
-                
-            } label: {
-                Text("Go Run")
-                    .font(.system(size: 30, weight: .black))
-                    .foregroundColor(Color("MainColor"))
-                    .italic()
-                    .frame(width: 120, height: 120)
+                VStack(spacing: 30) {
+                    
+                    VStack(spacing: 20) {
+                        
+                        Image("\(returnEngRawvalue(type: selection))_white")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .padding(.vertical,20)
+                            
+                        Text("\(selection.rawValue)")
+                        Text("1") //TODO: Data 연결
+                            .font(.system(size: 100, weight: .black))
+                            .foregroundColor(Color("MainColor"))
+                            .italic()
+                            .frame(height: 90)
+                        Text("도움 감사드립니다.")
+                            .padding(.vertical, 20)
+                            .padding(.bottom, 10)
+                        
+                    }
+                    .frame(minWidth: 274)
                     .background(.black)
-                    .cornerRadius(60)
-            }
-            .padding(.bottom, 94)
-        }.edgesIgnoringSafeArea(.all)
+                    .foregroundColor(.white)
+                    .cornerRadius(14)
+                    .padding(.top, 50)
+                    
+                    Button {
+                        isSendNotConfirmed = true
+                        
+                        pickedImage = nil
+                        
+                    } label: {
+                        Text("새로운 보고하기")
+                            .font(.system(size: 12, weight: .medium))
+                    }
+                    .frame(width: 144, height: 32)
+                    .foregroundColor(.black)
+                    .background(.white)
+                    .cornerRadius(16)
+                    .shadow(radius: 4, x: 2, y: 2)
+                    
+                    Button {
+                        isSendNotConfirmed = true
+                        pickedImage = nil
+                        Haptics.tap()
+                    } label: {
+                        Text("Go Run")
+                            .font(.system(size: 30, weight: .black))
+                            .foregroundColor(Color("MainColor"))
+                            .italic()
+                            .frame(width: 120, height: 120)
+                            .background(.black)
+                            .cornerRadius(60)
+                    }
+                    .padding(.bottom, 94)
+                }
+            .edgesIgnoringSafeArea(.all)
+            .padding(.top, 20)
     }
 }
 

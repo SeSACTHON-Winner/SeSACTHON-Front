@@ -8,23 +8,22 @@
 import SwiftUI
 
 struct StartView: View {
-    
-    @State var isNext = false
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     var body: some View {
-        
-        Button {
-            isNext = true
-        } label: {
-            StartButton()
-        }
-        .buttonStyle(PlainButtonStyle())
-        .navigationDestination(isPresented: $isNext) {
+        //MARK: 워치에서 Start메세지 보내기
+        if wsManager.watchRunDAO.isStart{
             RunningView()
         }
-        .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
-        
+        else{
+            Button {
+                wsManager.sendStart()
+            } label: {
+                StartButton()
+            }
+            .buttonStyle(PlainButtonStyle())
+            .ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
+        }
     }
 }
 
