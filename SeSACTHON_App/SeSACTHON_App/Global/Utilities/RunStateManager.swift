@@ -29,6 +29,7 @@ class RunStateManager : ObservableObject{
     }
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
+        time = 0
          wsManager.sendStop()
         await vm!.zoomTo(workout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -45,29 +46,26 @@ class RunStateManager : ObservableObject{
         ////
         Haptics.tap()
         wsManager.watchRunDAO = WatchRunDAO()
-         stopTimer()
     }
     func startTimer(workout:Workout) {
+        stopTimer()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
             print("timer : \(Double(time))")
             self.wsManager.watchRunDAO.fetchChange(workout: workout,duration:Double(time+1),helpNum: helpCount)
             DispatchQueue.main.async {
                 self.wsManager.sendWatchRunDao()
-                print("wsManager.watchRunDAO.duration = \(wsManager.watchRunDAO.duration)")
+                print("wsManager.watchRunDAO.duration = \(self.wsManager.watchRunDAO.duration)")
                 self.time += 1
             }
         }
-        
-        DispatchQueue.global(qos: .background).async {
-            RunLoop.current.add(self.timer!, forMode: .common)
-            RunLoop.current.run()
-        }
+//
+//        DispatchQueue.global(qos: .background).async {
+//            RunLoop.current.add(self.timer!, forMode: .common)
+//            RunLoop.current.run()
+//        }
     }
     func startButtonClicked(workout:Workout){
         Haptics.tap()
-        runState = "run"
-        startTimer(workout: workout)
-        wsManager.sendStart()
     }
     func restartButtonClicked(workout:Workout){
         Haptics.tap()
