@@ -24,7 +24,7 @@ struct ProfileView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Color.black.frame(height: 50)
+            Color.black.frame(height: 66)
             HStack {
                 Button {
                     dismiss()
@@ -43,12 +43,13 @@ struct ProfileView: View {
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .padding(.bottom)
+            .frame(height: 60)
+            .padding(.bottom, 8)
             .padding(.horizontal)
             .background(.black)
-            Color.black.frame(height: 20)
-                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                .shadow(radius: 3, x: 0 ,y: 4)
+            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+            .shadow(radius: 3, x: 0 ,y: 4)
+            
             HStack(spacing: 29) {
                 
                 // MARK: - profile image
