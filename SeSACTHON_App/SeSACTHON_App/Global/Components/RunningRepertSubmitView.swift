@@ -18,7 +18,7 @@ struct RunningReportSubmitView: View {
     
     var body: some View {
                 VStack(spacing: 30) {
-                    
+                    Spacer()
                     VStack(spacing: 20) {
                         
                         Image("\(returnEngRawvalue(type: selection))_white")
@@ -43,19 +43,13 @@ struct RunningReportSubmitView: View {
                     .foregroundColor(.white)
                     .cornerRadius(14)
                     .padding(.top, 50)
-                    
+                    Spacer()
                     Button {
                         isSendNotConfirmed = true
                         pickedImage = nil
                         Haptics.tap()
                     } label: {
-                        Text("Go Run")
-                            .font(.system(size: 30, weight: .black))
-                            .foregroundColor(Color("MainColor"))
-                            .italic()
-                            .frame(width: 120, height: 120)
-                            .background(.black)
-                            .cornerRadius(60)
+                        Image("GORUN")
                     }
                     .padding(.bottom, 94)
                 }
