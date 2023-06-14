@@ -71,15 +71,14 @@ struct MainRunningView: View {
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
-                        //TODO: 나중에 지우기
-                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
-                                print("false workbar")
-                            }
-                        }
+//                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+//                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
+//                                print("false workbar")
+//                            }
+//                        }
                         
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true).onAppear {
+                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true, helpCount: $helpCount).onAppear {
                                 print("true workbar")
                             }
                         }
