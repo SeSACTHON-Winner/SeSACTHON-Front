@@ -126,9 +126,8 @@ struct PlaceAnnotationView: View {
                                             print("failure: \(e)")
                                         }
                                         .resizable()
-                                        .scaledToFill()
+                                        .scaledToFit()
                                         .frame(width: 150, height: 150)
-                                        .background(.black)
                                         .cornerRadius(5)
                                     
                                     HStack {
