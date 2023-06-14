@@ -62,7 +62,7 @@ struct ReportSubmitView: View {
                 isSendNotConfirmed = true
                 
                 pickedImage = nil
-                
+                Haptics.tap()
             } label: {
                 Text("Go Run")
                     .font(.system(size: 30, weight: .black))

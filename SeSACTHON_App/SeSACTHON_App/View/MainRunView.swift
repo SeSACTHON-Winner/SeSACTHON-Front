@@ -317,6 +317,7 @@ struct MainRunHomeView: View {
                     HStack(alignment: .top, spacing: 28) {
                         
                         Button {
+                            Haptics.tap()
                             self.showingImagePicker = true
                         } label: {
                             Image("RunCamera").resizable()
@@ -333,6 +334,7 @@ struct MainRunHomeView: View {
                         
                         Button {
                             swpSelection = 1
+                            Haptics.tap()
                         } label: {
                             Text("Go")
                                 .font(.system(size: 32, weight: .black))
@@ -345,6 +347,7 @@ struct MainRunHomeView: View {
                         Button {
                             //self.userTrackingMode = .follow
                             updateTrackingMode()
+                            Hactics.success()
                         } label: {
                             Image("RunLocation")
                                 .resizable()
@@ -352,9 +355,6 @@ struct MainRunHomeView: View {
                         }
                     }.padding(.bottom, 60)
                 }
-                
-                
-                
             }
         }
         .navigationBarBackButtonHidden(true)

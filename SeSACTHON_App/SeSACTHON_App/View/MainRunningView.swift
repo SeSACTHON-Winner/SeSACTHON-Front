@@ -242,6 +242,7 @@ struct MainRunningView: View {
                 HStack(spacing: 50) {
                     if runState == "run" {
                         Button {
+                            Haptics.tap()
                             stopTimer()
                             runState = "stop"
                         } label: {
@@ -257,8 +258,8 @@ struct MainRunningView: View {
                     else if runState == "stop" {
                         if vm.recording {
                             Button {
+                                Haptics.tap()
                                 stopTimer()
-
                                 vm.zoomTo(workout)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     if let img = vm.saveMapViewAsImage() {
@@ -283,6 +284,7 @@ struct MainRunningView: View {
                             }.padding(.bottom, 94)
 
                             Button {
+                                Haptics.tap()
                                 runState = "run"
                                 startTimer()
                             } label: {
@@ -395,11 +397,6 @@ struct MainRunningView: View {
     }
 }
 
-//struct MainRunningView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainRunningView(swpSelection: .constant(2))
-//    }
-//}
 
 extension MainRunningView {
     func returnEngRaw() -> String {
