@@ -16,7 +16,7 @@ struct MainRunView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
 
     @State var time: TimeInterval = 0
-
+    @State var courseImage: UIImage = UIImage()
     @StateObject var vm = WorkoutViewModel()
     
     @State var helpCount = 0
@@ -40,15 +40,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, time: $time, workout: vm.newWorkout, helpCount: $helpCount)
+                MainRunningView(swpSelection: $swpSelection, time: $time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time, helpCount: $helpCount)
-                
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time, courseImage: $courseImage, helpCount: $helpCount)               
             default:
                 EmptyView()
             }

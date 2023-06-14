@@ -20,7 +20,7 @@ struct RunEndView: View {
     @Binding var time: TimeInterval
     @State var totalCount = 0
     @State var imagePath = "images/default.png"
-    
+    @Binding var courseImage: UIImage
     @Binding var helpCount: Int
     
     var body: some View {
@@ -39,7 +39,7 @@ struct RunEndView: View {
                             let photoName = "RunInfo-\(formattedDate)"
                             var params = ["uid" : UserDefaults.standard.string(forKey: "uid"), "picture_path" : "\(photoName)"] as Dictionary
                             AF.upload(multipartFormData: { multipartFormData in
-                                if let imageData = workout.courseImage.jpegData(compressionQuality: 0.5) {
+                                if let imageData = courseImage.jpegData(compressionQuality: 0.5) {
                                     print("\n\n\nimageData.description: \(imageData.description)\n\n\n")
                                     multipartFormData.append(imageData, withName: "photo", fileName: "\(photoName).jpg", mimeType: "image/jpeg")
                                 }
@@ -196,8 +196,8 @@ struct RunEndView: View {
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
                 Spacer()
                 VStack (alignment: .center){
-                    //코스 이미지 확인: 가끔 nil일 때도 있고, 확대하면 또 보이는 경우도 있는데, 수정해볼 예정
-                    Image(uiImage: workout.courseImage).resizable().frame(width: 250, height: 500).background(.pink)
+                    //코스 이미지 확인View
+                    //Image(uiImage: courseImage).resizable().frame(width: 250, height: 500).background(.pink)
                     HStack {
                         Text("최근 활동")
                             .font(.system(size: 16, weight: .heavy))

@@ -18,6 +18,7 @@ struct MainRunningView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Binding var time: TimeInterval
     @State private var timer: Timer?
+    @Binding var courseImage: UIImage
     
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
@@ -249,15 +250,17 @@ struct MainRunningView: View {
                         if vm.recording {
                             Button {
                                 stopTimer()
-                                
+
                                 vm.zoomTo(workout)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                    vm.saveMapViewAsImage()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    if let img = vm.saveMapViewAsImage() {
+                                        courseImage = img
+                                    }
                                 }
                                 Task {
                                     await vm.endWorkout()
                                 }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                     swpSelection = 3
                                 }
                             } label: {
@@ -268,9 +271,9 @@ struct MainRunningView: View {
                                     .frame(width: 120, height: 120)
                                     .background(Color("#222222"))
                                     .cornerRadius(60)
-                            }
-                            .padding(.bottom, 94)
-                            
+
+                            }.padding(.bottom, 94)
+
                             Button {
                                 runState = "run"
                                 startTimer()
