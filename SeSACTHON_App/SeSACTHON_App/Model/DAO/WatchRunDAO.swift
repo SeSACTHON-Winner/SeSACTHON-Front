@@ -23,8 +23,14 @@ struct WatchRunDAO : Codable,Hashable{
         self.distance = 0.0
         self.helpNum = 0
     }
+    #if os(iOS)
+    mutating func fetchChange(workout: Workout,duration: Double,helpNum: Int){
+        self.duration = duration
+        self.distance = workout.distance
+        self.helpNum = helpNum
+    }
+    #endif
     
-
     mutating func start() -> WatchRunDAO{
         self.isStart = true;
         self.isPause = false;
