@@ -236,14 +236,13 @@ struct MainRunningView: View {
                             Button {
                                 rsManager.stopButtonClicked()
                             } label: {
-                                Text("END")
-                                    .font(.system(size: 24, weight: .black))
+                                Text("STOP")
+                                    .font(.system(size: 28, weight: .black))
                                     .italic()
                                     .foregroundColor(.white)
                                     .frame(width: 120, height: 120)
                                     .background(Color("#222222"))
                                     .cornerRadius(60)
-
                             }.padding(.bottom, 94)
                         }
                         else if rsManager.runState == "stop" {
@@ -251,10 +250,9 @@ struct MainRunningView: View {
                                 //MARK: EndButton
                                 Button {
                                     Task{
-                                        
                                         print("task")
-                                     await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
-                                    }
+                                        await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
+                                        }
                                 } label: {
                                     Text("END")
                                         .font(.system(size: 24, weight: .black))
@@ -263,8 +261,8 @@ struct MainRunningView: View {
                                         .frame(width: 120, height: 120)
                                         .background(Color("#222222"))
                                         .cornerRadius(60)
-                                }
-                                .padding(.bottom, 94)
+
+                                }.padding(.bottom, 94)
                                //MARK: Restart Button
                                 Button {
                                     rsManager.restartButtonClicked()
@@ -294,7 +292,7 @@ struct MainRunningView: View {
                                             self.isAnimate.toggle()
                                         }
                                     }
-                                }.padding(.bottom, 94)
+                                } .padding(.bottom, 94)
                             }
                         }
                     }
