@@ -13,6 +13,7 @@ struct RunningView: View {
     @State var isNext = false
     @State var isEnd = false
     @State var isRunning = true
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: -10) {
@@ -29,20 +30,24 @@ struct RunningView: View {
                     watchReportBtn()
                 }
                 .buttonStyle(PlainButtonStyle())
+                
                 Button {
                     print("pause")
-                    isRunning.toggle()
+                    wsManager.watchRunDAO.isPause ? wsManager.sendStart() : wsManager.sendPause()
                 } label: {
-                    watchRunningBtn(color: .white, systemName: isRunning ? "pause.fill" : "play.fill")
+                    watchRunningBtn(color: .white, systemName: wsManager.watchRunDAO.isPause ? "play.fill" : "pause.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(.leading, 10)
+                //MARK: stop button
                 Button {
+                    wsManager.sendPause()
                     isEnd = true
                 } label: {
                     watchRunningBtn(color: .white, systemName: "stop.fill")
                 }
                 .buttonStyle(PlainButtonStyle())
+                
             }
             .padding(.vertical, 20)
             .padding(.leading, 10)

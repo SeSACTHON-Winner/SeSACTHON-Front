@@ -11,23 +11,19 @@ import Alamofire
 struct MainRunningView: View {
     @Binding var swpSelection: Int
     @State var currentDate = Date.now
-    @State var runState = "run"
-    
     @State var showStopConfirmation = false
-    
     @Environment(\.scenePhase) private var scenePhase
-    @Binding var time: TimeInterval
-    @State private var timer: Timer?
+//     @Binding var time: TimeInterval
+//     @State private var timer: Timer?
     @Binding var courseImage: UIImage
     
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
+    @ObservedObject var rsManager = RunStateManager.shared
     
     @EnvironmentObject var vm: WorkoutViewModel
     var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
-    
-    
     // MARK: - Camera
     @State private var showingImagePicker = false
     @State var pickedImage: Image?
@@ -53,24 +49,27 @@ struct MainRunningView: View {
                 Spacer().frame(height: 80)
                 HStack {
                     // 기존 timer
-                    Text("\(formattedTime(time))")
+                    Text("\(formattedTime(rsManager.time))")
                     //workout timer Version
                     //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 80, weight: .black)).italic()
-                        .onChange(of: workout.duration) { _ in
-                            let watchRunDAO = WatchRunDAO(isStart: true, duration: workout.duration, distance: workout.distance, helpNum: 2)
-                            guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
-                            if let session = wsManager.validSession{
-                                session.sendMessageData(data, replyHandler: nil)
-                            }
-                            print("workout.duration = \(workout.duration)")
-                        }
                 } .padding(.bottom, 4)
                 
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
+// <<<<<<< muel_feat/#143
+//                         //TODO: 나중에 지우기
+//                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+//                             WorkoutBar(time: $rsManager.time, workout: workout, new: false).onAppear {
+//                                 print("false workbar")
+//                             }
+//                         }
+                       
+//                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+//                             WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true).onAppear {
+// =======
 //                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
 //                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
 //                                print("false workbar")
@@ -78,7 +77,7 @@ struct MainRunningView: View {
 //                        }
                         
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(time: $time, workout: vm.newWorkout, new: true, helpCount: $helpCount).onAppear {
+                            WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true, helpCount: $helpCount).onAppear {
                                 print("true workbar")
                             }
                         }
@@ -231,47 +230,54 @@ struct MainRunningView: View {
                     }
                     .shadow(color: .black.opacity(0.25), radius: 2)
                     .padding(.bottom, 8)
-                    Spacer().frame(width: 120)
-                    Spacer().frame(width: 52, height: 52)
-                }
-//                .offset(x: 0, y: 10)
-                
-                
-                
-                
-                HStack(spacing: 50) {
-                    if runState == "run" {
-                        Button {
-                            Haptics.tap()
-                            stopTimer()
-                            runState = "stop"
-                        } label: {
-                            Text("STOP")
-                                .font(.system(size: 28, weight: .black))
-                                .italic()
-                                .foregroundColor(.white)
-                                .frame(width: 120, height: 120)
-                                .background(Color("#222222"))
-                                .cornerRadius(60)
-                        }.padding(.bottom, 94)
-                    }
-                    else if runState == "stop" {
-                        if vm.recording {
+                    HStack(spacing: 50) {
+                        if rsManager.runState == "run" {
+                            //MARK: StopButton
                             Button {
-                                Haptics.tap()
-                                stopTimer()
-                                vm.zoomTo(workout)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                    if let img = vm.saveMapViewAsImage() {
-                                        courseImage = img
-                                    }
-                                }
-                                Task {
-                                    await vm.endWorkout()
-                                }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                    swpSelection = 3
-                                }
+                                rsManager.stopButtonClicked()
+// =======
+//                     Spacer().frame(width: 120)
+//                     Spacer().frame(width: 52, height: 52)
+//                 }
+// //                .offset(x: 0, y: 10)
+                
+                
+                
+                
+//                 HStack(spacing: 50) {
+//                     if runState == "run" {
+//                         Button {
+//                             Haptics.tap()
+//                             stopTimer()
+//                             runState = "stop"
+//                         } label: {
+//                             Text("STOP")
+//                                 .font(.system(size: 28, weight: .black))
+//                                 .italic()
+//                                 .foregroundColor(.white)
+//                                 .frame(width: 120, height: 120)
+//                                 .background(Color("#222222"))
+//                                 .cornerRadius(60)
+//                         }.padding(.bottom, 94)
+//                     }
+//                     else if runState == "stop" {
+//                         if vm.recording {
+//                             Button {
+//                                 Haptics.tap()
+//                                 stopTimer()
+//                                 vm.zoomTo(workout)
+//                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                                     if let img = vm.saveMapViewAsImage() {
+//                                         courseImage = img
+//                                     }
+//                                 }
+//                                 Task {
+//                                     await vm.endWorkout()
+//                                 }
+//                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                                     swpSelection = 3
+//                                 }
+// >>>>>>> develop
                             } label: {
                                 Text("END")
                                     .font(.system(size: 24, weight: .black))
@@ -282,67 +288,146 @@ struct MainRunningView: View {
                                     .cornerRadius(60)
 
                             }.padding(.bottom, 94)
-
-                            Button {
-                                Haptics.tap()
-                                runState = "run"
-                                startTimer()
-                            } label: {
-                                ZStack {
-                                    Circle()
-                                        .foregroundColor(Color("MainColor"))
-                                        .scaleEffect(isAnimate ? 1.35 : 1.0)
-                                        .opacity(isAnimate ? 0.5 : 0)
-                                    
-                                    Circle()
-                                        .foregroundColor(Color("MainColor"))
-                                        .scaleEffect(isAnimate ? 1.2 : 1.0)
-                                        .opacity(isAnimate ? 0.8 : 0)
-                                    Circle()
-                                        .foregroundColor(Color("#222222"))
-                                }
-                                .frame(width: 120, height: 120)
-                                .overlay(
-                                    Text("RESTART")
-                                        .font(.system(size: 22, weight: .black))
+                        }
+                        else if rsManager.runState == "stop" {
+                            if vm.recording {
+                                //MARK: EndButton
+                                Button {
+                                    Task{
+                                        
+                                        print("task")
+                                     await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
+                                    }
+                                } label: {
+                                    Text("END")
+                                        .font(.system(size: 24, weight: .black))
                                         .italic()
-                                        .foregroundColor(Color("MainColor"))
-                                )
-                                .onAppear {
-                                    withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
-                                        self.isAnimate.toggle()
+                                        .foregroundColor(.white)
+                                        .frame(width: 120, height: 120)
+                                        .background(Color("#222222"))
+                                        .cornerRadius(60)
+                                }
+                                .padding(.bottom, 94)
+                               //MARK: Restart Button
+                                Button {
+                                    rsManager.restartButtonClicked()
+                                } label: {
+                                    ZStack {
+                                        Circle()
+                                            .foregroundColor(Color("MainColor"))
+                                            .scaleEffect(isAnimate ? 1.35 : 1.0)
+                                            .opacity(isAnimate ? 0.5 : 0)
+                                        
+                                        Circle()
+                                            .foregroundColor(Color("MainColor"))
+                                            .scaleEffect(isAnimate ? 1.2 : 1.0)
+                                            .opacity(isAnimate ? 0.8 : 0)
+                                        Circle()
+                                            .foregroundColor(Color("#222222"))
+                                    }
+                                    .frame(width: 120, height: 120)
+                                    .overlay(
+                                        Text("RESTART")
+                                            .font(.system(size: 22, weight: .black))
+                                            .italic()
+                                            .foregroundColor(Color("MainColor"))
+                                    )
+                                    .onAppear {
+                                        withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
+                                            self.isAnimate.toggle()
+                                        }
+// =======
+
+//                             Button {
+//                                 Haptics.tap()
+//                                 runState = "run"
+//                                 startTimer()
+//                             } label: {
+//                                 ZStack {
+//                                     Circle()
+//                                         .foregroundColor(Color("MainColor"))
+//                                         .scaleEffect(isAnimate ? 1.35 : 1.0)
+//                                         .opacity(isAnimate ? 0.5 : 0)
+                                    
+//                                     Circle()
+//                                         .foregroundColor(Color("MainColor"))
+//                                         .scaleEffect(isAnimate ? 1.2 : 1.0)
+//                                         .opacity(isAnimate ? 0.8 : 0)
+//                                     Circle()
+//                                         .foregroundColor(Color("#222222"))
+//                                 }
+//                                 .frame(width: 120, height: 120)
+//                                 .overlay(
+//                                     Text("RESTART")
+//                                         .font(.system(size: 22, weight: .black))
+//                                         .italic()
+//                                         .foregroundColor(Color("MainColor"))
+//                                 )
+//                                 .onAppear {
+//                                     withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
+//                                         self.isAnimate.toggle()
+// >>>>>>> develop
                                     }
                                 }
                             } .padding(.bottom, 94)
                         }
                     }
-                }
-                .onAppear {
-                    startTimer()
-                    // 백그라운드 상태 진입 알림 구독
-                    NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
-                        pauseTimer()
+                    .onAppear {
+                        rsManager.startTimer()
+                        // 백그라운드 상태 진입 알림 구독
+                        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
+                            rsManager.pauseTimer()
+                        }
+                        // 포그라운드 상태 진입 알림 구독
+                        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
+                            rsManager.resumeTimer()
+                        }
                     }
-                    // 포그라운드 상태 진입 알림 구독
-                    NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                        resumeTimer()
+                    .onDisappear {
+                        rsManager.stopTimer()
+                        
+                        // 알림 구독 해제
+                        NotificationCenter.default.removeObserver(self)
                     }
-                }
-                .onDisappear {
-                    stopTimer()
+                    .onChange(of: scenePhase) { phase in
+                        if phase == .background {
+                            // Store the current time in the background
+                            backgroundTime = Date().timeIntervalSinceReferenceDate
+                        } else if phase == .active {
+                            // Calculate the elapsed time when returning to the foreground
+                            let foregroundTime = Date().timeIntervalSinceReferenceDate
+                            let elapsedTime = foregroundTime - backgroundTime
+                            rsManager.time += elapsedTime
+                        }
+// =======
+//                 }
+//                 .onAppear {
+//                     startTimer()
+//                     // 백그라운드 상태 진입 알림 구독
+//                     NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
+//                         pauseTimer()
+//                     }
+//                     // 포그라운드 상태 진입 알림 구독
+//                     NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
+//                         resumeTimer()
+//                     }
+//                 }
+//                 .onDisappear {
+//                     stopTimer()
                     
-                    // 알림 구독 해제
-                    NotificationCenter.default.removeObserver(self)
-                }
-                .onChange(of: scenePhase) { phase in
-                    if phase == .background {
-                        // Store the current time in the background
-                        backgroundTime = Date().timeIntervalSinceReferenceDate
-                    } else if phase == .active {
-                        // Calculate the elapsed time when returning to the foreground
-                        let foregroundTime = Date().timeIntervalSinceReferenceDate
-                        let elapsedTime = foregroundTime - backgroundTime
-                        time += elapsedTime
+//                     // 알림 구독 해제
+//                     NotificationCenter.default.removeObserver(self)
+//                 }
+//                 .onChange(of: scenePhase) { phase in
+//                     if phase == .background {
+//                         // Store the current time in the background
+//                         backgroundTime = Date().timeIntervalSinceReferenceDate
+//                     } else if phase == .active {
+//                         // Calculate the elapsed time when returning to the foreground
+//                         let foregroundTime = Date().timeIntervalSinceReferenceDate
+//                         let elapsedTime = foregroundTime - backgroundTime
+//                         time += elapsedTime
+// >>>>>>> develop
                     }
                 }
             }
@@ -357,25 +442,7 @@ struct MainRunningView: View {
             .ignoresSafeArea()
         }
     }
-    
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            DispatchQueue.main.async {
-                self.time += 1
-            }
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            RunLoop.current.add(self.timer!, forMode: .common)
-            RunLoop.current.run()
-        }
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
+
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
@@ -383,17 +450,6 @@ struct MainRunningView: View {
         formatter.zeroFormattingBehavior = .pad
         //timeString = formatter.string(from: time) ?? ""
         return formatter.string(from: time) ?? ""
-    }
-    
-    // 백그라운드 상태 진입 시 타이머 일시 중지
-    private func pauseTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    // 포그라운드 상태 진입 시 타이머 재개
-    private func resumeTimer() {
-        startTimer()
     }
 }
 

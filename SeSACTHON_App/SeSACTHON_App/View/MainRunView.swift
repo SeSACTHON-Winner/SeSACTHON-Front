@@ -14,8 +14,11 @@ struct MainRunView: View {
     //var healthDataManager = HealthDataManager()
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.0190178, longitude: 129.3434893), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-
-    @State var time: TimeInterval = 0
+    @State private var isRestart = false;
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
+    @ObservedObject var runStateManager = RunStateManager.shared
+    //MARK: 이거 확인해보기 time
+    ///@State var time: TimeInterval = 0
     @State var courseImage: UIImage = UIImage()
     @StateObject var vm = WorkoutViewModel()
     
@@ -40,14 +43,21 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, time: $time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
+// <<<<<<< muel_feat/#143
+//                 MainRunningView(swpSelection: $swpSelection,workout: vm.newWorkout)
+// =======
+                MainRunningView(swpSelection: $swpSelection, time: $runStateManager.time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time, courseImage: $courseImage, helpCount: $helpCount)               
+// <<<<<<< muel_feat/#143
+//                 RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time)
+                
+// =======
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $courseImage, helpCount: $helpCount)               
             default:
                 EmptyView()
             }
@@ -55,6 +65,27 @@ struct MainRunView: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
+            runStateManager.initialize(vm: vm)
+            NotificationCenter.default.addObserver(forName: Notification.Name("start"), object: nil, queue: nil) { _ in
+                swpSelection = 1
+                print("Notification center work -> start : swpselection = 1")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("restart"), object: nil, queue: nil) { _ in
+                swpSelection = 2
+                runStateManager.restartButtonClicked()
+                print("Notification center work -> restart : swpselection = 2")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("pause"), object: nil, queue: nil) { _ in
+                runStateManager.stopButtonClicked()
+                print("Notification center work -> pause : swpselection = pause")
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("stop"), object: nil, queue: nil){ _ in
+                Task.init {
+                    await runStateManager.endButtonClicked(workout: vm.newWorkout, swpSelection: $swpSelection)
+                    print("Notification center work -> stop : swpselection = stop")
+                }
+            }
+            
         }
         .environmentObject(vm)
     }
@@ -149,7 +180,7 @@ struct MainRunHomeView: View {
     ]
     @Binding var swpSelection: Int
     @ObservedObject var locationManager = LocationDataManager()
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     @EnvironmentObject var vm: WorkoutViewModel
     
     // MARK: - Camera
@@ -305,6 +336,49 @@ struct MainRunHomeView: View {
                         
                         Spacer()
                     } else {
+                        Spacer().frame(height: 80)
+                        // MARK: - 말풍선
+                        SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
+                        //Color.black.frame(height: 100)
+                        Spacer()
+                        HStack(alignment: .top, spacing: 28) {
+                            
+                            Button {
+                                self.showingImagePicker = true
+                            } label: {
+                                Image("RunCamera").resizable()
+                                    .frame(width: 52, height: 52)
+                            }
+                            .fullScreenCover(isPresented: $showingImagePicker) {
+                                SUImagePicker(sourceType: .camera) { (image) in
+                                    self.sendImage = image
+                                    self.pickedImage = Image(uiImage: image)
+                                    print(image)
+                                }
+                                .ignoresSafeArea()
+                            }
+                            //MARK: go 버튼 -> 시작 메세지 보냄
+                            Button {
+                                swpSelection = 1
+                                wsManager.sendStart()
+                            } label: {
+                                Text("Go")
+                                    .font(.system(size: 32, weight: .black))
+                                    .italic()
+                                    .foregroundColor(.white)
+                                    .frame(width: 120, height: 120)
+                                    .background(Color("#222222"))
+                                    .cornerRadius(60)
+                            }
+                            Button {
+                                //self.userTrackingMode = .follow
+                                updateTrackingMode()
+                            } label: {
+                                Image("RunLocation")
+                                    .resizable()
+                                    .frame(width: 52, height: 52)
+                            }
+                        }.padding(.bottom, 60)
                         ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
                     
@@ -331,9 +405,10 @@ struct MainRunHomeView: View {
                             }
                             .ignoresSafeArea()
                         }
-                        
+                        //MARK: 여기도 startMessage보냄
                         Button {
                             swpSelection = 1
+                            wsManager.sendStart()
                             Haptics.tap()
                         } label: {
                             Text("Go")
