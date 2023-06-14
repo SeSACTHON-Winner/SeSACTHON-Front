@@ -54,13 +54,9 @@ struct MainRunningView: View {
                     //Text("\(formattedTime(workout.duration))")
                         .foregroundColor(.white)
                         .font(.system(size: 80, weight: .black)).italic()
+                    //MARK: send workout message 여기 잘 안먹음 바꿔줄 예정
                         .onChange(of: workout.duration) { _ in
-                            let watchRunDAO = WatchRunDAO(isStart: true, duration: workout.duration, distance: workout.distance, helpNum: 2)
-                            guard let data = try?JSONEncoder().encode(watchRunDAO) else{return}
-                            if let session = wsManager.validSession{
-                                session.sendMessageData(data, replyHandler: nil)
-                            }
-                            print("workout.duration = \(workout.duration)")
+                            wsManager.sendWatchRunDao()
                         }             
                 } .padding(.bottom, 4)
           

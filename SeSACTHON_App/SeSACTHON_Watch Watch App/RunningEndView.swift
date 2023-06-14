@@ -11,7 +11,7 @@ struct RunningEndView: View {
     
     @Environment(\.dismiss) private var dismiss
     @State var isRunningEnd = false
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {

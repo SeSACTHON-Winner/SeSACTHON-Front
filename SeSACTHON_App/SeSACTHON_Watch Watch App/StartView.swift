@@ -9,21 +9,27 @@ import SwiftUI
 
 struct StartView: View {
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
-    
     var body: some View {
-        Button {
-            wsManager.go = true
-//            wsManager.sendMessage(message: ["go" : true])
-        } label: {
-            StartButton()
-        }
-        .buttonStyle(PlainButtonStyle())
-        .navigationDestination(isPresented: $wsManager.go) {
+        //MARK: 워치에서 Start메세지 보내기
+        if wsManager.watchRunDAO.isStart{
             RunningView()
         }
-        .ignoresSafeArea()
-        .navigationBarBackButtonHidden(true)
-        
+        else if wsManager.watchRunDAO.isPause{
+            
+        }
+        else if wsManager.watchRunDAO.isStop{
+            
+        }
+        else{
+            Button {
+                wsManager.sendStart()
+            } label: {
+                StartButton()
+            }
+            .buttonStyle(PlainButtonStyle())
+            .ignoresSafeArea()
+            .navigationBarBackButtonHidden(true)
+        }
     }
 }
 

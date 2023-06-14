@@ -21,8 +21,10 @@ struct MainRunView: View {
     
     var body: some View {
         ZStack {
-            Rectangle().frame(height: 0).onChange(of: wsManager.go) { newValue in
-                print("wsManager.go changed")
+            Text("\(wsManager.watchRunDAO.distance)")
+                .frame(height: 0)
+                .onChange(of: wsManager.watchRunDAO.isStart) { _ in
+                    print("changed")
                 swpSelection = 1
             }
             switch swpSelection {
@@ -58,6 +60,10 @@ struct MainRunView: View {
         .navigationBarBackButtonHidden()
         .onAppear {
             //healthDataManager.requestHealthAuthorization()
+            NotificationCenter.default.addObserver(forName: Notification.Name("start"), object: nil, queue: nil) { _ in
+                swpSelection = 1
+                print("Notification center work -> start : swpselection = 1")
+            }
             
         }
         .environmentObject(vm)
@@ -153,7 +159,7 @@ struct MainRunHomeView: View {
     ]
     @Binding var swpSelection: Int
     @ObservedObject var locationManager = LocationDataManager()
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     @EnvironmentObject var vm: WorkoutViewModel
     
     // MARK: - Camera
@@ -330,13 +336,10 @@ struct MainRunHomeView: View {
                                 }
                                 .ignoresSafeArea()
                             }
-                            
+                            //MARK: go 버튼 -> 시작 메세지 보냄
                             Button {
                                 swpSelection = 1
-                                //TODO: go message 보내기
-//                                if let session = WatchSessionManager.sharedManager.validSession{
-//                                    session.sendMessage(["go" : true], replyHandler: nil)
-//                                }
+                                wsManager.sendStart()
                             } label: {
                                 Text("Go")
                                     .font(.system(size: 32, weight: .black))
@@ -380,9 +383,10 @@ struct MainRunHomeView: View {
                             }
                             .ignoresSafeArea()
                         }
-                        
+                        //MARK: 여기도 startMessage보냄
                         Button {
                             swpSelection = 1
+                            wsManager.sendStart()
                         } label: {
                             Text("Go")
                                 .font(.system(size: 32, weight: .black))
