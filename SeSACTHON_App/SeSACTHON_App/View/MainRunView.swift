@@ -167,6 +167,7 @@ struct MainRunHomeView: View {
     @State private var userTrackingMode: MapUserTrackingMode = .follow
     @State var address = ""
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    
     let layout = [
         GridItem(.flexible())
     ]
@@ -190,6 +191,7 @@ struct MainRunHomeView: View {
     
     @State var isSendNotConfirmed = true
     
+    @State var speechBubbleOpacity = 0.0
     
     var body: some View {
         ZStack {
@@ -328,9 +330,15 @@ struct MainRunHomeView: View {
                         
                         Spacer()
                     } else {
-                        Spacer().frame(height: 80)
+                        Spacer().frame(height: 20)
                         // MARK: - 말풍선
-                        SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
+                        SpeechBubble(text: "안전한 보행로를 위해\n장애물을 신고해주세요.")
+                            .opacity(speechBubbleOpacity)
+                            .onAppear{
+                                withAnimation(.easeIn(duration: 1)){
+                                    speechBubbleOpacity = 1.0
+                                }
+                            }
                         //Color.black.frame(height: 100)
                         Spacer()
                         HStack(alignment: .top, spacing: 28) {
@@ -375,9 +383,15 @@ struct MainRunHomeView: View {
                     }
                     
                 } else {
-                    Spacer().frame(height: 80)
+                    Spacer().frame(height: 20)
                     // MARK: - 말풍선
-                    SpeechBubble(text: "오늘은 경사도 높은 길을\n찾아볼까요?")
+                    SpeechBubble(text: "안전한 보행로를 위해\n장애물을 신고해주세요.")
+                        .opacity(speechBubbleOpacity)
+                        .onAppear{
+                            withAnimation(.easeIn(duration: 1)){
+                                speechBubbleOpacity = 1.0
+                            }
+                        }
                     //Color.black.frame(height: 100)
                     Spacer()
                     HStack(alignment: .top, spacing: 28) {
