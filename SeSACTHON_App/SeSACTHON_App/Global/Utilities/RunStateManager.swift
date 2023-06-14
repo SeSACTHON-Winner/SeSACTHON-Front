@@ -14,6 +14,7 @@ class RunStateManager : ObservableObject{
     var wsManager = WatchSessionManager.sharedManager
     var vm : WorkoutViewModel?
     var courseImage: UIImage = UIImage()
+    var helpCount = 0
     static let shared = RunStateManager()
     init(){
     }
@@ -43,12 +44,16 @@ class RunStateManager : ObservableObject{
          }
         ////
         Haptics.tap()
+        wsManager.watchRunDAO = WatchRunDAO()
          stopTimer()
     }
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+    func startTimer(workout:Workout) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            print("timer : \(Double(time))")
+            self.wsManager.watchRunDAO.fetchChange(workout: workout,duration:Double(time+1),helpNum: helpCount)
             DispatchQueue.main.async {
                 self.wsManager.sendWatchRunDao()
+                print("wsManager.watchRunDAO.duration = \(wsManager.watchRunDAO.duration)")
                 self.time += 1
             }
         }
@@ -58,10 +63,16 @@ class RunStateManager : ObservableObject{
             RunLoop.current.run()
         }
     }
-    func restartButtonClicked(){
+    func startButtonClicked(workout:Workout){
         Haptics.tap()
         runState = "run"
-        startTimer()
+        startTimer(workout: workout)
+        wsManager.sendStart()
+    }
+    func restartButtonClicked(workout:Workout){
+        Haptics.tap()
+        runState = "run"
+        startTimer(workout: workout)
         wsManager.sendStart()
     }
     
@@ -76,7 +87,7 @@ class RunStateManager : ObservableObject{
     }
     
     // 포그라운드 상태 진입 시 타이머 재개
-     func resumeTimer() {
-        startTimer()
+     func resumeTimer(workout:Workout) {
+        startTimer(workout: workout)
     }
 }

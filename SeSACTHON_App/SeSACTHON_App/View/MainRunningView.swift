@@ -13,8 +13,8 @@ struct MainRunningView: View {
     @State var currentDate = Date.now
     @State var showStopConfirmation = false
     @Environment(\.scenePhase) private var scenePhase
-//     @Binding var time: TimeInterval
-//     @State private var timer: Timer?
+    //     @Binding var time: TimeInterval
+    //     @State private var timer: Timer?
     @Binding var courseImage: UIImage
     
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
@@ -59,22 +59,22 @@ struct MainRunningView: View {
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
-// <<<<<<< muel_feat/#143
-//                         //TODO: 나중에 지우기
-//                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-//                             WorkoutBar(time: $rsManager.time, workout: workout, new: false).onAppear {
-//                                 print("false workbar")
-//                             }
-//                         }
-                       
-//                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-//                             WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true).onAppear {
-// =======
-//                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
-//                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
-//                                print("false workbar")
-//                            }
-//                        }
+                        // <<<<<<< muel_feat/#143
+                        //                         //TODO: 나중에 지우기
+                        //                         if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                        //                             WorkoutBar(time: $rsManager.time, workout: workout, new: false).onAppear {
+                        //                                 print("false workbar")
+                        //                             }
+                        //                         }
+                        
+                        //                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+                        //                             WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true).onAppear {
+                        // =======
+                        //                        if let workout = vm.selectedWorkout { // 기록이 있으면 선택된 "WorkoutBar"를 표시
+                        //                            WorkoutBar(time: $time, workout: workout, new: false).onAppear {
+                        //                                print("false workbar")
+                        //                            }
+                        //                        }
                         
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
                             WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true, helpCount: $helpCount).onAppear {
@@ -131,7 +131,7 @@ struct MainRunningView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .background(selection == item ? .white : .white.opacity(0.5))
                         .cornerRadius(16)
-                        .padding(.vertical, 4)
+                        .shadow(radius: 3, x: 1, y: 3)
                     }
                     .frame(width: 176)
                     .foregroundColor(.white)
@@ -209,7 +209,6 @@ struct MainRunningView: View {
                                 .scaledToFit()
                                 .frame(width: 120)
                         }
-                        
                     }
                     .padding(.top)
                     
@@ -224,7 +223,7 @@ struct MainRunningView: View {
                     Button {
                         self.showingImagePicker = true
                     }  label: {
-                        Image("RunCamera").resizable()
+                        Image("FinalCamera").resizable()
                             .frame(width: 52, height: 52)
                         
                     }
@@ -252,7 +251,7 @@ struct MainRunningView: View {
                                     Task{
                                         print("task")
                                         await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
-                                        }
+                                    }
                                 } label: {
                                     Text("END")
                                         .font(.system(size: 24, weight: .black))
@@ -261,11 +260,11 @@ struct MainRunningView: View {
                                         .frame(width: 120, height: 120)
                                         .background(Color("#222222"))
                                         .cornerRadius(60)
-
+                                    
                                 }.padding(.bottom, 94)
-                               //MARK: Restart Button
+                                //MARK: Restart Button
                                 Button {
-                                    rsManager.restartButtonClicked()
+                                    rsManager.restartButtonClicked(workout: workout)
                                 } label: {
                                     ZStack {
                                         Circle()
@@ -297,14 +296,14 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
-                        rsManager.startTimer()
+                        rsManager.startTimer(workout: workout)
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                             rsManager.pauseTimer()
                         }
                         // 포그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                            rsManager.resumeTimer()
+                            rsManager.resumeTimer(workout: workout)
                         }
                     }
                     .onDisappear {
@@ -337,7 +336,7 @@ struct MainRunningView: View {
             .ignoresSafeArea()
         }
     }
-
+    
     private func formattedTime(_ time: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]

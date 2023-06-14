@@ -151,7 +151,7 @@ struct MainMapView: View {
                                     isPlaceSelected = false
                                 }
                             } label: {
-                                Image("CurrentLocationBtn").frame(width: 50, height: 50)
+                                Image("FinalLocation").frame(width: 50, height: 50)
                             }
                         }
                         .padding(40)
