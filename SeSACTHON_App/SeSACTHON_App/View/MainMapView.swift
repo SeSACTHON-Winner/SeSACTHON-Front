@@ -27,6 +27,9 @@ struct MainMapView: View {
     @State var dangerGroupArr: [DangerInfoGroup] = []
     @State var imagePath = "images/default.png"
     
+    @EnvironmentObject var vm: WorkoutViewModel
+
+    
     var body: some View {
             VStack {
                 
@@ -49,22 +52,26 @@ struct MainMapView: View {
                             .foregroundColor(.white)
                             .italic()
                         Spacer()
-                        
-                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
-                            .placeholder { //플레이스 홀더 설정
-                                Image(systemName: "map")
-                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                            .onSuccess {r in //성공
-                                print("succes: \(r)")
-                            }
-                            .onFailure { e in //실패
-                                print("failure: \(e)")
-                            }
-                            .resizable()
-                            .frame(width: 34, height: 34)
-                            .clipShape(Circle())
-                            .padding(.leading)
-                        
+                        Button {
+                            vm.showRunListView = true
+                        } label: {
+                            KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                                .placeholder { //플레이스 홀더 설정
+                                    Image(systemName: "map")
+                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                .onSuccess {r in //성공
+                                    print("succes: \(r)")
+                                }
+                                .onFailure { e in //실패
+                                    print("failure: \(e)")
+                                }
+                                .resizable()
+                                .frame(width: 34, height: 34)
+                                .clipShape(Circle())
+                                .padding(.leading)
+                            
+                        }
+                      
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.bottom)
@@ -92,7 +99,7 @@ struct MainMapView: View {
                     .frame(height: 36)
                     .background(Color.white)
                     .cornerRadius(10)
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 8)
                     if !completerWrapper.searchResults.isEmpty && searchText != "" {
                         List(completerWrapper.searchResults, id: \.self) { result in
                             Button {
@@ -103,7 +110,7 @@ struct MainMapView: View {
                                 Text(result.title)
                             }
                         }
-                        .listStyle(.plain)
+                        .listStyle(.plain).cornerRadius(12)
                         .frame(height: 160)
                     }
                 }
@@ -111,6 +118,8 @@ struct MainMapView: View {
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .shadow(radius: 3, x: 0 ,y: 4)
+
                 
                 ZStack {
                     Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(userTrackingMode), annotationItems: dangerGroupArr
@@ -164,6 +173,9 @@ struct MainMapView: View {
             }
             print("KFImage : \(GlobalProfilePath.picture_path)")
         }
+        .fullScreenCover(isPresented: $vm.showRunListView, content: {
+            ProfileView()
+        })
     }
 }
 

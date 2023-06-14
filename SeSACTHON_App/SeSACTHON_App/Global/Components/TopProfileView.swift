@@ -37,26 +37,28 @@ struct TopProfileView: View {
                 .foregroundColor(.white)
                 .italic()
             Spacer()
-            KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
-                .placeholder { //플레이스 홀더 설정
-                    Image(systemName: "map")
-                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                .onSuccess {r in //성공
-                    print("succes: \(r)")
-                }
-                .onFailure { e in //실패
-                    print("failure: \(e)")
-                }
-                .resizable()
-                .frame(width: 34, height: 34)
-                .clipShape(Circle())
-                .padding(.leading)
-                .onTapGesture {
-                    vm.showRunListView = true
-                }
+            Button {
+                vm.showRunListView = true
+            } label: {
+                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                    .placeholder { //플레이스 홀더 설정
+                        Image(systemName: "map")
+                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                    .onSuccess {r in //성공
+                        print("succes: \(r)")
+                    }
+                    .onFailure { e in //실패
+                        print("failure: \(e)")
+                    }
+                    .resizable()
+                    .frame(width: 34, height: 34)
+                    .clipShape(Circle())
+                    .padding(.leading)
+            }
+            
         }
         .frame(maxWidth: .infinity)
-        .padding(.bottom)
+        //.padding(.bottom)
         .background(.black)
         .onAppear {
             var url = URL(string: "http://35.72.228.224/sesacthon/profileImage.php")!

@@ -19,8 +19,14 @@ struct MainRunView: View {
     @ObservedObject var runStateManager = RunStateManager.shared
     //MARK: 이거 확인해보기 time
     ///@State var time: TimeInterval = 0
-    @StateObject var vm = WorkoutViewModel()
-    
+
+   // @StateObject var vm = WorkoutViewModel()
+    @EnvironmentObject var vm: WorkoutViewModel
+
+    @State var helpCount = 0
+
+    //@StateObject var vm = WorkoutViewModel()
+
     
     var body: some View {
         ZStack {
@@ -79,7 +85,7 @@ struct MainRunView: View {
             }
             
         }
-        .environmentObject(vm)
+       
     }
 }
 
@@ -211,12 +217,12 @@ struct MainRunHomeView: View {
                         .font(.system(size: 17, weight: .regular))
                 }
                 .foregroundColor(.white)
-                .frame(height: 76)
+                .frame(height: 60)
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
-                
+                .shadow(radius: 3, x: 0 ,y: 4)
+
                 if let selectedImage = pickedImage {
                     
                     if isSendNotConfirmed {
