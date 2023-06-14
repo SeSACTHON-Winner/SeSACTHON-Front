@@ -360,7 +360,7 @@ struct RunRecentView: View {
         .frame(height: 148)
         .frame(maxWidth: .infinity)
         .shadow(radius: 4, x: 2, y: 2)
-        .padding(.bottom, 20)
+        .padding(.vertical, 10)
     }
 }
 //
