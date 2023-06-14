@@ -265,7 +265,7 @@ struct MainRunningView: View {
                                 }.padding(.bottom, 94)
                                //MARK: Restart Button
                                 Button {
-                                    rsManager.restartButtonClicked()
+                                    rsManager.restartButtonClicked(workout: workout)
                                 } label: {
                                     ZStack {
                                         Circle()
@@ -297,14 +297,14 @@ struct MainRunningView: View {
                         }
                     }
                     .onAppear {
-                        rsManager.startTimer()
+                        rsManager.startTimer(workout: workout)
                         // 백그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                             rsManager.pauseTimer()
                         }
                         // 포그라운드 상태 진입 알림 구독
                         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                            rsManager.resumeTimer()
+                            rsManager.resumeTimer(workout: workout)
                         }
                     }
                     .onDisappear {

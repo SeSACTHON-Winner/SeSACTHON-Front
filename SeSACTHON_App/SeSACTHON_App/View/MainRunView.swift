@@ -21,7 +21,6 @@ struct MainRunView: View {
     ///@State var time: TimeInterval = 0
     @StateObject var vm = WorkoutViewModel()
     
-    @State var helpCount = 0
     
     var body: some View {
         ZStack {
@@ -42,14 +41,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, courseImage: $runStateManager.courseImage, workout: vm.newWorkout, helpCount: $helpCount)
+                MainRunningView(swpSelection: $swpSelection, courseImage: $runStateManager.courseImage, workout: vm.newWorkout, helpCount: $runStateManager.helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $runStateManager.courseImage, helpCount: $helpCount)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
             default:
                 EmptyView()
             }
@@ -60,11 +59,12 @@ struct MainRunView: View {
             runStateManager.initialize(vm: vm)
             NotificationCenter.default.addObserver(forName: Notification.Name("start"), object: nil, queue: nil) { _ in
                 swpSelection = 1
+                runStateManager.startButtonClicked(workout: vm.newWorkout)
                 print("Notification center work -> start : swpselection = 1")
             }
             NotificationCenter.default.addObserver(forName: Notification.Name("restart"), object: nil, queue: nil) { _ in
                 swpSelection = 2
-                runStateManager.restartButtonClicked()
+                runStateManager.restartButtonClicked(workout: vm.newWorkout)
                 print("Notification center work -> restart : swpselection = 2")
             }
             NotificationCenter.default.addObserver(forName: Notification.Name("pause"), object: nil, queue: nil) { _ in
