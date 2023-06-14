@@ -347,7 +347,7 @@ struct MainRunHomeView: View {
                         Button {
                             //self.userTrackingMode = .follow
                             updateTrackingMode()
-                            Hactics.success()
+                            Haptics.success()
                         } label: {
                             Image("RunLocation")
                                 .resizable()
