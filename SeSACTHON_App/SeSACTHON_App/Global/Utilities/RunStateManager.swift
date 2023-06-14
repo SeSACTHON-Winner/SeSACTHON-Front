@@ -57,7 +57,7 @@ class RunStateManager : ObservableObject{
                 self.time += 1
             }
         }
-        
+
         DispatchQueue.global(qos: .background).async {
             RunLoop.current.add(self.timer!, forMode: .common)
             RunLoop.current.run()
@@ -65,9 +65,9 @@ class RunStateManager : ObservableObject{
     }
     func startButtonClicked(workout:Workout){
         Haptics.tap()
-        runState = "run"
-        startTimer(workout: workout)
-        wsManager.sendStart()
+//        runState = "run"
+//        startTimer(workout: workout)
+//        wsManager.sendStart()
     }
     func restartButtonClicked(workout:Workout){
         Haptics.tap()
