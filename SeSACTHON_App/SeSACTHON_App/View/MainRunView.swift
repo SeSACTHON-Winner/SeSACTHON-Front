@@ -19,6 +19,8 @@ struct MainRunView: View {
     @State var courseImage: UIImage = UIImage()
     @StateObject var vm = WorkoutViewModel()
     
+    @State var helpCount = 0
+    
     var body: some View {
         ZStack {
             switch swpSelection {
@@ -38,15 +40,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, time: $time, courseImage: $courseImage, workout: vm.newWorkout)
+                MainRunningView(swpSelection: $swpSelection, time: $time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time, courseImage: $courseImage)
-                
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $time, courseImage: $courseImage, helpCount: $helpCount)               
             default:
                 EmptyView()
             }

@@ -21,6 +21,8 @@ struct RunEndView: View {
     @State var totalCount = 0
     @State var imagePath = "images/default.png"
     @Binding var courseImage: UIImage
+    @Binding var helpCount: Int
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -64,6 +66,7 @@ struct RunEndView: View {
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
                             }
+                            self.helpCount = 0
                             dismiss()
                         } label: {
                             Image(systemName: "chevron.backward")
@@ -155,7 +158,7 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
                                 
-                                Text("0")
+                                Text("\(helpCount)")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {

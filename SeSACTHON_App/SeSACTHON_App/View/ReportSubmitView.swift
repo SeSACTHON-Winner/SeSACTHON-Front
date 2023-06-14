@@ -17,23 +17,25 @@ struct ReportSubmitView: View {
     var body: some View {
         VStack(spacing: 40) {
             
-            VStack {
+            VStack(spacing: 20) {
                 
                 Image("\(returnEngRawvalue(type: selection))_white")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 40)
-                    .padding(.vertical)
+                    .frame(width: 40, height: 40)
+                    .padding(.vertical,20)
                 
                 
                 Text("\(selection.rawValue)")
                 Text("1") //TODO: Data 연결
-                    .font(.system(size: 128, weight: .black))
+                    .font(.system(size: 128, weight: .heavy))
                     .foregroundColor(Color("MainColor"))
                     .italic()
+                    .frame(height: 120)
+                    
                 Text("도움 감사드립니다.")
-                    .padding(.vertical)
-                Spacer()
+                    .padding(.vertical, 20)
+                    .padding(.bottom, 20)
             }
             .frame(minWidth: 274)
             .background(.black)
