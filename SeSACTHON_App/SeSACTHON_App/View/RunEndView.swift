@@ -82,23 +82,7 @@ struct RunEndView: View {
                             .italic()
                         Spacer()
                         
-                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
-                            .placeholder { //플레이스 홀더 설정
-                                Image(systemName: "map")
-                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                            .onSuccess {r in //성공
-                                print("succes: \(r)")
-                            }
-                            .onFailure { e in //실패
-                                print("failure: \(e)")
-                            }
-                            .resizable()
-                            .frame(width: 34, height: 34)
-                            .clipShape(Circle())
-                            .padding(.leading)
-                            .onTapGesture {
-                                vm.showRunListView = true
-                            }
+                        
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.bottom)
@@ -131,27 +115,26 @@ struct RunEndView: View {
                                 //Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
-                            HStack(spacing: 20) {
-                                //TODO: 칼로리 잘 받아오나 확인
-                                Text("소모 칼로리")
-                                    .font(.system(size: 12, weight: .medium))
-                                    .foregroundColor(.white.opacity(0.6))
-                                    .multilineTextAlignment(.leading)
-                                    .frame(width: 60, alignment: .leading)
-                                Text("\(Measurement(value: workout.calories, unit: UnitEnergy.kilocalories).formatted())")
-                                    .font(.system(size: 24, weight: .bold)).italic()
-                                Text("\(Measurement(value: workout.calories, unit: UnitEnergy.calories).formatted())")
-                                    .font(.system(size: 24, weight: .bold)).italic()
-                            }
+//                            HStack(spacing: 20) {
+//                                //TODO: 칼로리 잘 받아오나 확인
+//                                Text("소모 칼로리")
+//                                    .font(.system(size: 12, weight: .medium))
+//                                    .foregroundColor(.white.opacity(0.6))
+//                                    .multilineTextAlignment(.leading)
+//                                    .frame(width: 60, alignment: .leading)
+//                                Text("\(Measurement(value: workout.calories, unit: UnitEnergy.kilocalories).formatted())")
+//                                    .font(.system(size: 24, weight: .bold)).italic()
+//                                Text("\(Measurement(value: workout.calories, unit: UnitEnergy.calories).formatted())")
+//                                    .font(.system(size: 24, weight: .bold)).italic()
+//                            }
                             HStack(spacing: 20) {
                                 Text("평균 페이스")
-                                    .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
+                                    .font(.system(size: 12, weight: .medium))
+                                    .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
                                 
                                 Text("\(formatPace())")
                                     .font(.system(size: 24, weight: .bold)).italic()
-                                //                                Text("\(Measurement(value: workout.pace, unit: UnitSpeed.kilometersPerHour).formatted())")
-                                //                                    .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {
                                 Text("도움 개수")
@@ -194,21 +177,23 @@ struct RunEndView: View {
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+
                 Spacer()
                 VStack (alignment: .center){
                     //코스 이미지 확인View
                     //Image(uiImage: courseImage).resizable().frame(width: 250, height: 500).background(.pink)
                     HStack {
                         Text("최근 활동")
+                            .padding(.leading, 26)
                             .font(.system(size: 16, weight: .heavy))
                         Spacer()
                     }
-                    .padding(.vertical, 12)
+                    .padding(.vertical, 8)
                     
                     ForEach(runningArr, id: \.self) { runninginfo in
                         RunRecentView(runData: runninginfo)
                     }
-                }.padding(.leading, 24)
+                }
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -326,31 +311,31 @@ struct RunRecentView: View {
                 Spacer()
                 
             }
-            HStack(spacing: 26.0) {
+            HStack(spacing: 12) {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(String(format: "%.2f", runData.distance))
+                    Text(String(format: "%.2f", runData.distance) + "km")
                         .font(.system(size: 18, weight: .semibold)).italic()
-                    Text("Km")
+                    Text("거리")
                         .font(.system(size: 12, weight: .regular))
-                }
+                }.frame(width: 68)
                 VStack(alignment: .leading, spacing: 14) {
                     Text(runData.time)
                         .font(.system(size: 18, weight: .semibold)).italic()
-                    Text("Time")
+                    Text("시간")
                         .font(.system(size: 12, weight: .regular))
-                }
+                }.frame(width: 68)
                 VStack(alignment: .leading, spacing: 14) {
-                    Text("\(runData.cal)")
+                    Text("\(runData.pace)")
                         .font(.system(size: 18, weight: .semibold)).italic()
-                    Text("Kcal")
+                    Text("페이스")
                         .font(.system(size: 12, weight: .regular))
-                }
+                }.frame(width: 68)
                 VStack(alignment: .leading, spacing: 14) {
                     Text("\(runData.helpCount)")
                         .font(.system(size: 18, weight: .semibold)).italic()
                     Text("도움")
                         .font(.system(size: 12, weight: .regular))
-                }
+                }.frame(width: 68)
             }
         }
         .padding(20)
@@ -359,7 +344,7 @@ struct RunRecentView: View {
         .padding(.horizontal, 24)
         .frame(height: 148)
         .frame(maxWidth: .infinity)
-        .shadow(radius: 4, x: 2, y: 2)
+        .shadow(color: .black.opacity(0.15), radius: 4, x: 2, y: 2)
         .padding(.vertical, 10)
     }
 }
