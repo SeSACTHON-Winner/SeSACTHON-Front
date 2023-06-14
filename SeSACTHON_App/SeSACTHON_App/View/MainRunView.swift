@@ -17,7 +17,12 @@ struct MainRunView: View {
     @State private var isRestart = false;
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
     @ObservedObject var runStateManager = RunStateManager.shared
+    //MARK: 이거 확인해보기 time
+    ///@State var time: TimeInterval = 0
+    @State var courseImage: UIImage = UIImage()
     @StateObject var vm = WorkoutViewModel()
+    
+    @State var helpCount = 0
     
     var body: some View {
         ZStack {
@@ -38,15 +43,21 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection,workout: vm.newWorkout)
+// <<<<<<< muel_feat/#143
+//                 MainRunningView(swpSelection: $swpSelection,workout: vm.newWorkout)
+// =======
+                MainRunningView(swpSelection: $swpSelection, time: $runStateManager.time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time)
+// <<<<<<< muel_feat/#143
+//                 RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time)
                 
+// =======
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $courseImage, helpCount: $helpCount)               
             default:
                 EmptyView()
             }
@@ -380,6 +391,7 @@ struct MainRunHomeView: View {
                     HStack(alignment: .top, spacing: 28) {
                         
                         Button {
+                            Haptics.tap()
                             self.showingImagePicker = true
                         } label: {
                             Image("RunCamera").resizable()
@@ -397,6 +409,7 @@ struct MainRunHomeView: View {
                         Button {
                             swpSelection = 1
                             wsManager.sendStart()
+                            Haptics.tap()
                         } label: {
                             Text("Go")
                                 .font(.system(size: 32, weight: .black))
@@ -409,6 +422,7 @@ struct MainRunHomeView: View {
                         Button {
                             //self.userTrackingMode = .follow
                             updateTrackingMode()
+                            Haptics.success()
                         } label: {
                             Image("RunLocation")
                                 .resizable()
@@ -416,9 +430,6 @@ struct MainRunHomeView: View {
                         }
                     }.padding(.bottom, 60)
                 }
-                
-                
-                
             }
         }
         .navigationBarBackButtonHidden(true)

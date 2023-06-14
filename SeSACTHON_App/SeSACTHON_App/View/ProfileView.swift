@@ -187,8 +187,8 @@ struct ProfileView: View {
                     .frame(maxWidth: .infinity)
                 }
             }
-            .padding(.top, 69)
-            .padding(.bottom, 60)
+            .padding(.top, 40)
+            .padding(.bottom, 40)
             
             HStack {
                 Text("최근 활동")
@@ -203,6 +203,7 @@ struct ProfileView: View {
                     RunRecentView(runData: runninginfo)
                 }
             }
+            
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
