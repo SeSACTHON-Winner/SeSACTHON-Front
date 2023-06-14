@@ -733,7 +733,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_Watch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
@@ -744,21 +744,13 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-<<<<<<< HEAD
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
-=======
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App3";
->>>>>>> 674c80c ([Desing/#144] 러닝 스타트 말풍선 디자인 수정)
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2.watchkitapp";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App3.watchkitapp";
->>>>>>> 674c80c ([Desing/#144] 러닝 스타트 말풍선 디자인 수정)
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -789,11 +781,7 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-<<<<<<< HEAD
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App2";
-=======
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App3";
->>>>>>> 674c80c ([Desing/#144] 러닝 스타트 말풍선 디자인 수정)
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -935,7 +923,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = UG6UT639QH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -962,7 +950,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App3";
+				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -981,11 +969,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SeSACTHON_App/Preview Content\"";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = VJUK3HBJ2M;
-=======
-				DEVELOPMENT_TEAM = JMM62MZQM5;
->>>>>>> 674c80c ([Desing/#144] 러닝 스타트 말풍선 디자인 수정)
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
@@ -1012,11 +996,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App3";
->>>>>>> 674c80c ([Desing/#144] 러닝 스타트 말풍선 디자인 수정)
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
