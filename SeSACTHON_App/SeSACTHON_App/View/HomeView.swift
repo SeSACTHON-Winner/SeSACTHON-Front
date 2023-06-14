@@ -25,7 +25,7 @@ struct HomeView: View {
                 Color.black.frame(height: 76)
                 HStack {
                     
-                    Text("Home")
+                    Text("HOME")
                         .font(.custom("SF Pro Text", size: 32))
                         .foregroundColor(.white)
                         .italic()

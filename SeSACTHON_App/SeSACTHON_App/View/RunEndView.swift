@@ -17,12 +17,13 @@ struct RunEndView: View {
     var workout: Workout
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var locationManager = LocationDataManager()
-    @Binding var time: TimeInterval
+    //@Binding var time: TimeInterval
     @State var totalCount = 0
     @State var imagePath = "images/default.png"
     @Binding var courseImage: UIImage
     @Binding var helpCount: Int
-    
+    @ObservedObject var rsManager = RunStateManager.shared
+
     var body: some View {
         ScrollView {
             VStack {
@@ -61,7 +62,7 @@ struct RunEndView: View {
                             let coordinate = locationManager.returnLocation()
                             url = URL(string: "http://35.72.228.224/sesacthon/runningInfo.php")!
                             let uid = UserDefaults.standard.string(forKey: "uid")!
-                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(workout.duration))","runningName" : "\(courseName)" , "helpCount" : 0, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance / 1000] as Dictionary
+                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(rsManager.time))","runningName" : "\(courseName)" , "helpCount" : helpCount, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance / 1000] as Dictionary
                             
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
@@ -110,8 +111,8 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))
                                     .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
-                                
-                                Text("\(formatDuration(time))")
+                                Text("\(formatDuration(rsManager.time))")
+                                //Text("\(formatDuration(time))")
                                 //Text("\(formatDuration(workout.duration))")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
@@ -252,7 +253,7 @@ struct RunEndView: View {
         }
     }
     func formatPace() -> String {
-        let seconds = time * 1000 / workout.distance
+        let seconds = rsManager.time * 1000 / workout.distance
         
         if seconds.isFinite {
             let minutes = Int(seconds / 60)

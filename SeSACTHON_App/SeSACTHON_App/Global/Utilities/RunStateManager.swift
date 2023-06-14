@@ -20,6 +20,7 @@ class RunStateManager : ObservableObject{
     }
     func initialize(vm: WorkoutViewModel) {
         self.vm = vm
+        self.time = 0
     }
     func stopButtonClicked(){
         stopTimer()
@@ -29,7 +30,7 @@ class RunStateManager : ObservableObject{
     }
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
-        time = 0
+        //time = 0
          wsManager.sendStop()
         await vm!.zoomTo(workout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
