@@ -10,21 +10,23 @@ import SwiftUI
 struct SpeechBubble: View{
     var text: String
     var body: some View{
-        VStack{
+        HStack{
+            Image("speechBubble")
+                .resizable()
+                .frame(width: 60.0, height: 60.0)
+                .offset(y:45)
             ZStack{
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(Color("SpeechBubbleColor"))
+                Image("talkBubble")
+                    .resizable()
                     .frame(width: 297,height: 103)
-                Text(text).foregroundColor(.white)
+                Text("안전한 보행로를 위해\n장애물을 신고해주세요.")
+                    .foregroundColor(.white)
                     .font(.system(size: 20, weight: .regular))
+                    .offset(x: -20, y:-3)
             }
-            Triangle()
-                .fill(Color("SpeechBubbleColor"))
-                .frame(width:27,height:27)
-                .offset(x:-105, y:-20)
-            
         }
     }
+    
     struct Triangle: Shape {
         func path(in rect: CGRect) -> Path {
             var path = Path()
