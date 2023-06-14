@@ -60,9 +60,7 @@ struct MainRunningView: View {
                     Spacer()
                     VStack {
                         if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(time: $rsManager.time, workout: vm.newWorkout, new: true, helpCount: $helpCount).onAppear {
-                                print("true workbar")
-                            }
+                            WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $helpCount)
                         }
                     }
                     Spacer()

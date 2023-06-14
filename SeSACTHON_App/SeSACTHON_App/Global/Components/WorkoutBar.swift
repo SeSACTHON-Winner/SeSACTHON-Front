@@ -12,7 +12,6 @@ struct WorkoutBar: View {
     @EnvironmentObject var vm: WorkoutViewModel
     @State var showWorkoutView = false
     @State var offset = Double.zero
-    @Binding var time: TimeInterval
     let workout: Workout
     let new: Bool
     
@@ -27,7 +26,6 @@ struct WorkoutBar: View {
                     WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
 //                  // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                     Spacer()
-                    //TODO: 도움개수 연결
                     WorkoutStat(name: "도움개수", value: helpCount.formatted())
 
                 }

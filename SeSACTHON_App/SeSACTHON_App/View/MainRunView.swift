@@ -54,7 +54,7 @@ struct MainRunView: View {
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
             default:
                 EmptyView()
             }
