@@ -19,7 +19,6 @@ struct MainRunView: View {
     @ObservedObject var runStateManager = RunStateManager.shared
     //MARK: 이거 확인해보기 time
     ///@State var time: TimeInterval = 0
-    @State var courseImage: UIImage = UIImage()
     @StateObject var vm = WorkoutViewModel()
     
     @State var helpCount = 0
@@ -43,21 +42,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-// <<<<<<< muel_feat/#143
-//                 MainRunningView(swpSelection: $swpSelection,workout: vm.newWorkout)
-// =======
-                MainRunningView(swpSelection: $swpSelection, time: $runStateManager.time, courseImage: $courseImage, workout: vm.newWorkout, helpCount: $helpCount)
+                MainRunningView(swpSelection: $swpSelection, courseImage: $runStateManager.courseImage, workout: vm.newWorkout, helpCount: $helpCount)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-// <<<<<<< muel_feat/#143
-//                 RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time)
-                
-// =======
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $courseImage, helpCount: $helpCount)               
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $runStateManager.courseImage, helpCount: $helpCount)
             default:
                 EmptyView()
             }
