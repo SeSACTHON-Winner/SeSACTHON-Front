@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 class RunStateManager : ObservableObject{
-    @Published  var runState = "run"
+    @Published var runState = "run"
     @Published var time: TimeInterval = 0
     private var timer: Timer?
     var wsManager = WatchSessionManager.sharedManager
@@ -19,6 +19,7 @@ class RunStateManager : ObservableObject{
     init(){
     }
     func initialize(vm: WorkoutViewModel) {
+        self.runState = "run"
         self.vm = vm
         self.time = 0
     }
