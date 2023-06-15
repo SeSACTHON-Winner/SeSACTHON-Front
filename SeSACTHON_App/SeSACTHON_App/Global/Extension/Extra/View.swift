@@ -51,7 +51,7 @@ extension View {
             .padding()
             .horizontallyCentred()
             .foregroundColor(.white)
-            .background(Color.accentColor)
+            .background(Color("Darkgray"))
             .cornerRadius(15)
     }
 }
