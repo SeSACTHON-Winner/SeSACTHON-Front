@@ -45,7 +45,7 @@ struct MainRunningView: View {
     var body: some View {
         VStack {
             VStack {
-                Color.black.frame(height: 84)
+                Color.black.frame(height: (pickedImage != nil) ?  60 : 40)
                 HStack {
                     Text("\(formattedTime(rsManager.time))")
                         .foregroundColor(.white)
@@ -55,16 +55,16 @@ struct MainRunningView: View {
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
-                        if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
+                        if pickedImage == nil {
                             WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $runStateManager.helpCount)
                         }
                     }
                     Spacer()
                 }
-                Spacer().frame(height: (pickedImage != nil) ? 24 : 36)
+                Spacer().frame(height: 32)
             }
             .foregroundColor(.white)
-            .frame(height: (pickedImage != nil) ?  120 : 242)
+            .frame(height: (pickedImage != nil) ?  128 : 242)
             .frame(maxWidth: .infinity)
             .background(Color.black)
             .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
@@ -74,7 +74,6 @@ struct MainRunningView: View {
             }.onDisappear {
                 print(workout.pace)
             }
-            
             
                 if let selectedImage = pickedImage {
                     if isSendNotConfirmed {
@@ -201,6 +200,9 @@ struct MainRunningView: View {
                     HStack {
                         if vm.recording {
                             Button {
+                                //MARK: 카메라 찍고 오면 시간은 가는데 버튼 상태는 멈춰있는 상황 해결
+                                rsManager.stopButtonClicked()
+                                rsManager.runState = "stop"
                                 self.showingImagePicker = true
                             }  label: {
                                 Image("FinalCamera").resizable()
