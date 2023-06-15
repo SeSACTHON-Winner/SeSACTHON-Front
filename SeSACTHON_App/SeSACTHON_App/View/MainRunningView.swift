@@ -20,7 +20,7 @@ struct MainRunningView: View {
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
     @ObservedObject var rsManager = RunStateManager.shared
-    @State private var isPause = false
+    //@State var isPause = false
     @EnvironmentObject var vm: WorkoutViewModel
     var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
@@ -59,7 +59,7 @@ struct MainRunningView: View {
                     HStack (alignment: .center){
                         Spacer()
                         VStack {
-                            if pickedImage == nil && isPause == false {
+                            if pickedImage == nil && rsManager.pause == false {
                                 WorkoutBar(workout: vm.newWorkout, new: true)
                             }
                         }
@@ -128,8 +128,8 @@ struct MainRunningView: View {
                             }
                             
                             Button {
-                                runStateManager.helpCount += 1
-                                print("helpCount : \(runStateManager.helpCount)")
+                                //runStateManager.helpCount += 1
+                              //  print("helpCount : \(runStateManager.helpCount)")
                                 // 사진 전송
                                 var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
                                 
@@ -155,7 +155,7 @@ struct MainRunningView: View {
                                         }
                                         print("Photo uploaded successfully")
                                         isSendNotConfirmed = false
-                                        isPause = false
+                                        rsManager.pause = false
                                         rsManager.sendButtonClicked()
                                     case .failure(let error):
                                         print("Photo upload failed with error: \(error)")
@@ -209,7 +209,7 @@ struct MainRunningView: View {
                                     //MARK: 카메라 찍고 오면 시간은 가는데 버튼 상태는 멈춰있는 상황 해결
                                     rsManager.stopButtonClicked()
                                     rsManager.runState = "stop"
-                                    isPause = true
+                                    rsManager.pause = true
                                     self.showingImagePicker = true
                                 }  label: {
                                     Image("FinalCamera").resizable()
@@ -223,7 +223,7 @@ struct MainRunningView: View {
                             if rsManager.runState == "run" {
                                 //MARK: StopButton
                                 Button {
-                                    isPause = true
+                                    rsManager.pause = true
                                     rsManager.stopButtonClicked()
                                 } label: {
                                     Text("STOP")
@@ -255,7 +255,7 @@ struct MainRunningView: View {
                                     }.padding(.bottom, 94)
                                     //MARK: Restart Button
                                     Button {
-                                        isPause = false
+                                        rsManager.pause = false
                                         rsManager.restartButtonClicked(workout: workout)
                                     } label: {
                                         ZStack {
