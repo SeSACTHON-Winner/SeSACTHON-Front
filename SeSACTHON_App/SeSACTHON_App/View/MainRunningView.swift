@@ -20,7 +20,7 @@ struct MainRunningView: View {
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
     @ObservedObject var rsManager = RunStateManager.shared
-    
+    @State private var isPause = false
     @EnvironmentObject var vm: WorkoutViewModel
     var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
@@ -45,7 +45,7 @@ struct MainRunningView: View {
     var body: some View {
         VStack {
             VStack {
-                Color.black.frame(height: (pickedImage != nil) ?  60 : 40)
+                Color.black.frame(height: (pickedImage != nil) ?  64 : 40)
                 HStack {
                     Text("\(formattedTime(rsManager.time))")
                         .foregroundColor(.white)
@@ -55,7 +55,7 @@ struct MainRunningView: View {
                 HStack (alignment: .center){
                     Spacer()
                     VStack {
-                        if pickedImage == nil {
+                        if pickedImage == nil && isPause == false {
                             WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $runStateManager.helpCount)
                         }
                     }
@@ -151,6 +151,7 @@ struct MainRunningView: View {
                                         }
                                         print("Photo uploaded successfully")
                                         isSendNotConfirmed = false
+                                        isPause = false
                                     case .failure(let error):
                                         print("Photo upload failed with error: \(error)")
                                     }
@@ -203,6 +204,7 @@ struct MainRunningView: View {
                                 //MARK: 카메라 찍고 오면 시간은 가는데 버튼 상태는 멈춰있는 상황 해결
                                 rsManager.stopButtonClicked()
                                 rsManager.runState = "stop"
+                                isPause = true
                                 self.showingImagePicker = true
                             }  label: {
                                 Image("FinalCamera").resizable()
@@ -216,6 +218,7 @@ struct MainRunningView: View {
                         if rsManager.runState == "run" {
                             //MARK: StopButton
                             Button {
+                                isPause = true
                                 rsManager.stopButtonClicked()
                             } label: {
                                 Text("STOP")
@@ -247,6 +250,7 @@ struct MainRunningView: View {
                                 }.padding(.bottom, 94)
                                 //MARK: Restart Button
                                 Button {
+                                    isPause = false
                                     rsManager.restartButtonClicked(workout: workout)
                                 } label: {
                                     ZStack {
