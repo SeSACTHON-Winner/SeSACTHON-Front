@@ -57,7 +57,7 @@ struct MainMapView: View {
                         } label: {
                             KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
                                 .placeholder { //플레이스 홀더 설정
-                                    Image(systemName: "map")
+                                    Image("RunningMan")
                                 }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                 .onSuccess {r in //성공
                                     print("succes: \(r)")
