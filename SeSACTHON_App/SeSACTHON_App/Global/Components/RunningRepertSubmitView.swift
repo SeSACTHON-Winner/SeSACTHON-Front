@@ -14,7 +14,7 @@ struct RunningReportSubmitView: View {
     @Binding var selection: MainRunningView.Status
     @Binding var pickedImage: Image?
     @Binding var isSendNotConfirmed: Bool
-    @Binding var helpCount: Int
+    //@Binding var helpCount: Int
     @ObservedObject var runStateManager = RunStateManager.shared
     
     
@@ -65,7 +65,7 @@ struct RunningReportSubmitView: View {
 struct RunningReportSubmitView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "d")), isSendNotConfirmed: .constant(false), helpCount: .constant(3))
+            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "d")), isSendNotConfirmed: .constant(false))
         }
     }
 }

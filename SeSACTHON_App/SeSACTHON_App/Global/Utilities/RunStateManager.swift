@@ -14,7 +14,7 @@ class RunStateManager : ObservableObject{
     var wsManager = WatchSessionManager.sharedManager
     var vm : WorkoutViewModel?
     var courseImage: UIImage = UIImage()
-    var helpCount = 0
+    @Published var helpCount = 0
     static let shared = RunStateManager()
     init(){
     }
@@ -22,6 +22,7 @@ class RunStateManager : ObservableObject{
         self.runState = "run"
         self.vm = vm
         self.time = 0
+        self.helpCount = 0
     }
     func stopButtonClicked(){
         stopTimer()
@@ -80,7 +81,11 @@ class RunStateManager : ObservableObject{
         startTimer(workout: workout)
         wsManager.sendStart()
     }
-    
+    //라딘 추가
+    func sendButtonClicked() {
+       // plusHelpCount()
+        wsManager.sendPlusHelpCount()
+    }
     func stopTimer() {
         timer?.invalidate()
         timer = nil
@@ -94,5 +99,8 @@ class RunStateManager : ObservableObject{
     // 포그라운드 상태 진입 시 타이머 재개
      func resumeTimer(workout:Workout) {
         startTimer(workout: workout)
+    }
+    func plusHelpCount() {
+        helpCount += 1
     }
 }

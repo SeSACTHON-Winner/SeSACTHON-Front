@@ -14,8 +14,9 @@ struct ReportView: View {
     @State var isNext = false
     @Environment(\.dismiss) private var dismiss
     @State var emoji = ""
-    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
+  
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: -10) {
@@ -97,7 +98,8 @@ struct ReportButtonEmoji: View {
     
     @State var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     @State var locattionmanager = WatchLocationDataManager()
-    
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
+
     var body: some View {
             Button {
                 coordinate = locattionmanager.returnLocation()
@@ -109,8 +111,10 @@ struct ReportButtonEmoji: View {
                 AF.request(url, method: .post, parameters: params).responseString {
                     print($0)
                 }
-                
+                //라딘 수정
+                wsManager.sendPlusHelpCount()
                 sleep(1)
+        
                 dismiss()
             } label: {
                 HStack {

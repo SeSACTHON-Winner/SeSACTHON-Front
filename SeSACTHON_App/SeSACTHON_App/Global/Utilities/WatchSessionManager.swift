@@ -148,6 +148,10 @@ extension WatchSessionManager {
         watchRunDAO = watchRunDAO.pause()
         sendWatchRunDao()
     }
+    
+    func sendPlusHelpCount() {
+        watchRunDAO = watchRunDAO.plus()
+    }
 
     // Sender
     func sendMessage(message: [String : AnyObject],
@@ -191,6 +195,10 @@ extension WatchSessionManager {
             }
             else if message.isStop{
                 NotificationCenter.default.post(name: Notification.Name("stop"), object: nil)
+            }
+            //라딘 추가
+            else if (message.helpNum != -1) {
+                NotificationCenter.default.post(name: Notification.Name("helpNum"), object: nil)
             }
         }
     }
