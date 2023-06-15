@@ -33,9 +33,9 @@ struct InfoView: View {
                 .padding(.bottom, 30)
                 
 
-                InfoRow(systemName: "map", title: "Browse all your Routes", description: "See all your routes stored in the Health App on one map.")
-                InfoRow(systemName: "record.circle", title: "Record Workouts", description: "Record runs, walks and see your route update live.")
-                InfoRow(systemName: "line.3.horizontal.decrease.circle", title: "Filter Workouts", description: "Filter the workouts shown on the map by date and type.")
+                InfoRow(systemName: "map", title: "경로 찾기", description: "건강 앱에 저장된 모든 경로를 맵에서 확인할 수 있습니다.")
+                InfoRow(systemName: "record.circle", title: "운동 기록", description: "주행 기록, 걷기 및 경로 업데이트 실시간 확인할 수 있습니다.")
+
                 Spacer()
                 
                 if welcome {

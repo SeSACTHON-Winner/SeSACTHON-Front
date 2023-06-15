@@ -24,7 +24,7 @@ struct PermissionsView: View {
                                 .cornerRadius(10)
                                 .shadow(color: .black.opacity(0.2), radius: 5)
                                 .padding(.top, 10)
-                            PermissionRow(title: "Health", description: NAME + " needs access to your Health Data to show all your workout routes on one map and save the workouts you record.", allowed: vm.healthAuth, denied: vm.healthStatus == .sharingDenied, instructions: "Please go to Health > Sharing > Apps > \(NAME) and select \"Turn On All\"", linkTitle: "Health", linkString: "x-apple-health://", loading: vm.healthLoading, allowString: "Allow") {
+                            PermissionRow(title: "Health", description: NAME + "에서는 모든 운동 경로를 하나의 지도에 표시하고 기록한 운동을 저장하기 위해 상태 데이터에 액세스해야 합니다.", allowed: vm.healthAuth, denied: vm.healthStatus == .sharingDenied, instructions: "Health > Sharing > Apps > \(NAME) > \"Turn On All\"", linkTitle: "Health", linkString: "x-apple-health://", loading: vm.healthLoading, allowString: "Allow") {
                                 Task {
                                     await vm.requestHealthAuthorisation() // 권한 요청이 ViewModel 객체에게 전송됩니다.
                                 }
@@ -41,7 +41,7 @@ struct PermissionsView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                                 .padding(.top, 10)
-                            PermissionRow(title: "Location Always", description: NAME + " needs access to your location to record a workout route in the background and show your location on the map.", allowed: vm.locationAuth, denied: vm.locationStatus == .denied, instructions: "Please go to Settings > \(NAME) > Location and select \"Always\"", linkTitle: "Settings", linkString: UIApplication.openSettingsURLString, loading: false, allowString: vm.locationStatus == .notDetermined ? "Allow While Using" : "Allow Always") {
+                            PermissionRow(title: "Location Always", description: NAME + "백그라운드에서 운동 경로를 기록하고 지도에 위치를 표시하려면 사용자의 위치에 액세스해야 합니다.", allowed: vm.locationAuth, denied: vm.locationStatus == .denied, instructions: "Settings > \(NAME) > Location > \"Always\"", linkTitle: "Settings", linkString: UIApplication.openSettingsURLString, loading: false, allowString: vm.locationStatus == .notDetermined ? "Allow While Using" : "Allow Always") {
                                 vm.requestLocationAuthorisation()
                             }
                         }
@@ -60,7 +60,7 @@ struct PermissionsView: View {
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                                 .padding(.top, 10)
-                            PermissionRow(title: "Precise Location", description: NAME + " needs access to your precise location to track your workout routes more accurately.", allowed: vm.accuracyAuth, denied: true, instructions: "Please go to Settings > \(NAME) > Location and toggle \"Precise Location\" to ON", linkTitle: "Settings", linkString: UIApplication.openSettingsURLString, loading: false, allowString: "Allow") {
+                            PermissionRow(title: "Precise Location", description: NAME + " 운동 경로를 더 정확하게 추적하기 위해서는 정확한 위치에 접근해야 합니다.", allowed: vm.accuracyAuth, denied: true, instructions: "Settings > \(NAME) > Location > toggle \"Precise Location\" ON", linkTitle: "Settings", linkString: UIApplication.openSettingsURLString, loading: false, allowString: "Allow") {
                                 vm.requestLocationAuthorisation()
                             }
                         }
