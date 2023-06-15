@@ -43,7 +43,7 @@ struct MainRunView: View {
             
             switch swpSelection {
             case 0:
-                MainRunHomeView(swpSelection: $swpSelection)
+                MainRunHomeView(swpSelection: $swpSelection,helpCount: $helpCount)
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
@@ -166,6 +166,8 @@ struct MainRunStart: View {
 }
 
 
+
+// MARK: - MainRunHomeView
 struct MainRunHomeView: View {
     @State var searchText = ""
     @State var showRoute = false
@@ -198,6 +200,9 @@ struct MainRunHomeView: View {
     @State var isSendNotConfirmed = true
     
     @State var speechBubbleOpacity = 0.0
+    
+    
+    @Binding var helpCount: Int
     
     var body: some View {
         ZStack {
@@ -341,7 +346,7 @@ struct MainRunHomeView: View {
                         // MARK: - 말풍선
                         //Color.black.frame(height: 100)
                         Spacer()
-                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
+                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $helpCount)
                     }
                     
                 } else {

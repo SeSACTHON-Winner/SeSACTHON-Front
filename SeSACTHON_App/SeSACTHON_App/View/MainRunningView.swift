@@ -195,7 +195,7 @@ struct MainRunningView: View {
                     Spacer().frame(height: 80)
                 } else {
                     Spacer()
-                    RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
+                    RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $helpCount)
                 }
             } else {
                 

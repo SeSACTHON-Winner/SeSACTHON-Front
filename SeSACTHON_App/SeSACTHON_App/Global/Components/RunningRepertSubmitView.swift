@@ -14,6 +14,7 @@ struct RunningReportSubmitView: View {
     @Binding var selection: MainRunningView.Status
     @Binding var pickedImage: Image?
     @Binding var isSendNotConfirmed: Bool
+    @Binding var helpCount: Int
     
     
     var body: some View {
@@ -45,6 +46,7 @@ struct RunningReportSubmitView: View {
                     .padding(.top, 50)
                     Spacer()
                     Button {
+                        helpCount += 1
                         isSendNotConfirmed = true
                         pickedImage = nil
                         Haptics.tap()
