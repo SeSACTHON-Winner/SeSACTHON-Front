@@ -93,7 +93,7 @@ struct MainRunningView: View {
                         Spacer()
                         ForEach(Status.allCases, id:  \.rawValue) { item in
                             HStack {
-                                Image("icon_\(returnEngRawvalue(type: item))")
+                                Image("icon_\(returnEngRawvalue(type: item))_main")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 30)

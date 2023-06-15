@@ -133,7 +133,7 @@ struct PlaceAnnotationView: View {
                                     HStack {
                                         if slopeCount > 0 {
                                             VStack{
-                                                Image("icon_slope")
+                                                Image("icon_slope_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(width: 30)
@@ -143,7 +143,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if stepCount > 0 {
                                             VStack{
-                                                Image("icon_step")
+                                                Image("icon_step_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)
@@ -153,7 +153,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if constructionCount > 0 {
                                             VStack{
-                                                Image("icon_construction")
+                                                Image("icon_construction_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)
@@ -163,7 +163,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if narrowCount > 0 {
                                             VStack{
-                                                Image("icon_narrow")
+                                                Image("icon_narrow_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)
