@@ -14,7 +14,6 @@ class RunStateManager : ObservableObject{
     var wsManager = WatchSessionManager.sharedManager
     var vm : WorkoutViewModel?
     var courseImage: UIImage = UIImage()
-    @Published var helpCount = 0
     static let shared = RunStateManager()
     @Published var pause: Bool = false
     
@@ -25,7 +24,6 @@ class RunStateManager : ObservableObject{
         self.runState = "run"
         self.vm = vm
         self.time = 0
-        self.helpCount = 0
         self.pause = false
     }
     func stopButtonClicked(){
@@ -35,12 +33,12 @@ class RunStateManager : ObservableObject{
         Haptics.tap()
         wsManager.sendPause()
     }
-    func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
+    func endButtonClicked(swpSelection : Binding<Int>)async{
         stopTimer()
         //time = 0
         //TODO: 라딘 추가사항 확인
         wsManager.sendStop()
-        await vm!.zoomTo(workout)
+        await vm!.zoomTo(vm!.newWorkout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let img = self.vm!.saveMapViewAsImage() {
                 self.courseImage = img
@@ -56,11 +54,12 @@ class RunStateManager : ObservableObject{
         Haptics.tap()
         wsManager.watchRunDAO = WatchRunDAO()
     }
-    func startTimer(workout:Workout) {
+    func startTimer() {
         stopTimer()
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
             print("timer : \(Double(time))")
-            self.wsManager.watchRunDAO.fetchChange(workout: workout,duration:Double(time+1),helpNum: helpCount)
+            self.wsManager.watchRunDAO.fetchChange(workout: vm!.newWorkout,duration:Double(time+1))
+            print("watchRundDao.distance : \(self.wsManager.watchRunDAO.distance)")
             DispatchQueue.main.async {
                 self.wsManager.sendWatchRunDao()
                 print("wsManager.watchRunDAO.duration = \(self.wsManager.watchRunDAO.duration)")
@@ -73,18 +72,18 @@ class RunStateManager : ObservableObject{
 //            RunLoop.current.run()
 //        }
     }
-    func startButtonClicked(workout:Workout){
+    func startButtonClicked(){
         Haptics.tap()
         //TODO: 라딘 추가 사항 - 확인
         runState = "run"
         pause = false
         //wsManager.sendStart()
     }
-    func restartButtonClicked(workout:Workout){
+    func restartButtonClicked(){
         Haptics.tap()
         runState = "run"
         pause = false
-        startTimer(workout: workout)
+        startTimer()
         wsManager.sendStart()
     }
     //라딘 추가
@@ -104,10 +103,7 @@ class RunStateManager : ObservableObject{
     }
     
     // 포그라운드 상태 진입 시 타이머 재개
-     func resumeTimer(workout:Workout) {
-        startTimer(workout: workout)
-    }
-    func plusHelpCount() {
-        helpCount += 1
+     func resumeTimer() {
+        startTimer()
     }
 }

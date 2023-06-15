@@ -128,8 +128,8 @@ struct MainRunningView: View {
                             }
                             
                             Button {
-                                //runStateManager.helpCount += 1
-                              //  print("helpCount : \(runStateManager.helpCount)")
+                                wsManager.watchRunDAO = wsManager.watchRunDAO.plus()
+                                print("helpCount : \(wsManager.watchRunDAO.helpNum)")
                                 // 사진 전송
                                 var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
                                 
@@ -241,7 +241,7 @@ struct MainRunningView: View {
                                     Button {
                                         Task{
                                             print("task")
-                                            await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
+                                            await rsManager.endButtonClicked(swpSelection: $swpSelection)
                                         }
                                     } label: {
                                         Text("END")
@@ -256,7 +256,7 @@ struct MainRunningView: View {
                                     //MARK: Restart Button
                                     Button {
                                         rsManager.pause = false
-                                        rsManager.restartButtonClicked(workout: workout)
+                                        rsManager.restartButtonClicked()
                                     } label: {
                                         ZStack {
                                             Circle()
@@ -288,14 +288,14 @@ struct MainRunningView: View {
                             }
                         }
                         .onAppear {
-                            rsManager.startTimer(workout: workout)
+                            rsManager.startTimer()
                             // 백그라운드 상태 진입 알림 구독
                             NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
                                 rsManager.pauseTimer()
                             }
                             // 포그라운드 상태 진입 알림 구독
                             NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                                rsManager.resumeTimer(workout: workout)
+                                rsManager.resumeTimer()
                             }
                         }
                         .onDisappear {

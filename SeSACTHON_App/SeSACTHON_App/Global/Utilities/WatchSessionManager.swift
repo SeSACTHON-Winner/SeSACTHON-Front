@@ -151,6 +151,7 @@ extension WatchSessionManager {
     
     func sendPlusHelpCount() {
         watchRunDAO = watchRunDAO.plus()
+        sendWatchRunDao()
     }
 
     // Sender
@@ -180,9 +181,11 @@ extension WatchSessionManager {
                 return
             }
             let isRestart = self.watchRunDAO.isPause
-            print("received message.duration = \(message.duration)")
-            self.watchRunDAO = message
-            if message.isStart && !message.isPause && !message.isStop{
+            print("received message.distance = \(message.distance)")
+            if (message.helpNum > self.watchRunDAO.helpNum) {
+                NotificationCenter.default.post(name: Notification.Name("helpNum"), object: nil)
+            }
+            else if message.isStart && !message.isPause && !message.isStop{
                 if isRestart{
                     NotificationCenter.default.post(name: Notification.Name("restart"), object: nil)
                 }
@@ -196,10 +199,8 @@ extension WatchSessionManager {
             else if message.isStop{
                 NotificationCenter.default.post(name: Notification.Name("stop"), object: nil)
             }
+            self.watchRunDAO = message
             //라딘 추가
-            else if (message.helpNum != -1) {
-                NotificationCenter.default.post(name: Notification.Name("helpNum"), object: nil)
-            }
         }
     }
 }

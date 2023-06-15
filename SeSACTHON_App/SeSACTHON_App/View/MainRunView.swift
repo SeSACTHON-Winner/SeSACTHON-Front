@@ -63,12 +63,12 @@ struct MainRunView: View {
             runStateManager.initialize(vm: vm)
             NotificationCenter.default.addObserver(forName: Notification.Name("start"), object: nil, queue: nil) { _ in
                 swpSelection = 1
-                runStateManager.startButtonClicked(workout: vm.newWorkout)
+                runStateManager.startButtonClicked()
                 print("Notification center work -> start : swpselection = 1")
             }
             NotificationCenter.default.addObserver(forName: Notification.Name("restart"), object: nil, queue: nil) { _ in
                 swpSelection = 2
-                runStateManager.restartButtonClicked(workout: vm.newWorkout)
+                runStateManager.restartButtonClicked()
                 print("Notification center work -> restart : swpselection = 2")
             }
             NotificationCenter.default.addObserver(forName: Notification.Name("pause"), object: nil, queue: nil) { _ in
@@ -77,7 +77,7 @@ struct MainRunView: View {
             }
             NotificationCenter.default.addObserver(forName: Notification.Name("stop"), object: nil, queue: nil){ _ in
                 Task.init {
-                    await runStateManager.endButtonClicked(workout: vm.newWorkout, swpSelection: $swpSelection)
+                    await runStateManager.endButtonClicked(swpSelection: $swpSelection)
                     print("Notification center work -> stop : swpselection = stop")
                 }
             }
@@ -279,7 +279,7 @@ struct MainRunHomeView: View {
                                     .frame(width: 120)
                             }
                             Button {
-                                runStateManager.helpCount += 1
+                                wsManager.watchRunDAO = wsManager.watchRunDAO.plus()
                                 // 사진 전송
                                 var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
                                 
