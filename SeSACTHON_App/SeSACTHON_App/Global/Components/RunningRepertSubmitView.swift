@@ -49,6 +49,8 @@ struct RunningReportSubmitView: View {
                     Button {
                         isSendNotConfirmed = true
                         pickedImage = nil
+                        //MARK: 신고 후 runstate run으로 변경 > 버그 수정
+                        runStateManager.runState = "run"
                         Haptics.tap()
                     } label: {
                         Image("GORUN")
