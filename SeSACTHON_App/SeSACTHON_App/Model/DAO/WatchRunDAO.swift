@@ -49,5 +49,9 @@ struct WatchRunDAO : Codable,Hashable{
         self.isStop = true;
         return self;
     }
-    
+    //라딘 수정
+    mutating func plus() -> WatchRunDAO{
+        self.helpNum += 1
+        return self;
+    }
 }

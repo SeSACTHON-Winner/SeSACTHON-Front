@@ -60,7 +60,7 @@ struct MainRunningView: View {
                         Spacer()
                         VStack {
                             if pickedImage == nil && isPause == false {
-                                WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $runStateManager.helpCount)
+                                WorkoutBar(workout: vm.newWorkout, new: true)
                             }
                         }
                         Spacer()
@@ -156,6 +156,7 @@ struct MainRunningView: View {
                                         print("Photo uploaded successfully")
                                         isSendNotConfirmed = false
                                         isPause = false
+                                        rsManager.sendButtonClicked()
                                     case .failure(let error):
                                         print("Photo upload failed with error: \(error)")
                                     }
@@ -196,7 +197,7 @@ struct MainRunningView: View {
                         Spacer().frame(height: 80)
                     } else {
                         Spacer()
-                        RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $runStateManager.helpCount)
+                        RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
                 } else {
                     

@@ -21,7 +21,7 @@ struct RunEndView: View {
     @State var totalCount = 0
     @State var imagePath = "images/default.png"
     @Binding var courseImage: UIImage
-    @Binding var helpCount: Int
+   // @Binding var helpCount: Int
     @ObservedObject var rsManager = RunStateManager.shared
 
     var body: some View {
@@ -62,12 +62,12 @@ struct RunEndView: View {
                             let coordinate = locationManager.returnLocation()
                             url = URL(string: "http://35.72.228.224/sesacthon/runningInfo.php")!
                             let uid = UserDefaults.standard.string(forKey: "uid")!
-                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(rsManager.time))","runningName" : "\(courseName)" , "helpCount" : helpCount, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance / 1000] as Dictionary
+                            let dangerparams = ["uid" : uid, "pace": "\(formatPace())","TIME" : "\(formatDuration(rsManager.time))","runningName" : "\(courseName)" , "helpCount" : rsManager.helpCount, "picture_path" : "images/\(photoName).jpg", "distance" : workout.distance / 1000] as Dictionary
                             
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
                             }
-                            self.helpCount = 0
+                            rsManager.helpCount = 0
                             dismiss()
                         } label: {
                             Image(systemName: "chevron.backward")
@@ -142,7 +142,7 @@ struct RunEndView: View {
                                     .font(.system(size: 12, weight: .medium))                           .frame(width: 60, alignment: .leading)
                                     .foregroundColor(.white.opacity(0.6))
                                 
-                                Text("\(helpCount)")
+                                Text("\(rsManager.helpCount)")
                                     .font(.system(size: 24, weight: .bold)).italic()
                             }
                             HStack(spacing: 20) {

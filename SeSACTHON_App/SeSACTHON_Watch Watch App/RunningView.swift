@@ -18,7 +18,9 @@ struct RunningView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: -10) {
             Spacer()
-            
+
+            //라딘 수정
+            //Text("\(Measurement(value: wsManager.watchRunDAO.distance, unit: UnitLength.meters).formatted())")
             Text("\(String(format: "%.2f", wsManager.watchRunDAO.distance))m")
                 .padding(.top, 30)
                 .padding(.leading, 10)

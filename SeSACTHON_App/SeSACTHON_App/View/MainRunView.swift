@@ -23,10 +23,8 @@ struct MainRunView: View {
     // @StateObject var vm = WorkoutViewModel()
     @EnvironmentObject var vm: WorkoutViewModel
     
-    @State var helpCount = 0
-    
-    //@StateObject var vm = WorkoutViewModel()
-    
+   // @Binding var helpCount: Int
+
     
     var body: some View {
         ZStack {
@@ -54,7 +52,7 @@ struct MainRunView: View {
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, courseImage: $runStateManager.courseImage)
             default:
                 EmptyView()
             }
@@ -82,6 +80,10 @@ struct MainRunView: View {
                     await runStateManager.endButtonClicked(workout: vm.newWorkout, swpSelection: $swpSelection)
                     print("Notification center work -> stop : swpselection = stop")
                 }
+            }
+            NotificationCenter.default.addObserver(forName: Notification.Name("heplNum"), object: nil, queue: nil) { _ in
+                runStateManager.sendButtonClicked()
+                print("Notification center work -> helpNum : helpnum += 1")
             }
             
         }
@@ -347,7 +349,7 @@ struct MainRunHomeView: View {
                         // MARK: - 말풍선
                         //Color.black.frame(height: 100)
                         Spacer()
-                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $runStateManager.helpCount)
+                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
                     }
                     
                 } else {
@@ -458,8 +460,8 @@ struct MainRunHomeView: View {
     }
     
 }
-struct MainRunView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainRunView()
-    }
-}
+//struct MainRunView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainRunView()
+//    }
+//}
