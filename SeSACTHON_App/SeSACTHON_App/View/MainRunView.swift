@@ -19,7 +19,13 @@ struct MainRunView: View {
     @ObservedObject var runStateManager = RunStateManager.shared
     //MARK: 이거 확인해보기 time
     ///@State var time: TimeInterval = 0
-    @StateObject var vm = WorkoutViewModel()
+    
+    // @StateObject var vm = WorkoutViewModel()
+    @EnvironmentObject var vm: WorkoutViewModel
+    
+    @State var helpCount = 0
+    
+    //@StateObject var vm = WorkoutViewModel()
     
     
     var body: some View {
@@ -41,14 +47,14 @@ struct MainRunView: View {
             case 1:
                 MainRunStart(swpSelection: $swpSelection)
             case 2:
-                MainRunningView(swpSelection: $swpSelection, courseImage: $runStateManager.courseImage, workout: vm.newWorkout, helpCount: $runStateManager.helpCount)
+                MainRunningView(swpSelection: $swpSelection, courseImage: $runStateManager.courseImage, workout: vm.newWorkout)
                     .onAppear {
                         Task {
                             await vm.startWorkout(type: .running)
                         }
                     }
             case 3:
-                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, time: $runStateManager.time, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
+                RunEndView(swpSelection: $swpSelection, workout: vm.selectedWorkout ?? .example, courseImage: $runStateManager.courseImage, helpCount: $runStateManager.helpCount)
             default:
                 EmptyView()
             }
@@ -79,7 +85,7 @@ struct MainRunView: View {
             }
             
         }
-        .environmentObject(vm)
+        
     }
 }
 
@@ -109,10 +115,10 @@ struct MainRunStart: View {
                     startText = "You"
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                         startCount = "1."
-                        startText = "Ready?"
+                        startText = "Ready ?"
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                             startCount = "Go !"
-                            startText = "Stop"
+                            startText = "Ready ?"
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                                 swpSelection = 2
                             }
@@ -153,13 +159,15 @@ struct MainRunStart: View {
                     }
                 }
             }
-            .padding(.bottom, 94)
+            .padding(.bottom, 96)
         }
         .edgesIgnoringSafeArea(.all)
     }
 }
 
 
+
+// MARK: - MainRunHomeView
 struct MainRunHomeView: View {
     @State var searchText = ""
     @State var showRoute = false
@@ -193,9 +201,13 @@ struct MainRunHomeView: View {
     
     @State var speechBubbleOpacity = 0.0
     
+    @ObservedObject var runStateManager = RunStateManager.shared
+    
     var body: some View {
         ZStack {
-        
+            if let myImage = pickedImage {
+                Color.black.opacity(0.4).ignoresSafeArea()
+            }
             VStack(spacing: 0) {
                 Color.black.frame(height: 76)
                 TopProfileView(title: "RUN")
@@ -211,17 +223,17 @@ struct MainRunHomeView: View {
                         .font(.system(size: 17, weight: .regular))
                 }
                 .foregroundColor(.white)
-                .frame(height: 76)
+                .frame(height: 60)
                 .frame(maxWidth: .infinity)
                 .background(Color.black)
                 .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                .shadow(radius: 3, x: 0 ,y: 4)
                 
                 if let selectedImage = pickedImage {
-                    
                     if isSendNotConfirmed {
+                        
                         Color.white
-                            .frame(width: 210, height: 210)
+                            .frame(width: 204, height: 204)
                             .cornerRadius(10)
                             .overlay {
                                 selectedImage
@@ -234,7 +246,7 @@ struct MainRunHomeView: View {
                         
                         ForEach(Status.allCases, id:  \.rawValue) { item in
                             HStack {
-                                Image("icon_\(returnEngRawvalue(type: item))")
+                                Image("icon_\(returnEngRawvalue(type: item))_main")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 30)
@@ -250,11 +262,12 @@ struct MainRunHomeView: View {
                             .background(selection == item ? .white : .white.opacity(0.5))
                             .cornerRadius(16)
                             .padding(.vertical, 4)
+                            .shadow(radius: 3, x: 1, y: 3)
                         }
                         .frame(width: 176)
                         .foregroundColor(.white)
                         .padding(.horizontal, 96)
-                        HStack {
+                        HStack(spacing: 32) {
                             Button {
                                 showingImagePicker = true
                             } label: {
@@ -264,7 +277,7 @@ struct MainRunHomeView: View {
                                     .frame(width: 120)
                             }
                             Button {
-                                
+                                runStateManager.helpCount += 1
                                 // 사진 전송
                                 var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!
                                 
@@ -332,54 +345,9 @@ struct MainRunHomeView: View {
                     } else {
                         Spacer().frame(height: 20)
                         // MARK: - 말풍선
-                        SpeechBubble(text: "안전한 보행로를 위해\n장애물을 신고해주세요.")
-                            .opacity(speechBubbleOpacity)
-                            .onAppear{
-                                withAnimation(.easeIn(duration: 1)){
-                                    speechBubbleOpacity = 1.0
-                                }
-                            }
                         //Color.black.frame(height: 100)
                         Spacer()
-                        HStack(alignment: .top, spacing: 28) {
-                            
-                            Button {
-                                self.showingImagePicker = true
-                            } label: {
-                                Image("RunCamera").resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                            .fullScreenCover(isPresented: $showingImagePicker) {
-                                SUImagePicker(sourceType: .camera) { (image) in
-                                    self.sendImage = image
-                                    self.pickedImage = Image(uiImage: image)
-                                    print(image)
-                                }
-                                .ignoresSafeArea()
-                            }
-                            //MARK: go 버튼 -> 시작 메세지 보냄
-                            Button {
-                                swpSelection = 1
-                                wsManager.sendStart()
-                            } label: {
-                                Text("Go")
-                                    .font(.system(size: 32, weight: .black))
-                                    .italic()
-                                    .foregroundColor(.white)
-                                    .frame(width: 120, height: 120)
-                                    .background(Color("#222222"))
-                                    .cornerRadius(60)
-                            }
-                            Button {
-                                //self.userTrackingMode = .follow
-                                updateTrackingMode()
-                            } label: {
-                                Image("RunLocation")
-                                    .resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                        }.padding(.bottom, 60)
-                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed)
+                        ReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $runStateManager.helpCount)
                     }
                     
                 } else {
@@ -400,7 +368,7 @@ struct MainRunHomeView: View {
                             Haptics.tap()
                             self.showingImagePicker = true
                         } label: {
-                            Image("RunCamera").resizable()
+                            Image("FinalCamera").resizable()
                                 .frame(width: 52, height: 52)
                         }
                         .fullScreenCover(isPresented: $showingImagePicker) {
@@ -417,20 +385,14 @@ struct MainRunHomeView: View {
                             wsManager.sendStart()
                             Haptics.tap()
                         } label: {
-                            Text("Go")
-                                .font(.system(size: 32, weight: .black))
-                                .italic()
-                                .foregroundColor(.white)
-                                .frame(width: 120, height: 120)
-                                .background(Color("#222222"))
-                                .cornerRadius(60)
+                            Image("GO")
                         }
                         Button {
                             //self.userTrackingMode = .follow
                             updateTrackingMode()
                             Haptics.success()
                         } label: {
-                            Image("RunLocation")
+                            Image("FinalLocation")
                                 .resizable()
                                 .frame(width: 52, height: 52)
                         }

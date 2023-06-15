@@ -123,7 +123,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
         setupLocationManager() // 위치 관리자 설정을 위해 함수를 호출합니다.
         updateHealthStatus() // 상태 업데이트 중
         if healthAuth { // 프로그램이 건강 데이터에 접근할 수 있는 권한을 가지면
-            loadWorkouts()// 과거 기록 데이터를 불러옵니다
+            //loadWorkouts()// 과거 기록 데이터를 불러옵니다
         }
     }
     
@@ -150,13 +150,14 @@ class WorkoutViewModel: NSObject, ObservableObject {
         healthLoading = true // 불러오기 스피너 사용하기
         healthStatus = await HKHelper.requestAuth() // 건강 데이터에 접근하기 위해 승인을 기다리는 중
         if healthAuth { // 프로그램에서 건강 데이터에 접근할 수 있는 권한을 가지면
-            loadWorkouts() // 과거 기록 데이터를 불러옵니다
+            //loadWorkouts() // 과거 기록 데이터를 불러옵니다
         }
         healthLoading = false // 불러오기 스피너 사용하지 않기
     }
     
     // MARK: - Workouts
     
+    /*
     // HealthKit API에서 트레이닝 불러오기
     func loadWorkouts() {
         loadingWorkouts = true
@@ -191,12 +192,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
                             
                         }
                         
-                        // 칼로리 불러오기
-                        HKHelper.loadCalories(for: hkWorkout) { calories in
-                            DispatchQueue.main.async {
-                                workout.calories = calories
-                            }
-                        }
+                        
                     }
                     // 모든 연습이 완료되었는지 확인합니다.
                     if tally == hkWorkouts.count {
@@ -209,7 +205,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
                 }
             }
         }
-    }
+    }*/
     
     // 검색 기준에 따라 트레이닝 필터하기
     func filterWorkouts() {
@@ -399,17 +395,17 @@ class WorkoutViewModel: NSObject, ObservableObject {
         //courseImage = image
         
         // Save the image to the Photos library
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAsset(from: image)
-        }) { success, error in
-            if success {
-                print("Map view image saved to Photos library.")
-            } else if let error = error {
-                print("Error saving map view image: \(error.localizedDescription)")
-            } else {
-                print("Failed to save map view image.")
-            }
-        }
+//        PHPhotoLibrary.shared().performChanges({
+//            PHAssetChangeRequest.creationRequestForAsset(from: image)
+//        }) { success, error in
+//            if success {
+//                print("Map view image saved to Photos library.")
+//            } else if let error = error {
+//                print("Error saving map view image: \(error.localizedDescription)")
+//            } else {
+//                print("Failed to save map view image.")
+//            }
+//        }
         mapView.showsUserLocation = true
         return image
     }
@@ -426,7 +422,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.trackingMode = newMode
                 withAnimation(.easeInOut(duration: 0.25)) {
-                    self.scale = 3
+                    self.scale = 4
                 }
             }
         } else {

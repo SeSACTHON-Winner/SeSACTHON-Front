@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "GoBtn.png",
+      "filename" : "FinalCamera.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "GoBtn@2x.png",
+      "filename" : "FinalCamera@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "GoBtn@3x.png",
+      "filename" : "FinalCamera@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

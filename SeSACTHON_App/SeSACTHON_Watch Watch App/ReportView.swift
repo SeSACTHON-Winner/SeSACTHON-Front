@@ -13,14 +13,13 @@ struct ReportView: View {
     
     @State var isNext = false
     @Environment(\.dismiss) private var dismiss
-    
-    
-    //.
+    @State var emoji = ""
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: -10) {
-                Text("05 : 12")
+                Text("\(formattedTime(wsManager.watchRunDAO.duration))")
                     .font(.custom("SF Pro Text", size: 32))
                     .tracking(-2.2)
             }
@@ -38,10 +37,10 @@ struct ReportView: View {
             .foregroundColor(.black)
             .italic()
             List {
-                ReportButtonEmoji(emoji: "elevation_white", dangertype: .slope)
-                ReportButtonEmoji(emoji: "step_white", dangertype: .step)
-                ReportButtonEmoji(emoji: "narrow_white", dangertype: .narrow)
-                ReportButtonEmoji(emoji: "construction_white", dangertype: .construct)
+                ReportButtonEmoji(emoji: "slope", dangertype: .slope)
+                ReportButtonEmoji(emoji: "step", dangertype: .step)
+                ReportButtonEmoji(emoji: "narrow", dangertype: .narrow)
+                ReportButtonEmoji(emoji: "construction", dangertype: .construct)
                 
             }
             .listStyle(CarouselListStyle())
@@ -114,15 +113,15 @@ struct ReportButtonEmoji: View {
                 sleep(1)
                 dismiss()
             } label: {
-            HStack {
-                Image(emoji)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30)
-                Text(dangertype.rawValue)
-                    .font(.custom("SF Pro Text", size: 14))
-                    .padding(.leading, 5)
-            }
+                HStack {
+                    Image("icon_\(emoji)_main")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                    Text(dangertype.rawValue)
+                        .font(.custom("SF Pro Text", size: 14))
+                        .padding(.leading, 5)
+                }
         }
         .frame(height: 90)
         .frame(maxWidth: .infinity)
@@ -157,4 +156,13 @@ enum dangerType: String {
     case step = "높은 턱"
     case narrow = "좁은길"
     case construct = "공사중"
+}
+
+private func formattedTime(_ time: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+    //timeString = formatter.string(from: time) ?? ""
+    return formatter.string(from: time) ?? ""
 }

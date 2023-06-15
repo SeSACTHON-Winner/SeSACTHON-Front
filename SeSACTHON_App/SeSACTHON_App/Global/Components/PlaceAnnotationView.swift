@@ -117,7 +117,7 @@ struct PlaceAnnotationView: View {
                                 VStack{
                                     KFImage(URL(string: "http://35.72.228.224/sesacthon/\(PicturePath.picturePath)")!)
                                         .placeholder { //플레이스 홀더 설정
-                                            Image(systemName: "map")
+                                            Image("RunningMan")
                                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                         .onSuccess {r in //성공
                                             print("succes: \(r)")
@@ -126,15 +126,14 @@ struct PlaceAnnotationView: View {
                                             print("failure: \(e)")
                                         }
                                         .resizable()
-                                        .scaledToFill()
+                                        .scaledToFit()
                                         .frame(width: 150, height: 150)
-                                        .background(.black)
                                         .cornerRadius(5)
                                     
                                     HStack {
                                         if slopeCount > 0 {
                                             VStack{
-                                                Image("icon_slope")
+                                                Image("icon_slope_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(width: 30)
@@ -144,7 +143,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if stepCount > 0 {
                                             VStack{
-                                                Image("icon_step")
+                                                Image("icon_step_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)
@@ -154,7 +153,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if constructionCount > 0 {
                                             VStack{
-                                                Image("icon_construction")
+                                                Image("icon_construction_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)
@@ -164,7 +163,7 @@ struct PlaceAnnotationView: View {
                                         }
                                         if narrowCount > 0 {
                                             VStack{
-                                                Image("icon_narrow")
+                                                Image("icon_narrow_main")
                                                     .resizable()
                                                     .scaledToFit()
                                                     .frame(height: 30)

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 class RunStateManager : ObservableObject{
-    @Published  var runState = "run"
+    @Published var runState = "run"
     @Published var time: TimeInterval = 0
     private var timer: Timer?
     var wsManager = WatchSessionManager.sharedManager
@@ -19,7 +19,9 @@ class RunStateManager : ObservableObject{
     init(){
     }
     func initialize(vm: WorkoutViewModel) {
+        self.runState = "run"
         self.vm = vm
+        self.time = 0
     }
     func stopButtonClicked(){
         stopTimer()
@@ -29,8 +31,9 @@ class RunStateManager : ObservableObject{
     }
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
-        time = 0
-         wsManager.sendStop()
+        //time = 0
+        //TODO: 라딘 추가사항 확인
+        wsManager.sendStop()
         await vm!.zoomTo(workout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let img = self.vm!.saveMapViewAsImage() {
@@ -66,6 +69,10 @@ class RunStateManager : ObservableObject{
     }
     func startButtonClicked(workout:Workout){
         Haptics.tap()
+        //TODO: 라딘 추가 사항 - 확인
+        runState = "run"
+        
+        //wsManager.sendStart()
     }
     func restartButtonClicked(workout:Workout){
         Haptics.tap()
