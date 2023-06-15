@@ -16,7 +16,7 @@ struct RunningEndView: View {
         
         VStack(alignment: .leading, spacing: 0) {
             Spacer()
-            Text("05 : 12")
+            Text("\(formattedTime(wsManager.watchRunDAO.duration))")
                 .font(.custom("SF Pro Text", size: 52))
                 .tracking(-2)
                 .foregroundStyle(
@@ -109,4 +109,13 @@ struct RunningEndView_Previews: PreviewProvider {
     static var previews: some View {
         RunningEndView()
     }
+}
+
+private func formattedTime(_ time: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+    //timeString = formatter.string(from: time) ?? ""
+    return formatter.string(from: time) ?? ""
 }
