@@ -181,7 +181,7 @@ extension WatchSessionManager {
                 return
             }
             let isRestart = self.watchRunDAO.isPause
-            print("received message.duration = \(message.duration)")
+            print("received message.distance = \(message.distance)")
             if (message.helpNum > self.watchRunDAO.helpNum) {
                 NotificationCenter.default.post(name: Notification.Name("helpNum"), object: nil)
             }
