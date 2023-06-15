@@ -16,17 +16,22 @@ class RunStateManager : ObservableObject{
     var courseImage: UIImage = UIImage()
     @Published var helpCount = 0
     static let shared = RunStateManager()
+    @Published var pause: Bool = false
+    
     init(){
+        
     }
     func initialize(vm: WorkoutViewModel) {
         self.runState = "run"
         self.vm = vm
         self.time = 0
         self.helpCount = 0
+        self.pause = false
     }
     func stopButtonClicked(){
         stopTimer()
         runState = "stop"
+        pause = true
         Haptics.tap()
         wsManager.sendPause()
     }
@@ -72,18 +77,20 @@ class RunStateManager : ObservableObject{
         Haptics.tap()
         //TODO: 라딘 추가 사항 - 확인
         runState = "run"
-        
+        pause = false
         //wsManager.sendStart()
     }
     func restartButtonClicked(workout:Workout){
         Haptics.tap()
         runState = "run"
+        pause = false
         startTimer(workout: workout)
         wsManager.sendStart()
     }
     //라딘 추가
     func sendButtonClicked() {
        // plusHelpCount()
+        pause = false
         wsManager.sendPlusHelpCount()
     }
     func stopTimer() {
