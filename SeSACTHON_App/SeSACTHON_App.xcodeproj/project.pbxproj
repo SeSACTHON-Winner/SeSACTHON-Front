@@ -725,7 +725,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_CFBundleDisplayName = "Run For You";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
@@ -762,7 +762,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-Watch-Watch-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = SeSACTHON_Watch;
+				INFOPLIST_KEY_CFBundleDisplayName = "Run For You";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
@@ -918,7 +918,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "Run For You";
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱 사용을 위해 승인해주세요";
@@ -965,7 +965,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SeSACTHON-App-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_CFBundleDisplayName = "Run For You";
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "앱 사용을 위해 승인해주세요";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "앱 사용을 위해 승인해주세요";
