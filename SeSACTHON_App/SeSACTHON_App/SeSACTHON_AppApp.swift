@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 let SIZE = 50.0
-let NAME = "Running"
+let NAME = "RunForYou"
 
 @main
 struct SeSACTHON_AppApp: App {
@@ -25,9 +25,6 @@ struct SeSACTHON_AppApp: App {
             if UserDefaults.standard.bool(forKey: "login") {
                 HomeView()
                     .onAppear {
-                        
-                        
-                        
                         sleep(1)
                     }
             } else {

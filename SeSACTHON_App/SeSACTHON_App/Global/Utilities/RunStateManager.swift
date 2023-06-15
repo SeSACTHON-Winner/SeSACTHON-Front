@@ -14,11 +14,13 @@ class RunStateManager : ObservableObject{
     var wsManager = WatchSessionManager.sharedManager
     var vm : WorkoutViewModel?
     var courseImage: UIImage = UIImage()
+    var helpCount = 0
     static let shared = RunStateManager()
     init(){
     }
     func initialize(vm: WorkoutViewModel) {
         self.vm = vm
+        self.time = 0
     }
     func stopButtonClicked(){
         stopTimer()
@@ -28,6 +30,7 @@ class RunStateManager : ObservableObject{
     }
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
+        //time = 0
          wsManager.sendStop()
         await vm!.zoomTo(workout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -43,25 +46,32 @@ class RunStateManager : ObservableObject{
          }
         ////
         Haptics.tap()
-         stopTimer()
+        wsManager.watchRunDAO = WatchRunDAO()
     }
-    func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+    func startTimer(workout:Workout) {
+        stopTimer()
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] timer in
+            print("timer : \(Double(time))")
+            self.wsManager.watchRunDAO.fetchChange(workout: workout,duration:Double(time+1),helpNum: helpCount)
             DispatchQueue.main.async {
                 self.wsManager.sendWatchRunDao()
+                print("wsManager.watchRunDAO.duration = \(self.wsManager.watchRunDAO.duration)")
                 self.time += 1
             }
         }
-        
-        DispatchQueue.global(qos: .background).async {
-            RunLoop.current.add(self.timer!, forMode: .common)
-            RunLoop.current.run()
-        }
+//
+//        DispatchQueue.global(qos: .background).async {
+//            RunLoop.current.add(self.timer!, forMode: .common)
+//            RunLoop.current.run()
+//        }
     }
-    func restartButtonClicked(){
+    func startButtonClicked(workout:Workout){
+        Haptics.tap()
+    }
+    func restartButtonClicked(workout:Workout){
         Haptics.tap()
         runState = "run"
-        startTimer()
+        startTimer(workout: workout)
         wsManager.sendStart()
     }
     
@@ -76,7 +86,7 @@ class RunStateManager : ObservableObject{
     }
     
     // 포그라운드 상태 진입 시 타이머 재개
-     func resumeTimer() {
-        startTimer()
+     func resumeTimer(workout:Workout) {
+        startTimer(workout: workout)
     }
 }

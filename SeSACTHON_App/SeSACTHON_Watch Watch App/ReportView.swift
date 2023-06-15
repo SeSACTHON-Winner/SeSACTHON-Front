@@ -13,6 +13,7 @@ struct ReportView: View {
     
     @State var isNext = false
     @Environment(\.dismiss) private var dismiss
+    @State var emoji = ""
     
     
     //.
@@ -38,10 +39,10 @@ struct ReportView: View {
             .foregroundColor(.black)
             .italic()
             List {
-                ReportButtonEmoji(emoji: "elevation_white", dangertype: .slope)
-                ReportButtonEmoji(emoji: "step_white", dangertype: .step)
-                ReportButtonEmoji(emoji: "narrow_white", dangertype: .narrow)
-                ReportButtonEmoji(emoji: "construction_white", dangertype: .construct)
+                ReportButtonEmoji(emoji: "slope", dangertype: .slope)
+                ReportButtonEmoji(emoji: "step", dangertype: .step)
+                ReportButtonEmoji(emoji: "narrow", dangertype: .narrow)
+                ReportButtonEmoji(emoji: "construction", dangertype: .construct)
                 
             }
             .listStyle(CarouselListStyle())
@@ -114,15 +115,15 @@ struct ReportButtonEmoji: View {
                 sleep(1)
                 dismiss()
             } label: {
-            HStack {
-                Image(emoji)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30)
-                Text(dangertype.rawValue)
-                    .font(.custom("SF Pro Text", size: 14))
-                    .padding(.leading, 5)
-            }
+                HStack {
+                    Image("icon_\(emoji)_main")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                    Text(dangertype.rawValue)
+                        .font(.custom("SF Pro Text", size: 14))
+                        .padding(.leading, 5)
+                }
         }
         .frame(height: 90)
         .frame(maxWidth: .infinity)

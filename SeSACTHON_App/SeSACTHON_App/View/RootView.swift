@@ -60,12 +60,17 @@ struct RootView: View {
             InfoView(welcome: welcome)
         }
         
-        .sheet(isPresented: $vm.showRunListView, onDismiss: {
-            welcome = false
-        }) {
-            //AccountView(welcome: welcome)
-            RunListView()
-        }
+        .fullScreenCover(isPresented: $vm.showRunListView, onDismiss: {
+            vm.showRunListView = false
+        }, content: {
+            ProfileView()
+        })
+        
+        //.sheet(isPresented: $vm.showRunListView) {
+            //RunListView()
+         //   ProfileView()
+        //}
+        
 
         .sheet(isPresented: $vm.showPermissionsView) { // PermissionsView를 시트 형태로 표시합니다.
             PermissionsView()
