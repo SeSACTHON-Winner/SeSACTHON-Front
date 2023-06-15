@@ -20,7 +20,7 @@ struct ReportSubmitView: View {
             
             VStack(spacing: 20) {
                 
-                Image("\(returnEngRawvalue(type: selection))_white")
+                Image("icon_\(returnEngRawvalue(type: selection))_main")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
@@ -73,7 +73,7 @@ extension ReportSubmitView {
     func returnEngRawvalue(type: MainRunHomeView.Status) -> String {
         switch type {
         case .gradient:
-            return "elevation"
+            return "slope"
         case .narrow:
             return "narrow"
         case .natural:
