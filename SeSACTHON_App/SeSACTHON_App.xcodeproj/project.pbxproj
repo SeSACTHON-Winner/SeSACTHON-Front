@@ -732,21 +732,13 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-<<<<<<< HEAD
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON5-App3";
-=======
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App3.watchkitapp";
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -777,21 +769,13 @@
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-<<<<<<< HEAD
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON5-App3";
-=======
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "dayjack.SeSACTHON-App";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App3.watchkitapp";
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App.watchkitapp";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -954,11 +938,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App3";
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1005,11 +985,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON5-App3";
-=======
 				PRODUCT_BUNDLE_IDENTIFIER = "dayjack.SeSACTHON-App";
->>>>>>> ad292866e86485a414b4fe41894a32ee887e226d
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
