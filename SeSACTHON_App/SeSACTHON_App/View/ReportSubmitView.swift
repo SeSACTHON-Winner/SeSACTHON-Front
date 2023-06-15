@@ -12,7 +12,7 @@ struct ReportSubmitView: View {
     @Binding var selection: MainRunHomeView.Status
     @Binding var pickedImage: Image?
     @Binding var isSendNotConfirmed: Bool
-    @Binding var helpCount: Int
+    //@Binding var helpCount: Int
     @ObservedObject var runStateManager = RunStateManager.shared
     
     var body: some View {
@@ -60,14 +60,14 @@ struct ReportSubmitView: View {
         }
     }
 }
-
-struct ReportSubmitView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "bolt")), isSendNotConfirmed: .constant(false), helpCount: .constant(9))
-        }
-    }
-}
+//
+//struct ReportSubmitView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "bolt")), isSendNotConfirmed: .constant(false), helpCount: .constant(9))
+//        }
+//    }
+//}
 
 extension ReportSubmitView {
     func returnEngRawvalue(type: MainRunHomeView.Status) -> String {

@@ -14,8 +14,9 @@ struct WorkoutBar: View {
     @State var offset = Double.zero
     let workout: Workout
     let new: Bool
-    
-    @Binding var helpCount: Int
+    @ObservedObject var runStateManager = RunStateManager.shared
+
+    //@Binding var helpCount: Int
 
     var body: some View {
 
@@ -26,7 +27,7 @@ struct WorkoutBar: View {
                     WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
 //                  // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                     Spacer()
-                    WorkoutStat(name: "도움개수", value: helpCount.formatted())
+                    WorkoutStat(name: "도움개수", value: runStateManager.helpCount.formatted())
 
                 }
             }
