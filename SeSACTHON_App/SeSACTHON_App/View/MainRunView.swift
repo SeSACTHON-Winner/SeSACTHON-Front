@@ -159,7 +159,7 @@ struct MainRunStart: View {
                     }
                 }
             }
-            .padding(.bottom, 94)
+            .padding(.bottom, 96)
         }
         .edgesIgnoringSafeArea(.all)
     }
@@ -383,13 +383,7 @@ struct MainRunHomeView: View {
                             wsManager.sendStart()
                             Haptics.tap()
                         } label: {
-                            Text("Go")
-                                .font(.system(size: 32, weight: .black))
-                                .italic()
-                                .foregroundColor(.white)
-                                .frame(width: 120, height: 120)
-                                .background(Color("#222222"))
-                                .cornerRadius(60)
+                            Image("GO")
                         }
                         Button {
                             //self.userTrackingMode = .follow

@@ -199,14 +199,15 @@ struct MainRunningView: View {
                 Spacer()
                 VStack(spacing: 16) {
                     HStack {
-                        Button {
-                            self.showingImagePicker = true
-                        }  label: {
-                            Image("FinalCamera").resizable()
-                                .frame(width: 52, height: 52)
+                        if vm.recording {
+                            Button {
+                                self.showingImagePicker = true
+                            }  label: {
+                                Image("FinalCamera").resizable()
+                                    .frame(width: 52, height: 52)
+                            }
+                            .shadow(color: .black.opacity(0.25), radius: 2)
                         }
-                        .shadow(color: .black.opacity(0.25), radius: 2)
-
                         Spacer()
                     }.offset(x: 56, y: 8)
                     HStack(spacing: 50) {

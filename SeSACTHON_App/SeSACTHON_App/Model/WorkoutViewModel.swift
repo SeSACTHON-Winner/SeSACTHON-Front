@@ -422,7 +422,7 @@ class WorkoutViewModel: NSObject, ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.trackingMode = newMode
                 withAnimation(.easeInOut(duration: 0.25)) {
-                    self.scale = 3
+                    self.scale = 4
                 }
             }
         } else {
