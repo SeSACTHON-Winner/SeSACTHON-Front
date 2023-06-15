@@ -12,6 +12,7 @@ struct RunningEndView: View {
     @Environment(\.dismiss) private var dismiss
     @State var isRunningEnd = false
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
@@ -72,8 +73,9 @@ extension RunningEndView {
     func runningInfoView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Group {
-                Text("2 km")
-                Text("도움 2개")
+                //라딘 수정
+                Text("\(Measurement(value: wsManager.watchRunDAO.distance, unit: UnitLength.meters).formatted())")
+                Text("\(wsManager.watchRunDAO.helpNum)")
             }
             .tracking(-0.8)
             .font(.custom("SF Pro Text", size: 14))
