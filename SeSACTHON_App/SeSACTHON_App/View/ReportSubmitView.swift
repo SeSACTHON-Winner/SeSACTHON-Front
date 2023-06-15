@@ -13,7 +13,7 @@ struct ReportSubmitView: View {
     @Binding var pickedImage: Image?
     @Binding var isSendNotConfirmed: Bool
     @Binding var helpCount: Int
-    
+    @ObservedObject var runStateManager = RunStateManager.shared
     
     var body: some View {
         VStack(spacing: 40) {
@@ -28,7 +28,7 @@ struct ReportSubmitView: View {
                 
                 
                 Text("\(selection.rawValue)")
-                Text("\(helpCount)") //TODO: Data 연결
+                Text("\(runStateManager.helpCount)") //TODO: Data 연결
                     .font(.system(size: 128, weight: .heavy))
                     .foregroundColor(Color("MainColor"))
                     .italic()
@@ -46,7 +46,6 @@ struct ReportSubmitView: View {
             
             
             Button {
-                helpCount += 1
                 isSendNotConfirmed = true
                 
                 pickedImage = nil
@@ -62,13 +61,13 @@ struct ReportSubmitView: View {
     }
 }
 
-//struct ReportSubmitView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationStack {
-//            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "bolt")), isSendNotConfirmed: .constant(false))
-//        }
-//    }
-//}
+struct ReportSubmitView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ReportSubmitView(selection: .constant(.gradient), pickedImage: .constant(Image(systemName: "bolt")), isSendNotConfirmed: .constant(false), helpCount: .constant(9))
+        }
+    }
+}
 
 extension ReportSubmitView {
     func returnEngRawvalue(type: MainRunHomeView.Status) -> String {
