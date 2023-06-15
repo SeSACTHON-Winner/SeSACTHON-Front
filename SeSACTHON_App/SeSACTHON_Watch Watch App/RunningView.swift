@@ -18,7 +18,8 @@ struct RunningView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: -10) {
             Spacer()
-            Text("1.2KM")
+            
+            Text("\(String(format: "%.2f", wsManager.watchRunDAO.distance))m")
                 .padding(.top, 30)
                 .padding(.leading, 10)
             RunningTimeView()
