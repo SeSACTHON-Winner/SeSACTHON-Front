@@ -32,7 +32,8 @@ class RunStateManager : ObservableObject{
     func endButtonClicked(workout : Workout,swpSelection : Binding<Int>)async{
         stopTimer()
         //time = 0
-         wsManager.sendStop()
+        //TODO: 라딘 추가사항 확인
+        wsManager.sendStop()
         await vm!.zoomTo(workout)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let img = self.vm!.saveMapViewAsImage() {
@@ -68,6 +69,10 @@ class RunStateManager : ObservableObject{
     }
     func startButtonClicked(workout:Workout){
         Haptics.tap()
+        //TODO: 라딘 추가 사항 - 확인
+        runState = "run"
+        
+        //wsManager.sendStart()
     }
     func restartButtonClicked(workout:Workout){
         Haptics.tap()

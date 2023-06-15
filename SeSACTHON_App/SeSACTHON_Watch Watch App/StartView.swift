@@ -10,19 +10,26 @@ import SwiftUI
 struct StartView: View {
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
     var body: some View {
-        //MARK: 워치에서 Start메세지 보내기
-        if wsManager.watchRunDAO.isStart{
-            RunningView()
-        }
-        else{
+//        //MARK: 워치에서 Start메세지 보내기
+//        if wsManager.watchRunDAO.isStart && (wsManager.watchRunDAO.isStart || wsManager.watchRunDAO.isPause) {
+//            RunningView().onChange(of: wsManager.watchRunDAO) { newValue in
+//                print(newValue)
+//            }
+//        }
+//        else{
             Button {
                 wsManager.sendStart()
+                //TODO: 라딘 - 아래 지워도 되는 지 확인하기
+                wsManager.watchRunDAO.isStart = true
             } label: {
                 StartButton()
             }
             .buttonStyle(PlainButtonStyle())
             .ignoresSafeArea()
             .navigationBarBackButtonHidden(true)
+            .navigationDestination(isPresented: $wsManager.watchRunDAO.isStart) {
+                RunningView()
+          //  }
         }
     }
 }

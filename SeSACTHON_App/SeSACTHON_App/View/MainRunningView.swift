@@ -20,7 +20,7 @@ struct MainRunningView: View {
     @AppStorage("backgroundTime") var backgroundTime: TimeInterval = 0
     @State private var isAnimate = false
     @ObservedObject var rsManager = RunStateManager.shared
-    
+    @State private var isPause = false
     @EnvironmentObject var vm: WorkoutViewModel
     var wsManager = WatchSessionManager.sharedManager
     let workout: Workout
@@ -43,39 +43,42 @@ struct MainRunningView: View {
     
     //DateComponentsFormatter().string(from: workout.duration) ?? ""
     var body: some View {
-        VStack {
+        ZStack {
+            if let myImage = pickedImage {
+                Color.black.opacity(0.4).ignoresSafeArea()
+            }
             VStack {
-                Color.black.frame(height: 84)
-                HStack {
-                    Text("\(formattedTime(rsManager.time))")
-                        .foregroundColor(.white)
-                        .font(.system(size: 80, weight: .black)).italic()
-                } .padding(.bottom, 4)
-                
-                HStack (alignment: .center){
-                    Spacer()
-                    VStack {
-                        if vm.recording { //만약 기록이 있으면 WorkoutBar()를 표시
-                            WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $runStateManager.helpCount)
+                VStack {
+                    Color.black.frame(height: (pickedImage != nil) ?  64 : 40)
+                    HStack {
+                        Text("\(formattedTime(rsManager.time))")
+                            .foregroundColor(.white)
+                            .font(.system(size: 80, weight: .black)).italic()
+                    } .padding(.bottom, 4)
+                    
+                    HStack (alignment: .center){
+                        Spacer()
+                        VStack {
+                            if pickedImage == nil && isPause == false {
+                                WorkoutBar(workout: vm.newWorkout, new: true, helpCount: $runStateManager.helpCount)
+                            }
                         }
+                        Spacer()
                     }
-                    Spacer()
+                    Spacer().frame(height: 32)
                 }
-                Spacer().frame(height: (pickedImage != nil) ? 24 : 36)
-            }
-            .foregroundColor(.white)
-            .frame(height: (pickedImage != nil) ?  120 : 242)
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
-            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-            .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
-            .onAppear {
-                print(workout.pace)
-            }.onDisappear {
-                print(workout.pace)
-            }
-            
-            
+                .foregroundColor(.white)
+                .frame(height: (pickedImage != nil) ?  128 : 242)
+                .frame(maxWidth: .infinity)
+                .background(Color.black)
+                .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                .shadow(color: .black.opacity(0.25),radius: 4, x: 0, y: 4)
+                .onAppear {
+                    print(workout.pace)
+                }.onDisappear {
+                    print(workout.pace)
+                }
+                
                 if let selectedImage = pickedImage {
                     if isSendNotConfirmed {
                         Spacer()
@@ -152,6 +155,7 @@ struct MainRunningView: View {
                                         }
                                         print("Photo uploaded successfully")
                                         isSendNotConfirmed = false
+                                        isPause = false
                                     case .failure(let error):
                                         print("Photo upload failed with error: \(error)")
                                     }
@@ -195,127 +199,135 @@ struct MainRunningView: View {
                         RunningReportSubmitView(selection: $selection, pickedImage: $pickedImage, isSendNotConfirmed: $isSendNotConfirmed, helpCount: $runStateManager.helpCount)
                     }
                 } else {
-                
-                Spacer()
-                VStack(spacing: 16) {
-                    HStack {
-                        if vm.recording {
-                            Button {
-                                self.showingImagePicker = true
-                            }  label: {
-                                Image("FinalCamera").resizable()
-                                    .frame(width: 52, height: 52)
-                            }
-                            .shadow(color: .black.opacity(0.25), radius: 2)
-                        }
-                        Spacer()
-                    }.offset(x: 56, y: 8)
-                    HStack(spacing: 50) {
-                        if rsManager.runState == "run" {
-                            //MARK: StopButton
-                            Button {
-                                rsManager.stopButtonClicked()
-                            } label: {
-                                Text("STOP")
-                                    .font(.system(size: 28, weight: .black))
-                                    .italic()
-                                    .foregroundColor(.white)
-                                    .frame(width: 120, height: 120)
-                                    .background(Color("#222222"))
-                                    .cornerRadius(60)
-                            }.padding(.bottom, 94)
-                        }
-                        else if rsManager.runState == "stop" {
+                    
+                    Spacer()
+                    VStack(spacing: 16) {
+                        HStack {
                             if vm.recording {
-                                //MARK: EndButton
                                 Button {
-                                    Task{
-                                        print("task")
-                                        await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
-                                    }
+                                    //MARK: 카메라 찍고 오면 시간은 가는데 버튼 상태는 멈춰있는 상황 해결
+                                    rsManager.stopButtonClicked()
+                                    rsManager.runState = "stop"
+                                    isPause = true
+                                    self.showingImagePicker = true
+                                }  label: {
+                                    Image("FinalCamera").resizable()
+                                        .frame(width: 52, height: 52)
+                                }
+                                .shadow(color: .black.opacity(0.25), radius: 2)
+                            }
+                            Spacer()
+                        }.offset(x: 56, y: 8)
+                        HStack(spacing: 50) {
+                            if rsManager.runState == "run" {
+                                //MARK: StopButton
+                                Button {
+                                    isPause = true
+                                    rsManager.stopButtonClicked()
                                 } label: {
-                                    Text("END")
-                                        .font(.system(size: 24, weight: .black))
+                                    Text("STOP")
+                                        .font(.system(size: 28, weight: .black))
                                         .italic()
                                         .foregroundColor(.white)
                                         .frame(width: 120, height: 120)
                                         .background(Color("#222222"))
                                         .cornerRadius(60)
-                                    
                                 }.padding(.bottom, 94)
-                                //MARK: Restart Button
-                                Button {
-                                    rsManager.restartButtonClicked(workout: workout)
-                                } label: {
-                                    ZStack {
-                                        Circle()
-                                            .foregroundColor(Color("MainColor"))
-                                            .scaleEffect(isAnimate ? 1.35 : 1.0)
-                                            .opacity(isAnimate ? 0.5 : 0)
-                                        
-                                        Circle()
-                                            .foregroundColor(Color("MainColor"))
-                                            .scaleEffect(isAnimate ? 1.2 : 1.0)
-                                            .opacity(isAnimate ? 0.8 : 0)
-                                        Circle()
-                                            .foregroundColor(Color("#222222"))
-                                    }
-                                    .frame(width: 120, height: 120)
-                                    .overlay(
-                                        Text("RESTART")
-                                            .font(.system(size: 22, weight: .black))
-                                            .italic()
-                                            .foregroundColor(Color("MainColor"))
-                                    )
-                                    .onAppear {
-                                        withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
-                                            self.isAnimate.toggle()
+                            }
+                            else if rsManager.runState == "stop" {
+                                if vm.recording {
+                                    //MARK: EndButton
+                                    Button {
+                                        Task{
+                                            print("task")
+                                            await rsManager.endButtonClicked(workout: workout, swpSelection: $swpSelection)
                                         }
-                                    }
-                                } .padding(.bottom, 94)
+                                    } label: {
+                                        Text("END")
+                                            .font(.system(size: 24, weight: .black))
+                                            .italic()
+                                            .foregroundColor(.white)
+                                            .frame(width: 120, height: 120)
+                                            .background(Color("#222222"))
+                                            .cornerRadius(60)
+                                        
+                                    }.padding(.bottom, 94)
+                                    //MARK: Restart Button
+                                    Button {
+                                        isPause = false
+                                        rsManager.restartButtonClicked(workout: workout)
+                                    } label: {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(Color("MainColor"))
+                                                .scaleEffect(isAnimate ? 1.35 : 1.0)
+                                                .opacity(isAnimate ? 0.5 : 0)
+                                            
+                                            Circle()
+                                                .foregroundColor(Color("MainColor"))
+                                                .scaleEffect(isAnimate ? 1.2 : 1.0)
+                                                .opacity(isAnimate ? 0.8 : 0)
+                                            Circle()
+                                                .foregroundColor(Color("#222222"))
+                                        }
+                                        .frame(width: 120, height: 120)
+                                        .overlay(
+                                            Text("RESTART")
+                                                .font(.system(size: 22, weight: .black))
+                                                .italic()
+                                                .foregroundColor(Color("MainColor"))
+                                        )
+                                        .onAppear {
+                                            withAnimation(Animation.spring(response: 0.35, dampingFraction: 0.75, blendDuration: 1.0).repeatForever()) {
+                                                self.isAnimate.toggle()
+                                            }
+                                        }
+                                    } .padding(.bottom, 94)
+                                }
                             }
                         }
-                    }
-                    .onAppear {
-                        rsManager.startTimer(workout: workout)
-                        // 백그라운드 상태 진입 알림 구독
-                        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
-                            rsManager.pauseTimer()
+                        .onAppear {
+                            rsManager.startTimer(workout: workout)
+                            // 백그라운드 상태 진입 알림 구독
+                            NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
+                                rsManager.pauseTimer()
+                            }
+                            // 포그라운드 상태 진입 알림 구독
+                            NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
+                                rsManager.resumeTimer(workout: workout)
+                            }
                         }
-                        // 포그라운드 상태 진입 알림 구독
-                        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: nil) { _ in
-                            rsManager.resumeTimer(workout: workout)
+                        .onDisappear {
+                            rsManager.stopTimer()
+                            
+                            // 알림 구독 해제
+                            NotificationCenter.default.removeObserver(self)
                         }
-                    }
-                    .onDisappear {
-                        rsManager.stopTimer()
-                        
-                        // 알림 구독 해제
-                        NotificationCenter.default.removeObserver(self)
-                    }
-                    .onChange(of: scenePhase) { phase in
-                        if phase == .background {
-                            // Store the current time in the background
-                            backgroundTime = Date().timeIntervalSinceReferenceDate
-                        } else if phase == .active {
-                            // Calculate the elapsed time when returning to the foreground
-                            let foregroundTime = Date().timeIntervalSinceReferenceDate
-                            let elapsedTime = foregroundTime - backgroundTime
-                            rsManager.time += elapsedTime
+                        .onChange(of: scenePhase) { phase in
+                            if phase == .background {
+                                // Store the current time in the background
+                                backgroundTime = Date().timeIntervalSinceReferenceDate
+                            } else if phase == .active {
+                                // Calculate the elapsed time when returning to the foreground
+                                let foregroundTime = Date().timeIntervalSinceReferenceDate
+                                let elapsedTime = foregroundTime - backgroundTime
+                                rsManager.time += elapsedTime
+                            }
                         }
                     }
                 }
             }
-        }
-        .edgesIgnoringSafeArea(.all)
-        .fullScreenCover(isPresented: $showingImagePicker) {
-            SUImagePicker(sourceType: .camera) { (image) in
-                sendImage = image
-                self.pickedImage = Image(uiImage: image)
-                print(image)
+            .edgesIgnoringSafeArea(.all)
+            .fullScreenCover(isPresented: $showingImagePicker) {
+                SUImagePicker(sourceType: .camera) { (image) in
+                    sendImage = image
+                    self.pickedImage = Image(uiImage: image)
+                    print(image)
+                }
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
         }
+        
     }
     
     private func formattedTime(_ time: TimeInterval) -> String {
