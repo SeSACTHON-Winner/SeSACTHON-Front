@@ -16,11 +16,11 @@ struct ReportView: View {
     @State var emoji = ""
     
     @ObservedObject var wsManager = WatchSessionManager.sharedManager
-
+  
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: -10) {
-                Text("05 : 12")
+                Text("\(formattedTime(wsManager.watchRunDAO.duration))")
                     .font(.custom("SF Pro Text", size: 32))
                     .tracking(-2.2)
             }
@@ -160,4 +160,13 @@ enum dangerType: String {
     case step = "높은 턱"
     case narrow = "좁은길"
     case construct = "공사중"
+}
+
+private func formattedTime(_ time: TimeInterval) -> String {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.minute, .second]
+    formatter.unitsStyle = .positional
+    formatter.zeroFormattingBehavior = .pad
+    //timeString = formatter.string(from: time) ?? ""
+    return formatter.string(from: time) ?? ""
 }
