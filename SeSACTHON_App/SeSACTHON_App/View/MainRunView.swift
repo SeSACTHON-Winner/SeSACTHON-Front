@@ -115,10 +115,10 @@ struct MainRunStart: View {
                     startText = "You"
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                         startCount = "1."
-                        startText = "Ready?"
+                        startText = "Ready ?"
                         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                             startCount = "Go !"
-                            startText = "Stop"
+                            startText = "Ready ?"
                             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                                 swpSelection = 2
                             }

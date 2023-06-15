@@ -22,42 +22,9 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Color.black.frame(height: 76)
-                HStack {
-                    
-                    Text("HOME")
-                        .font(.custom("SF Pro Text", size: 32))
-                        .foregroundColor(.white)
-                        .italic()
-                    Spacer()
-                    NavigationLink {
-                        ProfileView()
-                    } label: {
-                        KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
-                            .placeholder { //플레이스 홀더 설정
-                                Image(systemName: "map")
-                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                            .onSuccess {r in //성공
-                                print("succes: \(r)")
-                            }
-                            .onFailure { e in //실패
-                                print("failure: \(e)")
-                            }
-                            .resizable()
-                            .frame(width: 34, height: 34)
-                            .clipShape(Circle())
-                            .padding(.leading)
-                        
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.bottom)
-                .padding(.horizontal)
-                .background(.black)
-                Color.black.frame(height: 30)
-                    .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
-                    .shadow(radius: 3, x: 0 ,y: 4)
+                
                 ZStack {
+                    
                     TabView {
                         newsView(title: "단차의 높이, 차별의 높이", content: "차도와 보도를 구분하기 위하여\n차도에 연석을 설치하는 경우에는\n그 높이를 25cm 이하로 해야 합니다.\n이는 외국 도시들(10-15cm)에 비해 높습니다.", image: Image("NewsSample1"))
                         newsView(title: "교통약자들이 불편해 하는 \n최소 경사도 8.3%", content: "교통약자의 이동편의 증진법 시행규칙에서 교통약자가 통행할 수 있는 보도의 기울기는 \n최대 8.3% 이하로 하게끔 하고 있습니다.", image: Image("NewsSample2"))
@@ -65,6 +32,41 @@ struct HomeView: View {
                         newsView(title: "보도블럭 균열에 넘어지는 교통약자들", content: "교통약자는 보도블럭의 균열에 다양한 어려움을 느낄 수 있습니다. 예를 들어, 보행약자는 균열로 인해 휠체어나 보행 보조 기구를 움직이는 데에 어려움을 겪을 수 있습니다.", image: Image("NewsSample4"))
                     }
                     .tabViewStyle(PageTabViewStyle())
+                    VStack(spacing: 0) {
+                        Color.black.frame(height: 76)
+                        HStack {
+                            Text("HOME")
+                                .font(.custom("SF Pro Text", size: 32))
+                                .foregroundColor(.white)
+                                .italic()
+                            Spacer()
+                            NavigationLink {
+                                ProfileView()
+                            } label: {
+                                KFImage(URL(string: "http://35.72.228.224/sesacthon/\(imagePath)")!)
+                                    .placeholder { //플레이스 홀더 설정
+                                        Image(systemName: "map")
+                                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                    .onSuccess {r in //성공
+                                        print("succes: \(r)")
+                                    }
+                                    .onFailure { e in //실패
+                                        print("failure: \(e)")
+                                    }
+                                    .resizable()
+                                    .frame(width: 34, height: 34)
+                                    .clipShape(Circle())
+                                    .padding(.leading)
+                            }
+                        }
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity)
+                        .background(.black)
+                        Color.black.frame(height: 30)
+                            .cornerRadius(10, corners: [.bottomLeft, .bottomRight])
+                            .shadow(radius: 3, x: 0 ,y: 4)
+                    Spacer()
+                    }
                 }
                 .background(.black)
                 
