@@ -16,6 +16,7 @@ struct RunningReportSubmitView: View {
     @Binding var isSendNotConfirmed: Bool
     //@Binding var helpCount: Int
     @ObservedObject var runStateManager = RunStateManager.shared
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
     
     
     var body: some View {
@@ -30,7 +31,7 @@ struct RunningReportSubmitView: View {
                             .padding(.vertical,20)
                             
                         Text("\(selection.rawValue)")
-                        Text("\(runStateManager.helpCount)") //TODO: Data 연결
+                        Text("\(wsManager.watchRunDAO.helpNum)") //TODO: Data 연결
                             .font(.system(size: 100, weight: .black))
                             .foregroundColor(Color("MainColor"))
                             .italic()

@@ -15,6 +15,7 @@ struct WorkoutBar: View {
     let workout: Workout
     let new: Bool
     @ObservedObject var runStateManager = RunStateManager.shared
+    @ObservedObject var wsManager = WatchSessionManager.sharedManager
 
     //@Binding var helpCount: Int
 
@@ -27,7 +28,7 @@ struct WorkoutBar: View {
                     WorkoutStat(name: "페이스", value: formatPace()) // 포맷된 속도를 표시합니다.
 //                  // WorkoutStat(name: "Elevation", value: Measurement(value: workout.elevation, unit: UnitLength.meters).formatted())// 포맷된 고도를 표시합니다.
                     Spacer()
-                    WorkoutStat(name: "도움개수", value: runStateManager.helpCount.formatted())
+                    WorkoutStat(name: "도움개수", value: wsManager.watchRunDAO.helpNum.formatted())
 
                 }
             }
