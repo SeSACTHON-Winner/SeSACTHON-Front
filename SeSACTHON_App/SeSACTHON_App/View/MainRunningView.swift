@@ -128,7 +128,7 @@ struct MainRunningView: View {
                             }
                             
                             Button {
-                                wsManager.watchRunDAO = wsManager.watchRunDAO.plus()
+                                //wsManager.watchRunDAO = wsManager.watchRunDAO.plus()
                                 print("helpCount : \(wsManager.watchRunDAO.helpNum)")
                                 // 사진 전송
                                 var url = URL(string: "http://35.72.228.224/sesacthon/imageSave.php")!

@@ -68,7 +68,7 @@ struct RunEndView: View {
                             AF.request(url, method: .post, parameters: dangerparams).responseString {
                                 print($0)
                             }
-                            wsManager.watchRunDAO = WatchRunDAO()
+                            //wsManager.watchRunDAO = WatchRunDAO()
                             dismiss()
                         } label: {
                             Image(systemName: "chevron.backward")

@@ -25,6 +25,7 @@ class RunStateManager : ObservableObject{
         self.vm = vm
         self.time = 0
         self.pause = false
+        wsManager.watchRunDAO = WatchRunDAO()
     }
     func stopButtonClicked(){
         stopTimer()
@@ -52,7 +53,7 @@ class RunStateManager : ObservableObject{
          }
         ////
         Haptics.tap()
-        wsManager.watchRunDAO = WatchRunDAO()
+        //wsManager.watchRunDAO = WatchRunDAO()
     }
     func startTimer() {
         stopTimer()
